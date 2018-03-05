@@ -105,7 +105,7 @@ composite_coupling: on
 coupling_function_binning:
 upper_lim: on
 comp_est_amb_plot: on
-gwinc_file: gwinc_nomm_noises.mat
+gwinc_file: config_files/darm/gwinc_nomm_noises.mat
 # Plot parameters:
 comp_fig_height: 6
 comp_fig_width: 9

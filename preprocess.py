@@ -1,15 +1,9 @@
 """"
-To be imported to coup_calc.py
-
-
 CLASSES:
-
     ChannelASD -- Contains name, frequencies, amplitude values, and start time for a sensor ASD.
-
-
 FUNCTIONS:
-
-    get_FFT_params --- Extracts FFT parameters from config file, inferring some of them.
+    get_time_series --- Extracts time series data for a list of channel(s).
+    get_calibrated_darm --- Imports and calibrates DARM from whichever state it is in, to displacement.
     reject_saturated --- Removes saturated channels from list of channels.
     notch60Hz --- Applies a filter to time series to notch 60Hz resonances.
     convert_to_ASD --- Converts a list of TimeSeries data into a list of amplitude density spectra.
@@ -17,32 +11,23 @@ FUNCTIONS:
     get_calibration_factor --- Determines calibration factor associated with a specific channel.
     calibrate_sensor --- Calibrates the ASDs according to channel sensor type.
     smooth_ASD --- Sliding-average smoothing function for cleaning up noisiness in a spectrum.
-
-
 Usage Notes:
     GWPy is used for Channel, TimeSeries, and time explicitly. FrequencySeries is also relevant when ASDs are generated.
     scipy.signal is used in notch60Hz for filtering.
-
 """
-
 
 from gwpy.timeseries import TimeSeries
 import numpy as np
 import ConfigParser
-
 from scipy import signal
 import os
 import time
 import datetime
 import sys
 
-
-
-
 #===============================
 #### OBJECT CLASSES
 #===============================
-
 
 class ChannelASD(object):
     """
@@ -129,86 +114,124 @@ class ChannelASD(object):
         self.freqs = self.freqs[start:end]
         self.values = self.values[start:end]
 
+#===============================
+#### DATA IMPORT FUNCTIONS
+#===============================
 
-
-
-######################################################################################################
-
-
-
-
-#=======================================
-#### DATA PREPROCESSING FUNCTIONS
-#=======================================
-
-
-
-
-def get_FFT_params(duration, band_width, fft_overlap_pct, fft_avg, fft_rounding=True, verbose=False):
+def get_time_series(channel_names, t_start, t_end, return_failed=False):
     """
-    Get parameters for calculating ASDs.
+    Extracts time series data for a list of channel(s).
     
     Parameters
     ----------
-    duration: float, int
-        Duration of TimeSeries segment in seconds. If not None, this is used to get FFT time instead of band_width.
-    band_width: float, int
-        Bandwidth in Hz, used if duration is None.
-    fft_overlap_pct: float
-        FFT overlap percentage, e.g. 0.5 for 50% overlap.
-    fft_avg: int
-        Number of FFT averages to take over time segment.
-    fft_rounding: {True, False}, optional
-        If True, round FFT time to nearest second.
+    channel_names: list of strings
+        Names of channels to load.
+    t_start: float, int
+        Start time of time series segment.
+    t_end: float, int
+        End time of time series segment.
+    return_failed: {False, True}
+        If True, return list of channels that failed to load.
+        
+    Returns
+    -------
+    time_series_list: list
+        Gwpy TimeSeries objects.
+    channels_failed: list
+        Names of channels that failed to load.
+    """
+    
+    time_series_list = []
+    channels_failed = []
+    for name in channel_names:
+        try:
+            time_series_list.append(TimeSeries.fetch(name, t_start, t_end))
+        except RuntimeError:
+            channels_failed.append(name)
+        
+    if len(time_series_list) == 0:
+        print('\nWarning: No channels were successfully extracted.')
+        print('Check that channel names and times are valid.')
+    elif len(channels_failed) > 0:
+        print('\nWarning: Failed to extract {} of {} channels:'.format(len(chans_failed), len(l)))
+        for c in channels_failed:
+            print(c)
+        print('Check that channel names and times are valid.')
+
+    if return_failed:
+        return time_series_list, channels_failed
+    else:
+        return time_series_list
+
+def get_calibrated_DARM(ifo, gw_channel, t_start, t_end, FFT_time, overlap_time, calibration_file):
+    """
+    Imports and calibrates DARM from whichever state it is in, to displacement.
+
+    Parameters
+    ----------
+    cal_from: str
+        GW channel to use, must be 'strain_channel' or 'deltal_channel'.
+    t_start: float, int
+        Start time of time series segment.
+    t_end: float, int
+        End time of time series segment.
+    FFT_t: float
+        FFT time (seconds).
+    overlap_t: float
+        FFT overlap time (seconds).
+    cal_file: str
+        Name of DARM calibration file to be used.
     
     Returns
     -------
-    fft_time: float, int
-        FFT time in seconds, calculated from duration or bandwidth.
-    overlap_time: float
-        FFT overlap time in seconds, calculated from FFT time and overlap percentage.
-    duration: float, int
-        Duration of TimeSeries segment in seconds. If input duration was None, this is calculated from FFT_time.
-    band_width: float
-        Bandwidth in Hz. If input duration not None, this is calculated from FFT time.
+    calibrated_darmASD: FrequencySeries
+        Calibrated ASD of imported gravitational wave channel.
     """
-    
-    # Duration takes precedence; use it to get overlap time and bandwidth
-    if duration is not None:
-        over_prcnt = fft_overlap_pct*(10**-2)
-        fft_time = duration/(1+((1-over_prcnt)*(fft_avg-1)))
-        # The algorithm used for calculating ffts works well  with integers, better when even, best when powers of 2.
-        # Having fft_times and overlap_times be weird floats will take a lot of time. Thats why theres a rounding option.
-        if fft_rounding:
-            fft_time1 = fft_time
-            fft_time = round(fft_time1)
-            if verbose:
-                print('fft time rounded from '+str(fft_time1)+' s to '+str(fft_time)+' s.')
-        overlap_time = fft_time*over_prcnt
-        dur = duration
-        band_width = 1.0/fft_time
-        if verbose:
-            print('Band width is: '+str(band_width))
-        print('')
-    
-    # No duration; use band width to get duration and overlap time
+
+    if gw_channel == 'strain_channel':
+        
+        strain = TimeSeries.fetch(ifo + ':GDS-CALIB_STRAIN', t_start, t_end)
+        strainASD = strain.asd(FFT_time, overlap_time)
+        darmASD = strainASD * 4000.    # Strain to DARM, multiply by 4 km
+
+    elif gw_channel == 'deltal_channel':
+        
+        darm = TimeSeries.fetch(ifo + ':CAL-DELTAL_EXTERNAL_DQ', t_start, t_end)
+        darmASD = darm.asd(FFT_time, overlap_time)
+        
+        # Load DARM calibration file
+        try:
+            get_cal = open(calibration_file,'r')
+        except:
+            print('\nError: Calibration file ' + calibration_file + ' not found.\n')
+            sys.exit()
+        lines = get_cal.readlines()
+        get_cal.close()
+        
+        # Get frequencies and calibration factors
+        cal_freqs = np.zeros(len(lines))
+        dB_ratios = np.zeros(len(lines))
+        for i, line in enumerate(lines):
+            values = line.split()
+            cal_freqs[i] = float(values[0])
+            dB_ratios[i] = float(values[1])
+        cal_factors = 10.0 ** (dB_ratios / 20.) # Convert to calibration factors
+        
+        # Interpolate calibration factors then apply to DARM ASD
+        adjusted_ratios = np.interp(darmASD.frequencies.value, cal_freqs, cal_factors)
+        darmASD = darmASD * adjusted_ratios
+
     else:
-        fft_time = 1/band_width
-        if fft_rounding == True:
-            fft_time1 = fft_time
-            fft_time = round(fft_time1)
-            print('fft time rounded from '+str(fft_time1)+' to '+str(fft_time)+'.')
-        over_prcnt = fft_overlap_pct*(10**-2)
-        dur = fft_time*(1+((1-over_prcnt)*(fft_avg-1)))
-        overlap_time = fft_time*over_prcnt
-        if verbose:
-            print('Band width is: '+str(band_width+' Hz.'))
-        print('')
+        print('Please correctly specify GW channel calibration method in the configuration file.')
+        print('To calibrate from the strain-calibrated channel, H1:GDS-CALIB_STRAIN, write "strain_channel".')
+        print('To calibrate from H1:CAL-DELTAL_EXTERNAL_DQ, write "deltal_channel".')
+        sys.exit()
     
-    return fft_time, overlap_time, duration, band_width
+    return darmASD
 
-
-
+#=======================================
+#### PREPROCESSING FUNCTIONS
+#=======================================
 
 def reject_saturated(time_series_list, verbose=False):
     """
@@ -247,9 +270,6 @@ def reject_saturated(time_series_list, verbose=False):
                 print(bad_chan)
             
     return time_series_unsaturated
-
-
-
 
 def notch_60Hz(time_series_list):
     """
@@ -292,9 +312,6 @@ def notch_60Hz(time_series_list):
         
     return time_series_list
 
-
-
-
 def convert_to_ASD(time_series_list, FFT_time, overlap_time):
     """
     Converts a list of TimeSeries data into a list of amplitude density spectra.
@@ -316,9 +333,6 @@ def convert_to_ASD(time_series_list, FFT_time, overlap_time):
     
     asd_list = [ts.asd(FFT_time, overlap_time) for ts in time_series_list]
     return asd_list
-
-
-
 
 def quad_sum_ASD(asd_list, replace_original=False):
     """
@@ -358,9 +372,6 @@ def quad_sum_ASD(asd_list, replace_original=False):
         asd_list_out.append(asd_list_qsum[names.index(n)])
     
     return asd_list_out
-
-
-
 
 def get_calibration_factor(channel_names, ifo, calibration_file):
     """
@@ -426,9 +437,6 @@ def get_calibration_factor(channel_names, ifo, calibration_file):
             calibration_factors[name] = 1.
     
     return calibration_factors
-
-
-
 
 def calibrate_sensor(asd_list, ifo, calibration_file, verbose=False):
     """

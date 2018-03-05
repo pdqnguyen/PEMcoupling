@@ -17,8 +17,6 @@ It uses GWpy and PEM_coupling modules to:
         d) CSV files containing composite coupling functions (in physical units and in counts) and estimated ambients
         e) plots of composite coupling functions (in physical units and in counts) and estimated ambients
         f) multi-plots of composite coupling functions and estimated ambients, labeling data by injection
-
-
 Usage notes:
     gwpy:
         This code is written to run on gwpy 0.4.
@@ -30,25 +28,15 @@ Usage notes:
 
 from optparse import OptionParser
 import ConfigParser
-from gwpy.detector import Channel
-from gwpy.timeseries import TimeSeries
-from gwpy.frequencyseries import FrequencySeries
-from gwpy.time import *
 import numpy as np
-import pandas as pd
 from scipy.io import loadmat
 import time
 import datetime
 import sys
 import subprocess
 import re
-# Call modules from the PEMcoupling package
-import getconfig, getdata, preprocess, analysis, savedata
-# Time keeping for verbose printing of progress
-t1 = time.time()
-
-
-
+import getparams, preprocess, analysis, savedata    # Modules from the PEMcoupling package
+t1 = time.time()    # Time keeping for verbose printing of progress
 
 #================================
 #### OPTIONS PARSING
@@ -86,43 +74,15 @@ parser.add_option("-v", "--verbose", action = "store_true", dest = "verbose", de
                   help = "The porgram will give additional information about its procedures and show runtime "+\
                   "for specifc executions.")
 (options, args) = parser.parse_args()
-if len(args) != 3:
-    print('\nError: Exactly 3 arguments required (configuration file, interferometer, and station).\n')
-    sys.exit()
-
-# PARSE ARGUMENTS
-ifo_input, station_input, injection_type = args
-# Make sure interferometer input is valid
-if ifo_input.lower() in ['h1', 'lho']:
-    ifo = 'H1'
-elif ifo_input.lower() in ['l1', 'llo']:
-    ifo = 'L1'
-else:
-    print('\nError: 1st argument "ifo" must be one of "H1", "LHO", "L1", or "LHO" (not case-sensitive).\n')
-    sys.exit()
-# Make sure station input is valid
-if station_input.upper() in ['CS', 'EX', 'EY', 'ALL']:
-    station = station_input.upper()
-else:
-    print('\nError: 2nd argument "station" must be one of "CS", "EX", "EY", or "ALL" (not case-sensitive).\n')
-    sys.exit()
-# Make sure injection type is valid
-if injection_type.lower() in ['mag', 'magnetic']:
-    config_name = 'config_files/config_magnetic.txt'
-elif injection_type.lower() in ['vib', 'vibrational', 'acoustic']:
-    config_name = 'config_files/config_vibrational.txt'
-else:
-    print('\nError: 3rd argument "injection_type" must be one of "mag", "magnetic", "vib", "vibrational", or '+\
-          '"acoustic" (not case-sensitive).\n')
-    sys.exit()
 verbose = options.verbose
+ifo, station, config_name = getparams.get_arg_params(args)
 
 #=====================================================
 #### CONFIG PARSING
 #=====================================================
 
 # Read config file into dictionary
-config_dict = getconfig.get_config(config_name)
+config_dict = getparams.get_config_params(config_name)
 # Assign converted sub-dictionaries to separate dictionaries
 general_dict = config_dict['General']
 asd_dict = config_dict['ASD']
@@ -150,7 +110,6 @@ for option, value in smooth_dict.iteritems():
 # Set coupling factor local max width to 0 if not given in config
 if cf_dict['local_max_width'] is None:
     cf_dict['local_max_width'] = 0
-
 # OVERRIDE CONFIG OPTIONS WHERE APPLICABLE
 # Channel list
 if options.injection_list is not None:
@@ -174,9 +133,9 @@ if options.directory is not None:
 #==========================================
 
 if options.channel_list is not None:
-    channels = getdata.get_channel_list(options.channel_list, ifo, station, search=options.channel_search, verbose=verbose)
+    channels = getparams.get_channel_list(options.channel_list, ifo, station, search=options.channel_search, verbose=verbose)
 elif '.txt' in general_dict['channels']:
-    channels = getdata.get_channel_list(general_dict['channels'], ifo, station, search=options.channel_search, verbose=verbose)
+    channels = getparams.get_channel_list(general_dict['channels'], ifo, station, search=options.channel_search, verbose=verbose)
 else:
     print('\nChannel list input required in config file ("channels") or command line option ("--channel_list").\n')
     sys.exit()
@@ -193,7 +152,7 @@ injection_freqs = {}
 #### GET TIMES
 #===============================================
 
-injection_table = getdata.get_times(
+injection_table = getparams.get_times(
     ifo, station=station, times=options.times, injection_list=general_dict['times'], dtt=options.dtt,\
     dtt_list=options.dtt_list, injection_search=options.injection_search
 )
@@ -217,18 +176,14 @@ else:
 # FFT time and overlap time are necessary for taking amplitude ffts in gwpy.
 # Here, the duration parameter takes precedence over bandwidth,
 # i.e. if both are provided, duration is used to compute FFT time.
-fft_time, overlap_time, duration, band_width = preprocess.get_FFT_params(
-    asd_dict['duration'],
-    asd_dict['band_width'],
-    asd_dict['fft_overlap_pct'],
-    asd_dict['fft_avg'],
-    asd_dict['fft_rounding'],
-    verbose
+fft_time, overlap_time, duration, band_width = getparams.get_FFT_params(
+    asd_dict['duration'], asd_dict['band_width'], asd_dict['fft_overlap_pct'],
+    asd_dict['fft_avg'], asd_dict['fft_rounding'], verbose
 )
 # Convert smoothing parameters from Hz to freq bins based on bandwidth
 for key in smooth_params.keys():
     smooth_params[key] = [int(v/band_width) for v in smooth_params[key]]
-# This time stamp will be used for directory labeling and will be displayed on outputted graphs.
+# This time stamp will be used for directory labeling and will be displayed on all plots.
 t1 = time.time()
 # All coupling functions put into a list for each channel, saved in one dictionary
 coup_func_all = {}
@@ -253,12 +208,12 @@ for injection in injection_table:
         subdir = datetime.datetime.fromtimestamp(t1).strftime('DATA_%Y-%m-%d_%H:%M:%S')
     subdirectory = (general_dict['directory'] + '/' + subdir if general_dict['directory'] is not None else subdir)
     # Get fundamental frequency if this is a magnetic injection
-    freq_search = getdata.freq_search(name_inj)
+    freq_search = getparams.freq_search(name_inj)
     if freq_search is not None:
         injection_freqs[name_inj] = freq_search
 
     #=====================================================
-    #### PREPARE SENSOR DATA ####
+    #### PREPARE SENSOR DATA
     #=====================================================
 
     t11 = time.time()
@@ -287,13 +242,13 @@ for injection in injection_table:
     
     #### GET TIME SERIES ####
     if verbose: print('Fetching sensor (background) data...')
-    TS_quiet, chans_failed = getdata.get_time_series(chans, time_bg, time_bg + duration, return_failed=True)
+    TS_quiet, chans_failed = preprocess.get_time_series(chans, time_bg, time_bg + duration, return_failed=True)
     chans_good = [c for c in chans if c not in chans_failed]
     if len(chans_good) == 0:
         continue # No channels were successfully imported; move onto next injection
     
     if verbose: print('Fetching sensor (injection) data...')
-    TS_inject = getdata.get_time_series(chans_good, time_inj, time_inj + duration)
+    TS_inject = preprocess.get_time_series(chans_good, time_inj, time_inj + duration)
     
     if verbose: print('All channel time series extracted. (Runtime: {:.3f} s)\n'.format(time.time() - t11))
     if len(chans_failed)>0:
@@ -359,9 +314,7 @@ for injection in injection_table:
         savedata.ratio_table(
             chans_ASD_inject, chans_ASD_quiet,
             ratio_dict['ratio_z_min'], ratio_dict['ratio_z_max'],
-            method=ratio_method,
-            minFreq=ratio_dict['ratio_min_frequency'],
-            maxFreq=ratio_dict['ratio_max_frequency'],
+            method=ratio_method, minFreq=ratio_dict['ratio_min_frequency'], maxFreq=ratio_dict['ratio_max_frequency'], 
             directory=subdirectory, ts=t1
         )
         # QUIT CALCULATIONS IF RATIO PLOT IS ALL WE WANT (-R option instead of -r)
@@ -371,21 +324,21 @@ for injection in injection_table:
         # the effect of a set of injections are, without having to open up dozens of PEM spectra.
         del chans_ASD_quiet, chans_ASD_inject
         
-    #=====================================================
+    #======================================
     #### PREPARE DARM DATA
-    #=====================================================
+    #======================================
 
     t_darm = time.time()
     # Fetching data and calibrating it in one function:
     if verbose:
         print('\nFetching DARM (background) data...')
-    ASD_cal_darm_quiet = getdata.get_calibrated_DARM(
+    ASD_cal_darm_quiet = preprocess.get_calibrated_DARM(
         ifo, calib_dict['calibration_method'], time_bg, time_bg + duration,
         fft_time, overlap_time, darm_calibration_file
     )
     if verbose:
         print('Fetching DARM (injection) data...')
-    ASD_cal_darm_inject = getdata.get_calibrated_DARM(
+    ASD_cal_darm_inject = preprocess.get_calibrated_DARM(
         ifo, calib_dict['calibration_method'], time_inj, time_inj + duration,
         fft_time, overlap_time, darm_calibration_file
     )
@@ -394,7 +347,7 @@ for injection in injection_table:
         print('DARM ASDs calculated. (Runtime: '+str(t_darm2)+' s.)\n')
     
     #=======================================
-    #### CROP ASDs ####
+    #### CROP ASDs
     #=======================================
     
     N_chans = len(ASD_cal_quiet)
@@ -438,14 +391,13 @@ for injection in injection_table:
         ASD_inject.append(asd_inject)
         ASD_darm_quiet.append(asd_darm_quiet)
         ASD_darm_inject.append(asd_darm_inject)
-    
     del ASD_cal_quiet, ASD_cal_inject, ASD_cal_darm_quiet, ASD_cal_darm_inject
     if verbose:
         print('ASDs are ready for coupling function calculations.\n')
     
-    #=====================================================
-    #### CALCULATIONS // DATA EXPORT
-    #=====================================================
+    #============================================
+    #### CALCULATIONS // DATA EXPORT 
+    #============================================
     
     # GET SMOOTHING PARAMETERS
     # Smoothing is applied within the coupling function calculation.
@@ -508,10 +460,8 @@ for injection in injection_table:
         coup_func_list,
         plot_dict['spectrum_plot'], plot_dict['darm/10'], plot_dict['upper_lim'], plot_dict['est_amb_plot'],
         plot_dict['plot_freq_min'], plot_dict['plot_freq_max'],
-        plot_dict['coup_y_min'], plot_dict['coup_y_max'],
-        plot_dict['spec_y_min'], plot_dict['spec_y_max'],
-        plot_dict['coup_fig_height'], plot_dict['coup_fig_width'],
-        plot_dict['spec_fig_height'], plot_dict['spec_fig_width'],
+        plot_dict['coup_y_min'], plot_dict['coup_y_max'], plot_dict['spec_y_min'], plot_dict['spec_y_max'],
+        plot_dict['coup_fig_height'], plot_dict['coup_fig_width'], plot_dict['spec_fig_height'], plot_dict['spec_fig_width'],
         subdirectory, t1, coherence_results, verbose
     )    
     if (not verbose) and ((options.injection_list is not None) or (options.injection_search is not None) or (options.dtt is not None)):
@@ -536,20 +486,16 @@ if (not comp_dict['composite_coupling']) or (options.ratio_plot_only):
 
 
 
-#=======================================================
-#### PREPARE DATA FOR COMPOSITE COUPLING FUNCTIONS
-#=======================================================
+#==============================================
+#### COMPOSITE COUPLING FUNCTIONS
+#==============================================
 
 print('Obtaining composite coupling functions.\n')
 # IMPORT GWINC DATA FOR AMBIENT PLOT
 gwinc = None
 if comp_dict['gwinc_file'] is not None:
     try:
-        gwinc_mat = loadmat(comp_dict['gwinc_file'])
-        gwinc = [
-            np.asarray(gwinc_mat['nnn']['Freq'][0][0][0]),
-            np.sqrt(np.asarray(gwinc_mat['nnn']['Total'][0][0][0])) * 4000. # Convert strain PSD to DARM ASD
-        ]
+        gwinc = analysis.get_gwinc(comp_dict['gwinc_file'])
     except:
         print('\nWarning: GWINC data file ' + comp_dict['gwinc_file'] + ' not found. '+\
               'Composite estimated ambient will not show GWINC.\n')
@@ -570,21 +516,17 @@ for channel_name in sorted(channels_final):
     # CHECK BANDWIDTHS AND COLUMN LENGTHS
     band_widths = [cf_data.df for cf_data in cf_data_list]
     column_len = [cf_data.freqs.shape for cf_data in cf_data_list]
-    if (
-        any(bw != band_widths[0] for bw in band_widths) or \
-        any([k != column_len[0] for k in column_len])
-    ):
+    if (any(bw != band_widths[0] for bw in band_widths) or \
+        any([k != column_len[0] for k in column_len])):
         print('\nError: Coupling data objects have unequal data lengths.')
         print('If all the band_widths are the same, this should not be an issue.\n')
     # COMPUTE COMPOSITE COUPLING FUNCTION
     local_max_window = int(cf_dict['local_max_width'] / band_widths[0]) # Convert from Hz to bins
-    comp_data = analysis.composite_coupling_function(
-        cf_data_list, inj_names,
-        local_max_window=local_max_window,
-        freq_lines=injection_freqs
-    )    
+    comp_data = analysis.composite_coupling_function(cf_data_list, inj_names,\
+                                                     local_max_window=local_max_window,\
+                                                     freq_lines=injection_freqs)
     # GAUSSIAN SMOOTHING JUST BEFORE EXPORT; FOR SLIGHTLY SMOOTHER DATA
-    smooth_chans = ['ACC', 'MIC' 'WFS']    # Apply this procedure only to these channels
+    smooth_chans = ['ACC', 'MIC', 'WFS']    # Apply this procedure only to these channels
     width = 0.005                          # stdev of Gaussian kernel
     if any(x in channel_name for x in smooth_chans):
         comp_data = analysis.smooth_comp_data(comp_data, width)
@@ -596,15 +538,13 @@ for channel_name in sorted(channels_final):
     cf_binning = comp_dict['coupling_function_binning']
     if cf_binning is not None:
         # Bin original coupling function data
-        cf_data_binned_list = [analysis.bin_coupling_data(cf_data, cf_binning) for cf_data in cf_data_list]
+        cf_data_binned_list = [cf_data.bin_data(cf_binning) for cf_data in cf_data_list]
         # Keep track of binned frequencies and DARM separately for plotting an unbinned DARM
         freqs_binned = np.mean([cf_data.freqs for cf_data in cf_data_binned_list], axis=0)
         darm_binned = np.mean([cf_data.darm_bg for cf_data in cf_data_binned_list], axis=0)
         # Composite coupling function
-        comp_data_binned = analysis.composite_coupling_function(
-            cf_data_binned_list, inj_names,
-            local_max_window=local_max_window
-        )
+        comp_data_binned = analysis.composite_coupling_function(cf_data_binned_list, inj_names,\
+                                                                local_max_window=local_max_window)
         # Final smoothing
         if any(x in channel_name for x in smooth_chans):
             comp_data_binned = analysis.smooth_comp_data(comp_data_binned, width)
@@ -616,5 +556,3 @@ for channel_name in sorted(channels_final):
 t3 = time.time()
 print('Lowest (composite) coupling functions processed. (Runtime: {:.3f} s.)\n'.format(t3 - t2))
 print('Program is finished. (Runtime: {:.3f} s.)\n'.format(t3 - t1))
-
-sys.exit()
