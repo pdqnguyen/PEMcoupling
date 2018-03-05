@@ -1,0 +1,117 @@
+#### CONFIG FILE FOR AUTOMATED PEM COUPLING CALCULATOR (coup_calc_auto.py) ####
+
+# Formatting tips:
+# Provide boolean inputs as "on"/"true" or "off"/"false"
+# Write exponentials in the following form: 1.0e-16 or 1e-16
+
+
+[General]
+directory: 
+# Automatically generate subdirection based on ifo and station input (e.g. LHO/EX/EXmag)
+auto_subdir: on
+channels: config_files/pem/channels_magnetic.txt
+times: config_files/times/times_magnetic.txt
+
+
+#### DATA ANALYSIS OPTIONS ####
+
+[ASD]
+duration: 140
+FFT_avg: 10
+FFT_overlap_pct: 50
+band_width:
+FFT_rounding: on
+# Frequency range for data analysis (all analyses/exports will be restricted to this limit)
+data_freq_min: 6
+data_freq_max: 500
+
+[Calibration]
+# Either 'strain_channel' to use H1:GDS-CALIB_STRAIN, or 'deltal_channel' to use DELTAL_EXTERNAL
+calibration_method: deltal_channel
+darm_cal_lho: config_files/darm/darmcalLHO.txt
+darm_cal_llo: config_files/darm/darmcalLLO.txt
+sensor_calibration: config_files/pem/PEM_calibration.csv
+# Enable quadrature-summing of 3-axis sensors, replacing the three component channels
+# with a single channel e.g. CS_MAG_LVEA_VERTEX_XYZ
+quad_sum: on
+
+[Smoothing]
+# Spectrum smoothing must be provided as float (width (Hz) of smoothing window)
+# If log-smoothing, these are the window widths at freq=100Hz
+# Example: [sensor injection smoothing], [sensor background smoothing], [DARM (inj and bkgd) smoothing]
+MAG_smoothing: 0.2,0.2
+smoothing_log: on
+
+[Coupling Function]
+darm_factor_threshold: 2
+sens_factor_threshold: 2
+local_max_width: 0.1
+# Frequencies to omit when computing coupling functions
+darm_notch_lho: config_files/darm/darmnotchLHO.txt
+darm_notch_llo: config_files/darm/darmnotchLLO.txt
+
+
+#### EXPORT OPTIONS ####
+
+[Coupling Function Plot]
+
+# Frequency range for all plots (for visuals only; no effect on exported data)
+plot_freq_min: 
+plot_freq_max: 
+
+# Coupling function plot figure dimensions
+coup_fig_height: 6
+coup_fig_width: 12
+# Y-axis:
+coup_y_min: 
+coup_y_max: 
+
+# Spectrum plot
+spectrum_plot: on
+# Plot line showing one order of magnitude below DARM
+darm/10: on
+est_amb_plot: on
+upper_lim: on
+# Figure dimensions
+spec_fig_height: 9
+spec_fig_width: 18
+# Y-axis for sensor spectrum:
+spec_y_min: 
+spec_y_max: 
+
+[Coherence]
+#Input for these variables must be either 'on' or 'off'.
+coherence_calculator: off
+coherence_spectrum_plot: on
+#The following inputs must be percents (leave out the '%' sign).
+coherence_threshold: 40
+percent_data_threshold: 10
+
+[Ratio Plot]
+ratio_plot: off
+ratio_min_frequency: 5
+ratio_max_frequency: 1000
+ratio_z_min:
+ratio_z_max:
+ratio_avg: false
+ratio_max: true
+
+
+#### COMPOSITE COUPLING FUNCTIONS ####
+
+[Composite Coupling Function]
+composite_coupling: on
+# Binning width (logarithmic; input = percent of frequency)
+coupling_function_binning:
+upper_lim: on
+comp_est_amb_plot: on
+gwinc_file: gwinc_nomm_noises.mat
+# Plot parameters:
+comp_fig_height: 6
+comp_fig_width: 9
+# Frequency range
+comp_freq_min: 6
+comp_freq_max: 300
+# Y-axis for composite coupling function plot:
+comp_y_min:
+comp_y_max:

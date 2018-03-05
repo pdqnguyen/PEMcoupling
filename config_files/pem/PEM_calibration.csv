@@ -1,0 +1,272 @@
+﻿id,status,calibration,calculation,coupling,sample_rate,grid_location_x,grid_location_y,grid_location_z,aa_channel,date_tested,calibration_date,amplitude_error
+H1:PEM-CS_ACC_HAM2_PR1_Y,"",6 um/s2 per ADC count,Calculated through DAQ system,0,8192,-20122,1386,1620,0,2015-07-14,2013-08-22,7%
+H1:PEM-CS_MAG_LVEA_INPUTOPTICS_X,"","6.10 pT per ADC count above 1 Hz, 6100 pT per ADC count below 1 mHz",((100mT/ 10V) / (1000)) * (40V / 65536 counts),2E-8 meters/Tesla,2048,-18472,-1191,1710,0,0000-00-00,0000-00-00,0
+H1:PEM-CS_MIC_LVEA_INPUTOPTICS,"",8.309 x 10-5 Pascals per ADC count,"",1E-16 m/Pa,16384,-18446,-1183,1710,0,2015-07-15,2015-07-15,9%
+H1:PEM-CS_ACC_IOT2_INPUTOPTICS_Y,"",6.1 um/s2 per ADC count,((10 m/s2) / 100 V) * (4 V / 65536 counts),0,8192,0,0,0,0,2015-07-14,0000-00-00,0
+H1:PEM-CS_ACC_IOT1_MC_Z,"",6.1 um/s2 per ADC count,((10 m/s2) / 100 V) * (4 V / 65536 counts),0,8192,-19322,2526,1210,0,2015-07-14,0000-00-00,0
+H1:PEM-CS_ACC_IOT1_MC_X,"",6.1 um/s2 per ADC count,((10 m/s2) / 100 V) * (4 V / 65536 counts),0,8192,-19322,2526,1210,0,2015-07-14,0000-00-00,0
+H1:PEM-CS_ACC_PSL_PERISCOPE_X,"",6.1 um/s2 per ADC count,((10 m/s2) / 100 V) * (4 V / 65536 counts),1E-14 m/(m/s^2),8192,-25862,0,1900,0,2015-07-14,0000-00-00,0
+H1:PEM-CS_ACC_PSL_TABLE2_Z,"",6.1 um/s2 per ADC count,((10 m/s2) / 100 V) * (4 V / 65536 counts),1E-14 m/(m/s^2),8192,-27472,-667,1210,0,2015-07-14,0000-00-00,0
+H1:PEM-CS_ACC_PSL_TABLE1_Z,"",6.1 um/s2 per ADC count,((10 m/s2) / 100 V) * (4 V / 65536 counts),1E-14 m/(m/s^2),8192,-26802,1,1210,0,2015-07-14,0000-00-00,0
+H1:PEM-CS_ACC_PSL_TABLE1_Y,"",6.1 um/s2 per ADC count,((10 m/s2) / 100 V) * (4 V / 65536 counts),1E-14 m/(m/s^2),8192,-26802,1,1210,0,2015-07-14,0000-00-00,0
+H1:PEM-CS_ACC_PSL_TABLE1_X,"",6.1 um/s2 per ADC count,((10 m/s2) / 100 V) * (4 V / 65536 counts),1E-14 m/(m/s^2),8192,-26802,1,1210,0,2015-07-14,0000-00-00,0
+H1:PEM-EY_ACC_BSC10_ETMY_Z,"",7.0 um/s2 per ADC count,((10 m/s2) / 100 V) * (4 V / 65536 counts),0,8192,-90,3999982,470,0,2015-07-14,2014-07-18,0
+H1:PEM-CS_MAG_EBAY_SUSRACK_Z,"","6.10 pT per ADC count above 1 Hz, 6100 pT per ADC count below 1 mHz",((100mT/ 10V) / (1000)) * (40V / 65536 counts),2E-8 meters/Tesla,2048,-9131,-9578,1350,0,0000-00-00,0000-00-00,0
+H1:PEM-CS_ACC_IOT1_MC_Y,"",6.1 um/s2 per ADC count,((10 m/s2) / 100 V) * (4 V / 65536 counts),0,8192,-19322,2526,1210,0,2015-07-14,0000-00-00,0
+H1:PEM-CS_ACC_LVEAFLOOR_HAM1_Z,"",5.3 um/s2 per ADC count,Calculated through DAQ system,3E-7 m/m,8192,-23751,-36,0,0,2015-07-14,2013-08-19,7%
+H1:PEM-CS_MAG_EBAY_LSCRACK_Z,"","6.10 pT per ADC count above 1 Hz, 6100 pT per ADC count below 1 mHz",((100mT/ 10V) / (1000)) * (40V / 65536 counts),2E-8 meters/Tesla,2048,-10897,-10677,820,0,0000-00-00,0000-00-00,0
+H1:PEM-EY_MAG_EBAY_SUSRACK_Z,"","6.10 pT per ADC count above 1 Hz, 6100 pT per ADC count below 1 mHz",((100mT/ 10V) / (1000)) * (40V / 65536 counts),2e-8 meters/Tesla,2048,0,0,0,0,0000-00-00,0000-00-00,0
+H1:PEM-EY_MAG_VEA_FLOOR_Z,"","6.10 pT per ADC count above 1 Hz, 6100 pT per ADC count below 1 mHz",((100mT/ 10V) / (1000)) * (40V / 65536 counts),2e-8 meters/Tesla,2048,0,0,0,0,0000-00-00,0000-00-00,0
+H1:PEM-CS_MIC_LVEA_YMANSPOOL,"",9.020 x 10-5 Pascals per ADC count,"",0,16384,-1,41638,620,0,2015-07-15,2015-07-15,9
+H1:PEM-CS_ACC_LVEAFLOOR_YCRYO_Z,"",6.1 um/s2 per ADC count,Calculated through DAQ system,3E-7 m/m,8192,-77,41704,0,0,2013-08-23,2013-08-19,7%
+H1:PEM-CS_ACC_BEAMTUBE_YMAN_X,"",7.59 um/s2 per ADC count,Calculated through DAQ system,0,8192,22654,932,850,0,2013-08-23,0000-00-00,7%
+H1:PEM-EY_MAG_EBAY_SEIRACK_Z,"","6.10 pT per ADC count above 1 Hz, 6100 pT per ADC count below 1 mHz",((100mT/ 10V) / (1000)) * (40V / 65536 counts),2e-8 meters/Tesla,2048,0,0,0,0,0000-00-00,0000-00-00,0
+H1:PEM-EY_SEIS_VEA_FLOOR_Z,"",0.00740 um/s per ADC count,((1 m/s) / 800 V) * (1 V /168915 counts),0,256,0,0,0,0,0000-00-00,2014-08-13,0
+H1:PEM-CS_MIC_LVEA_VERTEX,"",8.581 x 10-5 Pascals per ADC count,"",1E-16 m/Pa,16384,7670,6125,550,0,2013-07-16,2014-07-16,9%
+H1:PEM-CS_ACC_OPLEV_ITMY_X,"",6.2 um/s2 per ADC count,Calculated through DAQ system,0,8192,850,11428,2420,0,2013-08-23,2013-08-23,7%
+H1:PEM-EY_ACC_ISCTEY_TRANS_X,"",6.1 um/s2 per ADC count,((10 m/s2) / 100 V) * (4 V / 65536 counts),0,8192,0,0,0,0,0000-00-00,0000-00-00,0
+H1:PEM-EY_ACC_VEA_FLOOR_Z,"",6.6 um/s2 per ADC count,((10 m/s2) / 100 V) * (4 V / 65536 counts),3E-7 m/m,8192,-750,4007192,0,0,0000-00-00,0000-00-00,0
+H1:PEM-EY_MIC_VEA_PLUSY,"",6 x 10-5 Pascals per ADC count,"",1E-17 m/Pa,16384,-700,4009682,1190,0,0000-00-00,2014-07-31,0
+H1:PEM-EY_MIC_EBAY_RACKS,"",6 x 10-5 Pascals per ADC count,"",1E-17 m/Pa,16384,0,0,0,0,0000-00-00,2014-07-18,0
+H1:PEM-CS_MAG_EBAY_LSCRACK_X,"","6.10 pT per ADC count above 1 Hz, 6100 pT per ADC count below 1 mHz",((100mT/ 10V) / (1000)) * (40V / 65536 counts),2E-8 meters/Tesla,2048,-10897,-10677,820,0,0000-00-00,0000-00-00,0
+L1:PEM-CS_ACC_LVEAFLOOR_XCRYO_Z,Inactive,6 um/s2 per ADC count,"",0,8192,41000,0,0,0,0000-00-00,0000-00-00,""
+H1:PEM-CS_MIC_EBAY_RACKS,"",7.881 x 10-5 Pascals per ADC count,"",0,16384,-9282,-9905,2210,0,2015-07-15,2015-07-15,0
+H1:PEM-CS_ACC_EBAY_FLOOR_Z,"",6.1 um/s2 per ADC count,Calculated through DAQ system,3E-7 m/m,8192,-9618,-7876,0,0,2013-08-23,2013-08-20,7%
+H1:PEM-EY_MIC_VEA_MINUSY,"",8.236 x 10-5 Pascals per ADC count,"",1E-17 m/Pa,16384,0,3991785,310,0,0000-00-00,2014-07-31,0
+H1:PEM-EY_ACC_OPLEV_ETMY_X,"",6.1 um/s2 per ADC count,((10 m/s2) / 100 V) * (4 V / 65536 counts),0,8192,20,3993835,830,0,0000-00-00,0000-00-00,0
+H1:PEM-EY_ACC_BSC10_ETMY_Y,"",7.0 um/s2 per ADC count,((10 m/s2) / 100 V) * (4 V / 65536 counts),0,8192,-790,4001512,1860,0,0000-00-00,2014-07-18,0
+H1:PEM-EY_ACC_BSC10_ETMY_X,"",7.0 um/s2 per ADC count,((10 m/s2) / 100 V) * (4 V / 65536 counts),0,8192,1780,4000002,1690,0,0000-00-00,2014-07-18,0
+H1:PEM-EY_ACC_EBAY_FLOOR_Z,"",6.4 um/s2 per ADC count,((10 m/s2) / 100 V) * (4 V / 65536 counts),0,8192,0,0,0,0,2015-07-14,2014-07-21,0
+H1:PEM-CS_MAG_EBAY_LSCRACK_Y,"","6.10 pT per ADC count above 1 Hz, 6100 pT per ADC count below 1 mHz",((100mT/ 10V) / (1000)) * (40V / 65536 counts),2E-8 meters/Tesla,2048,-10897,-10677,820,0,0000-00-00,0000-00-00,0
+H1:PEM-CS_ACC_HAM2_PR1_Z,"",6.1 um/s2 per ADC count,Calculated through DAQ system,0,8192,-20122,0,2790,0,2015-07-14,0000-00-00,0
+H1:PEM-CS_RADIO_LVEA_45MHZ,"","","",0,0,0,0,0,0,0000-00-00,0000-00-00,0
+H1:PEM-CS_ACC_PSL_TABLE3_Z,"",6.1 um/s2 per ADC count,((10 m/s2) / 100 V) * (4 V / 65536 counts),0,8192,-30092,1000,1210,0,2015-07-14,0000-00-00,0
+H1:PEM-CS_ACC_ISCT1_REFL_Y,"",6.1 um/s2 per ADC count,((10 m/s2) / 100 V) * (4 V / 65536 counts),0,8192,-23622,2526,1620,0,2015-07-14,0000-00-00,0
+H1:PEM-CS_ACC_BEAMTUBE_MCTUBE_Y ,"",5.9 um/s2 per ADC count,Calculated through DAQ system,0,8192,-12747,1075,1900,0,2015-07-14,2013-08-19,7%
+H1:PEM-CS_MIC_LVEA_BS,"",8.162 x 10-5 Pascals per ADC count,"",1E-16 m/Pa,16384,-2264,1202,1510,0,2013-07-16,2014-07-16,7%
+H1:PEM-CS_ACC_HAM3_PR2_Y,"",5.85 um/s2 per ADC count,Calculated through DAQ system,0,8192,-3918,815,1610,0,2013-08-23,2013-08-19,7%
+H1:PEM-CS_ACC_BSC2_BS_Y,"",5.86 um/s2 per ADC count,Calculated through DAQ system,0,8192,-814,1355,1530,0,2013-08-23,2013-08-16,7%
+H1:PEM-CS_ACC_LVEAFLOOR_BS_X,"",6.1 um/s2 per ADC count,Calculated through DAQ system,3E-7 m/m,8192,2553,-556,0,0,2015-07-14,2013-08-22,7%
+H1:PEM-CS_ACC_LVEAFLOOR_BS_Y,"",5.5 um/s2 per ADC count,Calculated through DAQ system,3E-7 m/m,8192,2553,-556,0,0,2015-07-14,2013-08-19,7%
+H1:PEM-CS_ACC_LVEAFLOOR_BS_Z,"",5.9 um/s2 per ADC count,Calculated through DAQ system,3E-7 m/m,8192,2553,-556,0,0,2015-07-14,2013-08-19,7%
+H1:PEM-CS_ACC_BSC3_ITMX_X,"",6 um/s2 per ADC count,Calculated through DAQ system,0,8192,6115,746,1570,0,2015-07-14,2013-08-23,7%
+H1:PEM-CS_ACC_BEAMTUBE_XMAN_Y,"",5.8 um/s2 per ADC count,Calculated through DAQ system,0,8192,22654,932,850,0,2015-07-14,2013-08-23,7%
+H1:PEM-CS_ACC_OPLEV_ITMX_Y,"",6.1 um/s2 per ADC count,"",0,8192,0,0,0,0,2015-07-14,0000-00-00,0
+H1:PEM-CS_ACC_LVEAFLOOR_XCRYO_Z,"",6.1 um/s2 per ADC count,Calculated through DAQ system,3E-7 m/m,8192,41780,-175,0,0,2015-07-14,2013-08-23,7%
+H1:PEM-CS_MIC_LVEA_XMANSPOOL,"",8.811 x 10-5 Pascals per ADC count,"",0,16384,41735,165,390,0,2015-07-15,2015-07-15,9%
+H1:PEM-CS_LOWFMIC_LVEA_VERTEX,"",680 uPa/count,"",0,0,-11866,-3051,0,0,0000-00-00,0000-00-00,0
+H1:PEM-CS_ACC_BSC1_ITMY_X,"",6.1 um/s2 per ADC count,Calculated through DAQ system,0,8192,1756,4742,1720,0,2015-07-14,2013-08-22,7%
+H1:PEM-CS_ACC_BSC1_ITMY_Y,"",5.8 um/s2 per ADC count,Calculated through DAQ system,0,8192,-568,6054,1550,0,2015-07-14,2013-08-16,7%
+H1:PEM-CS_ACC_BSC1_ITMY_Z,"",7.9 um/s2 per ADC count,Calculated through DAQ system,0,8192,4602,-64,500,0,2015-07-14,2013-08-19,7%
+H1:PEM-CS_ACC_HAM4_SR2_X,"",6 um/s2 per ADC count,Calculated through DAQ system,0,8192,-1410,-3838,1590,0,2015-07-14,2013-08-19,7%
+H1:PEM-CS_ACC_HAM5_SR1_X,"",6 um/s2 per ADC count,Calculated through DAQ system,0,8192,-1391,-20111,1600,0,2015-07-14,2013-08-19,7%
+H1:PEM-CS_ACC_HAM6_OMC_X,"",6.1 um/s2 per ADC count,((10 m/s2) / 100 V) * (4 V / 65536 counts),0,8192,1391,-22751,1600,0,2015-07-14,0000-00-00,0
+H1:PEM-CS_ACC_HAM6_OMC_Z,"",6.1 um/s2 per ADC count,((10 m/s2) / 100 V) * (4 V / 65536 counts),0,8192,500,-22711,2790,0,2015-07-14,0000-00-00,0
+H1:PEM-CS_MAG_LVEA_OUTPUTOPTICS_X,"","6.10 pT per ADC count above 1 Hz, 6100 pT per ADC count below 1 mHz",((100mT/ 10V) / (1000)) * (40V / 65536 counts),2E-8 meters/Tesla,2048,1240,-10677,820,0,0000-00-00,0000-00-00,0
+H1:PEM-CS_MAG_LVEA_OUTPUTOPTICS_Y,"","6.10 pT per ADC count above 1 Hz, 6100 pT per ADC count below 1 mHz",((100mT/ 10V) / (1000)) * (40V / 65536 counts),2E-8 meters/Tesla,2048,1240,-10677,820,0,0000-00-00,0000-00-00,0
+H1:PEM-CS_MAG_LVEA_INPUTOPTICS_Y,"","6.10 pT per ADC count above 1 Hz, 6100 pT per ADC count below 1 mHz",((100mT/ 10V) / (1000)) * (40V / 65536 counts),2E-8 meters/Tesla,2048,-18472,-1191,1710,0,0000-00-00,0000-00-00,0
+H1:PEM-CS_MAG_LVEA_OUTPUTOPTICS_Z,"","6.10 pT per ADC count above 1 Hz, 6100 pT per ADC count below 1 mHz",((100mT/ 10V) / (1000)) * (40V / 65536 counts),2E-8 meters/Tesla,2048,1240,-10677,820,0,0000-00-00,0000-00-00,0
+H1:PEM-CS_MAG_LVEA_INPUTOPTICS_Z,"","6.10 pT per ADC count above 1 Hz, 6100 pT per ADC count below 1 mHz",((100mT/ 10V) / (1000)) * (40V / 65536 counts),2E-8 meters/Tesla,2048,-18472,-1191,1710,0,0000-00-00,0000-00-00,0
+H1:PEM-CS_MIC_LVEA_OUTPUTOPTICS,"",8.195 x 10-5 Pascals per ADC count,"",2.8E-16 m/Pa,16384,760,-21431,2140,0,2015-07-15,2015-07-15,0
+H1:PEM-CS_ACC_ISCT6_OMC_X,"",6.1 um/s2 per ADC count,((10 m/s2) / 100 V) * (4 V / 65536 counts),0,8192,0,0,0,0,2015-07-14,0000-00-00,0
+H1:PEM-CS_MAINSMON_EBAY_1,"","","",0,0,0,0,0,0,0000-00-00,0000-00-00,0
+H1:PEM-CS_MAINSMON_EBAY_2,"","","",0,0,0,0,0,0,0000-00-00,0000-00-00,0
+H1:PEM-CS_MAINSMON_EBAY_3,"","","",0,0,0,0,0,0,0000-00-00,0000-00-00,0
+H1:PEM-CS_RADIO_EBAY_45MHZ,"","","",0,0,0,0,0,0,0000-00-00,0000-00-00,0
+H1:PEM-MY_ACC_BEAMTUBE_CRYO_X,"",6.0 um/s2 per ADC count,((10 m/s2) / 100 V) * (4 V / 65536 counts),0,8192,0,0,0,0,0000-00-00,2014-07-30,0
+H1:PEM-VAULT_COILMAG_DESERT_X,"","","",0,0,0,0,0,0,0000-00-00,0000-00-00,0
+H1:PEM-VAULT_COILMAG_DESERT_Y,"","","",0,0,0,0,0,0,0000-00-00,0000-00-00,0
+H1:PEM-VAULT_COILMAG_DESERT_Z,"","","",0,0,0,0,0,0,0000-00-00,0000-00-00,0
+H1:PEM-EY_SEIS_VEA_FLOOR_X,"",0.00738 um/s per ADC count,((1 m/s) / 800 V) * (1 V /169329 counts),0,256,0,0,0,0,0000-00-00,2014-08-13,0
+H1:PEM-EY_SEIS_VEA_FLOOR_Y,"",0.00738 um/s per ADC count,((1 m/s) / 800 V) * (1 V /169390 counts),0,256,0,0,0,0,0000-00-00,2014-08-13,0
+H1:PEM-EY_MAG_EBAY_SEIRACK_X,"","6.10 pT per ADC count above 1 Hz, 6100 pT per ADC count below 1 mHz",((100mT/ 10V) / (1000)) * (40V / 65536 counts),2e-8 meters/Tesla,2048,0,0,0,0,0000-00-00,0000-00-00,0
+H1:PEM-EY_MAG_EBAY_SEIRACK_Y,"","6.10 pT per ADC count above 1 Hz, 6100 pT per ADC count below 1 mHz",((100mT/ 10V) / (1000)) * (40V / 65536 counts),2e-8 meters/Tesla,2048,0,0,0,0,0000-00-00,0000-00-00,0
+H1:PEM-CS_MAG_EBAY_SUSRACK_X,"","6.10 pT per ADC count above 1 Hz, 6100 pT per ADC count below 1 mHz",((100mT/ 10V) / (1000)) * (40V / 65536 counts),2E-8 meters/Tesla,2048,-9131,-9578,1350,0,0000-00-00,0000-00-00,0
+H1:PEM-EY_MAG_EBAY_SUSRACK_Y,"","6.10 pT per ADC count above 1 Hz, 6100 pT per ADC count below 1 mHz",((100mT/ 10V) / (1000)) * (40V / 65536 counts),2e-8 meters/Tesla,2048,0,0,0,0,0000-00-00,0000-00-00,0
+H1:PEM-EY_MAG_EBAY_SUSRACK_X,"","6.10 pT per ADC count above 1 Hz, 6100 pT per ADC count below 1 mHz",((100mT/ 10V) / (1000)) * (40V / 65536 counts),2e-8 meters/Tesla,2048,0,0,0,0,0000-00-00,0000-00-00,0
+H1:PEM-CS_MAG_EBAY_SUSRACK_Y,"","6.10 pT per ADC count above 1 Hz, 6100 pT per ADC count below 1 mHz",((100mT/ 10V) / (1000)) * (40V / 65536 counts),2E-8 meters/Tesla,2048,-9131,-9578,1350,0,0000-00-00,0000-00-00,0
+H1:PEM-CS_ACC_BSC3_ITMX_Y,"",6.1 um/s2 per ADC count,Calculated through DAQ system,0,8192,4556,1822,1710,0,2013-08-23,2013-08-23,7%
+H1:PEM-EY_MAG_VEA_FLOOR_X,"","6.10 pT per ADC count above 1 Hz, 6100 pT per ADC count below 1 mHz",((100mT/ 10V) / (1000)) * (40V / 65536 counts),2e-8 meters/Tesla,2048,0,0,0,0,0000-00-00,0000-00-00,0
+H1:PEM-MY_SEIS_VEA_FLOOR_Z,"",0.0076 um/s per ADC count,((1 m/s) / 800 V) * (4 V /65536 counts)/10,0,256,0,0,0,0,0000-00-00,0000-00-00,0
+H1:PEM-MY_SEIS_VEA_FLOOR_Y,"",0.0076 um/s per ADC count,((1 m/s) / 800 V) * (4 V /65536 counts)/10,0,256,0,0,0,0,0000-00-00,0000-00-00,0
+H1:PEM-MY_SEIS_VEA_FLOOR_X,"",0.0076 um/s per ADC count,((1 m/s) / 800 V) * (4 V /65536 counts)/10,0,256,0,0,0,0,0000-00-00,0000-00-00,0
+H1:PEM-EY_MAG_VEA_FLOOR_Y,"","6.10 pT per ADC count above 1 Hz, 6100 pT per ADC count below 1 mHz",((100mT/ 10V) / (1000)) * (40V / 65536 counts),2e-8 meters/Tesla,2048,0,0,0,0,0000-00-00,0000-00-00,0
+H1:PEM-EY_LOWFMIC_VEA_FLOOR,"",680 uPa/count,"",0,0,0,0,0,0,0000-00-00,0000-00-00,0
+H1:PEM-VAULT_SEIS_DESERT_X,"",0.0076 um/s per ADC count,((1 m/s) / 800 V) * (4 V /65536 counts)/10,0,256,0,0,0,0,0000-00-00,0000-00-00,0
+H1:PEM-VAULT_SEIS_DESERT_Y,"",0.0076 um/s per ADC count,((1 m/s) / 800 V) * (4 V /65536 counts)/10,0,256,0,0,0,0,0000-00-00,0000-00-00,0
+H1:PEM-VAULT_SEIS_DESERT_Z,"",0.0076 um/s per ADC count,((1 m/s) / 800 V) * (4 V /65536 counts)/10,0,256,0,0,0,0,0000-00-00,0000-00-00,0
+H1:PEM-CS_MAG_LVEA_VERTEX_X,"","6.10 pT per ADC count above 1 Hz, 6100 pT per ADC count below 1 mHz",((100mT/ 10V) / (1000)) * (40V / 65536 counts),2E-8 meters/Tesla,2048,7666,6932,1290,0,2013-08-23,0000-00-00,0
+H1:PEM-CS_MAG_LVEA_VERTEX_Y,"","6.10 pT per ADC count above 1 Hz, 6100 pT per ADC count below 1 mHz",((100mT/ 10V) / (1000)) * (40V / 65536 counts),2E-8 meters/Tesla,2048,7666,6932,1290,0,2013-08-23,0000-00-00,0
+H1:PEM-CS_MAG_LVEA_VERTEX_Z,"","6.10 pT per ADC count above 1 Hz, 6100 pT per ADC count below 1 mHz",((100mT/ 10V) / (1000)) * (40V / 65536 counts),2E-8 meters/Tesla,2048,7666,6932,1290,0,2013-08-23,0000-00-00,0
+H1:PEM-CS_SEIS_LVEA_VERTEX_X,"",0.0076 um/s per ADC count,"",3E-7 m/m,256,7119,5734,0,0,2013-08-23,2013-08-20,0
+H1:PEM-CS_SEIS_LVEA_VERTEX_Y,"",0.0076 um/s per ADC count,((1 m/s) / 800 V) * (4 V /65536 counts)/10,3E-7 m/m,256,7119,5734,0,0,2013-08-23,2013-08-20,0
+H1:PEM-CS_SEIS_LVEA_VERTEX_Z,"",0.0076 um/s per ADC count,((1 m/s) / 800 V) * (4 V /65536 counts)/10,3E-7 m/m,256,7119,5734,0,0,2013-08-23,2013-08-20,0
+H1:PEM-MX_ACC_BEAMTUBE_CRYO_X,"",6.2 um/s2 per ADC count,((10 m/s2) / 100 V) * (4 V / 65536 counts),0,8192,0,0,0,0,0000-00-00,2014-07-30,0
+H1:PEM-MX_SEIS_VEA_FLOOR_Z,"",0.0076 um/s per ADC count,((1 m/s) / 800 V) * (4 V /65536 counts)/10,0,256,0,0,0,0,0000-00-00,0000-00-00,0
+H1:PEM-EX_MIC_VEA_MINUSX,"",8.088 x 10-5 Pascals per ADC count,"",1E-16 m/Pa,16384,0,0,0,0,2015-07-15,2015-07-15,0
+H1:PEM-EX_ACC_OPLEV_ETMX_Y,"",6.0 um/s2 per ADC count,((10 m/s2) / 100 V) * (4 V / 65536 counts),0,8192,0,0,0,0,2015-07-14,2014-08-20,0
+H1:PEM-EX_ACC_BSC9_ETMX_Y,"",6.0 um/s2 per ADC count,((10 m/s2) / 100 V) * (4 V / 65536 counts),0,8192,0,0,0,0,2015-07-14,2014-08-20,0
+H1:PEM-EX_ACC_BSC9_ETMX_Z,"",6.1 um/s2 per ADC count,((10 m/s2) / 100 V) * (4 V / 65536 counts),0,8192,0,0,0,0,2015-07-14,0000-00-00,0
+H1:PEM-EX_ACC_BSC9_ETMX_X,"",5.0 um/s2 per ADC count,((10 m/s2) / 100 V) * (4 V / 65536 counts),0,8192,0,0,0,0,2015-07-14,2014-08-20,0
+H1:PEM-EX_MAG_VEA_FLOOR_Z,"","6.10 pT per ADC count above 1 Hz, 6100 pT per ADC count below 1 mHz",((100mT/ 10V) / (1000)) * (40V / 65536 counts),0,2048,0,0,0,0,0000-00-00,0000-00-00,0
+H1:PEM-EX_SEIS_VEA_FLOOR_Z,"",0.00739 um/s per ADC count,((1 m/s) / 800 V) * (4 V /65536 counts)/10,0,256,0,0,0,0,0000-00-00,2014-08-18,0
+H1:PEM-EX_LOWFMIC_VEA_FLOOR,"",770 uPa/count,"",0,0,0,0,0,0,0000-00-00,0000-00-00,0
+H1:PEM-EX_MIC_VEA_PLUSX,"",9.031 x 10-5 Pascals per ADC count,"",1E-16 m/Pa,16384,0,0,0,0,2015-07-15,2015-07-15,0
+H1:PEM-EX_ACC_VEA_FLOOR_Z,"",6.1 um/s2 per ADC count,((10 m/s2) / 100 V) * (4 V / 65536 counts),0,8192,0,0,0,0,2015-07-14,0000-00-00,0
+H1:PEM-EX_ACC_ISCTEX_TRANS_Y,"",6.1 um/s2 per ADC count,((10 m/s2) / 100 V) * (4 V / 65536 counts),0,8192,0,0,0,0,2015-07-14,0000-00-00,0
+H1:PEM-EX_MAG_EBAY_SEIRACK_Z,"","6.10 pT per ADC count above 1 Hz, 6100 pT per ADC count below 1 mHz",((100mT/ 10V) / (1000)) * (40V / 65536 counts),0,2048,0,0,0,0,0000-00-00,0000-00-00,0
+H1:PEM-EX_MAG_EBAY_SEIRACK_Y,"","6.10 pT per ADC count above 1 Hz, 6100 pT per ADC count below 1 mHz",((100mT/ 10V) / (1000)) * (40V / 65536 counts),0,2048,0,0,0,0,0000-00-00,0000-00-00,0
+H1:PEM-EX_MAG_EBAY_SEIRACK_X,"","6.10 pT per ADC count above 1 Hz, 6100 pT per ADC count below 1 mHz",((100mT/ 10V) / (1000)) * (40V / 65536 counts),0,2048,0,0,0,0,0000-00-00,0000-00-00,0
+H1:PEM-EX_MAG_VEA_FLOOR_Y,"","6.10 pT per ADC count above 1 Hz, 6100 pT per ADC count below 1 mHz",((100mT/ 10V) / (1000)) * (40V / 65536 counts),0,2048,0,0,0,0,0000-00-00,0000-00-00,0
+H1:PEM-EX_MAG_VEA_FLOOR_X,"","6.10 pT per ADC count above 1 Hz, 6100 pT per ADC count below 1 mHz",((100mT/ 10V) / (1000)) * (40V / 65536 counts),0,2048,0,0,0,0,0000-00-00,0000-00-00,0
+H1:PEM-EX_SEIS_VEA_FLOOR_Y,"",0.00743 um/s per ADC count,((1 m/s) / 800 V) * (4 V /65536 counts)/10,0,256,0,0,0,0,0000-00-00,2014-08-18,0
+H1:PEM-EX_SEIS_VEA_FLOOR_X,"",0.00743 um/s per ADC count,((1 m/s) / 800 V) * (4 V /65536 counts)/10,0,256,0,0,0,0,0000-00-00,2014-08-18,0
+H1:PEM-EX_MAG_EBAY_SUSRACK_Z,"","6.10 pT per ADC count above 1 Hz, 6100 pT per ADC count below 1 mHz",((100mT/ 10V) / (1000)) * (40V / 65536 counts),0,2048,0,0,0,0,0000-00-00,0000-00-00,0
+H1:PEM-EX_MAG_EBAY_SUSRACK_Y,"","6.10 pT per ADC count above 1 Hz, 6100 pT per ADC count below 1 mHz",((100mT/ 10V) / (1000)) * (40V / 65536 counts),0,2048,0,0,0,0,0000-00-00,0000-00-00,0
+H1:PEM-EX_MAG_EBAY_SUSRACK_X,"","6.10 pT per ADC count above 1 Hz, 6100 pT per ADC count below 1 mHz",((100mT/ 10V) / (1000)) * (40V / 65536 counts),0,2048,0,0,0,0,0000-00-00,0000-00-00,0
+H1:PEM-EX_MIC_EBAY_RACKS,"",8.108 x 10-5 Pascals per ADC count,"",1E-16 m/Pa,16384,0,0,0,0,2015-07-15,2015-07-15,0
+H1:PEM-EX_ACC_EBAY_FLOOR_Z,"","6.1 &mu;/s2 per ADC count",((10 m/s2) / 100 V) * (4 V / 65536 counts),0,8192,0,0,0,0,0000-00-00,0000-00-00,0
+H1:PEM-EY_MAINSMON_EBAY_1,"","","",0,0,0,0,0,0,0000-00-00,0000-00-00,0
+H1:PEM-EY_MAINSMON_EBAY_2,"","","",0,0,0,0,0,0,0000-00-00,0000-00-00,0
+H1:PEM-EY_MAINSMON_EBAY_3,"","","",0,0,0,0,0,0,0000-00-00,0000-00-00,0
+H1:PEM-EX_MAINSMON_EBAY_1,"","","",0,0,0,0,0,0,0000-00-00,0000-00-00,0
+H1:PEM-EX_MAINSMON_EBAY_2,"","","",0,0,0,0,0,0,0000-00-00,0000-00-00,0
+H1:PEM-EX_MAINSMON_EBAY_3,"","","",0,0,0,0,0,0,0000-00-00,0000-00-00,0
+H1:PEM-CS_MIC_PSL_CENTER,"",7.278 x 10-5 Pascals per ADC count,"",3.5E-15 m/Pa,16384,-27977,333,2,0,2015-07-15,2015-07-15,0
+H1:PEM-CS_MIC_LVEA_HAM7,"",7.461 x 10-5 Pascals per ADC count,"",1E-16 m/Pa,16384,30710,10248,1360,0,2015-07-15,2015-07-15,9%
+L1:PEM-CS_SEIS_LVEA_VERTEX_X,"","","",0,256,0,0,0,0,0000-00-00,0000-00-00,0
+L1:PEM-CS_SEIS_LVEA_VERTEX_Y,"","","",0,256,0,0,0,0,0000-00-00,0000-00-00,0
+L1:PEM-CS_SEIS_LVEA_VERTEX_Z,"","","",0,256,0,0,0,0,0000-00-00,0000-00-00,0
+L1:PEM-CS_ADC_4_11_OUT,"",6.1 um/s2 per ADC count,"","","","","","","","","",""
+L1:PEM-CS_ADC_4_12_OUT,"",6.1 um/s2 per ADC count,"","","","","","","","","",""
+L1:PEM-CS_ADC_4_13_OUT,"",6.1 um/s2 per ADC count,"","","","","","","","","",""
+L1:PEM-CS_ADC_4_14_OUT,"",6.1 um/s2 per ADC count,"","","","","","","","","",""
+L1:PEM-CS_ADC_4_15_OUT,"",6.1 um/s2 per ADC count,"","","","","","","","","",""
+L1:PEM-CS_ACC_LVEAFLOOR_HAM1_Z,Inactive,"6.1 &mu;m/s<sup>2</sup> per ADC count",((10 m/s2) / 100 V) * (4 V / 65536 counts),0,8192,-24,0,0,0,2015-07-14,0000-00-00,0
+L1:PEM-CS_ACC_HAM2_PRM_Y,Active,"6.1 &mu;m/s<sup>2</sup> per ADC count",((10 m/s2) / 100 V) * (4 V / 65536 counts),0,8192,-20124,1383,1510,0,2015-07-14,0000-00-00,0
+L1:PEM-CS_ACC_HAM2_PRM_Z,Inactive,"6.1 &mu;m/s<sup>2</sup> per ADC count",((10 m/s2) / 100 V) * (4 V / 65536 counts),0,8192,0,0,0,0,2015-07-14,0000-00-00,0
+L1:PEM-CS_ACC_HAM3_PR2_Y,Active,"6.1 &mu;m/s<sup>2</sup> per ADC count",((10 m/s2) / 100 V) * (4 V / 65536 counts),0,8192,-3896,1383,1565,0,0000-00-00,0000-00-00,0
+L1:PEM-CS_ACC_LVEAFLOOR_BS_Z,Inactive,"6.1 &mu;m/s<sup>2</sup> per ADC count",((10 m/s2) / 100 V) * (4 V / 65536 counts),0,8192,0,0,0,0,2015-07-14,0000-00-00,0
+L1:PEM-CS_ACC_HAM4_SR2_X,Active,"6.1 &mu;m/s<sup>2</sup> per ADC count",((10 m/s2) / 100 V) * (4 V / 65536 counts),0,8192,1383,-3805,1510,0,2015-07-14,0000-00-00,0
+L1:PEM-CS_ACC_HAM5_SRM_X,Active,"6.1 &mu;m/s<sup>2</sup> per ADC count",((10 m/s2) / 100 V) * (4 V / 65536 counts),0,8192,1383,-20144,1510,0,2015-07-14,0000-00-00,0
+L1:PEM-CS_ACC_HAM6_OMC_X,Active,"6.1 &mu;m/s<sup>2</sup> per ADC count",((10 m/s2) / 100 V) * (4 V / 65536 counts),0,8192,1383,-22720,1510,0,2015-07-14,0000-00-00,0
+L1:PEM-CS_ACC_HAM6_OMC_Z,Active,"6.1 &mu;m/s<sup>2</sup> per ADC count",((10 m/s2) / 100 V) * (4 V / 65536 counts),0,8192,-397,-22720,2537,0,2015-07-14,0000-00-00,0
+L1:PEM-CS_ACC_BSC1_ITMY_X,Active,"6.1 &mu;m/s<sup>2</sup> per ADC count",((10 m/s2) / 100 V) * (4 V / 65536 counts),0,8192,1786,4580,1510,0,2015-07-14,0000-00-00,0
+L1:PEM-CS_ACC_BSC1_ITMY_Y,Active,"6.1 &mu;m/s<sup>2</sup> per ADC count",((10 m/s2) / 100 V) * (4 V / 65536 counts),0,8192,616,6074,1510,0,2015-07-14,0000-00-00,0
+L1:PEM-CS_ACC_BSC2_BS_Y,Active,"6.1 &mu;m/s<sup>2</sup> per ADC count",((10 m/s2) / 100 V) * (4 V / 65536 counts),0,8192,844,1450,1510,0,0000-00-00,0000-00-00,0
+L1:PEM-CS_ACC_BSC3_ITMX_X,Active,"6.1 &mu;m/s<sup>2</sup> per ADC count",((10 m/s2) / 100 V) * (4 V / 65536 counts),0,8192,6224,-597,1510,0,2015-07-14,0000-00-00,0
+L1:PEM-CS_ACC_BSC3_ITMX_Y,Active,"6.1 &mu;m/s<sup>2</sup> per ADC count",((10 m/s2) / 100 V) * (4 V / 65536 counts),0,8192,4501,1806,1510,0,2015-07-14,0000-00-00,0
+L1:PEM-CS_ACC_OPLEV_ITMX_Y,Active,"6.1 &mu;m/s<sup>2</sup> per ADC count",((10 m/s2) / 100 V) * (4 V / 65536 counts),0,8192,38202,82,1510,0,2015-07-14,0000-00-00,0
+L1:PEM-CS_ACC_BEAMTUBE_XMAN_Y,Active,"6.1 &mu;m/s<sup>2</sup> per ADC count",((10 m/s2) / 100 V) * (4 V / 65536 counts),0,8192,21786,-942,1510,0,2015-07-14,0000-00-00,0
+L1:PEM-CS_ACC_OPLEV_ITMY_X,Active,"6.1 &mu;m/s<sup>2</sup> per ADC count",((10 m/s2) / 100 V) * (4 V / 65536 counts),0,8192,82,37978,1510,0,2015-07-14,0000-00-00,0
+L1:PEM-CS_ACC_FLOOR_YCRYO_Z,Inactive,"6.1 &mu;m/s<sup>2</sup> per ADC count",((10 m/s2) / 100 V) * (4 V / 65536 counts),0,8192,0,41,0,0,2015-07-14,0000-00-00,0
+L1:PEM-CS_ACC_BEAMTUBE_YMAN_X,Active,"6.1 &mu;m/s<sup>2</sup> per ADC count",((10 m/s2) / 100 V) * (4 V / 65536 counts),0,8192,-942,21724,1510,0,2015-07-14,0000-00-00,0
+L1:PEM-CS_ACC_PSL_TABLE2_Z,Inactive,"6.1 &mu;m/s<sup>2</sup> per ADC count",((10 m/s2) / 100 V) * (4 V / 65536 counts),0,8192,0,0,0,0,2015-07-14,0000-00-00,0
+L1:PEM-CS_ACC_PSL_TABLE1_X,Active,"6.1 &mu;m/s<sup>2</sup> per ADC count",((10 m/s2) / 100 V) * (4 V / 65536 counts),0,8192,0,0,0,0,2015-07-14,0000-00-00,0
+L1:PEM-CS_ACC_PSL_TABLE1_Y,Active,"6.1 &mu;m/s<sup>2</sup> per ADC count",((10 m/s2) / 100 V) * (4 V / 65536 counts),0,8192,0,0,0,0,2015-07-14,0000-00-00,0
+L1:PEM-CS_ACC_PSL_TABLE1_Z,Active,"6.1 &mu;m/s<sup>2</sup> per ADC count",((10 m/s2) / 100 V) * (4 V / 65536 counts),0,8192,0,0,0,0,2015-07-14,0000-00-00,0
+L1:PEM-CS_ACC_PSL_PERISCOPE_X,Active,"6.1 &mu;m/s<sup>2</sup> per ADC count",((10 m/s2) / 100 V) * (4 V / 65536 counts),0,8192,0,0,0,0,2015-07-14,0000-00-00,0
+L1:PEM-CS_ACC_ISCT1_REFL_Y,Active,"6.1 &mu;m/s<sup>2</sup> per ADC count",((10 m/s2) / 100 V) * (4 V / 65536 counts),0,8192,0,0,0,0,2015-07-14,0000-00-00,0
+L1:PEM-CS_ACC_IOT1_IMC_X,Active,"6.1 &mu;m/s<sup>2</sup> per ADC count",((10 m/s2) / 100 V) * (4 V / 65536 counts),0,8192,-20546,2877,0,0,2015-07-14,0000-00-00,0
+L1:PEM-CS_ACC_IOT1_IMC_Y,Active,"6.1 &mu;m/s<sup>2</sup> per ADC count",((10 m/s2) / 100 V) * (4 V / 65536 counts),0,8192,-20546,2877,0,0,2015-07-14,0000-00-00,0
+L1:PEM-CS_ACC_IOT1_IMC_Z,Active,"6.1 &mu;m/s<sup>2</sup> per ADC count",((10 m/s2) / 100 V) * (4 V / 65536 counts),0,8192,-20546,2877,0,0,2015-07-14,0000-00-00,0
+L1:PEM-CS_ACC_IOT2_INPUTOPTICS_Y,Inactive,"6.1 &mu;m/s<sup>2</sup> per ADC count",((10 m/s2) / 100 V) * (4 V / 65536 counts),0,8192,0,0,0,0,2015-07-14,0000-00-00,0
+L1:PEM-CS_ACC_ISCT6_OMC_X,Active,"6.1 &mu;m/s<sup>2</sup> per ADC count",((10 m/s2) / 100 V) * (4 V / 65536 counts),0,8192,-23398,2781,0,0,2015-07-14,0000-00-00,0
+L1:PEM-CS_ACC_EBAY_FLOOR_Z,Active,"6.1 &mu;m/s<sup>2</sup> per ADC count",((10 m/s2) / 100 V) * (4 V / 65536 counts),0,819,0,0,0,0,0000-00-00,0000-00-00,0
+L1:PEM-CS_MAG_LVEA_OUTPUTOPTICS_X,Inactive,"4.27 pT per ADC count above 10 Hz, 4270 pT per ADC count below 0.1 Hz",((100mT/ 10V) / (1000)) * (40V / 65536 counts),0,2048,1188,-21661,2320,0,0000-00-00,0000-00-00,0 
+L1:PEM-CS_MAG_LVEA_OUTPUTOPTICS_Y,Inactive,"4.27 pT per ADC count above 10 Hz, 4270 pT per ADC count below 0.1 Hz",((100mT/ 10V) / (1000)) * (40V / 65536 counts),0,2048,1188,-21661,2320,0,0000-00-00,0000-00-00,0 
+L1:PEM-CS_MAG_LVEA_OUTPUTOPTICS_Z,Inactive,"4.27 pT per ADC count above 10 Hz, 4270 pT per ADC count below 0.1 Hz",((100mT/ 10V) / (1000)) * (40V / 65536 counts),0,2048,1188,-21661,2320,0,0000-00-00,0000-00-00,0 
+L1:PEM-CS_MAG_LVEA_VERTEX_X,"","6.10 pT per ADC count above 10 Hz, 6100 pT per ADC count below 0.1 Hz",((100mT/ 10V) / (1000)) * (40V / 65536 counts),0,2048,0,0,0,0,0000-00-00,0000-00-00,0
+L1:PEM-CS_MAG_LVEA_VERTEX_Y,"","6.10 pT per ADC count above 10 Hz, 6100 pT per ADC count below 0.1 Hz",((100mT/ 10V) / (1000)) * (40V / 65536 counts),0,2048,0,0,0,0,0000-00-00,0000-00-00,0
+L1:PEM-CS_MAG_LVEA_VERTEX_Z,"","6.10 pT per ADC count above 10 Hz, 6100 pT per ADC count below 0.1 Hz",((100mT/ 10V) / (1000)) * (40V / 65536 counts),0,2048,0,0,0,0,0000-00-00,0000-00-00,0
+L1:PEM-CS_MAG_EBAY_SUSRACK_X,"","610 pT per ADC count above 10 Hz, 610000 pT per ADC count below 0.1 Hz",((100mT/ 10V) / (10)) * (40V / 65536 counts),0,2048,0,0,0,0,0000-00-00,0000-00-00,0
+L1:PEM-CS_MAG_EBAY_SUSRACK_Y,"","610 pT per ADC count above 10 Hz, 610000 pT per ADC count below 0.1 Hz",((100mT/ 10V) / (10)) * (40V / 65536 counts),0,2048,0,0,0,0,0000-00-00,0000-00-00,0
+L1:PEM-CS_MAG_EBAY_SUSRACK_Z,"","610 pT per ADC count above 10 Hz, 610000 pT per ADC count below 0.1 Hz",((100mT/ 10V) / (10)) * (40V / 65536 counts),0,2048,0,0,0,0,0000-00-00,0000-00-00,0
+L1:PEM-CS_MIC_LVEA_INPUTOPTICS,Active,1.9 x 10-4 Pa per ADC count,"",0,16384,-18383,-1188,1922,0,0000-00-00,0000-00-00,0
+L1:PEM-CS_MIC_LVEA_BS,Active,1.2 x 10-4 Pa per ADC count,"",0,16384,1282,2347,1922,0,0000-00-00,0000-00-00,0
+L1:PEM-CS_MIC_LVEA_OUTPUTOPTICS,Active,2.2 x 10-4 Pa per ADC count,"",0,16384,0,0,0,0,0000-00-00,0000-00-00,0
+L1:PEM-CS_MIC_LVEA_XMANSPOOL,Active,2.2 x 10-4 Pa per ADC count,"",0,16384,41650,0,0,0,0000-00-00,0000-00-00,0
+L1:PEM-CS_MIC_LVEA_YMANSPOOL,Active,2.1 x 10-4 Pa per ADC count,"",0,16384,0,41492,0,0,0000-00-00,0000-00-00,0
+L1:PEM-CS_MIC_PSL_CENTER,Active,1.9 x 10-4 Pa per ADC count,"",0,16384,0,0,0,0,0000-00-00,0000-00-00,0
+L1:PEM-CS_MIC_EBAY_RACKS,Active,2.3 x 10-4 Pa per ADC count,"",0,16384,0,0,0,0,0000-00-00,0000-00-00,0
+L1:PEM-CS_AOR_ROOF_1,"","","",0,0,0,0,0,0,0000-00-00,0000-00-00,0
+L1:PEM-CS_AOR_ROOF_2,"","","",0,0,0,0,0,0,0000-00-00,0000-00-00,0
+L1:PEM-CS_RADIO_LVEA_45MHZ,Inactive,"","",0,0,0,0,0,0,0000-00-00,0000-00-00,0
+L1:PEM-CS_RADIO_EBAY_45MHZ,Inactive,"","",0,0,0,0,0,0,0000-00-00,0000-00-00,0
+L1:PEM-CS_TEMP_BSC1_ITMY,"","","",0,0,0,0,0,0,0000-00-00,0000-00-00,0
+L1:PEM-CS_TEMP_BSC3_ITMX,"","","",0,0,0,0,0,0,0000-00-00,0000-00-00,0
+L1:PEM-CS_LOWFMIC_LVEA_VERTEX,"","","",0,0,2928,9040,0,0,0000-00-00,0000-00-00,0
+L1:PEM-CS_MAINSMON_EBAY_1,Inactive,"","",0,0,0,0,0,0,0000-00-00,0000-00-00,0
+L1:PEM-CS_MAINSMON_EBAY_2,Inactive,"","",0,0,0,0,0,0,0000-00-00,0000-00-00,0
+L1:PEM-CS_MAINSMON_EBAY_3,"","","",0,0,0,0,0,0,0000-00-00,0000-00-00,0
+L1:PEM-EY_ACC_BSC5_ETMY_X,"","6.1 &mu;/s2 per ADC count",((10 m/s2) / 100 V) * (4 V / 65536 counts),0,8192,1799,4000042,1510,0,2015-07-14,0000-00-00,""
+L1:PEM-EY_ACC_BSC5_ETMY_Y,"","6.1 &mu;/s2 per ADC count",((10 m/s2) / 100 V) * (4 V / 65536 counts),0,8192,-6,4001787,0,0,2015-07-14,0000-00-00,""
+L1:PEM-EY_ACC_BSC5_ETMY_Z,"","6.1 &mu;/s2 per ADC count",((10 m/s2) / 100 V) * (4 V / 65536 counts),0,8192,0,0,0,0,2015-07-14,0000-00-00,""
+L1:PEM-EY_ACC_EBAY_FLOOR_Z,"","6.1 &mu;/s2 per ADC count",((10 m/s2) / 100 V) * (4 V / 65536 counts),0,8192,0,0,0,0,2015-07-14,2014-07-21,""
+L1:PEM-EY_ACC_ISCTEY_TRANS_X,"","6.1 &mu;/s2 per ADC count",((10 m/s2) / 100 V) * (4 V / 65536 counts),0,8192,0,0,0,0,0000-00-00,0000-00-00,""
+L1:PEM-EY_ACC_OPLEV_ETMY_X,"","6.1 &mu;/s2 per ADC count",((10 m/s2) / 100 V) * (4 V / 65536 counts),0,8192,200,3993906,0,0,2015-07-14,0000-00-00,""
+L1:PEM-EY_ACC_VEA_FLOOR_Z,"","6.1 &mu;/s2 per ADC count",((10 m/s2) / 100 V) * (4 V / 65536 counts),0,8192,0,0,0,0,2015-07-14,0000-00-00,""
+L1:PEM-EY_MAG_VEA_FLOOR_Z,"","6.10 pT per ADC count above 10 Hz, 6100 pT per ADC count below 0.1 Hz",((100mT/ 10V) / (1000)) * (40V / 65536 counts),0,0,0,0,0,0,0000-00-00,0000-00-00,""
+L1:PEM-EY_MAG_VEA_FLOOR_Y,"","6.10 pT per ADC count above 10 Hz, 6100 pT per ADC count below 0.1 Hz",((100mT/ 10V) / (1000)) * (40V / 65536 counts),0,0,0,0,0,0,0000-00-00,0000-00-00,""
+L1:PEM-EY_MAG_VEA_FLOOR_X,"","6.10 pT per ADC count above 10 Hz, 6100 pT per ADC count below 0.1 Hz",((100mT/ 10V) / (1000)) * (40V / 65536 counts),0,0,0,0,0,0,0000-00-00,0000-00-00,""
+L1:PEM-EY_MAG_EBAY_SUSRACK_Z,"","610 pT per ADC count above 10 Hz, 610000 pT per ADC count below 0.1 Hz",((100mT/ 10V) / (10)) * (40V / 65536 counts),0,0,0,0,0,0,0000-00-00,0000-00-00,""
+L1:PEM-EY_MAG_EBAY_SUSRACK_Y,"","610 pT per ADC count above 10 Hz, 610000 pT per ADC count below 0.1 Hz",((100mT/ 10V) / (10)) * (40V / 65536 counts),0,0,0,0,0,0,0000-00-00,0000-00-00,""
+L1:PEM-EY_MAG_EBAY_SUSRACK_X,"","610 pT per ADC count above 10 Hz, 610000 pT per ADC count below 0.1 Hz",((100mT/ 10V) / (10)) * (40V / 65536 counts),0,0,0,0,0,0,0000-00-00,0000-00-00,""
+L1:PEM-EY_MIC_EBAY_RACKS,"",1.9 x 10-4 Pa per ADC count,"",0,16384,0,0,0,0,0000-00-00,0000-00-00,""
+L1:PEM-EY_MIC_VEA_PLUSY,"",1.9 x 10-4 Pa per ADC count,"",0,16384,1320,3995986,0,0,0000-00-00,0000-00-00,""
+L1:PEM-EY_SEIS_VEA_FLOOR_X,"","","",0,0,1053,3991273,0,0,0000-00-00,0000-00-00,""
+L1:PEM-EY_SEIS_VEA_FLOOR_Y,"","","",0,0,1053,3991273,0,0,0000-00-00,0000-00-00,""
+L1:PEM-EY_SEIS_VEA_FLOOR_Z,"","","",0,0,1053,3991273,0,0,0000-00-00,0000-00-00,""
+L1:PEM-EY_LOWFMIC_VEA_FLOOR,"","","",0,0,1320,3995986,0,0,0000-00-00,0000-00-00,""
+L1:PEM-EX_ACC_BSC4_ETMX_X,"","6.1 &mu;/s2 per ADC count",((10 m/s2) / 100 V) * (4 V / 65536 counts),0,8192,4001807,18,1510,0,2015-07-14,0000-00-00,""
+L1:PEM-EX_ACC_BSC4_ETMX_Y,"","6.1 &mu;/s2 per ADC count",((10 m/s2) / 100 V) * (4 V / 65536 counts),0,8192,4000172,-1804,1510,0,2015-07-14,0000-00-00,""
+L1:PEM-EX_ACC_BSC4_ETMX_Z,"","6.1 &mu;/s2 per ADC count",((10 m/s2) / 100 V) * (4 V / 65536 counts),0,8192,0,0,0,0,2015-07-14,0000-00-00,""
+L1:PEM-EX_ACC_EBAY_FLOOR_Z,"","6.1 &mu;/s2 per ADC count",((10 m/s2) / 100 V) * (4 V / 65536 counts),0,8192,0,0,0,0,2015-07-14,0000-00-00,""
+L1:PEM-EX_ACC_ISCTEX_TRANS_Y,"","6.1 &mu;/s2 per ADC count",((10 m/s2) / 100 V) * (4 V / 65536 counts),0,8192,0,0,0,0,0000-00-00,0000-00-00,""
+L1:PEM-EX_ACC_OPLEV_ETMX_Y,"","6.1 &mu;/s2 per ADC count",((10 m/s2) / 100 V) * (4 V / 65536 counts),0,8192,3991499,230,0,0,0000-00-00,0000-00-00,""
+L1:PEM-EX_ACC_VEA_FLOOR_Z,"","6.1 &mu;/s2 per ADC count",((10 m/s2) / 100 V) * (4 V / 65536 counts),0,8192,0,0,0,0,0000-00-00,0000-00-00,""
+L1:PEM-EX_MAG_VEA_FLOOR_Z,"","6.10 pT per ADC count above 10 Hz, 6100 pT per ADC count below 0.1 Hz",((100mT/ 10V) / (1000)) * (40V / 65536 counts),0,0,0,0,0,0,0000-00-00,0000-00-00,""
+L1:PEM-EX_MAG_VEA_FLOOR_Y,"","6.10 pT per ADC count above 10 Hz, 6100 pT per ADC count below 0.1 Hz",((100mT/ 10V) / (1000)) * (40V / 65536 counts),0,0,0,0,0,0,0000-00-00,0000-00-00,""
+L1:PEM-EX_MAG_VEA_FLOOR_X,"","6.10 pT per ADC count above 10 Hz, 6100 pT per ADC count below 0.1 Hz",((100mT/ 10V) / (1000)) * (40V / 65536 counts),0,0,0,0,0,0,0000-00-00,0000-00-00,""
+L1:PEM-EX_MAG_EBAY_SUSRACK_Z,"","427 pT per ADC count above 10 Hz, 427000 pT per ADC count below 0.1 Hz","",0,0,0,0,0,0,0000-00-00,0000-00-00,""
+L1:PEM-EX_MAG_EBAY_SUSRACK_Y,"","427 pT per ADC count above 10 Hz, 427000 pT per ADC count below 0.1 Hz","",0,0,0,0,0,0,0000-00-00,0000-00-00,""
+L1:PEM-EX_MAG_EBAY_SUSRACK_X,"","427 pT per ADC count above 10 Hz, 427000 pT per ADC count below 0.1 Hz","",0,0,0,0,0,0,0000-00-00,0000-00-00,""
+L1:PEM-EX_MIC_EBAY_RACKS,"",1.8 x 10-4 Pa per ADC count,"",0,16384,0,0,0,0,0000-00-00,0000-00-00,""
+L1:PEM-EX_MIC_VEA_PLUSX,"",2.1 x 10-4 Pa per ADC count,"",0,16384,4001313,803,0,0,0000-00-00,0000-00-00,""
+L1:PEM-EX_SEIS_VEA_FLOOR_X,"","","",0,0,3988940,1173,0,0,0000-00-00,0000-00-00,""
+L1:PEM-EX_SEIS_VEA_FLOOR_Y,"","","",0,0,3988940,1173,0,0,0000-00-00,0000-00-00,""
+L1:PEM-EX_SEIS_VEA_FLOOR_Z,"","","",0,0,3988940,1173,0,0,0000-00-00,0000-00-00,""
+L1:PEM-EX_LOWFMIC_VEA_FLOOR,"","","",0,0,3992829,1666,0,0,0000-00-00,0000-00-00,""
+H1:PEM-CS_RADIO_LVEA_9MHZ,"","","",0,0,0,0,0,0,0000-00-00,0000-00-00,""
+H1:PEM-CS_TILT_LVEA_VERTEX_T_DQ,"",6.105 x 10-3 degrees Celsius per count,"",0,0,0,0,0,0,0000-00-00,0000-00-00,""
+H1:PEM-CS_TILT_LVEA_VERTEX_X_DQ,"","","",0,0,0,0,0,0,0000-00-00,0000-00-00,""
+H1:PEM-CS_TILT_LVEA_VERTEX_Y_DQ,"","","",0,0,0,0,0,0,0000-00-00,0000-00-00,""
+H1:PEM-CS_RADIO_EBAY_9MHZ,"","","",0,0,0,0,0,0,0000-00-00,0000-00-00,""
+H1:PEM-EX_TILT_VEA_FLOOR_X,"","","",0,0,3992595,1173,0,0,0000-00-00,0000-00-00,""
+H1:PEM-EY_TILT_VEA_FLOOR_X,"","","",0,0,1523,3995604,0,0,0000-00-00,0000-00-00,""
+L1:PEM-CS_ACC_LVEAFLOOR_YCRYO_Z,Inactive,"6.1 &mu;/s2 per ADC count",((10 m/s2) / 100 V) * (4 V / 65536 counts),0,8192,0,41000,0,0,0000-00-00,0000-00-00,""
+L1:PEM-EX_TEMP_BSC4_ETMX,"","","",0,0,0,0,0,0,0000-00-00,0000-00-00,""
+L1:PEM-EX_TEMP_BSC4_ETMX,"","","",0,0,0,0,0,0,0000-00-00,0000-00-00,""
+L1:PEM-EY_TEMP_BSC5_ETMY,"","","",0,0,0,0,0,0,0000-00-00,0000-00-00,""
+L1:PEM-EY_MAINSMON_EBAY_1,"","","",0,0,0,0,0,0,0000-00-00,0000-00-00,""
+L1:PEM-EX_MAINSMON_EBAY_1,"","","",0,0,0,0,0,0,0000-00-00,0000-00-00,""
+L1:PEM-EX_MAINSMON_EBAY_3,"","","",0,0,0,0,0,0,0000-00-00,0000-00-00,""
+L1:PEM-EX_MAINSMON_EBAY_2,"","","",0,0,0,0,0,0,0000-00-00,0000-00-00,""
+L1:PEM-EY_MAINSMON_EBAY_2,"","","",0,0,0,0,0,0,0000-00-00,0000-00-00,""
+L1:PEM-EY_MAINSMON_EBAY_3,"","","",0,0,0,0,0,0,0000-00-00,0000-00-00,""
+L1:PEM-CS_RADIO_LVEA_9MHZ,"","","",0,0,0,0,0,0,0000-00-00,0000-00-00,""
+L1:PEM-CS_RADIO_EBAY_9MHZ,"","","",0,0,0,0,0,0,0000-00-00,0000-00-00,""
+L1:PEM-EX_TILT_VEA_FLOOR_X,"","","",0,0,0,0,0,0,0000-00-00,0000-00-00,""
+L1:PEM-CS_TILT_LVEA_VERTEX_X,"","","",0,0,0,0,0,0,0000-00-00,0000-00-00,""
+L1:PEM-EY_TILT_VEA_FLOOR_X,"","","",0,0,0,0,0,0,0000-00-00,0000-00-00,""
+H1:PEM-EY_TILT_VEA_FLOOR_T,"",6.105*10^-3 (deg_C/count),"(1.638 Counts/mV)*(10mV/deg_C)*(10""""""10x gain"""""")",0,0,0,0,0,0,0000-00-00,0000-00-00,""
+H1:PEM-EX_TILT_VEA_FLOOR_T,"",6.105 x 10-3 degrees Celsius per ADC count,(.1 deg C/mV)(1mV/1.638count) and there is a 10x gain from AA chassis,0,0,0,0,0,0,2015-06-23,2015-06-23,""
+H1:PEM-EY_TILT_VEA_FLOOR_Y,"","","",0,0,0,0,0,0,0000-00-00,0000-00-00,""
+H1:PEM-EX_TILT_VEA_FLOOR_Y,"","","",0,0,0,0,0,0,0000-00-00,0000-00-00,""
+L1:PEM-CS_ACC_HAM6VAC_OMCCAGE_X,"",0.0012 m/s2 per ADC count,"",0,8192,0,0,0,0,0000-00-00,0000-00-00,""
+L1:PEM-CS_ACC_HAM6VAC_OMCCAGE_Y,"",0.0012 m/s2 per ADC count,"",0,0,0,0,0,0,0000-00-00,0000-00-00,""
+L1:PEM-CS_ACC_HAM6VAC_OMCCAGE_Z,"",0.0012 m/s2 per ADC count,"",0,0,0,0,0,0,0000-00-00,0000-00-00,""
+L1:PEM-CS_ACC_HAM6VAC_SEPTUM_X,"",0.0012 m/s2 per ADC count,"",0,0,0,0,0,0,0000-00-00,0000-00-00,""
+L1:PEM-CS_ACC_HAM6VAC_SEPTUM_Y,"",0.0012 m/s2 per ADC count,"",0,0,0,0,0,0,0000-00-00,0000-00-00,""
+L1:PEM-CS_ACC_HAM6VAC_SEPTUM_Z,"",0.0012 m/s2 per ADC count,"",0,0,0,0,0,0,0000-00-00,0000-00-00,""
+VAULT,"","","",0,0,0,0,0,0,0000-00-00,0000-00-00,""
