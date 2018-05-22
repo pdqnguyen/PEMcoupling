@@ -1,0 +1,3 @@
+2018-03-30 11:38:13,844 PEMcoupling.py DEBUG: This message should go to the log file
+2018-03-30 11:38:23,854 PEMcoupling.py INFO: Event logging for PEMcoupling.py executed at time 2018_Mar_30_11:38:13
+2018-03-30 11:38:23,854 PEMcoupling.py WARNING: Warning message.

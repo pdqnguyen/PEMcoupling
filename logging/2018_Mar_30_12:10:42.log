@@ -1,0 +1,3 @@
+12:10:42 PEMcoupling.py INFO: Parsing arguements.
+12:10:42 getparams.py INFO: Parsing arguments.
+12:10:42 getparams.py ERROR: Argument "station" must be one of "CS", "EX", "EY", or "ALL" (not case-sensitive).

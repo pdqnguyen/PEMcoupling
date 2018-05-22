@@ -1,19 +1,11 @@
 """"
 FUNCTIONS:
     coupling_function --- Computes coupling functions for multiple sensors, returning a list of CouplingData objects.
-    smooth_asd --- Used to smooth spectra in coupling_function routine.
     coherence --- Computes GWPy coherence b/w sensor and DARM.
-    coupling_function_binned --- Bins data in pandas DataFrame format.
-    
-    [ Multi-injection analysis ]
-    composite_coupling_function --- Extracts lowest coupling function from lists of coupling functions.
-    gaussian_smooth --- Performs gaussian smoothing on a (composite) coupling function.
-        
+    composite_coupling_function --- Extracts lowest coupling function from lists of coupling functions.        
 
 Usage Notes:
     GWPy is used in coherence function.
-    pandas is used in coupling_function_binned.
-
 """
 
 from gwpy.timeseries import TimeSeries
@@ -27,102 +19,107 @@ import matplotlib.cm as cm
 import matplotlib.lines as mlines
 import matplotlib.ticker as ticker
 plt.switch_backend('Agg')
-from matplotlib import rc
-rc('text',usetex=True)
-import re
 from textwrap import wrap
 import os
 import time
 import datetime
 import sys
-from couplingfunction import CoupFunc, CompositeCoupFunc
+import logging
+# pemcoupling modules
+try:
+    from couplingfunction import CoupFunc, CompositeCoupFunc
+    from preprocess import smooth_ASD
+except ImportError:
+    print('')
+    logging.error('Failed to load PEM coupling modules. Make sure you have all of these in the right place!')
+    print('')
+    raise
 
 def coupling_function(
-    quiet_asd, inject_asd, quiet_darm_asd, inject_darm_asd,
+    ASD_bg, ASD_inj, ASD_darm_bg, ASD_darm_inj,
     darm_factor=2, sens_factor=2, local_max_width=0,
-    smooth_params=None, calibration_factors=None, notch_windows = [], fsearch=None, verbose=False
+    smooth_params=None, notch_windows = [], fsearch=None, verbose=False
 ):
     """
     Calculates coupling factors from sensor spectra and DARM spectra.
     
     Parameters
     ----------
-    quiet_asd: ChannelASD object
+    ASD_bg : ChannelASD object
         ASD of PEM sensor during background.
-    inject_asd: ChannelASD object
+    ASD_inj : ChannelASD object
         ASD of PEM sensor during injection.
-    quiet_darm_asd: ChannelASD object
+    ASD_darm_bg : ChannelASD object
         ASD of DARM during background.
-    inject_darm_asd: ChannelASD object
+    ASD_darm_inj : ChannelASD object
         ASD of DARM during injection.
-    darm_factor: float, int, optional
+    darm_factor : float, int, optional
         Coupling factor threshold for determining measured coupling factors vs upper limits. Defaults to 2.
-    sens_factor: float, int, optional
+    sens_factor : float, int, optional
         Coupling factor threshold for determining upper limit vs no injection. Defaults to 2.
-    local_max_width: float, int, optional
+    local_max_width : float, int, optional
         Width of local max restriction. E.g. if 2, keep only coupling factors that are maxima within +/- 2 Hz.
-    smooth_dict: dict, optional
-        Smoothing parameters and smoothing log option, provided in a dictionary
-    smooth_params: dict, optional
-    calibration_factors: dict, optional
-        Channel names and their calibration factors, for converting coupling functions back to counts.
-    notch_windows: list, optional
+    smooth_params : tuple, optional
+        Injection smooth parameter, background smoothing parameter, and logarithmic smoothing.
+    notch_windows : list, optional
         List of notch window frequency pairs (freq min, freq max).
-    fsearch: None, float, optional
+    fsearch : None, float, optional
         Only compute coupling factors near multiples of this frequency. If none, treat as broadband injection.
-    quiet_asd_smooth: {None, list}, optional
-        List of background sensor ASDs (ChannelASD objects) that were smoothed to match inject_asd smoothing.
-    verbose: {False, True}, optional
+    verbose : {False, True}, optional
         Print progress.
     
     Returns
     -------
-    cf: CoupFunc object
+    cf : CoupFunc object
         Contains sensor name, frequencies, coupling factors, flags ('real', 'upper limit', or 'Thresholds not met'), and other information.
     """
     
     # Gather relevant data
-    name = quiet_asd.name
-    time_q = quiet_asd.t0
-    time_inj = inject_asd.t0
-    freqs = inject_asd.freqs
-    bw = quiet_asd.df
-    sens_q = quiet_asd.values
-    darm_q = quiet_darm_asd.values
-    sens_inj = inject_asd.values
-    darm_inj = inject_darm_asd.values
+    name = ASD_bg.name
+    unit = ASD_bg.channel.unit
+    calibration = ASD_bg.calibration
+    time_bg = ASD_bg.t0
+    time_inj = ASD_inj.t0
+    freqs = ASD_inj.freqs
+    bandwidth = ASD_bg.df
+    sens_bg = ASD_bg.values
+    darm_bg = ASD_darm_bg.values
+    sens_inj = ASD_inj.values
+    darm_inj = ASD_darm_inj.values
     # "Reference background": this is smoothed w/ same smoothing as injection spectrum.
-    # Thresholds use both sens_q and sens_q_ref for classifying coupling factors.
-    sens_q_ref = np.copy(sens_q)
-    # Initialize output arrays
+    # Thresholds use both sens_bg and sens_bg_ref for classifying coupling factors.
+    sens_bg_ref = np.copy(sens_bg)
+    # OUTPUT ARRAYS
     factors = np.zeros(len(freqs))
     flags = np.array(['No data']*len(freqs), dtype=object)
-    #### SMOOTH SPECTRA ####
+    loop_range = np.array(range(len(freqs)))
+    # SMOOTH SPECTRA
     if smooth_params is not None:
         inj_smooth, base_smooth, log_smooth = smooth_params
-        sens_q_ref = smooth_asd(freqs, sens_q, inj_smooth, log_smooth)
-        sens_q = smooth_asd(freqs, sens_q, base_smooth, log_smooth)
-        darm_q = smooth_asd(freqs, darm_q, base_smooth, log_smooth)
-        sens_inj = smooth_asd(freqs, sens_inj, inj_smooth, log_smooth)
-        darm_inj = smooth_asd(freqs, darm_inj, base_smooth, log_smooth)
-    #### ZERO OUT LOW-FREQ SATURATION EFFECTS ####
+        sens_bg_ref = smooth_ASD(freqs, sens_bg, inj_smooth, log_smooth)
+        sens_bg = smooth_ASD(freqs, sens_bg, base_smooth, log_smooth)
+        darm_bg = smooth_ASD(freqs, darm_bg, base_smooth, log_smooth)
+        sens_inj = smooth_ASD(freqs, sens_inj, inj_smooth, log_smooth)
+        darm_inj = smooth_ASD(freqs, darm_inj, base_smooth, log_smooth)
+    ###########################################################################################
+    # DETERMINE LOOP RANGE
+    # Zero out low-frequency saturated signals
     # This is done only if a partially saturated signal has produced artificial excess power at low freq
-    # The cut-off is applied to the coupling function by replacing sens_inj with sens_q below the cut-off freq
+    # The cut-off is applied to the coupling function by replacing sens_inj with sens_bg below the cut-off freq
     # This doesn't affect the raw data, so plots will still show excess power at low freq
     cutoff_idx = 0
     if ('ACC' in name) or ('MIC' in name):
-        freq_sat = 15 # Freq below which a large excess in ASD will trigger the coupling function cut-off
+        freq_sat = 10 # Freq below which a large excess in ASD will trigger the coupling function cut-off
         coup_freq_min = 30 # Cut-off frequency (Hz)
-        ratio = sens_inj[freqs < freq_sat] / sens_q[freqs < freq_sat]
+        ratio = sens_inj[freqs < freq_sat] / sens_bg[freqs < freq_sat]
         if ratio.mean() > sens_factor:
             # Apply cut-off to data by treating values below the cut-off as upper limits
             while freqs[cutoff_idx] < coup_freq_min:
-                factors[cutoff_idx] = darm_q[cutoff_idx] / sens_q[cutoff_idx]
+                factors[cutoff_idx] = darm_bg[cutoff_idx] / sens_bg[cutoff_idx]
                 flags[cutoff_idx] = 'Thresholds not met'
                 cutoff_idx += 1
-    loop_range = np.array(range(cutoff_idx, len(freqs)))
-    #### RESTRICT FREQUENCY RANGE TO MULTIPLES OF SPECIFIED FREQUENCY ####
-    # Keep freqs that are within 0.5*local_max_width to the specified freqs
+        loop_range = loop_range[loop_range >= cutoff_idx]
+    # Keep only freqs that are within (0.5*local_max_width) of the specified freqs, given by fsearch
     if (fsearch is not None) and (local_max_width > 0):
         loop_freqs = freqs[loop_range]
         f_mod = loop_freqs % fsearch
@@ -130,7 +127,7 @@ def coupling_function(
         prox = np.column_stack((f_mod, fsearch - f_mod)).min(axis=1)
         fsearch_mask = prox < (0.5*local_max_width)
         loop_range = loop_range[fsearch_mask]
-    #### NOTCH DARM LINES ####
+    # Notch DARM lines and MIC 60 Hz resonances
     if name[10:13] == 'MIC':
         # Add notch windows for microphone 60 Hz resonances
         notches = notch_windows + [[f-2.,f+2.] for f in range(120, int(max(freqs)), 60)]
@@ -142,36 +139,40 @@ def coupling_function(
         notch_mask = sum( (loop_freqs>wn[0]) & (loop_freqs<wn[1]) for wn in notches) < 1
         loop_range = loop_range[notch_mask]
     ##########################################################################################
-    # Find coupling factors at valid frequencies
+    # COMPUTE COUPLING FACTORS WHERE APPLICABLE
+    sens_ratio = sens_inj / np.maximum(sens_bg, sens_bg_ref)
+    darm_ratio = darm_inj / darm_bg
     for i in loop_range:
         # Determine coupling factor status
-        sens_above_threshold = sens_inj[i] > sens_factor * max([sens_q[i], sens_q_ref[i]])
-        darm_above_threshold = darm_inj[i] > darm_factor * darm_q[i]
+        sens_above_threshold = sens_ratio[i] > sens_factor
+        darm_above_threshold = darm_ratio[i] > darm_factor
         if darm_above_threshold and sens_above_threshold:
             # Sensor and DARM thresholds met --> measureable coupling factor
-            factors[i] = np.sqrt(darm_inj[i]**2 - darm_q[i]**2) / np.sqrt(sens_inj[i]**2 - sens_q[i]**2)
+            factors[i] = np.sqrt(darm_inj[i]**2 - darm_bg[i]**2) / np.sqrt(sens_inj[i]**2 - sens_bg[i]**2)
             flags[i] = 'Real'
         elif sens_above_threshold:
             # Only sensor threshold met --> upper limit coupling factor
             # Can't compute excess power for DARM, but can still do so for sensor
-            factors[i] = darm_inj[i] / np.sqrt(sens_inj[i]**2 - sens_q[i]**2)
+            factors[i] = darm_inj[i] / np.sqrt(sens_inj[i]**2 - sens_bg[i]**2)
             flags[i] = 'Upper Limit'
         elif fsearch is None:
             # Below-threshold upper limits; for broad-band injections (not searching specific frequencies)
             # No excess power in either DARM nor sensor, just assume maximum sensor contribution
             factors[i] = darm_inj[i] / sens_inj[i] # Reproduces DARM in estimated ambient plot
             flags[i] = 'Thresholds not met'
+        else:
+            # Leave this factor as "No Data"
+            pass
     ###########################################################################################
-    # Window for local max requirement
+    # LOCALIZED COUPLING FACTORS
     if local_max_width > 0:
-        w_locmax = int( local_max_width / bw ) # convert Hz to bins
+        w_locmax = int( local_max_width / bandwidth ) # convert Hz to bins
         for i in range(len(factors)):
             lo = max([0, i - w_locmax])
             hi = min([i + w_locmax + 1, len(factors)])
             local_factors = factors[lo:hi]
             local_flags = flags[lo:hi]
             local_factors_real = [factor for j,factor in enumerate(local_factors) if local_flags[j] == 'Real']
-
             if 'Real' not in local_flags:
                 # No real values nearby -> keep only if this is a local-max-upper-limit
                 if not (flags[i] == 'Upper Limit' and factors[i] == max(local_factors)):
@@ -181,57 +182,37 @@ def coupling_function(
                 # Keep only if local max and real
                 factors[i] = 0
                 flags[i] = 'No data'
-    #############################
+    ###########################################################################################
+    # OUTLIER REJECTION
+    # Clean up coupling functions by demoting marginal values; only for broad-band coupling functions
+    elif smooth_params is not None:
+        base_smooth = smooth_params[1]
+        new_factors = np.copy(factors)
+        new_flags = np.copy(flags)
+        loop_range_2 = loop_range[(flags[loop_range] == 'Real') | (flags[loop_range] == 'Upper Limit')]
+        for i in loop_range_2:
+            N = np.round(freqs[i] * base_smooth / 100).astype(int) # Number of nearby values to compare to
+            lower_ = max([0, i-int(N/2)])
+            upper_ = min([len(freqs), i+N-int(N/2)+1])
+            nearby_flags = flags[lower_ : upper_] # Flags of nearby coupling factors
+            if sum(flags[i] == nearby_flags) < (N/2.):
+                # This is an outlier, demote this point to a lower flag
+                if (flags[i] == 'Real'):
+                    new_factors[i] = darm_inj[i] / np.sqrt(sens_inj[i]**2 - sens_bg[i]**2)
+                    new_flags[i] = 'Upper Limit'
+                elif (flags[i] == 'Upper Limit') and (fsearch is None):
+                    new_factors[i] = darm_inj[i] / sens_inj[i]
+                    new_flags[i] = 'Thresholds not met'
+        factors = new_factors
+        flags = new_flags
+    ###########################################################################################
     # Create a CouplingData object from this data
-    cf = CoupFunc(name, freqs, factors, flags, sens_q, darm_q, sens_inj, darm_inj, time_q, time_inj, calibration_factors)    
+    cf = CoupFunc(
+        name, freqs, factors, flags, sens_bg, darm_bg,
+        sens_inj=sens_inj, darm_inj=darm_inj, t_bg=time_bg, t_inj=time_inj,
+        unit=unit, calibration=calibration
+    )
     return cf
-
-def smooth_asd(x, y, width, smoothing_log=False):
-    """
-    Sliding-average smoothing function for cleaning up noisiness in a spectrum.
-    Example of logarithmic smoothing:
-    If width = 5 and smoothing_log = True, smoothing windows are defined such that the window is
-    5 frequency bins wide (i.e. 5 Hz wide if bandwidth = 1 Hz) at 100 Hz, and 50 bins at 1000 Hz.
-    ...
-    A bit about smoothing: the underlying motivation is to minimize random noise which artificially yields coupling
-    factors in the calculations later, but smoothing is also crucial in eliminating point-source features
-    (e.g. drops in microphone spectrum due to the point-like microphone sitting at an anti-node of the injected
-    sound waves). It is not so justifiable to smooth the sensor background, or DARM, since background noise and
-    overall coupling to DARM are diffuse, so smoothing of these should be very limited.
-    The extra objects ASD_new_quiet_smoother is the background ASD smoothed as much as the injection.
-    ASD_quiet and ASD_quiet_smoother are both used in the CouplingFunction routine; the latter for determining
-    coupling regions in frequency domain, the former for actual coupling computation.
-    
-    Parameters
-    ----------
-    x: array 
-        Frequencies.
-    y: array
-        ASD values to be smoothed.
-    width: int
-        Size of window for sliding average (measured in frequency bins).
-    smoothing_log: {False, True}, optional
-        If True, smoothing window width grows proportional to frequency (see example above).
-    
-    Returns
-    -------
-    y_smooth: array
-        Smoothed ASD values.
-    """
-    y_smooth = np.zeros_like(y)
-    if smoothing_log:
-        # Num of bins at frequency f:  ~ width * f / 100
-        widths = np.round(x * width / 100).astype(int)
-        for i,w in enumerate(widths):
-            lower_ = max([0, i-int(w/2)])
-            upper_ = min([len(y), i+w-int(w/2)+1])
-            y_smooth[i] = np.mean(y[lower_:upper_])
-    else:
-        for i in range(len(y)):
-            lower_ = max([0, i-int(width/2)])
-            upper_ = min([len(y), i+width-int(width/2)])
-            y_smooth[i] = np.mean(y[lower_:upper_])
-    return y_smooth
 
 def coherence(
     gw_channel, ifo, sensor_time_series,
@@ -244,34 +225,34 @@ def coherence(
 
     Parameters
     ----------
-    gw_channel: str
+    gw_channel : str
         Either 'strain_channel' or 'deltal_channel'.
-    ifo: str
+    ifo : str
         Interferometer name, 'H1' or 'L1'.
-    sensor_time_series: list
+    sensor_time_series : list
         Sensor TimeSeries objects.
-    t_start: float, int
+    t_start : float, int
         Start time of time series segment.
-    t_end: float, int
+    t_end : float, int
         End time of time series segment.
-    FFT_time:
+    FFT_time :
         Length (seconds) of FFT averaging windows.
-    overlap_time: float, int
+    overlap_time : float, int
         Overlap time (seconds) of FFT averaging windows.
-    cohere_plot: bool
+    cohere_plot : bool
         If True, save coherence plot to path.
-    thresh1: float, int
+    thresh1 : float, int
         Coherence threshold. Used only for notifications.
-    thresh2: float, int
+    thresh2 : float, int
         Threshold for how much of coherence data falls below thresh1. Used only for notifications.
-    path: str
+    path : str
         Output directory
-    ts: time.time object
+    ts : time.time object
         Time stamp of main routine; important for output plots and directory name.
     
     Returns
     -------
-    coherence_dict: dict
+    coherence_dict : dict
         Dictionary of channel names and coherences (gwpy FrequencySeries object).
     """
     
@@ -330,164 +311,24 @@ def coherence(
     print('Coherence(s) calculated. (Runtime: {:.3f} s)'.format(ts2))    
     return coherence_dict
 
-def bin_coupling_data(data, width):
-    """
-    Logarithmic binning of coupling function data in pandas dataframe format
-    
-    Parameters
-    ----------
-    data: CoupFunc object
-        Coupling function data (including flags and spectra).
-    width: float
-        Bin width as fraction of frequency.
-    
-    Returns
-    -------
-    data_binned: pandas.DataFrame object
-        Binned coupling function data.
-    """
-    
-    scale = 1. + width
-    bin_edges = [data.freqs.min()]
-    while bin_edges[-1] <= data.freqs.max():
-        bin_edges.append(bin_edges[-1] * scale)
-    freqs_binned = np.zeros(len(bin_edges)-1)
-    factors_binned = np.zeros_like(freqs_binned)
-    flags_binned = np.array(['No data'] * len(freqs_binned))
-    sens_bg_binned = np.zeros_like(freqs_binned)
-    darm_bg_binned = np.zeros_like(freqs_binned)
-    for i in range(len(bin_edges)-1):
-        freq_min, freq_max = (bin_edges[i], bin_edges[i+1])
-        freqs_binned[i] = (freq_max + freq_min) / 2
-        window = (data.freqs >= freq_min) & (data.freqs < freq_max)
-        if window.sum() > 0:
-            factor_max_idx = data.factors[window].argmax()
-            factors_binned[i] = data.factors[window][factor_max_idx]
-            flags_binned[i] = data.flags[window][factor_max_idx]
-            sens_bg_binned[i] = data.sens_bg[window][factor_max_idx]
-            darm_bg_binned[i] = data.darm_bg[window][factor_max_idx]
-        else:
-            factors_binned[i] = 0
-            flags_binned[i] = 'No data'
-            sens_bg_binned[i] = data.sens_bg[window].mean()
-            darm_bg_binned[i] = data.darm_bg[window].mean()
-    data_binned = CoupFunc(data.name, freqs_binned, factors_binned, flags_binned, sens_bg_binned, data.sens_inj,\
-                           darm_bg_binned, data.darm_inj, data.t_bg, data.t_inj, data.calibration_factors)
-    return data_binned
-
-def bin_coupling_dataframe(df, width):
-    """
-    Logarithmic binning of coupling function data in pandas dataframe format
-    
-    Parameters
-    ----------
-    df: pandas.DataFrame object
-        Coupling function data (including flags and spectra).
-    width: float
-        Bin width as fraction of frequency.
-    
-    Returns
-    -------
-    df_binned: pandas.DataFrame object
-        Binned coupling function data.
-    """
-
-    scale = 1. + width
-    bin_edges = [df['frequency'].min()]
-    while bin_edges[-1] <= df['frequency'].max():
-        bin_edges.append(bin_edges[-1] * scale)
-
-    df_binned = pd.DataFrame(index=range(len(bin_edges)-1), columns=df.columns)
-
-    for j in range(len(bin_edges)-1):
-        f_min, f_max = (bin_edges[j], bin_edges[j+1])
-        df_binned.set_value(j, 'frequency', (f_max + f_min) / 2)
-
-        subset = df[(df['frequency'] >= f_min) & (df['frequency'] < f_max)]
-        
-        if subset.shape[0] > 0:
-            factor_max_idx = np.asarray(subset['factor']).argmax()
-            for col in ['flag', 'factor', 'factor_counts', 'sensBG', 'darmBG']:
-                df_binned.set_value(j, col, np.asarray(subset[col])[factor_max_idx])
-
-        else:
-            df_binned.set_value(j, 'flag', 'No data')
-            df_binned.set_value(j, 'factor', 0)
-            df_binned.set_value(j, 'factor_counts', 0)
-            for col in ['sensBG', 'darmBG']:
-                df_binned.set_value(j, col, subset[col].astype(float).mean())
-
-    return df_binned
-
-
-
-def coupling_data_binned(df, width):
-    """
-    Logarithmic binning of coupling function data in pandas dataframe format
-    
-    Parameters
-    ----------
-    df: pandas.DataFrame object
-        Coupling function data (including flags and spectra).
-    width: float
-        Bin width as fraction of frequency.
-    
-    Returns
-    -------
-    df_binned: pandas.DataFrame object
-        Binned coupling function data.
-    """
-    
-    scale = 1. + width
-    bin_edges = [data.freqs.min()]
-    while bin_edges[-1] <= data.freqs.max():
-        bin_edges.append(bin_edges[-1] * scale)
- 
-    df_binned = pd.DataFrame(index=range(len(bin_edges)-1), columns=df.columns)
- 
-    for j in range(len(bin_edges)-1):
-        f_min, f_max = (bin_edges[j], bin_edges[j+1])
-        df_binned.set_value(j, 'frequency', (f_max + f_min) / 2)
- 
-        subset = df[(df['frequency'] >= f_min) & (df['frequency'] < f_max)]
-        
-        if subset.shape[0] > 0:
-            factor_max_idx = np.asarray(subset['factor']).argmax()
-            for col in ['flag', 'factor', 'factor_counts', 'sensBG', 'darmBG']:
-                df_binned.set_value(j, col, np.asarray(subset[col])[factor_max_idx])
- 
-        else:
-            df_binned.set_value(j, 'flag', 'No data')
-            df_binned.set_value(j, 'factor', 0)
-            df_binned.set_value(j, 'factor_counts', 0)
-            for col in ['sensBG', 'darmBG']:
-                df_binned.set_value(j, col, subset[col].astype(float).mean())
- 
-    return df_binned
-    
-
-
-
-###############################################################################################################
-
-
-
 def composite_coupling_function(cf_data_list, injection_names, local_max_window=0, freq_lines=None):
     """
     Selects for each frequency bin the "nearest" coupling factor, i.e. the lowest across multiple injection locations.
     
     Parameters
     ----------
-    cf_data_list: list
+    cf_data_list : list
         CoupFunc objects to be processed.
-    injection_names: list
+    injection_names : list
         Names of injections.
-    local_max_window: int, optional
+    local_max_window : int, optional
         Local max window in number of frequency bins.
+    freq_lines : dict, optional
+        Frequency lines for each injection name.
 
     Returns
     -------
-    comp_cf: CompositeCoupFunc object
+    comp_cf : CompositeCoupFunc object
         Contains composite coupling function tagged with flags and injection names
     """
     
@@ -506,16 +347,14 @@ def composite_coupling_function(cf_data_list, injection_names, local_max_window=
     injection_cols = [[n]*N_rows for n in injection_names]    
     sens_bg = np.mean([cf_data.sens_bg for cf_data in cf_data_list], axis=0)
     darm_bg = np.mean([cf_data.darm_bg for cf_data in cf_data_list], axis=0)    
-    # Only one injection; trivial
     if len(cf_data_list) == 1:
+        # Only one injection; trivial
         cf = cf_data_list[0]
         factors = cf.factors
         factors_counts = cf.factors_in_counts
         flags = cf.flags
         injs = np.asarray(injection_cols[0])
-        comp_data = couplingfunction.CompositeCouplingData(
-            channel_name, freqs, factors, factors_counts, flags, injs, sens_bg, darm_bg
-        )
+        comp_data = CompositeCoupFunc(channel_name, freqs, factors, factors_counts, flags, injs, sens_bg, darm_bg)
         return comp_data    
     # Stack columns in matrices
     matrix_fact = np.column_stack(tuple(factor_cols))
@@ -526,7 +365,7 @@ def composite_coupling_function(cf_data_list, injection_names, local_max_window=
     factors = np.zeros(N_rows)
     factors_counts = np.zeros(N_rows)
     flags = np.array(['No data'] * N_rows, dtype=object)
-    injs = np.array([None] * N_rows)    
+    injs = np.array([None] * N_rows)
     for i in range(N_rows):
         # Assign rows to arrays
         factor_row = np.asarray(matrix_fact[i,:])
@@ -540,28 +379,29 @@ def composite_coupling_function(cf_data_list, injection_names, local_max_window=
         local_flags = np.ravel(matrix_flag[ i1 : i2 , : ])
         mask_zero = (local_flags != 'No data')
         local_factors_nonzero = local_factors[mask_zero]
-        local_flags_nonzero = local_flags[mask_zero]        
+        local_flags_nonzero = local_flags[mask_zero]
         # Separate each column into 'Real', 'Upper Limit', and 'Thresholds not met' lists
         flag_types = ['Real', 'Upper Limit', 'Thresholds not met']
         factors_dict, factors_counts_dict, injs_dict = [{}, {}, {}]
         for f in flag_types:
             factors_dict[f] = factor_row[flag_row == f]
             factors_counts_dict[f] = factor_counts_row[flag_row == f]
-            injs_dict[f] = inj_row[flag_row == f]        
+            injs_dict[f] = inj_row[flag_row == f]
         # Conditions for each type of coupling factor
         flag = 'No data'
         for f in flag_types:
             if len(factors_dict[f]) > 0:
                 if min(factors_dict[f]) == min(local_factors_nonzero):
-                    flag = f        
+                    flag = f
         # Assign lowest coupling factor and injection; assign flag based on above conditions
         if flag != 'No data':
             idx = np.argmin(factors_dict[flag])
             factors[i] = factors_dict[flag][idx]
             factors_counts[i] = factors_counts_dict[flag][idx]
             flags[i] = flag
-            injs[i] = injs_dict[flag][idx]    
-    # Patch the issue of overlapping upper limits in magnetic coupling functions
+            injs[i] = injs_dict[flag][idx]
+    # Truncate low-freq injections when higher-freq injections are present
+    # This fixes the issue of overlapping upper limits at high-freq in magnetic coupling functions
     if type(freq_lines) is dict:
         if all(name in list(freq_lines.keys()) for name in injection_names):
             freq_lines[None] = 0.
@@ -575,7 +415,10 @@ def composite_coupling_function(cf_data_list, injection_names, local_max_window=
                 # Find first instance of an injection whose fundamental freq is fmin
                 if len(idx) > 0:
                     f0_arr = np.array([freq_lines[inj] for inj in injs])
-                    start_idx = np.where(f0_arr >= fmin)[0][0]
+                    try:
+                        start_idx = np.where(f0_arr >= fmin)[0][0]
+                    except IndexError:
+                        continue
                     idx = idx[idx >= start_idx]
                     if len(idx) > 0:
                         for i in idx:
@@ -584,18 +427,87 @@ def composite_coupling_function(cf_data_list, injection_names, local_max_window=
                                 factors[i] = 0.
                                 factors_counts[i] = 0.
                                 flags[i] = 'No data'
-                                injs[i] = None    
-    comp_cf = CompositeCoupFunc(channel_name, freqs, factors, factors_counts, flags, injs, sens_bg, darm_bg)
+                                injs[i] = None
+    comp_cf = CompositeCoupFunc(channel_name, freqs, factors, factors_counts, flags, injs, sens_bg=sens_bg, darm_bg=darm_bg)
     return comp_cf
 
-def csv_to_cf(filename, channelname=None):
-    """Loads csv coupling function data into a CoupFunc object."""
-    try:
-        data = np.loadtxt(filename, delimiter=',', skiprows=1, unpack=True)
-        return CoupFunc(channelname, data[0], data[1], data[3], data[4], data[5])
-    except:
-        print('\nError: Invalid file or file format.\n')
-        sys.exit()
+def max_coupling_function(freqs, factor_df, flag_df):
+    """
+    Determine maximum coupling function.
+    
+    Parameters
+    ----------
+    freqs : array-like
+        Frequency array.
+    factor_df : pandas.DataFrame
+        Dataframe where each column is a coupling function for a channel.
+    flag_df : pandas.DataFrame
+        Corresponding flags for the coupling factors in factor_df.
+        
+    Returns
+    -------
+    max_factor_df : pandas.DataFrame
+        Maximum coupling function with corresponding frequencies, flags, and channels.
+    """
+    
+    above_thresh = (flag_df == 'Real') | (flag_df == 'Upper Limit')
+    below_thresh = ~above_thresh
+    row_above_thresh = np.any(above_thresh, axis=1)
+    row_below_thresh = np.all(below_thresh, axis=1)
+    factor_df_above_thresh = factor_df.copy()
+    factor_df_below_thresh = factor_df.copy()
+    factor_df_above_thresh[~above_thresh] = 0.
+    factor_df_below_thresh[~below_thresh] = 0.
+    max_channels = pd.Series(index=factor_df.index)
+    max_channels[row_above_thresh] = factor_df_above_thresh.idxmax(axis=1)
+    max_channels[row_below_thresh] = factor_df_below_thresh.idxmax(axis=1)
+    has_data = ~pd.isnull(max_channels)
+    max_channels = max_channels[has_data]
+    max_factor_df = pd.DataFrame(index=factor_df.index[has_data])
+    max_factor_df['frequency'] = freqs[has_data]
+    max_factor_df['factor'] = factor_df[has_data].lookup(max_channels.index, max_channels.values)
+    max_factor_df['flag'] = flag_df[has_data].lookup(max_channels.index, max_channels.values)
+    max_factor_df['channel'] = max_channels.values
+    return max_factor_df
+
+def max_estimated_ambient(freqs, amb_df, flag_df):
+    """
+    Determine maximum estimated ambient.
+    
+    Parameters
+    ----------
+    freqs : array-like
+        Frequency array.
+    amb_df : pandas.DataFrame
+        Dataframe where each column is an estimated ambient (ASD) for a channel.
+    flag_df : pandas.DataFrame
+        Corresponding flags for the estimated ambients in amb_df.
+        
+    Returns
+    -------
+    max_amb_df : pandas.DataFrame
+        Maximum ambient with corresponding frequencies, flags, and channels.
+    """
+    
+    above_thresh = (flag_df == 'Real') | (flag_df == 'Upper Limit')
+    below_thresh = ~above_thresh
+    row_above_thresh = np.any(above_thresh, axis=1)
+    row_below_thresh = np.all(below_thresh, axis=1)
+    amb_df_above_thresh = amb_df.copy()
+    amb_df_below_thresh = amb_df.copy()
+    amb_df_above_thresh[~above_thresh] = 0.
+    amb_df_below_thresh[~below_thresh] = 0.
+    max_channels = pd.Series(index=amb_df.index)
+    max_channels[row_above_thresh] = amb_df_above_thresh.idxmax(axis=1)
+    max_channels[row_below_thresh] = amb_df_below_thresh.idxmax(axis=1)
+    has_data = ~pd.isnull(max_channels)
+    max_channels = max_channels[has_data]
+    max_amb_df = pd.DataFrame(index=amb_df.index[has_data])
+    max_amb_df['frequency'] = freqs[has_data]
+    max_amb_df['amb'] = amb_df[has_data].lookup(max_channels.index, max_channels.values)
+    max_amb_df['flag'] = flag_df[has_data].lookup(max_channels.index, max_channels.values)
+    max_amb_df['channel'] = max_channels.values
+    return max_amb_df
 
 def smooth_comp_data(data, width):
     """
@@ -662,15 +574,3 @@ def gaussian_smooth(x, y, width, flags=None):
             y_wndw[y_wndw == 0.] = np.nan
             y_smooth[i] = np.nansum( y_wndw * normGaussian(x_wndw, x[i], w) )
     return y_smooth
-
-def get_gwinc(filename):
-    """
-    Uses scipy.io.loadmat to load gwinc data.
-    """
-    from scipy.io import loadmat
-    gwinc_mat = loadmat(filename)
-    gwinc = [
-        np.asarray(gwinc_mat['nnn']['Freq'][0][0][0]),
-        np.sqrt(np.asarray(gwinc_mat['nnn']['Total'][0][0][0])) * 4000. # Convert strain PSD to DARM ASD
-    ]
-    return gwinc

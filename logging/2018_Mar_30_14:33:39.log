@@ -1,0 +1,266 @@
+14:33:39 PEMcoupling.py (<module>) INFO: Importing packages.
+14:33:42 getparams.py (get_arg_params) INFO: Parsing arguments.
+14:33:42 getparams.py (get_config_params) INFO: Opening config file.
+14:33:42 getparams.py (get_config_params) INFO: Checking if missing/empty config file.
+14:33:42 getparams.py (get_config_params) INFO: Parsing numerical and boolean config options.
+14:33:42 PEMcoupling.py (<module>) INFO: Separating config dictionary by section.
+14:33:42 PEMcoupling.py (<module>) INFO: Handling conflicts between config options and command line options.
+14:33:42 PEMcoupling.py (<module>) INFO: Reading in channel list given in config file.
+14:33:42 getparams.py (get_channel_names) INFO: Opening channel list file.
+14:33:42 PEMcoupling.py (<module>) INFO: Creating injection table.
+14:33:42 getparams.py (get_times) INFO: Getting DTT files from command line input.
+14:33:42 getparams.py (get_times) INFO: List of DTT files created.
+14:33:42 getparams.py (get_times_DTT) INFO: Reading DTT files for times.
+14:33:46 getparams.py (get_times_DTT) INFO: Finished reading DTTs.
+14:33:47 PEMcoupling.py (<module>) INFO: Reporting injection results.
+14:33:47 PEMcoupling.py (<module>) INFO: Calculating FFT parameters.
+14:33:47 getparams.py (get_FFT_params) INFO: Duration given; determining overlap time and bandwidth.
+14:33:47 getparams.py (get_FFT_params) INFO: FFT parameters acquired.
+14:33:47 PEMcoupling.py (<module>) INFO: Converting smoothing parameters to frequency bins based on bandwidth.
+14:33:47 PEMcoupling.py (<module>) INFO: Beginning to loop over injections.
+14:33:47 PEMcoupling.py (<module>) INFO: Searching for fundamental frequency if applicable.
+14:33:47 PEMcoupling.py (<module>) INFO: Being picky about channels.
+14:33:47 preprocess.py (get_time_series) INFO: Channel successfully extracted: H1:IMC-WFS_A_DC_PIT_OUT_DQ at time 1185727588 to 1185727638.0.
+14:33:47 preprocess.py (get_time_series) INFO: Channel successfully extracted: H1:IMC-WFS_A_DC_YAW_OUT_DQ at time 1185727588 to 1185727638.0.
+14:33:47 preprocess.py (get_time_series) INFO: Channel successfully extracted: H1:PEM-CS_ACC_BEAMTUBE_MCTUBE_Y_DQ at time 1185727588 to 1185727638.0.
+14:33:48 preprocess.py (get_time_series) INFO: Channel successfully extracted: H1:PEM-CS_ACC_BEAMTUBE_XMAN_Y_DQ at time 1185727588 to 1185727638.0.
+14:33:48 preprocess.py (get_time_series) INFO: Channel successfully extracted: H1:PEM-CS_ACC_BEAMTUBE_YMAN_X_DQ at time 1185727588 to 1185727638.0.
+14:33:48 preprocess.py (get_time_series) INFO: Channel successfully extracted: H1:PEM-CS_ACC_BSC1_ITMY_X_DQ at time 1185727588 to 1185727638.0.
+14:33:49 preprocess.py (get_time_series) INFO: Channel successfully extracted: H1:PEM-CS_ACC_BSC1_ITMY_Y_DQ at time 1185727588 to 1185727638.0.
+14:33:49 preprocess.py (get_time_series) INFO: Channel successfully extracted: H1:PEM-CS_ACC_BSC1_ITMY_Z_DQ at time 1185727588 to 1185727638.0.
+14:33:49 preprocess.py (get_time_series) INFO: Channel successfully extracted: H1:PEM-CS_ACC_BSC2_BS_Y_DQ at time 1185727588 to 1185727638.0.
+14:33:50 preprocess.py (get_time_series) INFO: Channel successfully extracted: H1:PEM-CS_ACC_BSC3_ITMX_X_DQ at time 1185727588 to 1185727638.0.
+14:33:50 preprocess.py (get_time_series) INFO: Channel successfully extracted: H1:PEM-CS_ACC_BSC3_ITMX_Y_DQ at time 1185727588 to 1185727638.0.
+14:33:50 preprocess.py (get_time_series) INFO: Channel successfully extracted: H1:PEM-CS_ACC_EBAY_FLOOR_Z_DQ at time 1185727588 to 1185727638.0.
+14:33:50 preprocess.py (get_time_series) INFO: Channel successfully extracted: H1:PEM-CS_ACC_HAM2_PRM_Y_DQ at time 1185727588 to 1185727638.0.
+14:33:51 preprocess.py (get_time_series) INFO: Channel successfully extracted: H1:PEM-CS_ACC_HAM2_PRM_Z_DQ at time 1185727588 to 1185727638.0.
+14:33:51 preprocess.py (get_time_series) INFO: Channel successfully extracted: H1:PEM-CS_ACC_HAM3_PR2_Y_DQ at time 1185727588 to 1185727638.0.
+14:33:51 preprocess.py (get_time_series) INFO: Channel successfully extracted: H1:PEM-CS_ACC_HAM4_SR2_X_DQ at time 1185727588 to 1185727638.0.
+14:33:52 preprocess.py (get_time_series) INFO: Channel successfully extracted: H1:PEM-CS_ACC_HAM5_SRM_X_DQ at time 1185727588 to 1185727638.0.
+14:33:52 preprocess.py (get_time_series) INFO: Channel successfully extracted: H1:PEM-CS_ACC_HAM6_OMC_X_DQ at time 1185727588 to 1185727638.0.
+14:33:52 preprocess.py (get_time_series) INFO: Channel successfully extracted: H1:PEM-CS_ACC_HAM6_OMC_Z_DQ at time 1185727588 to 1185727638.0.
+14:33:53 preprocess.py (get_time_series) INFO: Channel successfully extracted: H1:PEM-CS_ACC_IOT1_IMC_X_DQ at time 1185727588 to 1185727638.0.
+14:33:53 preprocess.py (get_time_series) INFO: Channel successfully extracted: H1:PEM-CS_ACC_IOT1_IMC_Y_DQ at time 1185727588 to 1185727638.0.
+14:33:53 preprocess.py (get_time_series) INFO: Channel successfully extracted: H1:PEM-CS_ACC_IOT1_IMC_Z_DQ at time 1185727588 to 1185727638.0.
+14:33:54 preprocess.py (get_time_series) INFO: Channel successfully extracted: H1:PEM-CS_ACC_ISCT1_REFL_Y_DQ at time 1185727588 to 1185727638.0.
+14:33:54 preprocess.py (get_time_series) INFO: Channel successfully extracted: H1:PEM-CS_ACC_OPLEV_ITMX_Y_DQ at time 1185727588 to 1185727638.0.
+14:33:54 preprocess.py (get_time_series) INFO: Channel successfully extracted: H1:PEM-CS_ACC_OPLEV_ITMY_X_DQ at time 1185727588 to 1185727638.0.
+14:33:54 preprocess.py (get_time_series) INFO: Channel successfully extracted: H1:PEM-CS_MIC_EBAY_RACKS_DQ at time 1185727588 to 1185727638.0.
+14:33:55 preprocess.py (get_time_series) INFO: Channel successfully extracted: H1:PEM-CS_MIC_LVEA_BS_DQ at time 1185727588 to 1185727638.0.
+14:33:55 preprocess.py (get_time_series) INFO: Channel successfully extracted: H1:PEM-CS_MIC_LVEA_INPUTOPTICS_DQ at time 1185727588 to 1185727638.0.
+14:33:55 preprocess.py (get_time_series) INFO: Channel successfully extracted: H1:PEM-CS_MIC_LVEA_OUTPUTOPTICS_DQ at time 1185727588 to 1185727638.0.
+14:33:56 preprocess.py (get_time_series) INFO: Channel successfully extracted: H1:PEM-CS_MIC_LVEA_VERTEX_DQ at time 1185727588 to 1185727638.0.
+14:33:56 preprocess.py (get_time_series) INFO: Channel successfully extracted: H1:PEM-CS_MIC_LVEA_XMANSPOOL_DQ at time 1185727588 to 1185727638.0.
+14:33:56 preprocess.py (get_time_series) INFO: Channel successfully extracted: H1:PEM-CS_MIC_LVEA_YMANSPOOL_DQ at time 1185727588 to 1185727638.0.
+14:33:57 preprocess.py (get_time_series) INFO: Channel successfully extracted: H1:IMC-WFS_A_DC_PIT_OUT_DQ at time 1185732574 to 1185732624.0.
+14:33:57 preprocess.py (get_time_series) INFO: Channel successfully extracted: H1:IMC-WFS_A_DC_YAW_OUT_DQ at time 1185732574 to 1185732624.0.
+14:33:57 preprocess.py (get_time_series) INFO: Channel successfully extracted: H1:PEM-CS_ACC_BEAMTUBE_MCTUBE_Y_DQ at time 1185732574 to 1185732624.0.
+14:33:58 preprocess.py (get_time_series) INFO: Channel successfully extracted: H1:PEM-CS_ACC_BEAMTUBE_XMAN_Y_DQ at time 1185732574 to 1185732624.0.
+14:33:58 preprocess.py (get_time_series) INFO: Channel successfully extracted: H1:PEM-CS_ACC_BEAMTUBE_YMAN_X_DQ at time 1185732574 to 1185732624.0.
+14:33:58 preprocess.py (get_time_series) INFO: Channel successfully extracted: H1:PEM-CS_ACC_BSC1_ITMY_X_DQ at time 1185732574 to 1185732624.0.
+14:33:59 preprocess.py (get_time_series) INFO: Channel successfully extracted: H1:PEM-CS_ACC_BSC1_ITMY_Y_DQ at time 1185732574 to 1185732624.0.
+14:33:59 preprocess.py (get_time_series) INFO: Channel successfully extracted: H1:PEM-CS_ACC_BSC1_ITMY_Z_DQ at time 1185732574 to 1185732624.0.
+14:33:59 preprocess.py (get_time_series) INFO: Channel successfully extracted: H1:PEM-CS_ACC_BSC2_BS_Y_DQ at time 1185732574 to 1185732624.0.
+14:33:59 preprocess.py (get_time_series) INFO: Channel successfully extracted: H1:PEM-CS_ACC_BSC3_ITMX_X_DQ at time 1185732574 to 1185732624.0.
+14:34:00 preprocess.py (get_time_series) INFO: Channel successfully extracted: H1:PEM-CS_ACC_BSC3_ITMX_Y_DQ at time 1185732574 to 1185732624.0.
+14:34:00 preprocess.py (get_time_series) INFO: Channel successfully extracted: H1:PEM-CS_ACC_EBAY_FLOOR_Z_DQ at time 1185732574 to 1185732624.0.
+14:34:00 preprocess.py (get_time_series) INFO: Channel successfully extracted: H1:PEM-CS_ACC_HAM2_PRM_Y_DQ at time 1185732574 to 1185732624.0.
+14:34:01 preprocess.py (get_time_series) INFO: Channel successfully extracted: H1:PEM-CS_ACC_HAM2_PRM_Z_DQ at time 1185732574 to 1185732624.0.
+14:34:01 preprocess.py (get_time_series) INFO: Channel successfully extracted: H1:PEM-CS_ACC_HAM3_PR2_Y_DQ at time 1185732574 to 1185732624.0.
+14:34:01 preprocess.py (get_time_series) INFO: Channel successfully extracted: H1:PEM-CS_ACC_HAM4_SR2_X_DQ at time 1185732574 to 1185732624.0.
+14:34:02 preprocess.py (get_time_series) INFO: Channel successfully extracted: H1:PEM-CS_ACC_HAM5_SRM_X_DQ at time 1185732574 to 1185732624.0.
+14:34:02 preprocess.py (get_time_series) INFO: Channel successfully extracted: H1:PEM-CS_ACC_HAM6_OMC_X_DQ at time 1185732574 to 1185732624.0.
+14:34:02 preprocess.py (get_time_series) INFO: Channel successfully extracted: H1:PEM-CS_ACC_HAM6_OMC_Z_DQ at time 1185732574 to 1185732624.0.
+14:34:02 preprocess.py (get_time_series) INFO: Channel successfully extracted: H1:PEM-CS_ACC_IOT1_IMC_X_DQ at time 1185732574 to 1185732624.0.
+14:34:03 preprocess.py (get_time_series) INFO: Channel successfully extracted: H1:PEM-CS_ACC_IOT1_IMC_Y_DQ at time 1185732574 to 1185732624.0.
+14:34:03 preprocess.py (get_time_series) INFO: Channel successfully extracted: H1:PEM-CS_ACC_IOT1_IMC_Z_DQ at time 1185732574 to 1185732624.0.
+14:34:03 preprocess.py (get_time_series) INFO: Channel successfully extracted: H1:PEM-CS_ACC_ISCT1_REFL_Y_DQ at time 1185732574 to 1185732624.0.
+14:34:04 preprocess.py (get_time_series) INFO: Channel successfully extracted: H1:PEM-CS_ACC_OPLEV_ITMX_Y_DQ at time 1185732574 to 1185732624.0.
+14:34:04 preprocess.py (get_time_series) INFO: Channel successfully extracted: H1:PEM-CS_ACC_OPLEV_ITMY_X_DQ at time 1185732574 to 1185732624.0.
+14:34:04 preprocess.py (get_time_series) INFO: Channel successfully extracted: H1:PEM-CS_MIC_EBAY_RACKS_DQ at time 1185732574 to 1185732624.0.
+14:34:05 preprocess.py (get_time_series) INFO: Channel successfully extracted: H1:PEM-CS_MIC_LVEA_BS_DQ at time 1185732574 to 1185732624.0.
+14:34:05 preprocess.py (get_time_series) INFO: Channel successfully extracted: H1:PEM-CS_MIC_LVEA_INPUTOPTICS_DQ at time 1185732574 to 1185732624.0.
+14:34:05 preprocess.py (get_time_series) INFO: Channel successfully extracted: H1:PEM-CS_MIC_LVEA_OUTPUTOPTICS_DQ at time 1185732574 to 1185732624.0.
+14:34:06 preprocess.py (get_time_series) INFO: Channel successfully extracted: H1:PEM-CS_MIC_LVEA_VERTEX_DQ at time 1185732574 to 1185732624.0.
+14:34:06 preprocess.py (get_time_series) INFO: Channel successfully extracted: H1:PEM-CS_MIC_LVEA_XMANSPOOL_DQ at time 1185732574 to 1185732624.0.
+14:34:06 preprocess.py (get_time_series) INFO: Channel successfully extracted: H1:PEM-CS_MIC_LVEA_YMANSPOOL_DQ at time 1185732574 to 1185732624.0.
+14:34:06 preprocess.py (reject_saturated) INFO: Channel rejected due to saturation: H1:PEM-CS_ACC_BEAMTUBE_MCTUBE_Y_DQ
+14:34:06 preprocess.py (reject_saturated) INFO: Channel rejected due to saturation: H1:PEM-CS_ACC_BEAMTUBE_XMAN_Y_DQ
+14:34:06 preprocess.py (reject_saturated) INFO: Channel rejected due to saturation: H1:PEM-CS_ACC_BEAMTUBE_YMAN_X_DQ
+14:34:06 preprocess.py (reject_saturated) INFO: Channel rejected due to saturation: H1:PEM-CS_ACC_BSC1_ITMY_X_DQ
+14:34:06 preprocess.py (reject_saturated) INFO: Channel rejected due to saturation: H1:PEM-CS_ACC_BSC1_ITMY_Z_DQ
+14:34:06 preprocess.py (reject_saturated) INFO: Channel rejected due to saturation: H1:PEM-CS_ACC_HAM4_SR2_X_DQ
+14:34:06 preprocess.py (reject_saturated) INFO: Channel rejected due to saturation: H1:PEM-CS_ACC_HAM5_SRM_X_DQ
+14:34:06 preprocess.py (reject_saturated) INFO: Channel rejected due to saturation: H1:PEM-CS_ACC_HAM6_OMC_X_DQ
+14:34:06 preprocess.py (reject_saturated) INFO: Channel rejected due to saturation: H1:PEM-CS_ACC_HAM6_OMC_Z_DQ
+14:34:06 preprocess.py (reject_saturated) INFO: Channel rejected due to saturation: H1:PEM-CS_ACC_OPLEV_ITMX_Y_DQ
+14:34:06 preprocess.py (convert_to_ASD) INFO: Channel converted to ASD: H1:IMC-WFS_A_DC_PIT_OUT with FFT time 9.0 and overlap time 4.5
+14:34:06 preprocess.py (convert_to_ASD) INFO: Channel converted to ASD: H1:IMC-WFS_A_DC_YAW_OUT with FFT time 9.0 and overlap time 4.5
+14:34:06 preprocess.py (convert_to_ASD) INFO: Channel converted to ASD: H1:PEM-CS_ACC_BSC1_ITMY_Y with FFT time 9.0 and overlap time 4.5
+14:34:06 preprocess.py (convert_to_ASD) INFO: Channel converted to ASD: H1:PEM-CS_ACC_BSC2_BS_Y with FFT time 9.0 and overlap time 4.5
+14:34:06 preprocess.py (convert_to_ASD) INFO: Channel converted to ASD: H1:PEM-CS_ACC_BSC3_ITMX_X with FFT time 9.0 and overlap time 4.5
+14:34:06 preprocess.py (convert_to_ASD) INFO: Channel converted to ASD: H1:PEM-CS_ACC_BSC3_ITMX_Y with FFT time 9.0 and overlap time 4.5
+14:34:06 preprocess.py (convert_to_ASD) INFO: Channel converted to ASD: H1:PEM-CS_ACC_EBAY_FLOOR_Z with FFT time 9.0 and overlap time 4.5
+14:34:07 preprocess.py (convert_to_ASD) INFO: Channel converted to ASD: H1:PEM-CS_ACC_HAM2_PRM_Y with FFT time 9.0 and overlap time 4.5
+14:34:07 preprocess.py (convert_to_ASD) INFO: Channel converted to ASD: H1:PEM-CS_ACC_HAM2_PRM_Z with FFT time 9.0 and overlap time 4.5
+14:34:07 preprocess.py (convert_to_ASD) INFO: Channel converted to ASD: H1:PEM-CS_ACC_HAM3_PR2_Y with FFT time 9.0 and overlap time 4.5
+14:34:07 preprocess.py (convert_to_ASD) INFO: Channel converted to ASD: H1:PEM-CS_ACC_IOT1_IMC_X with FFT time 9.0 and overlap time 4.5
+14:34:07 preprocess.py (convert_to_ASD) INFO: Channel converted to ASD: H1:PEM-CS_ACC_IOT1_IMC_Y with FFT time 9.0 and overlap time 4.5
+14:34:07 preprocess.py (convert_to_ASD) INFO: Channel converted to ASD: H1:PEM-CS_ACC_IOT1_IMC_Z with FFT time 9.0 and overlap time 4.5
+14:34:07 preprocess.py (convert_to_ASD) INFO: Channel converted to ASD: H1:PEM-CS_ACC_ISCT1_REFL_Y with FFT time 9.0 and overlap time 4.5
+14:34:07 preprocess.py (convert_to_ASD) INFO: Channel converted to ASD: H1:PEM-CS_ACC_OPLEV_ITMY_X with FFT time 9.0 and overlap time 4.5
+14:34:07 preprocess.py (convert_to_ASD) INFO: Channel converted to ASD: H1:PEM-CS_MIC_EBAY_RACKS with FFT time 9.0 and overlap time 4.5
+14:34:07 preprocess.py (convert_to_ASD) INFO: Channel converted to ASD: H1:PEM-CS_MIC_LVEA_BS with FFT time 9.0 and overlap time 4.5
+14:34:07 preprocess.py (convert_to_ASD) INFO: Channel converted to ASD: H1:PEM-CS_MIC_LVEA_INPUTOPTICS with FFT time 9.0 and overlap time 4.5
+14:34:07 preprocess.py (convert_to_ASD) INFO: Channel converted to ASD: H1:PEM-CS_MIC_LVEA_OUTPUTOPTICS with FFT time 9.0 and overlap time 4.5
+14:34:07 preprocess.py (convert_to_ASD) INFO: Channel converted to ASD: H1:PEM-CS_MIC_LVEA_VERTEX with FFT time 9.0 and overlap time 4.5
+14:34:07 preprocess.py (convert_to_ASD) INFO: Channel converted to ASD: H1:PEM-CS_MIC_LVEA_XMANSPOOL with FFT time 9.0 and overlap time 4.5
+14:34:07 preprocess.py (convert_to_ASD) INFO: Channel converted to ASD: H1:PEM-CS_MIC_LVEA_YMANSPOOL with FFT time 9.0 and overlap time 4.5
+14:34:07 preprocess.py (convert_to_ASD) INFO: Channel converted to ASD: H1:IMC-WFS_A_DC_PIT_OUT with FFT time 9.0 and overlap time 4.5
+14:34:07 preprocess.py (convert_to_ASD) INFO: Channel converted to ASD: H1:IMC-WFS_A_DC_YAW_OUT with FFT time 9.0 and overlap time 4.5
+14:34:07 preprocess.py (convert_to_ASD) INFO: Channel converted to ASD: H1:PEM-CS_ACC_BSC1_ITMY_Y with FFT time 9.0 and overlap time 4.5
+14:34:07 preprocess.py (convert_to_ASD) INFO: Channel converted to ASD: H1:PEM-CS_ACC_BSC2_BS_Y with FFT time 9.0 and overlap time 4.5
+14:34:07 preprocess.py (convert_to_ASD) INFO: Channel converted to ASD: H1:PEM-CS_ACC_BSC3_ITMX_X with FFT time 9.0 and overlap time 4.5
+14:34:07 preprocess.py (convert_to_ASD) INFO: Channel converted to ASD: H1:PEM-CS_ACC_BSC3_ITMX_Y with FFT time 9.0 and overlap time 4.5
+14:34:07 preprocess.py (convert_to_ASD) INFO: Channel converted to ASD: H1:PEM-CS_ACC_EBAY_FLOOR_Z with FFT time 9.0 and overlap time 4.5
+14:34:07 preprocess.py (convert_to_ASD) INFO: Channel converted to ASD: H1:PEM-CS_ACC_HAM2_PRM_Y with FFT time 9.0 and overlap time 4.5
+14:34:07 preprocess.py (convert_to_ASD) INFO: Channel converted to ASD: H1:PEM-CS_ACC_HAM2_PRM_Z with FFT time 9.0 and overlap time 4.5
+14:34:08 preprocess.py (convert_to_ASD) INFO: Channel converted to ASD: H1:PEM-CS_ACC_HAM3_PR2_Y with FFT time 9.0 and overlap time 4.5
+14:34:08 preprocess.py (convert_to_ASD) INFO: Channel converted to ASD: H1:PEM-CS_ACC_IOT1_IMC_X with FFT time 9.0 and overlap time 4.5
+14:34:08 preprocess.py (convert_to_ASD) INFO: Channel converted to ASD: H1:PEM-CS_ACC_IOT1_IMC_Y with FFT time 9.0 and overlap time 4.5
+14:34:08 preprocess.py (convert_to_ASD) INFO: Channel converted to ASD: H1:PEM-CS_ACC_IOT1_IMC_Z with FFT time 9.0 and overlap time 4.5
+14:34:08 preprocess.py (convert_to_ASD) INFO: Channel converted to ASD: H1:PEM-CS_ACC_ISCT1_REFL_Y with FFT time 9.0 and overlap time 4.5
+14:34:08 preprocess.py (convert_to_ASD) INFO: Channel converted to ASD: H1:PEM-CS_ACC_OPLEV_ITMY_X with FFT time 9.0 and overlap time 4.5
+14:34:08 preprocess.py (convert_to_ASD) INFO: Channel converted to ASD: H1:PEM-CS_MIC_EBAY_RACKS with FFT time 9.0 and overlap time 4.5
+14:34:08 preprocess.py (convert_to_ASD) INFO: Channel converted to ASD: H1:PEM-CS_MIC_LVEA_BS with FFT time 9.0 and overlap time 4.5
+14:34:08 preprocess.py (convert_to_ASD) INFO: Channel converted to ASD: H1:PEM-CS_MIC_LVEA_INPUTOPTICS with FFT time 9.0 and overlap time 4.5
+14:34:08 preprocess.py (convert_to_ASD) INFO: Channel converted to ASD: H1:PEM-CS_MIC_LVEA_OUTPUTOPTICS with FFT time 9.0 and overlap time 4.5
+14:34:08 preprocess.py (convert_to_ASD) INFO: Channel converted to ASD: H1:PEM-CS_MIC_LVEA_VERTEX with FFT time 9.0 and overlap time 4.5
+14:34:08 preprocess.py (convert_to_ASD) INFO: Channel converted to ASD: H1:PEM-CS_MIC_LVEA_XMANSPOOL with FFT time 9.0 and overlap time 4.5
+14:34:08 preprocess.py (convert_to_ASD) INFO: Channel converted to ASD: H1:PEM-CS_MIC_LVEA_YMANSPOOL with FFT time 9.0 and overlap time 4.5
+14:34:08 preprocess.py (get_calibration_factors) INFO: Parsing calibration data for channel H1:PEM-CS_ACC_HAM2_PRM_Y.
+14:34:08 preprocess.py (get_calibration_factors) INFO: Calibration factor acquired for channel H1:PEM-CS_ACC_HAM2_PRM_Y.
+14:34:08 preprocess.py (get_calibration_factors) INFO: Parsing calibration data for channel H1:PEM-CS_MIC_LVEA_INPUTOPTICS.
+14:34:08 preprocess.py (get_calibration_factors) INFO: Calibration factor acquired for channel H1:PEM-CS_MIC_LVEA_INPUTOPTICS.
+14:34:08 preprocess.py (get_calibration_factors) INFO: Parsing calibration data for channel H1:PEM-CS_ACC_IOT1_IMC_Z.
+14:34:08 preprocess.py (get_calibration_factors) INFO: Calibration factor acquired for channel H1:PEM-CS_ACC_IOT1_IMC_Z.
+14:34:08 preprocess.py (get_calibration_factors) INFO: Parsing calibration data for channel H1:PEM-CS_ACC_IOT1_IMC_X.
+14:34:08 preprocess.py (get_calibration_factors) INFO: Calibration factor acquired for channel H1:PEM-CS_ACC_IOT1_IMC_X.
+14:34:08 preprocess.py (get_calibration_factors) INFO: Parsing calibration data for channel H1:PEM-CS_ACC_IOT1_IMC_Y.
+14:34:08 preprocess.py (get_calibration_factors) INFO: Calibration factor acquired for channel H1:PEM-CS_ACC_IOT1_IMC_Y.
+14:34:08 preprocess.py (get_calibration_factors) INFO: Parsing calibration data for channel H1:PEM-CS_MIC_LVEA_YMANSPOOL.
+14:34:08 preprocess.py (get_calibration_factors) INFO: Calibration factor acquired for channel H1:PEM-CS_MIC_LVEA_YMANSPOOL.
+14:34:08 preprocess.py (get_calibration_factors) INFO: Parsing calibration data for channel H1:PEM-CS_MIC_LVEA_VERTEX.
+14:34:08 preprocess.py (get_calibration_factors) INFO: Calibration factor acquired for channel H1:PEM-CS_MIC_LVEA_VERTEX.
+14:34:08 preprocess.py (get_calibration_factors) INFO: Parsing calibration data for channel H1:PEM-CS_ACC_OPLEV_ITMY_X.
+14:34:08 preprocess.py (get_calibration_factors) INFO: Calibration factor acquired for channel H1:PEM-CS_ACC_OPLEV_ITMY_X.
+14:34:08 preprocess.py (get_calibration_factors) INFO: Parsing calibration data for channel H1:PEM-CS_MIC_EBAY_RACKS.
+14:34:08 preprocess.py (get_calibration_factors) INFO: Calibration factor acquired for channel H1:PEM-CS_MIC_EBAY_RACKS.
+14:34:08 preprocess.py (get_calibration_factors) INFO: Parsing calibration data for channel H1:PEM-CS_ACC_EBAY_FLOOR_Z.
+14:34:08 preprocess.py (get_calibration_factors) INFO: Calibration factor acquired for channel H1:PEM-CS_ACC_EBAY_FLOOR_Z.
+14:34:08 preprocess.py (get_calibration_factors) INFO: Parsing calibration data for channel H1:PEM-CS_ACC_HAM2_PRM_Z.
+14:34:08 preprocess.py (get_calibration_factors) INFO: Calibration factor acquired for channel H1:PEM-CS_ACC_HAM2_PRM_Z.
+14:34:08 preprocess.py (get_calibration_factors) INFO: Parsing calibration data for channel H1:PEM-CS_ACC_ISCT1_REFL_Y.
+14:34:08 preprocess.py (get_calibration_factors) INFO: Calibration factor acquired for channel H1:PEM-CS_ACC_ISCT1_REFL_Y.
+14:34:08 preprocess.py (get_calibration_factors) INFO: Parsing calibration data for channel H1:PEM-CS_MIC_LVEA_BS.
+14:34:08 preprocess.py (get_calibration_factors) INFO: Calibration factor acquired for channel H1:PEM-CS_MIC_LVEA_BS.
+14:34:08 preprocess.py (get_calibration_factors) INFO: Parsing calibration data for channel H1:PEM-CS_ACC_HAM3_PR2_Y.
+14:34:08 preprocess.py (get_calibration_factors) INFO: Calibration factor acquired for channel H1:PEM-CS_ACC_HAM3_PR2_Y.
+14:34:08 preprocess.py (get_calibration_factors) INFO: Parsing calibration data for channel H1:PEM-CS_ACC_BSC2_BS_Y.
+14:34:08 preprocess.py (get_calibration_factors) INFO: Calibration factor acquired for channel H1:PEM-CS_ACC_BSC2_BS_Y.
+14:34:08 preprocess.py (get_calibration_factors) INFO: Parsing calibration data for channel H1:PEM-CS_ACC_BSC3_ITMX_X.
+14:34:08 preprocess.py (get_calibration_factors) INFO: Calibration factor acquired for channel H1:PEM-CS_ACC_BSC3_ITMX_X.
+14:34:08 preprocess.py (get_calibration_factors) INFO: Parsing calibration data for channel H1:PEM-CS_MIC_LVEA_XMANSPOOL.
+14:34:08 preprocess.py (get_calibration_factors) INFO: Calibration factor acquired for channel H1:PEM-CS_MIC_LVEA_XMANSPOOL.
+14:34:08 preprocess.py (get_calibration_factors) INFO: Parsing calibration data for channel H1:PEM-CS_ACC_BSC1_ITMY_Y.
+14:34:08 preprocess.py (get_calibration_factors) INFO: Calibration factor acquired for channel H1:PEM-CS_ACC_BSC1_ITMY_Y.
+14:34:08 preprocess.py (get_calibration_factors) INFO: Parsing calibration data for channel H1:PEM-CS_MIC_LVEA_OUTPUTOPTICS.
+14:34:08 preprocess.py (get_calibration_factors) INFO: Calibration factor acquired for channel H1:PEM-CS_MIC_LVEA_OUTPUTOPTICS.
+14:34:08 preprocess.py (get_calibration_factors) INFO: Parsing calibration data for channel H1:PEM-CS_ACC_BSC3_ITMX_Y.
+14:34:08 preprocess.py (get_calibration_factors) INFO: Calibration factor acquired for channel H1:PEM-CS_ACC_BSC3_ITMX_Y.
+14:34:08 preprocess.py (get_calibration_factors) INFO: No calibration factor acquired for channel H1:PEM-CS_MIC_LVEA_YMANSPOOL.
+14:34:08 preprocess.py (get_calibration_factors) INFO: No calibration factor acquired for channel H1:PEM-CS_MIC_LVEA_YMANSPOOL.
+14:34:08 preprocess.py (calibrate_sensors) INFO: Channel calibrated: H1:PEM-CS_ACC_BSC1_ITMY_Y.
+14:34:08 preprocess.py (calibrate_sensors) INFO: Channel calibrated: H1:PEM-CS_ACC_BSC2_BS_Y.
+14:34:08 preprocess.py (calibrate_sensors) INFO: Channel calibrated: H1:PEM-CS_ACC_BSC3_ITMX_X.
+14:34:08 preprocess.py (calibrate_sensors) INFO: Channel calibrated: H1:PEM-CS_ACC_BSC3_ITMX_Y.
+14:34:08 preprocess.py (calibrate_sensors) INFO: Channel calibrated: H1:PEM-CS_ACC_EBAY_FLOOR_Z.
+14:34:08 preprocess.py (calibrate_sensors) INFO: Channel calibrated: H1:PEM-CS_ACC_HAM2_PRM_Y.
+14:34:08 preprocess.py (calibrate_sensors) INFO: Channel calibrated: H1:PEM-CS_ACC_HAM2_PRM_Z.
+14:34:08 preprocess.py (calibrate_sensors) INFO: Channel calibrated: H1:PEM-CS_ACC_HAM3_PR2_Y.
+14:34:08 preprocess.py (calibrate_sensors) INFO: Channel calibrated: H1:PEM-CS_ACC_IOT1_IMC_X.
+14:34:08 preprocess.py (calibrate_sensors) INFO: Channel calibrated: H1:PEM-CS_ACC_IOT1_IMC_Y.
+14:34:08 preprocess.py (calibrate_sensors) INFO: Channel calibrated: H1:PEM-CS_ACC_IOT1_IMC_Z.
+14:34:08 preprocess.py (calibrate_sensors) INFO: Channel calibrated: H1:PEM-CS_ACC_ISCT1_REFL_Y.
+14:34:08 preprocess.py (calibrate_sensors) INFO: Channel calibrated: H1:PEM-CS_ACC_OPLEV_ITMY_X.
+14:34:08 preprocess.py (calibrate_sensors) INFO: Channel calibrated: H1:PEM-CS_MIC_EBAY_RACKS.
+14:34:08 preprocess.py (calibrate_sensors) INFO: Channel calibrated: H1:PEM-CS_MIC_LVEA_BS.
+14:34:08 preprocess.py (calibrate_sensors) INFO: Channel calibrated: H1:PEM-CS_MIC_LVEA_INPUTOPTICS.
+14:34:08 preprocess.py (calibrate_sensors) INFO: Channel calibrated: H1:PEM-CS_MIC_LVEA_OUTPUTOPTICS.
+14:34:08 preprocess.py (calibrate_sensors) INFO: Channel calibrated: H1:PEM-CS_MIC_LVEA_VERTEX.
+14:34:08 preprocess.py (calibrate_sensors) INFO: Channel calibrated: H1:PEM-CS_MIC_LVEA_XMANSPOOL.
+14:34:08 preprocess.py (calibrate_sensors) INFO: Channel calibrated: H1:PEM-CS_MIC_LVEA_YMANSPOOL.
+14:34:08 preprocess.py (get_calibration_factors) INFO: Parsing calibration data for channel H1:PEM-CS_ACC_HAM2_PRM_Y.
+14:34:08 preprocess.py (get_calibration_factors) INFO: Calibration factor acquired for channel H1:PEM-CS_ACC_HAM2_PRM_Y.
+14:34:08 preprocess.py (get_calibration_factors) INFO: Parsing calibration data for channel H1:PEM-CS_MIC_LVEA_INPUTOPTICS.
+14:34:08 preprocess.py (get_calibration_factors) INFO: Calibration factor acquired for channel H1:PEM-CS_MIC_LVEA_INPUTOPTICS.
+14:34:08 preprocess.py (get_calibration_factors) INFO: Parsing calibration data for channel H1:PEM-CS_ACC_IOT1_IMC_Z.
+14:34:08 preprocess.py (get_calibration_factors) INFO: Calibration factor acquired for channel H1:PEM-CS_ACC_IOT1_IMC_Z.
+14:34:08 preprocess.py (get_calibration_factors) INFO: Parsing calibration data for channel H1:PEM-CS_ACC_IOT1_IMC_X.
+14:34:08 preprocess.py (get_calibration_factors) INFO: Calibration factor acquired for channel H1:PEM-CS_ACC_IOT1_IMC_X.
+14:34:08 preprocess.py (get_calibration_factors) INFO: Parsing calibration data for channel H1:PEM-CS_ACC_IOT1_IMC_Y.
+14:34:08 preprocess.py (get_calibration_factors) INFO: Calibration factor acquired for channel H1:PEM-CS_ACC_IOT1_IMC_Y.
+14:34:08 preprocess.py (get_calibration_factors) INFO: Parsing calibration data for channel H1:PEM-CS_MIC_LVEA_YMANSPOOL.
+14:34:08 preprocess.py (get_calibration_factors) INFO: Calibration factor acquired for channel H1:PEM-CS_MIC_LVEA_YMANSPOOL.
+14:34:08 preprocess.py (get_calibration_factors) INFO: Parsing calibration data for channel H1:PEM-CS_MIC_LVEA_VERTEX.
+14:34:08 preprocess.py (get_calibration_factors) INFO: Calibration factor acquired for channel H1:PEM-CS_MIC_LVEA_VERTEX.
+14:34:08 preprocess.py (get_calibration_factors) INFO: Parsing calibration data for channel H1:PEM-CS_ACC_OPLEV_ITMY_X.
+14:34:08 preprocess.py (get_calibration_factors) INFO: Calibration factor acquired for channel H1:PEM-CS_ACC_OPLEV_ITMY_X.
+14:34:08 preprocess.py (get_calibration_factors) INFO: Parsing calibration data for channel H1:PEM-CS_MIC_EBAY_RACKS.
+14:34:08 preprocess.py (get_calibration_factors) INFO: Calibration factor acquired for channel H1:PEM-CS_MIC_EBAY_RACKS.
+14:34:08 preprocess.py (get_calibration_factors) INFO: Parsing calibration data for channel H1:PEM-CS_ACC_EBAY_FLOOR_Z.
+14:34:08 preprocess.py (get_calibration_factors) INFO: Calibration factor acquired for channel H1:PEM-CS_ACC_EBAY_FLOOR_Z.
+14:34:08 preprocess.py (get_calibration_factors) INFO: Parsing calibration data for channel H1:PEM-CS_ACC_HAM2_PRM_Z.
+14:34:08 preprocess.py (get_calibration_factors) INFO: Calibration factor acquired for channel H1:PEM-CS_ACC_HAM2_PRM_Z.
+14:34:08 preprocess.py (get_calibration_factors) INFO: Parsing calibration data for channel H1:PEM-CS_ACC_ISCT1_REFL_Y.
+14:34:08 preprocess.py (get_calibration_factors) INFO: Calibration factor acquired for channel H1:PEM-CS_ACC_ISCT1_REFL_Y.
+14:34:08 preprocess.py (get_calibration_factors) INFO: Parsing calibration data for channel H1:PEM-CS_MIC_LVEA_BS.
+14:34:08 preprocess.py (get_calibration_factors) INFO: Calibration factor acquired for channel H1:PEM-CS_MIC_LVEA_BS.
+14:34:08 preprocess.py (get_calibration_factors) INFO: Parsing calibration data for channel H1:PEM-CS_ACC_HAM3_PR2_Y.
+14:34:08 preprocess.py (get_calibration_factors) INFO: Calibration factor acquired for channel H1:PEM-CS_ACC_HAM3_PR2_Y.
+14:34:08 preprocess.py (get_calibration_factors) INFO: Parsing calibration data for channel H1:PEM-CS_ACC_BSC2_BS_Y.
+14:34:08 preprocess.py (get_calibration_factors) INFO: Calibration factor acquired for channel H1:PEM-CS_ACC_BSC2_BS_Y.
+14:34:08 preprocess.py (get_calibration_factors) INFO: Parsing calibration data for channel H1:PEM-CS_ACC_BSC3_ITMX_X.
+14:34:08 preprocess.py (get_calibration_factors) INFO: Calibration factor acquired for channel H1:PEM-CS_ACC_BSC3_ITMX_X.
+14:34:08 preprocess.py (get_calibration_factors) INFO: Parsing calibration data for channel H1:PEM-CS_MIC_LVEA_XMANSPOOL.
+14:34:08 preprocess.py (get_calibration_factors) INFO: Calibration factor acquired for channel H1:PEM-CS_MIC_LVEA_XMANSPOOL.
+14:34:08 preprocess.py (get_calibration_factors) INFO: Parsing calibration data for channel H1:PEM-CS_ACC_BSC1_ITMY_Y.
+14:34:08 preprocess.py (get_calibration_factors) INFO: Calibration factor acquired for channel H1:PEM-CS_ACC_BSC1_ITMY_Y.
+14:34:08 preprocess.py (get_calibration_factors) INFO: Parsing calibration data for channel H1:PEM-CS_MIC_LVEA_OUTPUTOPTICS.
+14:34:08 preprocess.py (get_calibration_factors) INFO: Calibration factor acquired for channel H1:PEM-CS_MIC_LVEA_OUTPUTOPTICS.
+14:34:08 preprocess.py (get_calibration_factors) INFO: Parsing calibration data for channel H1:PEM-CS_ACC_BSC3_ITMX_Y.
+14:34:08 preprocess.py (get_calibration_factors) INFO: Calibration factor acquired for channel H1:PEM-CS_ACC_BSC3_ITMX_Y.
+14:34:08 preprocess.py (get_calibration_factors) INFO: No calibration factor acquired for channel H1:PEM-CS_MIC_LVEA_YMANSPOOL.
+14:34:08 preprocess.py (get_calibration_factors) INFO: No calibration factor acquired for channel H1:PEM-CS_MIC_LVEA_YMANSPOOL.
+14:34:08 preprocess.py (calibrate_sensors) INFO: Channel calibrated: H1:PEM-CS_ACC_BSC1_ITMY_Y.
+14:34:08 preprocess.py (calibrate_sensors) INFO: Channel calibrated: H1:PEM-CS_ACC_BSC2_BS_Y.
+14:34:08 preprocess.py (calibrate_sensors) INFO: Channel calibrated: H1:PEM-CS_ACC_BSC3_ITMX_X.
+14:34:08 preprocess.py (calibrate_sensors) INFO: Channel calibrated: H1:PEM-CS_ACC_BSC3_ITMX_Y.
+14:34:08 preprocess.py (calibrate_sensors) INFO: Channel calibrated: H1:PEM-CS_ACC_EBAY_FLOOR_Z.
+14:34:08 preprocess.py (calibrate_sensors) INFO: Channel calibrated: H1:PEM-CS_ACC_HAM2_PRM_Y.
+14:34:08 preprocess.py (calibrate_sensors) INFO: Channel calibrated: H1:PEM-CS_ACC_HAM2_PRM_Z.
+14:34:08 preprocess.py (calibrate_sensors) INFO: Channel calibrated: H1:PEM-CS_ACC_HAM3_PR2_Y.
+14:34:08 preprocess.py (calibrate_sensors) INFO: Channel calibrated: H1:PEM-CS_ACC_IOT1_IMC_X.
+14:34:08 preprocess.py (calibrate_sensors) INFO: Channel calibrated: H1:PEM-CS_ACC_IOT1_IMC_Y.
+14:34:08 preprocess.py (calibrate_sensors) INFO: Channel calibrated: H1:PEM-CS_ACC_IOT1_IMC_Z.
+14:34:08 preprocess.py (calibrate_sensors) INFO: Channel calibrated: H1:PEM-CS_ACC_ISCT1_REFL_Y.
+14:34:08 preprocess.py (calibrate_sensors) INFO: Channel calibrated: H1:PEM-CS_ACC_OPLEV_ITMY_X.
+14:34:08 preprocess.py (calibrate_sensors) INFO: Channel calibrated: H1:PEM-CS_MIC_EBAY_RACKS.
+14:34:08 preprocess.py (calibrate_sensors) INFO: Channel calibrated: H1:PEM-CS_MIC_LVEA_BS.
+14:34:08 preprocess.py (calibrate_sensors) INFO: Channel calibrated: H1:PEM-CS_MIC_LVEA_INPUTOPTICS.
+14:34:08 preprocess.py (calibrate_sensors) INFO: Channel calibrated: H1:PEM-CS_MIC_LVEA_OUTPUTOPTICS.
+14:34:08 preprocess.py (calibrate_sensors) INFO: Channel calibrated: H1:PEM-CS_MIC_LVEA_VERTEX.
+14:34:08 preprocess.py (calibrate_sensors) INFO: Channel calibrated: H1:PEM-CS_MIC_LVEA_XMANSPOOL.
+14:34:08 preprocess.py (calibrate_sensors) INFO: Channel calibrated: H1:PEM-CS_MIC_LVEA_YMANSPOOL.
+14:34:08 PEMcoupling.py (<module>) INFO: Channel not calibrated: H1:IMC-WFS_A_DC_PIT_OUT
+14:34:08 PEMcoupling.py (<module>) INFO: Channel not calibrated: H1:IMC-WFS_A_DC_YAW_OUT

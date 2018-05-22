@@ -1,0 +1,5 @@
+11:46:13 PEMcoupling.py DEBUG: This message should go to the log file
+11:46:13 PEMcoupling.py INFO: Event logging for PEMcoupling.py executed at time 2018_Mar_30_11:46:13
+11:46:13 PEMcoupling.py WARNING: Warning message.
+11:46:13 PEMcoupling.py WARNING: Dividing by zero is a sin.
+11:46:13 getparams.py INFO: Parsing arguments.

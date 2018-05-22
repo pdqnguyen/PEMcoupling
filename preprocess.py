@@ -1,252 +1,35 @@
 """"
-CLASSES:
-    ChannelASD -- Contains name, frequencies, amplitude values, and start time for a sensor ASD.
 FUNCTIONS:
-    get_time_series --- Extracts time series data for a list of channel(s).
-    get_calibrated_darm --- Imports and calibrates DARM from whichever state it is in, to displacement.
     reject_saturated --- Removes saturated channels from list of channels.
-    notch60Hz --- Applies a filter to time series to notch 60Hz resonances.
     convert_to_ASD --- Converts a list of TimeSeries data into a list of amplitude density spectra.
     quad_sum_ASD --- Generates a quad-sum channel for every set of tri-axial sensors.
-    get_calibration_factor --- Determines calibration factor associated with a specific channel.
-    calibrate_sensor --- Calibrates the ASDs according to channel sensor type.
+    get_calibration_factors --- Finds calibration factors for list of channels.
+    calibrate_sensors --- Calibrates ASDs according to channel sensor type.
     smooth_ASD --- Sliding-average smoothing function for cleaning up noisiness in a spectrum.
-Usage Notes:
-    GWPy is used for Channel, TimeSeries, and time explicitly. FrequencySeries is also relevant when ASDs are generated.
-    scipy.signal is used in notch60Hz for filtering.
 """
 
 from gwpy.timeseries import TimeSeries
+from gwpy.frequencyseries import FrequencySeries
 import numpy as np
-import ConfigParser
-from scipy import signal
-import os
 import time
-import datetime
-import sys
-
-#===============================
-#### OBJECT CLASSES
-#===============================
-
-class ChannelASD(object):
-    """
-    Calibrated amplitude spectral density of a single channel.
-    Note: this uses the Channel function from gwpy.detector to retrieve channel info.
-    
-    Attributes:
-    name: str
-        Channel name.
-    freqs: array
-        Frequencies.
-    value: array
-        Calibrated ASD values.
-    t0: float, int
-        Start time of channel.
-    """
-    
-    def __init__(self, name, freqs, values, t0=None):
-        self.name = name
-        self.freqs = np.asarray(freqs)
-        self.values = np.asarray(values)
-        self.t0 = t0
-        self.df = self.freqs[1] - self.freqs[0]
-
-    def unit(self):
-        # Sensor unit of measurement
-        chan = Channel(self.name)
-        sig = chan.signal
-        units_dict = {'MIC': 'Pa', 'MAG': 'T', 'RADIO': 'ADC', 'SEIS': 'm', \
-                      'ISI': 'm', 'ACC': 'm', 'HPI': 'm'}
-        for x in units_dict:
-            if x in sig:
-                return units_dict[x]
-            elif x == chan.system:
-                return units_dict[x]
-        #If no units are found, return unknown
-        return 'Unknown Units'
-
-    def sensor(self):
-        # Sensor type
-        chan = Channel(self.name)
-        sig = chan.signal
-        types = {'MIC': 'MIC', 'MAG': 'MAG', 'RADIO': 'RADIO', 'SEIS': 'SEIS', \
-                 'ISI':'SEIS', 'HPI':'SEIS', 'ACC': 'ACC'}
-        for x in types:
-            if x in sig:
-                return units_dict[x]
-            elif x == channel.system:
-                        return units_dict[x]
-        # If no units are found, return unknown
-        return 'Unknown Type'
-
-    def system(self):
-        # Name of sensor system
-        return Channel(self.name).system
-    
-    def crop(self, fmin, fmax):
-        """
-        Crop ASD between fmin and fmax.
-        
-        Parameters
-        ----------
-        fmin: float, int
-            Minimum frequency (Hz).
-        fmax: float, int
-            Maximum frequency (Hz).
-        """
-        
-        try:
-            fmin = float(fmin)
-            fmax = float(fmax)
-        except:
-            print('\nError: .crop method for ChannelASD object requires float inputs for fmin, fmax.\n')
-        # Determine start and end indices from fmin and fmax
-        if fmin > self.freqs[0]:
-            start = int(float(fmin - self.freqs[0]) / float(self.df))
-        else:
-            start = None
-        if fmax <= self.freqs[-1]:
-            end = int(float(fmax - self.freqs[0]) / float(self.df))
-        else:
-            end = None
-        # Crop data to start and end
-        self.freqs = self.freqs[start:end]
-        self.values = self.values[start:end]
-
-#===============================
-#### DATA IMPORT FUNCTIONS
-#===============================
-
-def get_time_series(channel_names, t_start, t_end, return_failed=False):
-    """
-    Extracts time series data for a list of channel(s).
-    
-    Parameters
-    ----------
-    channel_names: list of strings
-        Names of channels to load.
-    t_start: float, int
-        Start time of time series segment.
-    t_end: float, int
-        End time of time series segment.
-    return_failed: {False, True}
-        If True, return list of channels that failed to load.
-        
-    Returns
-    -------
-    time_series_list: list
-        Gwpy TimeSeries objects.
-    channels_failed: list
-        Names of channels that failed to load.
-    """
-    
-    time_series_list = []
-    channels_failed = []
-    for name in channel_names:
-        try:
-            time_series_list.append(TimeSeries.fetch(name, t_start, t_end))
-        except RuntimeError:
-            channels_failed.append(name)
-        
-    if len(time_series_list) == 0:
-        print('\nWarning: No channels were successfully extracted.')
-        print('Check that channel names and times are valid.')
-    elif len(channels_failed) > 0:
-        print('\nWarning: Failed to extract {} of {} channels:'.format(len(chans_failed), len(l)))
-        for c in channels_failed:
-            print(c)
-        print('Check that channel names and times are valid.')
-
-    if return_failed:
-        return time_series_list, channels_failed
-    else:
-        return time_series_list
-
-def get_calibrated_DARM(ifo, gw_channel, t_start, t_end, FFT_time, overlap_time, calibration_file):
-    """
-    Imports and calibrates DARM from whichever state it is in, to displacement.
-
-    Parameters
-    ----------
-    cal_from: str
-        GW channel to use, must be 'strain_channel' or 'deltal_channel'.
-    t_start: float, int
-        Start time of time series segment.
-    t_end: float, int
-        End time of time series segment.
-    FFT_t: float
-        FFT time (seconds).
-    overlap_t: float
-        FFT overlap time (seconds).
-    cal_file: str
-        Name of DARM calibration file to be used.
-    
-    Returns
-    -------
-    calibrated_darmASD: FrequencySeries
-        Calibrated ASD of imported gravitational wave channel.
-    """
-
-    if gw_channel == 'strain_channel':
-        
-        strain = TimeSeries.fetch(ifo + ':GDS-CALIB_STRAIN', t_start, t_end)
-        strainASD = strain.asd(FFT_time, overlap_time)
-        darmASD = strainASD * 4000.    # Strain to DARM, multiply by 4 km
-
-    elif gw_channel == 'deltal_channel':
-        
-        darm = TimeSeries.fetch(ifo + ':CAL-DELTAL_EXTERNAL_DQ', t_start, t_end)
-        darmASD = darm.asd(FFT_time, overlap_time)
-        
-        # Load DARM calibration file
-        try:
-            get_cal = open(calibration_file,'r')
-        except:
-            print('\nError: Calibration file ' + calibration_file + ' not found.\n')
-            sys.exit()
-        lines = get_cal.readlines()
-        get_cal.close()
-        
-        # Get frequencies and calibration factors
-        cal_freqs = np.zeros(len(lines))
-        dB_ratios = np.zeros(len(lines))
-        for i, line in enumerate(lines):
-            values = line.split()
-            cal_freqs[i] = float(values[0])
-            dB_ratios[i] = float(values[1])
-        cal_factors = 10.0 ** (dB_ratios / 20.) # Convert to calibration factors
-        
-        # Interpolate calibration factors then apply to DARM ASD
-        adjusted_ratios = np.interp(darmASD.frequencies.value, cal_freqs, cal_factors)
-        darmASD = darmASD * adjusted_ratios
-
-    else:
-        print('Please correctly specify GW channel calibration method in the configuration file.')
-        print('To calibrate from the strain-calibrated channel, H1:GDS-CALIB_STRAIN, write "strain_channel".')
-        print('To calibrate from H1:CAL-DELTAL_EXTERNAL_DQ, write "deltal_channel".')
-        sys.exit()
-    
-    return darmASD
-
-#=======================================
-#### PREPROCESSING FUNCTIONS
-#=======================================
+import logging
+from channel import ChannelASD
+from utils import quad_sum_names
 
 def reject_saturated(time_series_list, verbose=False):
     """
-    Rejects saturated sensors (currently just accelerometers) based on if the time series exceeding a threshold value.
+    Reject saturated sensors based on whether the time series exceeds 32000 ADC counts.
     
     Parameters
     ----------
-    time_series_list: list
+    time_series_list : list
         TimeSeries objects.
-    verbose: {False, True}, optional
+    verbose : {False, True}, optional
         If True, report saturated channels.
         
     Returns
     -------
-    time_series_unsaturated: list
+    time_series_unsaturated : list
         TimeSeries objects that did not exceed the saturation threhold.
     """
     
@@ -256,9 +39,9 @@ def reject_saturated(time_series_list, verbose=False):
         name = time_series.channel.name
         if ('ACC' in name or 'ADC' in name) and (time_series.value.max() >= 32000):
             bad_channels.append(name)
+            logging.info('Channel rejected due to saturation: ' + name)
         else:
             time_series_unsaturated.append(time_series)
-    
     # Report results
     num_saturated = len(bad_channels)
     num_channels = len(time_series_list)
@@ -268,196 +51,144 @@ def reject_saturated(time_series_list, verbose=False):
             print('The following ACC channels were rejected: ')
             for bad_chan in bad_channels:
                 print(bad_chan)
-            
     return time_series_unsaturated
-
-def notch_60Hz(time_series_list):
-    """
-    Notch-filters 60-Hz line and resonances in MIC, MAG, and DARM signals.
-    
-    Parameters
-    ----------
-    time_series_list: list
-        TimeSeries object(s).
-
-    Returns
-    -------
-    time_series_list: list
-        TimeSeries object(s) with 60-Hz lines notched.
-    """
-    
-    bw_dict = {'MIC': [.2, .18], 'MAG': [.2, .18], 'DELTAL': [.2,.18], 'CALIB_STRAIN': [.2,.18]} # pass and stop bands
-    g_dict = {'MIC': 20, 'MAG': 20, 'DELTAL': 6, 'CALIB_STRAIN': 6} # stop gains
-    
-    for i, time_series in enumerate(time_series_list):
-        nyq = time_series.sample_rate.value / 2 # Nyquist frequency
-        
-        # Choose pass- and stop-band frequencies based on channel type
-        try:
-            chan_type = next(key for key in bw_dict.keys() if key in time_series.channel.name)
-        except:
-            continue
-        df1, df2 = bw_dict[chan_type]
-        
-        # Only notch 60Hz for DARM; notch 60 Hz and resonances for sensors
-        if chan_type in ['DELTAL', 'CALIB_STRAIN']:
-            frange = [60]
-        else:
-            frange = range(60, min(1000,int(nyq)), 60)
-        for f in frange:
-            wp = [(f-df1)/nyq, (f+df1)/nyq]
-            ws = [(f-df2)/nyq, (f+df2)/nyq]
-            notch_filt = signal.iirdesign(wp=wp, ws=ws, gpass=1, gstop=g_dict[chan_type], ftype='ellip', output='zpk')
-            time_series_list[i] = time_series.filter(notch_filt, filtfilt=True)
-        
-    return time_series_list
 
 def convert_to_ASD(time_series_list, FFT_time, overlap_time):
     """
-    Converts a list of TimeSeries data into a list of amplitude density spectra.
+    Convert a list of TimeSeries data into a list of amplitude density spectra in the form of ChannelASD objects.
     
     Parameters
     ----------
-    ts_list: list
-        TimeSeries objects.
-    FFT_time: float, int
+    ts_list : list
+        Gwpy TimeSeries objects.
+    FFT_time : float, int
         Length of FFT averaging windows (seconds).
-    overlap_time:
+    overlap_time : float, int
         Amount of overlap between FFT averaging windows (seconds).
         
     Returns
     -------
-    asd_list: list
-        Amplitude spectral densities as gwpy FrequencySeries objects.
+    asd_list : list
+        Amplitude spectral densities as ChannelASD objects.
     """
     
-    asd_list = [ts.asd(FFT_time, overlap_time) for ts in time_series_list]
+    asd_list = []
+    for ts in time_series_list:
+        asd1 = ts.asd(FFT_time, overlap_time)
+        name = asd1.channel.name.replace('_DQ', '')
+        asd2 = ChannelASD(name, asd1.frequencies.value, asd1.value, t0=asd1.epoch.value)
+        logging.info('Channel converted to ASD: ' + name + ' with FFT time ' + str(FFT_time) + ' and overlap time ' + str(overlap_time))
+        asd_list.append(asd2)
     return asd_list
 
-def quad_sum_ASD(asd_list, replace_original=False):
+def get_calibration_factors(channel_names, calibration_file):
     """
-    Finds quadrature sum of multi-axial sensors (i.e. magnetometers).
-        
-    Parameters
-    ----------
-    asd_list: list
-        FrequencySeries objects with '_X', '_Y', or '_Z' in their names
-    replace_original: bool
-        If True, remove original single-component channels from ASD list.
-        
-    Returns
-    -------
-    asd_list_qsum: list
-        Quadrature-summed FrequencySeries object(s).
-    """
-    
-    qsum_names = ['MAG_LVEA_INPUTOPTICS', 'MAG_LVEA_OUTPUTOPTICS', 'MAG_LVEA_VERTEX', \
-                  'MAG_EBAY_LSCRACK', 'MAG_EBAY_SUSRACK', 'MAG_EBAY_SEIRACK', \
-                  'MAG_VEA_FLOOR']
-    
-    asd_list_qsum = []
-    for qs_n in qsum_names:
-        asd_axes = [asd.copy() for asd in asd_list if (qs_n in asd.channel.name and 'QUAD' not in asd.channel.name)]
-        if len(asd_axes) == 3:
-            qsum = np.sqrt( sum([asd**2 for asd in asd_axes]) )
-            qsum.name = qsum.name[:-5] + '_XYZ'
-            qsum.channel.name = qsum.channel.name[:-5] + '_XYZ'
-            asd_list_qsum.append(qsum)
-            
-    asd_list_out = []
-    names = [asd.name for asd in asd_list_qsum]
-    names_sorted = sorted(names)
-    while len(names_sorted) > 0:
-        n = names_sorted.pop(0)
-        asd_list_out.append(asd_list_qsum[names.index(n)])
-    
-    return asd_list_out
-
-def get_calibration_factor(channel_names, ifo, calibration_file):
-    """
-    Determines calibration factor associated with a specific channel.
-    NOTE: this function assumes that the general calibration for unit conversion is done elsewhere in the code.
+    Read a calibration file to determine the calibration factor of each channel.
     
     Parameters
     ----------
-    channel_names: list of strings
+    channel_names : list of strings
         Names of channels to be calibrated.
-    ifo: str
-        Interferometer name, 'H1' or 'L1'.
-    calibration_file: str
+    calibration_file : str
         Name of calibration file for PEM sensors.
         
     Returns
     -------
-    chan_factor: float
-        Calibration factor.
+    calibration_factors : dict
+        Channel names and calibration factors.
+    uncalibrated_channesls : list
+        Channels with no calibration factors found.
     """
     
+    # Clean up channel names
+    channel_names = [c.replace('_DQ', '').replace(' ','') for c in channel_names]
+    # Reference data for substituting and removing parts of strings
+    remove_strings = ['<sup>', '</sup>', '"', '&', '^', ';']
+    replace_strings = {
+        ' mm': ' x 10-3 m',
+        ' mum': ' x 10-6 m',
+        ' um': ' x 10-6 m',
+        ' mu': ' x 10-6 m',
+        ' nm': ' x 10-9 m',
+        ' muT': ' x 10-6 T',
+        ' uT': ' x 10-6 T',
+        ' nT': ' x 10-9 T',
+        ' pT': ' x 10-12 T',
+        ' mPa': ' x 10-3 Pa',
+        ' muPa': ' x 10-6 Pa',
+        ' uPa': ' x 10-6 Pa',
+    }
+    units = ['m', 'm/s', 'm/s2', 'Pa', 'T']
     # Load calibration file
     try:
-        calib_file = open(calibration_file,'r')
-    except:
-        print('\nError: Sensor calibration file ' + calibration_file + ' not found.\n')
-        sys.exit()
-    lines = calib_file.readlines()[1:] # Skip header
-    calib_file.close()
-    
-    calib_factor_dict = {}
+        with open(calibration_file,'r') as calib_file:
+            lines = calib_file.readlines()
+    except IOError:
+        print('')
+        logging.warning('Sensor calibration file ' + calibration_file + ' not found.')
+        print('')
+        return {}, []
+    calibration_factors = {}
+    calibration_channels = []
     for line in lines:
         info = line.split(',')
-        if ifo in info[0]:
-            chan = info[0]
-            calib_raw = info[2]
-            if calib_raw != "" and calib_raw != " ":
-                num = 0
-                factor = ''
-                if not calib_raw[0].isdigit():
-                    calib_raw = calib_raw[1:]
-                while calib_raw[num].isdigit() or (calib_raw[num] == '.'):
-                    factor = factor + calib_raw[num]
-                    num += 1
-                if len(factor) > 0:
-                    calib_factor_dict[chan] = factor
-                else:
-                    calib_factor_dict[chan] = 1
-            else:
-                calib_factor_dict[chan] = 1
-    
-    
-    # Make sure channel_names is treated as a list for the looping
-    if type(channel_names) == str:
-        channel_names = [channel_names]
-    
-    # Match calibration factors with channels
-    calibration_factors = {}
-    for name in channel_names:
-        if name.replace('_DQ', '') in calib_factor_dict.keys():
-            calibration_factors[name] = float(calib_factor_dict[name.replace('_DQ', '')])
-        else:
-            calibration_factors[name] = 1.
-    
-    return calibration_factors
+        cal_channel = info[0].replace('_DQ', '').replace(' ','')   # Clean up calibration channel name
+        for channel in channel_names:
+            # Only grab data for channels in channel_names
+            if channel == cal_channel:
+                logging.info('Parsing calibration data for channel ' + channel + '.')
+                calib_raw_string = info[2]
+                for x in remove_strings:
+                    calib_raw_string = calib_raw_string.replace(x, '')
+                for key, value in replace_strings.items():
+                    calib_raw_string = calib_raw_string.replace(key, value)
+                if len(calib_raw_string.replace(' ','')) > 0:
+                    if any(unit in calib_raw_string for unit in units):
+                        for unit in units:
+                            if unit in calib_raw_string:
+                                calib_raw_string = calib_raw_string[:calib_raw_string.find(unit)].replace(' ', '')
+                                break
+                    else:
+                        i = 0
+                        while calib_raw_string[i].isdigit() or (calib_raw_string[i] in ['.', ' ', 'x', '-']):
+                            i += 1
+                        calib_raw_string = calib_raw_string[:i].replace(' ','')
+                    calib_split = calib_raw_string.split('x')
+                    calib_factor = float(calib_split[0])
+                    if len(calib_split) > 1:
+                        if calib_split[1][:2] == '10':
+                            exponent = calib_split[1][2:]
+                            calib_factor *= 10 ** int(exponent)
+                    calibration_factors[channel] = calib_factor
+                    logging.info('Calibration factor acquired for channel ' + channel + '.')
+                break
+    uncalibrated_channels = []
+    for c in channel_names:
+        if c not in calibration_factors.keys():
+            uncalibrated_channels.append(c)
+            logging.info('No calibration factor acquired for channel ' + channel + '.')
+    return calibration_factors, uncalibrated_channels
 
-def calibrate_sensor(asd_list, ifo, calibration_file, verbose=False):
+def calibrate_sensors(asd_list, calibration_file, verbose=False):
     """
-    Calibrates the ASDs according to channel sensor type.
+    Calibrate ASDs according to channel sensor type.
     
     Parameters
     ----------
-    asd_list: list
-        Uncalibrated PEM sensor ASD(s) as FrequencySeries object(s).
-    ifo: str
-        Interferometer name, 'H1' or 'L1'.
-    verbose: {False, True}, optional
+    asd_list : list
+        Uncalibrated PEM sensor ASD(s) as FrequencySeries object(s) or ChannelASD objects.
+    calibration_file : str
+        Name of calibration file for PEM sensors.
+    verbose : {False, True}, optional
         If True, print progress.
         
     Returns
     -------
-    calibrated_asd_list: list
+    calibrated_asd_list : list
         Calibrated ASD(s) as FrequencySeries object(s).
-    calibration_factors: dict
+    calibration_factors : dict
         Channel names and corresponding calibration factors.
-    uncalibrated_channels: list
+    uncalibrated_channels : list
         Channels with no calibration factors found.
     """
     
@@ -468,86 +199,95 @@ def calibrate_sensor(asd_list, ifo, calibration_file, verbose=False):
     else:
         not_list = True
         asd_list= [asd_list]
-    
-    # Get dictionary of calibration factors from calibration file
     channel_names = [asd.channel.name for asd in asd_list]
-    calibration_factors = get_calibration_factor(channel_names, ifo, calibration_file)
-        
+    calibration_factors, uncalibrated_channels = get_calibration_factors(channel_names, calibration_file)
     calibrated_asd_list = []
-    uncalibrated_channels = []
-    for raw_asd in asd_list:
-        ts11 = time.time()
-        channel = raw_asd.channel
-        sig = channel.signal
-        freqs = np.asarray(raw_asd.frequencies.value)
-        amps = raw_asd.value # Hz^(-1/2)
-        
-        factor = calibration_factors[channel.name]
-        
-        # Apply calibration according to channel type
-            
-        if 'MIC' in sig:
-            # Records air pressure (Pa)
-            factor *= 1e-5    # calib factor is given in atm
-            cal_asd = raw_asd * factor
-            calibrated_asd_list.append(cal_asd)
-            calibration_factors[channel.name] = factor
-            
-        elif 'MAG' in sig:
-            # Records Tesla (T)
-            loc = np.argmax(freqs >= 1) # Index of first freq value >= 1. Gives 0 if all freqs < 1.
-            factor *= 1e-12    # calib factor is given in picoTesla
-            factor_arr = np.zeros_like(freqs)
-            for j in range(loc, len(freqs)):
-                factor_arr[j] = factor
-            cal_asd = raw_asd * factor_arr
-            calibrated_asd_list.append(cal_asd)
-            calibration_factors[channel.name] = factor
-            
-        elif 'RADIO' in sig:
-            # Records voltage (V)
-            cal_asd = raw_asd * factor
-            calibrated_asd_list.append(cal_asd)
-            calibration_factors[channel.name] = factor
-
-        elif ('SEIS' in sig) or (channel.system == 'ISI') or (channel.system == 'HPI'):
-            # Records velocity (m/s) --> Convert to displacement by dividing by omega = (2*pi*freq)
-            freqs1 = list(freqs)
-            freqs_new = [10**-10]
-            freqs_new += freqs1[1:]
-            freqs_new = np.asarray(freqs_new)
-            denom = freqs_new*(2*np.pi)
-            cal_asd = raw_asd * factor / denom
-            calibrated_asd_list.append(cal_asd)
-            calibration_factors[channel.name] = factor
-
-        elif ('ACC' in sig) or ('ADC' in sig):
-            # Records acceleration (m/s^2) --> Convert to displacement by dividing by omega^2 = (2*pi*freq)^2
-            freqs1 = list(freqs)
-            freqs_new = [10**-10]
-            freqs_new += freqs1[1:]
-            freqs_new = np.asarray(freqs_new)
-            factor *= 1e-6    # calib factor is given in micrometers
-            denom = (freqs_new*(2*np.pi))**2    # convert acceleration to displacement (m/s^2 --> m)
-            cal_asd = raw_asd * factor / denom
-            calibrated_asd_list.append(cal_asd)
-            calibration_factors[channel.name] = factor
-        
-        else:
-            uncalibrated_channels.append(channel.name)
-            calibrated_asd_list.append(raw_asd)
-        
-        
-        ts12 = time.time() - ts11
-        if verbose:
-            print('{} calibrated. (Runtime: {:.2f} s)'.format(channel.name, ts12))
-    
+    for i, asd in enumerate(asd_list):
+        name = channel_names[i]
+        if isinstance(asd, FrequencySeries):
+            asd = ChannelASD(name, asd.frequencies.value, asd.value, t0=asd.epoch.value)
+            logging.info('Channel converted from gwpy FrequencySeries to ChannelASD object: ' + name + '.')
+        if name in calibration_factors.keys():
+            asd.calibrate(calibration_factors[name])
+            logging.info('Channel calibrated: ' + name + '.')
+        calibrated_asd_list.append(asd)
     ts2 = time.time() - ts1
-    if not_list:
-        if verbose:
-            print('Channel spectrum calibrated. (Runtime: {:.3f} s)'.format(ts2))
-        return calibrated_asd_list[0], calibration_factors
+    if verbose:
+        print('Channel spectra calibrated. (Runtime: {:.3f} s)'.format(ts2))
+    return calibrated_asd_list, calibration_factors, uncalibrated_channels
+
+def quad_sum_ASD(asd_list, replace_original=False):
+    """
+    Create a quadrature sum ASD of multi-axial sensors (i.e. magnetometers).
+        
+    Parameters
+    ----------
+    asd_list : list
+        FrequencySeries objects with '_X', '_Y', or '_Z' in their names
+    replace_original : bool
+        If True, remove original single-component channels from ASD list.
+        
+    Returns
+    -------
+    asd_list_qsum : list
+        Quadrature-summed FrequencySeries object(s).
+    """
+    
+    channel_names = [asd.name for asd in asd_list]
+    qsum_dict = quad_sum_names(channel_names)
+    asd_list_qsum = []
+    for name, axes in qsum_dict.items():
+        asd_axes = [asd for asd in asd_list if asd.name in axes]
+        logging.info('Generating quad sum ASD for ' + name + '.')
+        qsum_values = np.sqrt( sum([asd.values**2 for asd in asd_axes]) )
+        qsum = ChannelASD(name, asd_axes[0].freqs, qsum_values, t0=asd_axes[0].t0,\
+                          unit=asd_axes[0].unit, calibration=asd_axes[0].calibration)
+        asd_list_qsum.append(qsum)
+    return asd_list_qsum
+
+def smooth_ASD(x, y, width, smoothing_log=False):
+    """
+    Sliding-average smoothing function for cleaning up noisiness in a spectrum.
+    Example of logarithmic smoothing:
+    If width = 5 and smoothing_log = True, smoothing windows are defined such that the window is
+    5 frequency bins wide (i.e. 5 Hz wide if bandwidth = 1 Hz) at 100 Hz, and 50 bins at 1000 Hz.
+    ...
+    A bit about smoothing: the underlying motivation is to minimize random noise which artificially yields coupling
+    factors in the calculations later, but smoothing is also crucial in eliminating point-source features
+    (e.g. drops in microphone spectrum due to the point-like microphone sitting at an anti-node of the injected
+    sound waves). It is not so justifiable to smooth the sensor background, or DARM, since background noise and
+    overall coupling to DARM are diffuse, so smoothing of these should be very limited.
+    The extra objects ASD_new_bg_smoother is the background ASD smoothed as much as the injection.
+    ASD_bg and ASD_bg_smoother are both used in the CouplingFunction routine; the latter for determining
+    coupling regions in frequency domain, the former for actual coupling computation.
+    
+    Parameters
+    ----------
+    x : array 
+        Frequencies.
+    y : array
+        ASD values to be smoothed.
+    width : int
+        Size of window for sliding average (measured in frequency bins).
+    smoothing_log : {False, True}, optional
+        If True, smoothing window width grows proportional to frequency (see example above).
+    
+    Returns
+    -------
+    y_smooth : array
+        Smoothed ASD values.
+    """
+    y_smooth = np.zeros_like(y)
+    if smoothing_log:
+        # Num of bins at frequency f:  ~ width * f / 100
+        widths = np.round(x * width / 100).astype(int)
+        for i,w in enumerate(widths):
+            lower_ = max([0, i-int(w/2)])
+            upper_ = min([len(y), i+w-int(w/2)+1])
+            y_smooth[i] = np.mean(y[lower_:upper_])
     else:
-        if verbose:
-            print('Channel spectra calibrated. (Runtime: {:.3f} s)'.format(ts2))
-        return calibrated_asd_list, calibration_factors, uncalibrated_channels
+        for i in range(len(y)):
+            lower_ = max([0, i-int(width/2)])
+            upper_ = min([len(y), i+width-int(width/2)])
+            y_smooth[i] = np.mean(y[lower_:upper_])
+    return y_smooth

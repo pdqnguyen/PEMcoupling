@@ -1,0 +1,10 @@
+12:52:51 PEMcoupling.py INFO: Importing packages.
+12:52:54 getparams.py INFO: Parsing arguments.
+12:52:54 getparams.py INFO: Opening config file.
+12:52:54 getparams.py INFO: Checking if missing/empty config file.
+12:52:54 getparams.py INFO: Parsing numerical and boolean config options.
+12:52:54 PEMcoupling.py INFO: Separating config dictionary by section.
+12:52:54 PEMcoupling.py INFO: Handling conflicts between config options and command line options.
+12:52:54 PEMcoupling.py INFO: Reading in channel list given in config file.
+12:52:54 getparams.py INFO: Opening channel list file.
+12:52:54 PEMcoupling.py INFO: Creating injection table.

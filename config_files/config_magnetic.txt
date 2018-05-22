@@ -38,7 +38,7 @@ quad_sum: on
 [Smoothing]
 # Spectrum smoothing must be provided as float (width (Hz) of smoothing window)
 # If log-smoothing, these are the window widths at freq=100Hz
-# Example: [sensor injection smoothing], [sensor background smoothing], [DARM (inj and bkgd) smoothing]
+# Example: [sensor injection smoothing], [baseline smoothing (sensor bkgd and DARM inj and bkgd)]
 MAG_smoothing: 0.2,0.2
 smoothing_log: on
 
@@ -90,7 +90,7 @@ percent_data_threshold: 10
 [Ratio Plot]
 ratio_plot: off
 ratio_min_frequency: 5
-ratio_max_frequency: 1000
+ratio_max_frequency: 500
 ratio_z_min:
 ratio_z_max:
 ratio_avg: false

@@ -11,10 +11,6 @@ from gwpy.time import *
 import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
-import matplotlib.patches as mpatches
-import matplotlib.cm as cm
-import matplotlib.lines as mlines
-import matplotlib.ticker as ticker
 plt.switch_backend('Agg')
 from textwrap import wrap
 import os
@@ -22,8 +18,7 @@ import time
 import datetime
 import sys
 import warnings
-from matplotlib import rc
-rc('text',usetex=True)
+import logging
 
 def export_coup_data(
     data_list,
@@ -37,127 +32,128 @@ def export_coup_data(
 
     Parameters
     ----------
-    data_list: list
+    data_list : list
         CouplingData objects to be plotted.
-    spec_plot: bool
+    spec_plot : bool
         If True, generate spectrum plot.
-    show_darm_threshold: bool
+    show_darm_threshold : bool
         If True, show DARM spectrum in spec plot.
-    upper_lim: bool
+    upper_lim : bool
         If True, show upper limit coupling factors.
-    est_amb: bool,
+    est_amb : bool,
         If True, show estimated ambient spectrum in spec plot.
-    freq_min: float
+    freq_min : float
         Minimum frequency for plots.
-    freq_max: float
+    freq_max : float
         Maximum frequency for plots.
-    factor_min: float
+    factor_min : float
         Y-axis minimum for coupling function plot.
-    factor_max: float
+    factor_max : float
         Y-axis maximum for coupling function plot.
-    spec_min: float
+    spec_min : float
         Y-axis minimum for sensor spectrum plot.
-    spec_max: float
+    spec_max : float
         Y-axis maximum for sensor spectrum plot.
-    fig_h_coup: float, int
+    fig_h_coup : float, int
         Coupling function plot figure height.
-    fig_w_coup: float, int
+    fig_w_coup : float, int
         Coupling function plot figure width.
-    fig_h_spec: float, int
+    fig_h_spec : float, int
         Spectrum plot figure height.
-    fig_w_spec: float, int
+    fig_w_spec : float, int
         Spectrum plot figure width.
-    options_directory: str
+    options_directory : str
         Output directory.
-    ts: time.time object
+    ts : time.time object
         Time stamp of main calculation routine.
-    coherence_results: dict
+    coherence_results : dict
         Channel names and coherence data (gwpy FrequencySeries objects)
-    verbose: bool
+    verbose : bool
         If True, print progress.
     """
-    t1 = time.time()    
-    for channel in data_list:        
+    t1 = time.time()
+    for cf in data_list:        
         if verbose:
-            print('Exporting data for {}'.format(channel.name))    
+            print('Exporting data for {}'.format(cf.name))    
         # LOOK FOR COHERENCE DATA FOR THIS CHANNEL
-        if channel.name in coherence_results.keys():
-            coherence_data = coherence_results[channel.name]
+        if cf.name in coherence_results.keys():
+            coherence_data = coherence_results[cf.name]
         else:
-            coherence_data = None        
+            coherence_data = None
         # FREQUENCY DOMAIN - SAME FOR ALL PLOTS
         if freq_min_dict is None:
-            freq_min = channel.freqs[0]
+            freq_min = cf.freqs[0]
         else:
             freq_min = freq_min_dict
         if freq_max_dict is None:
-            freq_max = channel.freqs[-1]
+            freq_max = cf.freqs[-1]
         else:
-            freq_max = freq_max_dict        
-        # COUPLING FUNCTION PLOT        
+            freq_max = freq_max_dict
+        # COUPLING FUNCTION PLOT
         # Coupling function in physical sensor units
-        channel.plot(
+        cf.plot(
             options_directory,
             in_counts=False,
             freq_min=freq_min, freq_max=freq_max,
             factor_min=factor_min_dict, factor_max=factor_max_dict,
             fig_w=fig_w_coup, fig_h=fig_h_coup,
             ts=ts, upper_lim=upper_lim
-        )        
+        )
         # Coupling function in raw sensor counts
-        channel.plot(
+        cf.plot(
             options_directory,
             in_counts=True,
             ts=ts, upper_lim=upper_lim,
             freq_min=freq_min, freq_max=freq_max,
             factor_min=factor_min_dict, factor_max=factor_max_dict,
             fig_w=fig_w_coup, fig_h=fig_h_coup
-        )        
+        )
         # ASD PLOT WITH ESTIMATED AMBIENTS
-        if spec_plot:            
-            channel.specplot(
+        if spec_plot:
+            cf.specplot(
                 path=options_directory, ts=ts, est_amb=est_amb, show_darm_threshold=show_darm_threshold, upper_lim=upper_lim,
                 freq_min=freq_min, freq_max=freq_max,
                 spec_min=spec_min_dict, spec_max=spec_max_dict,
                 fig_w=fig_w_spec, fig_h=fig_h_spec,
-            )            
+            )
         # CSV DATA FILE
-        if any(channel.flags != 'No data'):
+        if any(cf.flags != 'No data'):
             if options_directory is None:
                 directory = datetime.datetime.fromtimestamp(ts).strftime('DATA_%Y-%m-%d_%H:%M:%S')
             else:
                 directory = options_directory
             if not os.path.exists(str(directory)):
                 os.makedirs(str(directory))
-            strip_name = channel.name[7:].replace('_DQ','')
+            strip_name = cf.name[7:].replace('_DQ','')
             filename = str(directory)+'/'+strip_name+'_coupling_data.txt'
-            channel.to_csv(filename, coherence_data=coherence_data)                
+            cf.to_csv(filename, coherence_data=coherence_data)
     t2 = time.time() - t1
     if verbose:
         print('\nData export procedures finished. (Runtime: {:3f} s)'.format(t2))
     return
 
-def export_composite_coupling_data(channel, freqs_raw, darm_raw, gwinc, inj_names, path, refDict, verbose):
+def export_composite_coupling_data(comp_cf, freqs_raw, darm_raw, gwinc, inj_names, path, upper_lim=True, est_amb_plot=True,\
+                                   freq_min=None, freq_max=None, factor_min=None, factor_max=None, fig_w=9, fig_h=6, verbose=False):
     """
     Produces a coupling function plot, estimated ambient plot, and csv from lowest coupling function data.
     
     Parameters
     ----------
-    channel: CompositeCouplingData object
+    comp_cf : CompositeCouplingData object
         Composite coupling function, frequencies, and other data.
-    freqs_raw: array
+    freqs_raw : array
         Raw frequencies for plotting DARM spectrum.
-    darm_raw: array
+    darm_raw : array
         Raw DARM ASD values for plotting DARM spectrum.
-    gwinc: list
+    gwinc : list
         Frequency array and spectrum values for plotting GWINC spectrum.
-    inj_names: list
+    inj_names : list
         Names of injections.
-    path: str
+    path : str
         Output directory.
-    refDict: dict
+    refDict : dict
         Dictionary of plot options.
-    verbose: bool
+    verbose : bool
         If True, print progress.
     """
     
@@ -169,56 +165,50 @@ def export_composite_coupling_data(channel, freqs_raw, darm_raw, gwinc, inj_name
     
     #======================================
     #### ORGANIZE DATA FOR PLOTTING ####
-    #======================================    
+    #======================================
     
     #### DETERMINE AXIS LIMITS ####
     if verbose:
         print('\nDetermining axis limits for plots...')
-    mask_nonzero = (channel.factors > 0)    
+    mask_nonzero = (comp_cf.factors > 0)    
     #### X-AXIS (FREQUENCY) LIMITS ####
-    x_axis = channel.freqs[mask_nonzero]    
+    x_axis = comp_cf.freqs[mask_nonzero]    
     if (len(x_axis) == 0):
-        print('No lowest coupling factors for ' + channel.name + '.')
+        print('No lowest coupling factors for ' + comp_cf.name + '.')
         print('Data export aborted for this channel.')
         return
-        
-    if refDict['comp_freq_min'] is None:
+    if freq_min is None:
         freq_min = max( [min(x_axis) / 1.5, 6] )
-    else:
-        freq_min = refDict['comp_freq_min']
-            
-    if refDict['comp_freq_max'] is None:
-        freq_max = min( [max(x_axis) * 1.5, max(channel.freqs)] )
-    else:
-        freq_max = refDict['comp_freq_max']
+    if freq_max is None:
+        freq_max = min( [max(x_axis) * 1.5, max(comp_cf.freqs)] )
+    
     #### Y-AXIS (COUPLING FACTOR) LIMITS ####
-    y_axis = channel.factors[mask_nonzero & (channel.freqs>=freq_min) & (channel.freqs < freq_max)]
-    y_axis_counts = channel.factors_in_counts[mask_nonzero & (channel.freqs>=freq_min) & (channel.freqs < freq_max)]
+    y_axis = comp_cf.factors[mask_nonzero & (comp_cf.freqs>=freq_min) & (comp_cf.freqs < freq_max)]
+    y_axis_counts = comp_cf.factors_in_counts[mask_nonzero & (comp_cf.freqs>=freq_min) & (comp_cf.freqs < freq_max)]
     if (len(y_axis) == 0):
-        print('No lowest coupling factors for ' + channel.name)
+        print('No lowest coupling factors for ' + comp_cf.name)
         print('between ' + str(freq_min) + ' and ' + str(freq_max) + ' Hz.')
         print('Data export aborted for this channel.')
         return
-    if refDict['comp_y_min'] is None:
-        fact_min = np.min(y_axis) / 3
-        fact_counts_min = np.min(y_axis_counts) / 3
+    if factor_min is None:
+        factor_min = np.min(y_axis) / 3
+        factor_counts_min = np.min(y_axis_counts) / 3
     else:
-        fact_min = refDict['comp_y_min']
-        fact_counts_min = refDict['comp_y_min']
+        factor_counts_min = factor_min
             
-    if refDict['comp_y_max'] is None:
-        fact_max = np.max(y_axis) * 1.5
-        fact_counts_max = np.max(y_axis_counts) * 1.5
+    if factor_max is None:
+        factor_max = np.max(y_axis) * 1.5
+        factor_counts_max = np.max(y_axis_counts) * 1.5
     else:
-        fact_max = refDict['comp_y_max']
-        fact_counts_max = refDict['comp_y_max']
+        factor_counts_max = factor_max
+        
     #### SORTED NAMES OF INJECTIONS ####
-    sorted_names = sorted(set(channel.injections))
+    sorted_names = sorted(set(comp_cf.injections))
     if None in sorted_names:
-        sorted_names.remove(None)    
-    #### FILEPATH ####
-    filename = path + '/' + channel.name.replace('_DQ', '') + '_composite_'
+        sorted_names.remove(None)
     
+    #### FILEPATH ####
+    filename = path + '/' + comp_cf.name.replace('_DQ', '') + '_composite_'
     csv_filename = filename + 'coupling_data.txt'
     multi_filename = filename + 'coupling_multi_plot.png'
     single_filename = filename + 'coupling_plot.png'
@@ -230,23 +220,20 @@ def export_composite_coupling_data(channel, freqs_raw, darm_raw, gwinc, inj_name
     #### LOWEST COUPLING FUNCTION PLOT ####
     #===========================================
     
-    channel.plot(
-        multi_filename,
-        freq_min, freq_max, fact_min, fact_max,
-        in_counts=False, split_injections=True, upper_lim=refDict['upper_lim'],
-        fig_w=refDict['comp_fig_width'], fig_h=refDict['comp_fig_height'],
+    comp_cf.plot(
+        multi_filename, in_counts=False, split_injections=True, upper_lim=upper_lim,
+        freq_min=freq_min, freq_max=freq_max, factor_min=factor_min, factor_max=factor_max,
+        fig_w=fig_w, fig_h=fig_h
     )    
-    channel.plot(
-        single_filename,
-        freq_min, freq_max, fact_min, fact_max,
-        in_counts=False, split_injections=False, upper_lim=refDict['upper_lim'],
-        fig_w=refDict['comp_fig_width'], fig_h=refDict['comp_fig_height'],
+    comp_cf.plot(
+        single_filename, in_counts=False, split_injections=False, upper_lim=upper_lim,
+        freq_min=freq_min, freq_max=freq_max, factor_min=factor_min, factor_max=factor_max,
+        fig_w=fig_w, fig_h=fig_h
     )    
-    channel.plot(
-        single_counts_filename,
-        freq_min, freq_max, fact_counts_min, fact_counts_max,
-        in_counts=True, split_injections=False, upper_lim=refDict['upper_lim'],
-        fig_w=refDict['comp_fig_width'], fig_h=refDict['comp_fig_height'],
+    comp_cf.plot(
+        single_counts_filename, in_counts=True, split_injections=False, upper_lim=upper_lim,
+        freq_min=freq_min, freq_max=freq_max, factor_min=factor_counts_min, factor_max=factor_counts_max,
+        fig_w=fig_w, fig_h=fig_h
     )    
     if verbose:
         print('Composite coupling function plots complete.')
@@ -255,26 +242,24 @@ def export_composite_coupling_data(channel, freqs_raw, darm_raw, gwinc, inj_name
     #### LOWEST ESTIMATED AMBIENT PLOT ####
     #===========================================
 
-    if refDict['comp_est_amb_plot']:        
-        mask_freq = (channel.freqs >= freq_min) & (channel.freqs < freq_max) # data lying within frequency plot range
-        ambs_pos = channel.ambients[(channel.ambients > 0) & mask_freq]
-        darm_pos = channel.darm_bg[(channel.darm_bg > 0) & mask_freq]
+    if est_amb_plot:
+        mask_freq = (comp_cf.freqs >= freq_min) & (comp_cf.freqs < freq_max) # data lying within frequency plot range
+        ambs_pos = comp_cf.ambients[(comp_cf.ambients > 0) & mask_freq]
+        darm_pos = comp_cf.darm_bg[(comp_cf.darm_bg > 0) & mask_freq]
         values = np.concatenate((ambs_pos, darm_pos)) # all positive data within freq range
         amb_min = values.min() / 4
-        amb_max = values.max() * 2        
-        if np.any(channel.flags != 'No data'):
-            channel.ambientplot(
+        amb_max = values.max() * 2
+        if np.any(comp_cf.flags != 'No data'):
+            comp_cf.ambientplot(
                 est_amb_multi_filename,
-                freq_min, freq_max, amb_min, amb_max,
-                gw_signal='darm', split_injections=True, gwinc=gwinc,
-                fig_w=refDict['comp_fig_width'], fig_h=refDict['comp_fig_height']
-            )            
-            channel.ambientplot(
+                gw_signal='darm', split_injections=True, gwinc=gwinc, darm_data=[freqs_raw, darm_raw],
+                freq_min=freq_min, freq_max=freq_max, amb_min=amb_min, amb_max=amb_max, fig_w=fig_w, fig_h=fig_h
+            )
+            comp_cf.ambientplot(
                 est_amb_single_filename,
-                freq_min, freq_max, amb_min/4000., amb_max/4000.,
-                gw_signal='strain', split_injections=False, gwinc=gwinc,
-                fig_w=refDict['comp_fig_width'], fig_h=refDict['comp_fig_height']
-            )    
+                gw_signal='strain', split_injections=False, gwinc=gwinc, darm_data=[freqs_raw, darm_raw],
+                freq_min=freq_min, freq_max=freq_max, amb_min=amb_min/4000., amb_max=amb_max/4000., fig_w=fig_w, fig_h=fig_h
+            )
             if verbose:
                 print('Composite estimated ambient plots complete.')        
         else:
@@ -284,7 +269,7 @@ def export_composite_coupling_data(channel, freqs_raw, darm_raw, gwinc, inj_name
     #### CSV OUTPUT ####
     #===================================================
     
-    channel.to_csv(csv_filename)
+    comp_cf.to_csv(csv_filename)
     if verbose:
         print('CSV saved.')
     return
@@ -295,23 +280,23 @@ def ratio_table(chansI, chansQ, z_min, z_max, method='raw', minFreq=5, maxFreq=N
     
     Parameters
     ----------
-    chansI: list
+    chansI : list
         Injection sensor ASDs.
-    chansQ: list
+    chansQ : list
         Background sensor ASDs.
-    z_min: float, int
+    z_min : float, int
         Minimum ratio for colorbar.
-    z_max: float, int
+    z_max : float, int
         Maximum raito for colorbar.
-    ts: time.time object
+    ts : time.time object
         Time stamp of main calculation routine.
-    method: {'raw', 'max', 'avg}
+    method : {'raw', 'max', 'avg}
         Show raw ('raw'), average ('avg'), or maximum ('max') ratio per frequency bin.
-    minFreq: float, int, optional
+    minFreq : float, int, optional
         Minimum frequency for ratio plot.
-    maxFreq: float, int, optional
+    maxFreq : float, int, optional
         Maximum frequency for ratio plot.
-    directory: {None, str}, optional
+    directory : {None, str}, optional
         Output directory.
     """
     
@@ -359,7 +344,7 @@ def ratio_table(chansI, chansQ, z_min, z_max, method='raw', minFreq=5, maxFreq=N
                 up = min((j + 1) * HzIndex, tratio.shape[0])
                 ratio[0, j] = np.amax(tratio[li : up])
             ratio[1, :] = ratio[0, :]
-            ratio = ratio.astype(int)            
+            ratio = ratio.astype(int)
         elif (method == 'avg'):
             freqs.append(chansI[i].freqs[HzIndex: -1: HzIndex]) # Frequencies for this channel
             ratio = np.zeros([2, freqs[i].shape[0]]) # Empty ratios array            
@@ -372,7 +357,7 @@ def ratio_table(chansI, chansQ, z_min, z_max, method='raw', minFreq=5, maxFreq=N
                 if tratio[j] < z_min:
                     tratio[j] = 0
             ratio[0, :] = tratios.astype(int)
-            ratio[1, :] = ratio[0, :]            
+            ratio[1, :] = ratio[0, :]
         else:
             ratio = np.zeros([2, chansI[i].freqs.shape[0]])
             # No binning, just report raw ratios
@@ -411,7 +396,7 @@ def ratio_table(chansI, chansQ, z_min, z_max, method='raw', minFreq=5, maxFreq=N
         pos = ax.get_position()
         #ax.set_position([pos.x0 + offset, pos.y0, 0.9 * pos.width, pos.height])
         plt.figtext(
-            0.02, pos.y0 + pos.height / 2.0 - fontHt / 2.0, chansI[i].name.replace('_','\_'),
+            0.02, pos.y0 + pos.height / 2.0 - fontHt / 2.0, chansI[i].name,
             fontsize=fontsize, color='k', fontweight='bold'
         )
     #Adds black tick labels to bottom plot
@@ -437,7 +422,7 @@ def ratio_table(chansI, chansQ, z_min, z_max, method='raw', minFreq=5, maxFreq=N
     plt.suptitle("Ratio of Injected Spectra to Quiet Spectra", fontsize=fontsize*2, color='k')    
     if directory:
         plt.figtext(
-            0.5, 0.02, "Injection name: " + directory.split('/')[-1].replace('_','\_'),
+            0.5, 0.02, "Injection name: " + directory.split('/')[-1],
             fontsize=fontsize*2, color ='b',
             horizontalalignment='center', verticalalignment='bottom'
         )

@@ -4,6 +4,9 @@ Functions for determining parameters for coupling function calculations in PEMco
 
 import ConfigParser
 import sys
+import subprocess
+import re
+import logging
 
 def get_arg_params(args):
     """
@@ -11,36 +14,42 @@ def get_arg_params(args):
     
     Parameters
     ----------
-    args: tuple
+    args : tuple
         Arguments from argparser.
     
     Returns
     -------
-    ifo: str
+    ifo : str
         Interferometer name.
-    station: str
+    station : str
         Station name, CS, EX, EY, or ALL.
-    config_name: str
+    config_name : str
         Name of configuration file to use, based on injection_type.
     """
     
+    logging.info('Parsing arguments.')
     if len(args) != 3:
-        print('\nError: Exactly 3 arguments required (configuration file, interferometer, and station).\n')
+        print('')
+        logging.error('Exactly 3 arguments required (interferometer, station, injection type).')
+        print('')
         sys.exit()
     ifo_input, station_input, injection_type = args
     # Make sure interferometer input is valid
-    if ifo_input.lower() in ['h1', 'lho']:
-        ifo = 'H1'
-    elif ifo_input.lower() in ['l1', 'llo']:
-        ifo = 'L1'
-    else:
-        print('\nError: 1st argument "ifo" must be one of "H1", "LHO", "L1", or "LHO" (not case-sensitive).\n')
+    ifo_dict = {'H1': 'H1', 'LHO': 'H1', 'L1': 'L1', 'LLO': 'L1'}
+    try:
+        ifo = ifo_dict[ifo_input.upper()]
+    except KeyError:
+        print('')
+        logging.error('Argument "ifo" must be one of "H1", "LHO", "L1", or "LHO" (not case-sensitive).')
+        print('')
         sys.exit()
     # Make sure station input is valid
     if station_input.upper() in ['CS', 'EX', 'EY', 'ALL']:
         station = station_input.upper()
     else:
-        print('\nError: 2nd argument "station" must be one of "CS", "EX", "EY", or "ALL" (not case-sensitive).\n')
+        print('')
+        logging.error('Argument "station" must be one of "CS", "EX", "EY", or "ALL" (not case-sensitive).')
+        print('')
         sys.exit()
     # Make sure injection type is valid
     if injection_type.lower() in ['mag', 'magnetic']:
@@ -48,8 +57,10 @@ def get_arg_params(args):
     elif injection_type.lower() in ['vib', 'vibrational', 'acoustic']:
         config_name = 'config_files/config_vibrational.txt'
     else:
-        print('\nError: 3rd argument "injection_type" must be one of "mag", "magnetic", "vib", "vibrational", or '+\
-              '"acoustic" (not case-sensitive).\n')
+        print('')
+        logging.error('Argument "injection_type" must be one of "mag", "magnetic", "vib", "vibrational", or '+\
+                      '"acoustic" (not case-sensitive).')
+        print('')
         sys.exit()
     return ifo, station, config_name
 
@@ -59,29 +70,37 @@ def get_config_params(config_name):
     
     Parameters
     ----------
-    config_name: str
+    config_name : str
         Name of config file.
     
     Returns
     -------
-    config_dict: dict
+    config_dict : dict
         Dictionary containing a sub-dictionary of config options/values for each section in the config file.
     """
     
     # Read config file
     config = ConfigParser.ConfigParser()
+    logging.info('Opening config file.')
     try:
         config.read(config_name)
-    except:
-        print('\nError: Configuration file ' + config_name + ' not found.\n')
-        sys.exit()
+    except IOError:
+        print('')
+        logging.warning('Configuration file ' + config_name + ' not found.')
+        print('')
+        return {}
     # Check for missing/empty config file
+    logging.info('Checking if missing/empty config file.')
     if len(config.sections()) == 0:
-        print('\nError: Configuration file ' + config_name + ' not found.\n')
-        sys.exit()
+        print('')
+        logging.warning('Configuration file ' + config_name + ' not found.')
+        print('')
+        return {}
     if all( [len(config.options(x)) == 0 for x in config.sections()] ):
-        print('\nError: Configuration file ' + config_name + ' is empty.\n')
-        sys.exit()
+        print('')
+        logging.warning('Configuration file ' + config_name + ' is empty.')
+        print('')
+        return {}
     # Read config inputs into sub-dictionaries of config_dict (separated by config section)
     config_dict = {}
     for section in config.sections():
@@ -110,50 +129,57 @@ def get_config_params(config_name):
     ]
     float_required = ['darm_factor_threshold', 'sens_factor_threshold' ]
     int_required = ['fft_avg']
-    # Convert numerical config options to appropriate types (floats and ints)
+    # Convert numerical and boolean config options to appropriate types (float, int, bool)
+    logging.info('Parsing numerical and boolean config options.')
     for sub_dict in config_dict.values():
         for option, value in sub_dict.items():
             if option in float_options:
                 try:
                     sub_dict[option] = float(value)
-                except:
+                except ValueError:
                     sub_dict[option] = None
                     if option in float_required:
-                        print('\nError: float input required for option ' + option + '.\n')
-                        sys.exit()
+                        print('')
+                        logging.error('Float input required for option ' + option + '.')
+                        raise
             elif option in int_options:
                 try:
                     sub_dict[option] = int(value)
-                except:
+                except ValueError:
                     sub_dict[option] = None
                     if option in int_required:
-                        print('\nError: int input required for option ' + option + '.\n')
-                        sys.exit()
+                        print('')
+                        logging.error('Integer input required for option ' + option + '.')
+                        print('')
+                        raise
             elif option in bool_options:
                 sub_dict[option] = (value.lower() in ['on', 'true', 'yes'])
             elif '_smoothing' in option:
                 try:
                     sub_dict[option] = [float(v) for v in value.split(',')]
-                except:
-                    print('\nError: Input for ' + option + ' should be list of three floats (e.g. ACC_smothing: 5, 0.5, 0.5).\n')
-                    sys.exit()
+                except ValueError:
+                    print('')
+                    logging.error('Input for ' + option + ' should be list of three floats (e.g. ACC_smothing: 5, 0.5, 0.5).')
+                    print('')
+                    raise
             elif 'notch' in option:
                 if value is not None:
                     try:
-                        notch_file = open(value)
-                    except:
-                        print('\nError: Cannot open file ' + value + ' provided in config file.\n')
-                        sys.exit()
-                    notch_data = notch_file.read().split('\n')
-                    notch_list = []
-                    for row in notch_data:
-                        try:
-                            notch_list.append(map(float, row.split(',')))
-                        except:
-                            print('\nError: Data in DARM notch files must be floats.\n')
-                            sys.exit()
-                    sub_dict[option] = notch_list
-                    notch_file.close()
+                        with open(value) as notch_file:
+                            notch_data = notch_file.read().split('\n')
+                            notch_list = []
+                            for row in notch_data:
+                                try:
+                                    notch_list.append(list(map(float, row.split(','))))
+                                except ValueError:
+                                    print('')
+                                    logging.error('Data in DARM notch files must be floats.')
+                                    print('')
+                                    raise
+                            sub_dict[option] = notch_list
+                    except IOError:
+                        logging.error('Cannot open file ' + value + ' provided by ' + option + ' in config file.')
+                        sub_dict[option] = [[]]
                 else:
                     sub_dict[option] = []
     return config_dict
@@ -164,11 +190,11 @@ def get_channel_list(file_name, ifo, station='ALL', search=None, verbose=False):
     
     Parameters
     ----------
-    file_name: str
+    file_name : str
         Name of file containing channel list.
-    ifo: str
+    ifo : str
         Interferometer name, 'H1' or 'L1'.
-    station: {'ALL', 'CS', 'EX', 'EY'} optional
+    station : {'ALL', 'CS', 'EX', 'EY'} optional
         CS, EX, EY, or ALL (default ALL).
     
     Returns
@@ -176,29 +202,16 @@ def get_channel_list(file_name, ifo, station='ALL', search=None, verbose=False):
     channels: list of strings
         Full channel names, e.g. 'H1:PEM-CS_ACC_BEAMTUBE_MCTUBE_Y_DQ'.
     """
-    try:
-        file_chans = open(file_name.replace(' ',''), 'r')
-    except:
-        print('\nError: Channel list ' + file_name + ' not found.\n')
-        sys.exit()
-    # Read and sort channel names
-    channels = []
-    for c in file_chans.readlines():
-        if (station in ['CS', 'EX', 'EY']) and (c[:9] == ifo + ':PEM-' + station):
-            channels.append(c.replace('\n', ''))
-        elif (station == 'ALL') and (c[:2] == ifo):
-            channels.append(c.replace('\n', ''))
-    file_chans.close()
-    # Report if no channels found
-    if len(channels)==0:
-        print('\nError: No channels found from ' + file_chans + '.\n')
-        sys.exit()
+    
+    channels = get_channel_names(file_name, ifo, station)
     channels.sort()
     if (search is not None):
+        logging.info('Performing channel search.')
         channels = search_channels(channels, search, verbose=verbose)
     if len(channels) == 0:
-        print('\nError: No channels found matching search entry.\n')
-        sys.exit()
+        print('')
+        logging.warning('No channels found matching search entry.')
+        print('')
     return channels
 
 def get_channel_names(file_name, ifo, station='ALL'):
@@ -207,34 +220,43 @@ def get_channel_names(file_name, ifo, station='ALL'):
     
     Parameters
     ----------
-    file_name: str
+    file_name : str
         Name of file containing channel list.
-    ifo: str
+    ifo : str
         Interferometer name, 'H1' or 'L1'.
-    station: {'ALL', 'CS', 'EX', 'EY'} optional
+    station : {'ALL', 'CS', 'EX', 'EY'} optional
         CS, EX, EY, or ALL (default ALL).
     
     Returns
     -------
-    channels: list of strings
+    channels : list of strings
         Full channel names, e.g. 'H1:PEM-CS_ACC_BEAMTUBE_MCTUBE_Y_DQ'.
     """
     
+    logging.info('Opening channel list file.')
     try:
-        file_chans = open(file_name.replace(' ',''), 'r')
-    except:
-        print('\nError: Channel list ' + file_name + ' not found.\n')
-        sys.exit()
-        
+        with open(file_name.replace(' ',''), 'r') as file:
+            lines = file.readlines()
+    except IOError:
+        print('')
+        logging.error('Channel list ' + file_name + ' not found.')
+        print('')
+        return []
     # Read and sort channel names
     channels = []
-    for c in file_chans.readlines():
+    for c in lines:
         if (station in ['CS', 'EX', 'EY']) and (c[:9] == ifo + ':PEM-' + station):
+            channels.append(c.replace('\n', ''))
+        elif (station == 'CS') and (c[:6] == ifo + ':IMC'):
             channels.append(c.replace('\n', ''))
         elif (station == 'ALL') and (c[:2] == ifo):
             channels.append(c.replace('\n', ''))
-    file_chans.close()
-    
+    if len(channels)==0:
+        print('')
+        logging.warning('No channels found from ' + file_chans + '.')
+        print('')
+        return channels
+    channels.sort()
     return channels
 
 def search_channels(channels, search, verbose=False):
@@ -243,14 +265,14 @@ def search_channels(channels, search, verbose=False):
     
     Parameters
     ----------
-    channels: list of strings
+    channels : list of strings
         Full channel names, e.g. 'H1:PEM-CS_ACC_BEAMTUBE_MCTUBE_Y_DQ'.
-    search: str
+    search : str
         Search entry.
         
     Returns
     -------
-    channel_search_results: list of strings
+    channel_search_results : list of strings
         Channel names matching search entry.
     """
     
@@ -258,16 +280,15 @@ def search_channels(channels, search, verbose=False):
     search = search.upper()
     if (',/' in search) or ('/,' in search) or ('//' in search) or (',,' in search)\
     or search[-1] == '/' or search[-1] == ',':
-        print('\nError: Invalid search entry.')
-        print('Entry cannot have adjacent commas and slashes or commas and slashes at the end.')
-        sys.exit()
-        
+        print('')
+        logging.error('Invalid search entry. Entry cannot have adjacent commas and slashes or commas and slashes at the end.')
+        print('')
+        return channels
     search_or = search.split('/') # Read forward slashes as OR
     if verbose:
         print('\nSearching for channels containing:')
         search_print = " OR ".join(["( '"+s_o.replace(",","' AND '")+"' )" for s_o in search_or]).replace("'-","NOT '")
         print(search_print)
-    
     for c in channels:
         for s_o in search_or:
             search_and = s_o.split(',') # Read commas as AND
@@ -281,7 +302,7 @@ def search_channels(channels, search, verbose=False):
                 channel_search_results.append(c)
     return channel_search_results
 
-def get_times(ifo, station='ALL', times=None, injection_list=None, dtt=None, dtt_list=None, injection_search=None):
+def get_times(ifo, station='ALL', times=None, dtt=None, dtt_list=None, injection_list=None, injection_search=None):
     """
     Create a table of injection names/times from input times, a list of injection names/times, a DTT file, or a list of DTT files.
     We have multiple ways of getting injection/background times. In order of priority:
@@ -292,166 +313,162 @@ def get_times(ifo, station='ALL', times=None, injection_list=None, dtt=None, dtt
     
     Parameters
     ----------
-    ifo: str
+    ifo : str
         Inteferometer name, 'H1' or 'L1'.
     station = {'ALL', 'CS', 'EX', 'EY'}
         Station name. If 'ALL', get times for all stations at given ifo.
-    times: tuple, optional
+    times : tuple, optional
         Background time and injection time, in GPS. None by default.
-    injection_list: str, optional
-        Name of config file (.txt) containing injection names and times (separated by station). None by default.
-    dtt: str, optional
+    dtt : str, optional
         Name of a single DTT file to reference for background/injection times. None by default.
-    dtt_list: str, optional
+    dtt_list : str, optional
         Name of a .txt file containing DTT filenames.
+    injection_list : str, optional
+        Name of config file (.txt) containing injection names and times (separated by station). None by default.
+    injection_search : str, optional
+        Search entry to feed into search_injections.
     
     Returns
     -------
-    injection_table: list of lists
+    injection_table : list of lists
         Each sub-list contains injection name (str), background time (int), and injection time (int).
     """
 
     # (1) COMMAND LINE OPTION - SINGLE PAIR OF <BACKGROUND TIME> <INJECTION TIME>
     if times is not None:
+        logging.info('Getting times from command line input.')
         injection_table = [['', int(times[0]), int(times[1])]]
-    # (2) COMMAND LINE OR CONFIG OPTION - TXT TABLE OF INJECTION NAMES, BKGD TIMES, INJECTION TIMES
-    elif injection_list is not None:
-        injection_table = get_times_config(injection_list, ifo, station)
-    # (3) COMMAND LINE OPTION - DTT FILE (.XML)
+    # (2) COMMAND LINE OPTION - DTT FILE (.XML)
     elif (dtt is not None) or (dtt_list is not None):
+        logging.info('Getting DTT files from command line input.')
         # Get DTT filename(s)
         if dtt is not None:
-            # One or more DTT files provided directly in command line
-            dtt_names = dtt.split(',')
+            if ('.xml' in dtt):
+                # One or more DTT files provided directly in command line, split by commas
+                dtt_names = dtt.split(',')
+            elif '*' in dtt:
+                # Wildcard in command line input; use ls to find DTT files
+                try:
+                    dtt_names = subprocess.check_output(['ls ' + dtt], shell=True).splitlines()
+                except:
+                    dtt_names = []
+                    print('')
+                    logging.error('DTT file(s) ' + str(dtt) + ' not found.')
+                    print('')
+                    sys.exit()
+            else:
+                # Name of directory containing DTT files
+                try:
+                    if dtt[-1] != '/':
+                        dtt += '/'
+                    dtt_names = subprocess.check_output(['ls ' + dtt + '*.xml'], shell=True).splitlines()
+                except:
+                    dtt_names = []
+                    print('')
+                    logging.error('DTT directory' + str(dtt) + ' not found, or it does not contain .xml files.')
+                    print('')
+                    sys.exit()
         elif dtt_list is not None:
             # txt file containing a list of DTT files
             try:
-                dtt_list_file = open(dtt_list)
-                dtt_names = dtt_list_file.readlines().replace('/n', '')
-            except:
-                print('\nError: dtt list file ' + dtt_list + ' not found.')
-                sys.exit()
+                with open(dtt_list) as dtt_list_file:
+                    dtt_names = dtt_list_file.readlines()
+                    if len(dtt_names) == 0:
+                        print('')
+                        logging.error('DTT files found.')
+                        print('')
+            except IOError:
+                dtt_names = []
+                print('')
+                logging.error('DTT list file ' + dtt_list + ' not found.')
+                print('')
+                raise
         # Search for DTT file(s)
-        injection_table = get_times_DTT(dtt_names)
-        print('\nInjection data found for {} DTT files.'.format(len(injection_table)))
+        if len(dtt_names) == 0:
+            injection_table = []
+        else:
+            logging.info('List of DTT files created.')
+            injection_table = get_times_DTT(dtt_names)
+            print('\nInjection data found for {} DTT file(s).'.format(len(injection_table)))
+    # (3) COMMAND LINE OR CONFIG OPTION - TXT TABLE OF INJECTION NAMES, BKGD TIMES, INJECTION TIMES
+    elif injection_list is not None:
+        try:
+            with open(injection_list) as injection_file:
+                lines = injection_file.readlines()
+                if any(['[' in line for line in lines]):
+                    injection_table = get_times_config(injection_list, ifo, station)
+                else:
+                    injection_table = get_times_txt(injection_list)
+        except IOError:
+            print('')
+            logging.error('Injection list file ' + injection_list + ' not found.')
+            print('')
+            injection_table = []
     else:
-        print('\nError: No times or lists given to get_times.\n')
-        sys.exit()
+        print('')
+        logging.error('No times or lists given to get_times.')
+        print('')
+        injection_table = []
     # SEARCH FOR SPECIFIC INJECTIONS BY NAME
     if (injection_search is not None):
         # Get injections (rows of injection_table) that match the given injection_search option
             injection_table = search_injections(injection_table, injection_search, verbose=True)
     return injection_table
 
-def get_times_config(file_name, ifo, station='ALL'):
-    """
-    Get injection names and times from a .txt table
-        
-    Parameters
-    ----------
-    file_name: str
-        Name of times config file (.txt).
-    ifo: str
-        Inteferometer name, 'H1' or 'L1'.
-    station = {'ALL', 'CS', 'EX', 'EY'}
-        Station name. If 'ALL', get times for all stations at given ifo.
-    
-    Returns
-    -------
-    injection_table: list of lists
-        Each sub-list contains injection name (str), background time (int), and injection time (int).
-    """
-    
-    ifo_name = ('LHO' if ifo == 'H1' else 'LLO')
-    
-    config_file = ConfigParser.ConfigParser()
-    try:
-        config_file.read(file_name)
-    except:
-        print('\nError: Could not find the time list file ' + file_name + '.\n')
-        sys.exit()
-    
-    if station == 'ALL':
-        injections_raw = ''
-        for s in ['CS', 'EX', 'EY']:
-            injections_raw += config_file.get(ifo_name, s)
-    else:
-        injections_raw = config_file.get(ifo_name, station)
-    
-    injections_split = injections_raw.strip().split('\n')
-    injection_table = []
-    for row in injections_split:
-        name, bg_time, inj_time = row.split(',')
-        injection_table.append([name, int(bg_time), int(inj_time)])
-    
-    return injection_table
-
-def get_times_DTT(file_names, channels=[], return_channels=False):
+def get_times_DTT(file_names, return_channels=False):
     """
     Get injection names and times from a single .xml file (saved from DTT).
         
     Parameters
     ----------
-    file_name: str
+    file_name : str
         DTT file name (.xml).
-    channels: list of strings
+    channels : list of strings
         Channel list to add channels found in DTT file.
-    return_channels: {False, True}, optional
+    return_channels : {False, True}, optional
         If True, return new channel list.
         
     Returns
     -------
-    injection_table: list of lists
+    injection_table : list of lists
         Each sub-list contains injection name (str), background time (int), and injection time (int).
-    chans: list of strings
+    chans : list of strings
         Input channel list, with new channels appended.
     """
     
     if type(file_names) != list:
-        if '*' in file_names:
-            # Find all file names matching wildcard file name provided
-            try:
-                file_names = subprocess.check_output(['ls ' + file_names], shell=True).splitlines()
-            except:
-                print('\nError: DTT file(s) ' + file_names + ' not found.\n')
-                sys.exit()
-        else:
-            # Just one file name, but treat as a list anyway
-            file_names = [file_names]
-    
+        file_names = [file_names]
     injection_table = []
-    
+    injection_times = [] # This is to make sure injection times aren't mistaken as background times
+    channels = []
+    logging.info('Reading DTT files for times.')
     for file_name in file_names:
-        
         # Get injection name from .xml or vice versa
         injection_name = file_name.split('/')[-1]
         if file_name[-4:] != '.xml':
             file_name += '.xml'
         else:
             injection_name = injection_name.replace('.xml', '')
-            
         # Open DTT file, report a warning if not found
         try:
-            DTT_file = open(file_name)
-        except:
-            print('\nWarning: File not found: ' + file)
-            return
-        
+            with open(file_name) as DTT_file:
+                lines = DTT_file.readlines()
+        except IOError:
+            print('')
+            logging.warning('File not found: ' + str(file))
+            print('')
+            continue
         # Main loop for getting times and channels
-        lines = DTT_file.readlines()
-        times = {}
+        times = {'Start': [], 'Time':[], 't0': [], 'TestTime': []}
         for i, line in enumerate(lines):
-            line = line.replace(' ','').replace('\n','')
-            
+            line = line.replace(' ','').replace('\n','')            
             # Add time to times dictionary if a time is found in this line
             if '"GPS"' in line:
                 tname = line[line.index('TimeName') + 10: line.index('Type')-1]
                 t = line[line.index('"GPS"') + 6: line.index('</Time>')]
-                if (t not in times.values()) & (tname not in times.keys()):
-                    times[tname] = str(int(float(t)))
-                elif (t not in times.values()):
-                    times[tname + '_1'] = str(int(float(t)))
-                    
+                t = int(float(t))
+                if (t not in times[tname]):
+                    times[tname].append(t)
             # Append channel name if found in this line
             if return_channels and ('"MeasurementChannel[' in line):
                 channel_name = line[line.index('"channel"') + 10: line.index('</Param>')]
@@ -460,18 +477,106 @@ def get_times_DTT(file_names, channels=[], return_channels=False):
                     and ('DELTAL' not in channel_name)\
                     and (channel_name not in channels):
                         # Add to list if channel is not GW channel and not in list yet
-                        channels.append(c)
-                        
+                        channels.append(channel_name)
         DTT_file.close()
-        try:
-            injection_table.append([injection_name, int(times['t0']), int(times['t0_1'])])
-        except:
-            print('\nWarning: No background/injection times found in file ' + xn)
-    
+        if 'TestTime' not in times.keys() or 't0' not in times.keys():
+            print('')
+            logging.warning('Missing background or injection time found in file ' + file_name)
+            print('')
+        else:
+            t0_list = [t for t in times['t0'] if (t not in injection_times)]
+            if len(times['TestTime']) == 0 or len(t0_list) == 0:
+                print('')
+                logging.warning('Missing background or injection time found in file ' + file_name)
+                print('')
+            else:
+                time_inj = max(times['TestTime'])
+                injection_times.append(time_inj)
+                time_bg = max([t for t in times['t0'] if (t not in injection_times)])
+                injection_table.append([injection_name, time_bg, time_inj])
+    logging.info('Finished reading DTTs.')
+    if len(injection_table) == 0:
+        print('')
+        logging.error('No injection times found in ' + file_name + '.')
+        print('')
     if return_channels:
         return injection_table, channels
     else:
         return injection_table
+
+def get_times_config(file_name, ifo, station='ALL'):
+    """
+    Get injection names and times from a config file.
+        
+    Parameters
+    ----------
+    file_name : str
+        Name of times config file (.txt).
+    ifo : str
+        Inteferometer name, 'H1' or 'L1'.
+    station = {'ALL', 'CS', 'EX', 'EY'}
+        Station name. If 'ALL', get times for all stations at given ifo.
+    
+    Returns
+    -------
+    injection_table : list of lists
+        Each sub-list contains injection name (str), background time (int), and injection time (int).
+    """
+    
+    ifo_name = ('LHO' if ifo == 'H1' else 'LLO')
+    config_file = ConfigParser.ConfigParser()
+    logging.info('Reading injection times config file.')
+    try:
+        config_file.read(file_name)
+    except IOError:
+        print('')
+        logging.error('Could not find the time list file ' + file_name + '.')
+        print('')
+        return []
+    if station == 'ALL':
+        injections_raw = ''
+        for s in ['CS', 'EX', 'EY']:
+            injections_raw += config_file.get(ifo_name, s)
+    else:
+        injections_raw = config_file.get(ifo_name, station)
+    injections_split = injections_raw.strip().split('\n')
+    injection_table = []
+    for row in injections_split:
+        name, bg_time, inj_time = row.split(',')
+        injection_table.append([name, int(bg_time), int(inj_time)])
+    if len(injection_table) == 0:
+        print('')
+        logging.warning('No injection times found in ' + file_name + '. Check that file format is valid.')
+        print('')
+    return injection_table
+
+def get_times_txt(file_name):
+    """
+    Get injection names and times from a .txt table.
+    """
+    
+    injection_table = []
+    logging.info('Reading injection names/times file.')
+    try:
+        with open(file_name) as file:
+            lines = file.readlines()
+    except IOError:
+        print('')
+        logging.error('Injection names/times file ' + file_name + ' not found.')
+        print('')
+        return []
+    for line in lines:
+        try:
+            row = line.replace('\n', '').split(',')
+            injection_table.append([row[0], int(row[1]), int(row[2])])
+        except ValueError:
+            pass
+    logging.info('Finished reading injection names/times file.')
+    if len(injection_table) == 0:
+        print('')
+        logging.warning('No injection times found in ' + file_name + '. Check that file format is valid.')
+        print('')
+    return injection_table
 
 def search_injections(injection_table, search, verbose=False):
     """
@@ -479,9 +584,9 @@ def search_injections(injection_table, search, verbose=False):
     
     Parameters
     ----------
-    injection_table: list of lists
+    injection_table : list of lists
         Each row consists of injection name, background time, and injection time for an injection.
-    search: str
+    search : str
         Search entry.
         
     Return
@@ -489,14 +594,15 @@ def search_injections(injection_table, search, verbose=False):
     injection_table_new:
         Rows of input injection_table with name matching search entry.
     """
+    
+    logging.info('Searching injection table for search entry ' + search + '.')
     if (',/' in search) or ('/,' in search) or ('//' in search) or (',,' in search)\
     or search[-1] == '/' or search[-1] == ',':
-        print('\nError: Invalid search entry.')
-        print('Entry cannot have adjacent commas and slashes or commas and slashes at the end.')
-        sys.exit()
-    
+        print('')
+        logging.warning('Invalid search entry. Entry cannot have adjacent commas and slashes or commas and slashes at the end.')
+        print('')
+        return injection_table
     injection_table_new = []
-
     search_or = search.split('/') # Read forward slashes as OR
     if verbose:
         print('\nSearching for injections containing:')
@@ -514,26 +620,8 @@ def search_injections(injection_table, search, verbose=False):
                     match+= 1
             if match == len(search_and):
                 injection_table_new.append(row)
+    logging.info('Finished searching injection table.')
     return injection_table_new
-
-def freq_search(name_inj):
-    """
-    Get fundamental frequency of an injection if is a magnetic injection.
-    """
-    freq_search = None # Fundamental frequency of injection lines
-    if 'mag' in name_inj.lower():
-        # Search for either one of two patterns:
-        # (1) 'p' between two numbers (eg 7p1)
-        # (2) number followed by 'Hz' (eg 7Hz)
-        freq_str = re.search('([0-9]+p[0-9]+)|([0-9]+Hz)', name_inj, re.IGNORECASE).group(0)
-        if freq_str is not None:
-            # If found, get fundamental frequency from search result
-            freq_str = re.sub('Hz', '', freq_str, flags=re.IGNORECASE)
-            freq_str = re.sub('p', '.', freq_str, flags=re.IGNORECASE)
-            freq_search = float(freq_str)
-            print('Fundamental frequency found: ' + freq_str +' Hz.')
-            print('Computing coupling factors near integer multiples of this frequency only.')
-    return freq_search
 
 def get_FFT_params(duration, band_width, fft_overlap_pct, fft_avg, fft_rounding=True, verbose=False):
     """
@@ -541,31 +629,32 @@ def get_FFT_params(duration, band_width, fft_overlap_pct, fft_avg, fft_rounding=
     
     Parameters
     ----------
-    duration: float, int
+    duration : float, int
         Duration of TimeSeries segment in seconds. If not None, this is used to get FFT time instead of band_width.
-    band_width: float, int
+    band_width : float, int
         Bandwidth in Hz, used if duration is None.
-    fft_overlap_pct: float
+    fft_overlap_pct : float
         FFT overlap percentage, e.g. 0.5 for 50% overlap.
-    fft_avg: int
+    fft_avg : int
         Number of FFT averages to take over time segment.
-    fft_rounding: {True, False}, optional
+    fft_rounding : {True, False}, optional
         If True, round FFT time to nearest second.
     
     Returns
     -------
-    fft_time: float, int
+    fft_time : float, int
         FFT time in seconds, calculated from duration or bandwidth.
-    overlap_time: float
+    overlap_time : float
         FFT overlap time in seconds, calculated from FFT time and overlap percentage.
-    duration: float, int
+    duration : float, int
         Duration of TimeSeries segment in seconds. If input duration was None, this is calculated from FFT_time.
-    band_width: float
+    band_width : float
         Bandwidth in Hz. If input duration not None, this is calculated from FFT time.
     """
     
-    # Duration takes precedence; use it to get overlap time and bandwidth
     if duration is not None:
+        logging.info('Duration given; determining overlap time and bandwidth.')
+        # Duration takes precedence; use it to get overlap time and bandwidth
         over_prcnt = fft_overlap_pct*(10**-2)
         fft_time = duration/(1+((1-over_prcnt)*(fft_avg-1)))
         # The algorithm used for calculating ffts works well  with integers, better when even, best when powers of 2.
@@ -581,9 +670,9 @@ def get_FFT_params(duration, band_width, fft_overlap_pct, fft_avg, fft_rounding=
         if verbose:
             print('Band width is: '+str(band_width))
         print('')
-    
-    # No duration; use band width to get duration and overlap time
     else:
+        logging.info('Bandwidth given; determining overlap time and duration.')
+        # No duration; use band width to get duration and overlap time
         fft_time = 1/band_width
         if fft_rounding == True:
             fft_time1 = fft_time
@@ -595,5 +684,36 @@ def get_FFT_params(duration, band_width, fft_overlap_pct, fft_avg, fft_rounding=
         if verbose:
             print('Band width is: '+str(band_width+' Hz.'))
         print('')
-    
+    logging.info('FFT parameters acquired.')
     return fft_time, overlap_time, duration, band_width
+
+def freq_search(name_inj, verbose=False):
+    """
+    Get fundamental frequency of an injection if is a magnetic injection.
+    
+    Parameters
+    ----------
+    name_inj : str
+    
+    Returns
+    -------
+    freq_search : float
+        Fundamental frequency (Hz).
+    """
+    
+    freq_search = None # Fundamental frequency of injection lines
+    if 'mag' in name_inj.lower():
+        # Search for either one of two patterns:
+        # (1) 'p' between two numbers (eg 7p1)
+        # (2) number followed by 'Hz' (eg 7Hz)
+        freq_str = re.search('([0-9]+p[0-9]+)|([0-9]+Hz)', name_inj, re.IGNORECASE).group(0)
+        if freq_str is not None:
+            # If found, get fundamental frequency from search result
+            freq_str = re.sub('Hz', '', freq_str, flags=re.IGNORECASE)
+            freq_str = re.sub('p', '.', freq_str, flags=re.IGNORECASE)
+            freq_search = float(freq_str)
+            logging.info('Fundamental frequency found: ' + freq_str +' Hz.')
+            if verbose:
+                print('Fundamental frequency found: ' + freq_str +' Hz.')
+                print('Coupling will only be computed near harmonics of this frequency.')
+    return freq_search

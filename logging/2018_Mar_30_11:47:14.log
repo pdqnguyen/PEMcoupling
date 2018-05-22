@@ -1,0 +1,4 @@
+11:47:14 PEMcoupling.py DEBUG: This message should go to the log file
+11:47:14 PEMcoupling.py INFO: Event logging for PEMcoupling.py executed at time 2018_Mar_30_11:47:14
+11:47:14 PEMcoupling.py WARNING: Warning message.
+11:47:14 PEMcoupling.py WARNING: Cannot divide by zero!

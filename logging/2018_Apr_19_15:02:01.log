@@ -1,0 +1,19 @@
+15:02:01 PEMcoupling.py (<module>) INFO: Importing PEM coupling packages.
+15:02:03 getparams.py (get_arg_params) INFO: Parsing arguments.
+15:02:03 getparams.py (get_config_params) INFO: Opening config file.
+15:02:03 getparams.py (get_config_params) INFO: Checking if missing/empty config file.
+15:02:03 getparams.py (get_config_params) INFO: Parsing numerical and boolean config options.
+15:02:03 PEMcoupling.py (<module>) INFO: Separating config dictionary by section.
+15:02:03 PEMcoupling.py (<module>) INFO: Handling conflicts between config options and command line options.
+15:02:03 PEMcoupling.py (<module>) INFO: Reading in channel list given in config file.
+15:02:03 getparams.py (get_channel_names) INFO: Opening channel list file.
+15:02:03 PEMcoupling.py (<module>) INFO: Creating injection table.
+15:02:03 getparams.py (get_times_config) INFO: Reading injection times config file.
+15:02:03 PEMcoupling.py (<module>) INFO: Reporting injection results.
+15:02:03 PEMcoupling.py (<module>) INFO: Calculating FFT parameters.
+15:02:03 getparams.py (get_FFT_params) INFO: Duration given; determining overlap time and bandwidth.
+15:02:03 getparams.py (get_FFT_params) INFO: FFT parameters acquired.
+15:02:03 PEMcoupling.py (<module>) INFO: Converting smoothing parameters to frequency bins based on bandwidth.
+15:02:03 PEMcoupling.py (<module>) INFO: Beginning to loop over injections.
+15:02:03 PEMcoupling.py (<module>) INFO: Searching for fundamental frequency if applicable.
+15:02:03 PEMcoupling.py (<module>) INFO: Being picky about channels.

@@ -1,0 +1,483 @@
+15:44:58 PEMcoupling.py (<module>) INFO: Importing PEM coupling packages.
+15:45:00 getparams.py (get_arg_params) INFO: Parsing arguments.
+15:45:00 getparams.py (get_config_params) INFO: Opening config file.
+15:45:00 getparams.py (get_config_params) INFO: Checking if missing/empty config file.
+15:45:00 getparams.py (get_config_params) INFO: Parsing numerical and boolean config options.
+15:45:00 PEMcoupling.py (<module>) INFO: Separating config dictionary by section.
+15:45:00 PEMcoupling.py (<module>) INFO: Handling conflicts between config options and command line options.
+15:45:00 PEMcoupling.py (<module>) INFO: Reading in channel list given in config file.
+15:45:00 getparams.py (get_channel_names) INFO: Opening channel list file.
+15:45:00 PEMcoupling.py (<module>) INFO: Creating injection table.
+15:45:00 getparams.py (get_times_config) INFO: Reading injection times config file.
+15:45:00 PEMcoupling.py (<module>) INFO: Reporting injection results.
+15:45:00 PEMcoupling.py (<module>) INFO: Calculating FFT parameters.
+15:45:00 getparams.py (get_FFT_params) INFO: Duration given; determining overlap time and bandwidth.
+15:45:00 getparams.py (get_FFT_params) INFO: FFT parameters acquired.
+15:45:00 PEMcoupling.py (<module>) INFO: Converting smoothing parameters to frequency bins based on bandwidth.
+15:45:00 PEMcoupling.py (<module>) INFO: Beginning to loop over injections.
+15:45:00 PEMcoupling.py (<module>) INFO: Searching for fundamental frequency if applicable.
+15:45:00 getparams.py (freq_search) INFO: Fundamental frequency found: 7 Hz.
+15:45:00 PEMcoupling.py (<module>) INFO: Being picky about channels.
+15:45:07 loaddata.py (get_time_series) INFO: Channel successfully extracted: H1:PEM-EX_MAG_VEA_FLOOR_X_DQ at time 1185915159 to 1185915299.0.
+15:45:11 loaddata.py (get_time_series) INFO: Channel successfully extracted: H1:PEM-EX_MAG_VEA_FLOOR_Y_DQ at time 1185915159 to 1185915299.0.
+15:45:15 loaddata.py (get_time_series) INFO: Channel successfully extracted: H1:PEM-EX_MAG_VEA_FLOOR_Z_DQ at time 1185915159 to 1185915299.0.
+15:45:19 loaddata.py (get_time_series) INFO: Channel successfully extracted: H1:PEM-EX_MAG_VEA_FLOOR_X_DQ at time 1185915378 to 1185915518.0.
+15:45:21 loaddata.py (get_time_series) INFO: Channel successfully extracted: H1:PEM-EX_MAG_VEA_FLOOR_Y_DQ at time 1185915378 to 1185915518.0.
+15:45:24 loaddata.py (get_time_series) INFO: Channel successfully extracted: H1:PEM-EX_MAG_VEA_FLOOR_Z_DQ at time 1185915378 to 1185915518.0.
+15:45:24 preprocess.py (convert_to_ASD) INFO: Channel converted to ASD: H1:PEM-EX_MAG_VEA_FLOOR_X with FFT time 25.0 and overlap time 12.5
+15:45:24 preprocess.py (convert_to_ASD) INFO: Channel converted to ASD: H1:PEM-EX_MAG_VEA_FLOOR_Y with FFT time 25.0 and overlap time 12.5
+15:45:24 preprocess.py (convert_to_ASD) INFO: Channel converted to ASD: H1:PEM-EX_MAG_VEA_FLOOR_Z with FFT time 25.0 and overlap time 12.5
+15:45:24 preprocess.py (convert_to_ASD) INFO: Channel converted to ASD: H1:PEM-EX_MAG_VEA_FLOOR_X with FFT time 25.0 and overlap time 12.5
+15:45:24 preprocess.py (convert_to_ASD) INFO: Channel converted to ASD: H1:PEM-EX_MAG_VEA_FLOOR_Y with FFT time 25.0 and overlap time 12.5
+15:45:25 preprocess.py (convert_to_ASD) INFO: Channel converted to ASD: H1:PEM-EX_MAG_VEA_FLOOR_Z with FFT time 25.0 and overlap time 12.5
+15:45:25 preprocess.py (get_calibration_factors) INFO: Parsing calibration data for channel H1:PEM-EX_MAG_VEA_FLOOR_Z.
+15:45:25 preprocess.py (get_calibration_factors) INFO: Calibration factor acquired for channel H1:PEM-EX_MAG_VEA_FLOOR_Z.
+15:45:25 preprocess.py (get_calibration_factors) INFO: Parsing calibration data for channel H1:PEM-EX_MAG_VEA_FLOOR_Y.
+15:45:25 preprocess.py (get_calibration_factors) INFO: Calibration factor acquired for channel H1:PEM-EX_MAG_VEA_FLOOR_Y.
+15:45:25 preprocess.py (get_calibration_factors) INFO: Parsing calibration data for channel H1:PEM-EX_MAG_VEA_FLOOR_X.
+15:45:25 preprocess.py (get_calibration_factors) INFO: Calibration factor acquired for channel H1:PEM-EX_MAG_VEA_FLOOR_X.
+15:45:25 preprocess.py (calibrate_sensors) INFO: Channel calibrated: H1:PEM-EX_MAG_VEA_FLOOR_X.
+15:45:25 preprocess.py (calibrate_sensors) INFO: Channel calibrated: H1:PEM-EX_MAG_VEA_FLOOR_Y.
+15:45:25 preprocess.py (calibrate_sensors) INFO: Channel calibrated: H1:PEM-EX_MAG_VEA_FLOOR_Z.
+15:45:25 preprocess.py (get_calibration_factors) INFO: Parsing calibration data for channel H1:PEM-EX_MAG_VEA_FLOOR_Z.
+15:45:25 preprocess.py (get_calibration_factors) INFO: Calibration factor acquired for channel H1:PEM-EX_MAG_VEA_FLOOR_Z.
+15:45:25 preprocess.py (get_calibration_factors) INFO: Parsing calibration data for channel H1:PEM-EX_MAG_VEA_FLOOR_Y.
+15:45:25 preprocess.py (get_calibration_factors) INFO: Calibration factor acquired for channel H1:PEM-EX_MAG_VEA_FLOOR_Y.
+15:45:25 preprocess.py (get_calibration_factors) INFO: Parsing calibration data for channel H1:PEM-EX_MAG_VEA_FLOOR_X.
+15:45:25 preprocess.py (get_calibration_factors) INFO: Calibration factor acquired for channel H1:PEM-EX_MAG_VEA_FLOOR_X.
+15:45:25 preprocess.py (calibrate_sensors) INFO: Channel calibrated: H1:PEM-EX_MAG_VEA_FLOOR_X.
+15:45:25 preprocess.py (calibrate_sensors) INFO: Channel calibrated: H1:PEM-EX_MAG_VEA_FLOOR_Y.
+15:45:25 preprocess.py (calibrate_sensors) INFO: Channel calibrated: H1:PEM-EX_MAG_VEA_FLOOR_Z.
+15:45:25 preprocess.py (quad_sum_ASD) INFO: Generating quad sum ASD for H1:PEM-EX_MAG_VEA_FLOOR_XYZ.
+15:45:25 preprocess.py (quad_sum_ASD) INFO: Generating quad sum ASD for H1:PEM-EX_MAG_VEA_FLOOR_XYZ.
+15:45:36 PEMcoupling.py (<module>) INFO: Cropping ASDs to match frequencies: H1:PEM-EX_MAG_VEA_FLOOR_X.
+15:45:36 PEMcoupling.py (<module>) INFO: Cropping ASDs to match frequencies: H1:PEM-EX_MAG_VEA_FLOOR_XYZ.
+15:45:36 PEMcoupling.py (<module>) INFO: Cropping ASDs to match frequencies: H1:PEM-EX_MAG_VEA_FLOOR_Y.
+15:45:36 PEMcoupling.py (<module>) INFO: Cropping ASDs to match frequencies: H1:PEM-EX_MAG_VEA_FLOOR_Z.
+15:45:36 PEMcoupling.py (<module>) INFO: Acquiring smoothing parameters for channel H1:PEM-EX_MAG_VEA_FLOOR_X.
+15:45:36 PEMcoupling.py (<module>) INFO: Acquiring smoothing parameters for channel H1:PEM-EX_MAG_VEA_FLOOR_XYZ.
+15:45:36 PEMcoupling.py (<module>) INFO: Acquiring smoothing parameters for channel H1:PEM-EX_MAG_VEA_FLOOR_Y.
+15:45:36 PEMcoupling.py (<module>) INFO: Acquiring smoothing parameters for channel H1:PEM-EX_MAG_VEA_FLOOR_Z.
+15:45:38 PEMcoupling.py (<module>) INFO: Coupling function complete: H1:PEM-EX_MAG_VEA_FLOOR_X.
+15:45:39 PEMcoupling.py (<module>) INFO: Coupling function complete: H1:PEM-EX_MAG_VEA_FLOOR_XYZ.
+15:45:41 PEMcoupling.py (<module>) INFO: Coupling function complete: H1:PEM-EX_MAG_VEA_FLOOR_Y.
+15:45:43 PEMcoupling.py (<module>) INFO: Coupling function complete: H1:PEM-EX_MAG_VEA_FLOOR_Z.
+15:46:05 PEMcoupling.py (<module>) INFO: Coupling functions saved for injection 044EXmagNearDoor7Hzramp.
+15:46:05 PEMcoupling.py (<module>) INFO: Searching for fundamental frequency if applicable.
+15:46:05 getparams.py (freq_search) INFO: Fundamental frequency found: 51 Hz.
+15:46:05 PEMcoupling.py (<module>) INFO: Being picky about channels.
+15:46:06 loaddata.py (get_time_series) INFO: Channel successfully extracted: H1:PEM-EX_MAG_VEA_FLOOR_X_DQ at time 1185915159 to 1185915299.0.
+15:46:07 loaddata.py (get_time_series) INFO: Channel successfully extracted: H1:PEM-EX_MAG_VEA_FLOOR_Y_DQ at time 1185915159 to 1185915299.0.
+15:46:07 loaddata.py (get_time_series) INFO: Channel successfully extracted: H1:PEM-EX_MAG_VEA_FLOOR_Z_DQ at time 1185915159 to 1185915299.0.
+15:46:14 loaddata.py (get_time_series) INFO: Channel successfully extracted: H1:PEM-EX_MAG_VEA_FLOOR_X_DQ at time 1185915705 to 1185915845.0.
+15:46:19 loaddata.py (get_time_series) INFO: Channel successfully extracted: H1:PEM-EX_MAG_VEA_FLOOR_Y_DQ at time 1185915705 to 1185915845.0.
+15:46:22 loaddata.py (get_time_series) INFO: Channel successfully extracted: H1:PEM-EX_MAG_VEA_FLOOR_Z_DQ at time 1185915705 to 1185915845.0.
+15:46:22 preprocess.py (convert_to_ASD) INFO: Channel converted to ASD: H1:PEM-EX_MAG_VEA_FLOOR_X with FFT time 25.0 and overlap time 12.5
+15:46:22 preprocess.py (convert_to_ASD) INFO: Channel converted to ASD: H1:PEM-EX_MAG_VEA_FLOOR_Y with FFT time 25.0 and overlap time 12.5
+15:46:22 preprocess.py (convert_to_ASD) INFO: Channel converted to ASD: H1:PEM-EX_MAG_VEA_FLOOR_Z with FFT time 25.0 and overlap time 12.5
+15:46:22 preprocess.py (convert_to_ASD) INFO: Channel converted to ASD: H1:PEM-EX_MAG_VEA_FLOOR_X with FFT time 25.0 and overlap time 12.5
+15:46:22 preprocess.py (convert_to_ASD) INFO: Channel converted to ASD: H1:PEM-EX_MAG_VEA_FLOOR_Y with FFT time 25.0 and overlap time 12.5
+15:46:22 preprocess.py (convert_to_ASD) INFO: Channel converted to ASD: H1:PEM-EX_MAG_VEA_FLOOR_Z with FFT time 25.0 and overlap time 12.5
+15:46:22 preprocess.py (get_calibration_factors) INFO: Parsing calibration data for channel H1:PEM-EX_MAG_VEA_FLOOR_Z.
+15:46:22 preprocess.py (get_calibration_factors) INFO: Calibration factor acquired for channel H1:PEM-EX_MAG_VEA_FLOOR_Z.
+15:46:22 preprocess.py (get_calibration_factors) INFO: Parsing calibration data for channel H1:PEM-EX_MAG_VEA_FLOOR_Y.
+15:46:22 preprocess.py (get_calibration_factors) INFO: Calibration factor acquired for channel H1:PEM-EX_MAG_VEA_FLOOR_Y.
+15:46:22 preprocess.py (get_calibration_factors) INFO: Parsing calibration data for channel H1:PEM-EX_MAG_VEA_FLOOR_X.
+15:46:22 preprocess.py (get_calibration_factors) INFO: Calibration factor acquired for channel H1:PEM-EX_MAG_VEA_FLOOR_X.
+15:46:22 preprocess.py (calibrate_sensors) INFO: Channel calibrated: H1:PEM-EX_MAG_VEA_FLOOR_X.
+15:46:22 preprocess.py (calibrate_sensors) INFO: Channel calibrated: H1:PEM-EX_MAG_VEA_FLOOR_Y.
+15:46:22 preprocess.py (calibrate_sensors) INFO: Channel calibrated: H1:PEM-EX_MAG_VEA_FLOOR_Z.
+15:46:22 preprocess.py (get_calibration_factors) INFO: Parsing calibration data for channel H1:PEM-EX_MAG_VEA_FLOOR_Z.
+15:46:22 preprocess.py (get_calibration_factors) INFO: Calibration factor acquired for channel H1:PEM-EX_MAG_VEA_FLOOR_Z.
+15:46:22 preprocess.py (get_calibration_factors) INFO: Parsing calibration data for channel H1:PEM-EX_MAG_VEA_FLOOR_Y.
+15:46:22 preprocess.py (get_calibration_factors) INFO: Calibration factor acquired for channel H1:PEM-EX_MAG_VEA_FLOOR_Y.
+15:46:22 preprocess.py (get_calibration_factors) INFO: Parsing calibration data for channel H1:PEM-EX_MAG_VEA_FLOOR_X.
+15:46:22 preprocess.py (get_calibration_factors) INFO: Calibration factor acquired for channel H1:PEM-EX_MAG_VEA_FLOOR_X.
+15:46:22 preprocess.py (calibrate_sensors) INFO: Channel calibrated: H1:PEM-EX_MAG_VEA_FLOOR_X.
+15:46:22 preprocess.py (calibrate_sensors) INFO: Channel calibrated: H1:PEM-EX_MAG_VEA_FLOOR_Y.
+15:46:22 preprocess.py (calibrate_sensors) INFO: Channel calibrated: H1:PEM-EX_MAG_VEA_FLOOR_Z.
+15:46:22 preprocess.py (quad_sum_ASD) INFO: Generating quad sum ASD for H1:PEM-EX_MAG_VEA_FLOOR_XYZ.
+15:46:22 preprocess.py (quad_sum_ASD) INFO: Generating quad sum ASD for H1:PEM-EX_MAG_VEA_FLOOR_XYZ.
+15:46:27 PEMcoupling.py (<module>) INFO: Cropping ASDs to match frequencies: H1:PEM-EX_MAG_VEA_FLOOR_X.
+15:46:27 PEMcoupling.py (<module>) INFO: Cropping ASDs to match frequencies: H1:PEM-EX_MAG_VEA_FLOOR_XYZ.
+15:46:27 PEMcoupling.py (<module>) INFO: Cropping ASDs to match frequencies: H1:PEM-EX_MAG_VEA_FLOOR_Y.
+15:46:27 PEMcoupling.py (<module>) INFO: Cropping ASDs to match frequencies: H1:PEM-EX_MAG_VEA_FLOOR_Z.
+15:46:27 PEMcoupling.py (<module>) INFO: Acquiring smoothing parameters for channel H1:PEM-EX_MAG_VEA_FLOOR_X.
+15:46:27 PEMcoupling.py (<module>) INFO: Acquiring smoothing parameters for channel H1:PEM-EX_MAG_VEA_FLOOR_XYZ.
+15:46:27 PEMcoupling.py (<module>) INFO: Acquiring smoothing parameters for channel H1:PEM-EX_MAG_VEA_FLOOR_Y.
+15:46:27 PEMcoupling.py (<module>) INFO: Acquiring smoothing parameters for channel H1:PEM-EX_MAG_VEA_FLOOR_Z.
+15:46:29 PEMcoupling.py (<module>) INFO: Coupling function complete: H1:PEM-EX_MAG_VEA_FLOOR_X.
+15:46:30 PEMcoupling.py (<module>) INFO: Coupling function complete: H1:PEM-EX_MAG_VEA_FLOOR_XYZ.
+15:46:32 PEMcoupling.py (<module>) INFO: Coupling function complete: H1:PEM-EX_MAG_VEA_FLOOR_Y.
+15:46:34 PEMcoupling.py (<module>) INFO: Coupling function complete: H1:PEM-EX_MAG_VEA_FLOOR_Z.
+15:46:54 PEMcoupling.py (<module>) INFO: Coupling functions saved for injection 045EXmagNearDoor51Hzramp.
+15:46:54 PEMcoupling.py (<module>) INFO: Searching for fundamental frequency if applicable.
+15:46:54 getparams.py (freq_search) INFO: Fundamental frequency found: 51 Hz.
+15:46:54 PEMcoupling.py (<module>) INFO: Being picky about channels.
+15:46:57 loaddata.py (get_time_series) INFO: Channel successfully extracted: H1:PEM-EX_MAG_VEA_FLOOR_X_DQ at time 1186334486 to 1186334626.0.
+15:47:01 loaddata.py (get_time_series) INFO: Channel successfully extracted: H1:PEM-EX_MAG_VEA_FLOOR_Y_DQ at time 1186334486 to 1186334626.0.
+15:47:03 loaddata.py (get_time_series) INFO: Channel successfully extracted: H1:PEM-EX_MAG_VEA_FLOOR_Z_DQ at time 1186334486 to 1186334626.0.
+15:47:07 loaddata.py (get_time_series) INFO: Channel successfully extracted: H1:PEM-EX_MAG_VEA_FLOOR_X_DQ at time 1186338178 to 1186338318.0.
+15:47:11 loaddata.py (get_time_series) INFO: Channel successfully extracted: H1:PEM-EX_MAG_VEA_FLOOR_Y_DQ at time 1186338178 to 1186338318.0.
+15:47:13 loaddata.py (get_time_series) INFO: Channel successfully extracted: H1:PEM-EX_MAG_VEA_FLOOR_Z_DQ at time 1186338178 to 1186338318.0.
+15:47:14 preprocess.py (convert_to_ASD) INFO: Channel converted to ASD: H1:PEM-EX_MAG_VEA_FLOOR_X with FFT time 25.0 and overlap time 12.5
+15:47:14 preprocess.py (convert_to_ASD) INFO: Channel converted to ASD: H1:PEM-EX_MAG_VEA_FLOOR_Y with FFT time 25.0 and overlap time 12.5
+15:47:14 preprocess.py (convert_to_ASD) INFO: Channel converted to ASD: H1:PEM-EX_MAG_VEA_FLOOR_Z with FFT time 25.0 and overlap time 12.5
+15:47:14 preprocess.py (convert_to_ASD) INFO: Channel converted to ASD: H1:PEM-EX_MAG_VEA_FLOOR_X with FFT time 25.0 and overlap time 12.5
+15:47:14 preprocess.py (convert_to_ASD) INFO: Channel converted to ASD: H1:PEM-EX_MAG_VEA_FLOOR_Y with FFT time 25.0 and overlap time 12.5
+15:47:14 preprocess.py (convert_to_ASD) INFO: Channel converted to ASD: H1:PEM-EX_MAG_VEA_FLOOR_Z with FFT time 25.0 and overlap time 12.5
+15:47:14 preprocess.py (get_calibration_factors) INFO: Parsing calibration data for channel H1:PEM-EX_MAG_VEA_FLOOR_Z.
+15:47:14 preprocess.py (get_calibration_factors) INFO: Calibration factor acquired for channel H1:PEM-EX_MAG_VEA_FLOOR_Z.
+15:47:14 preprocess.py (get_calibration_factors) INFO: Parsing calibration data for channel H1:PEM-EX_MAG_VEA_FLOOR_Y.
+15:47:14 preprocess.py (get_calibration_factors) INFO: Calibration factor acquired for channel H1:PEM-EX_MAG_VEA_FLOOR_Y.
+15:47:14 preprocess.py (get_calibration_factors) INFO: Parsing calibration data for channel H1:PEM-EX_MAG_VEA_FLOOR_X.
+15:47:14 preprocess.py (get_calibration_factors) INFO: Calibration factor acquired for channel H1:PEM-EX_MAG_VEA_FLOOR_X.
+15:47:14 preprocess.py (calibrate_sensors) INFO: Channel calibrated: H1:PEM-EX_MAG_VEA_FLOOR_X.
+15:47:14 preprocess.py (calibrate_sensors) INFO: Channel calibrated: H1:PEM-EX_MAG_VEA_FLOOR_Y.
+15:47:14 preprocess.py (calibrate_sensors) INFO: Channel calibrated: H1:PEM-EX_MAG_VEA_FLOOR_Z.
+15:47:14 preprocess.py (get_calibration_factors) INFO: Parsing calibration data for channel H1:PEM-EX_MAG_VEA_FLOOR_Z.
+15:47:14 preprocess.py (get_calibration_factors) INFO: Calibration factor acquired for channel H1:PEM-EX_MAG_VEA_FLOOR_Z.
+15:47:14 preprocess.py (get_calibration_factors) INFO: Parsing calibration data for channel H1:PEM-EX_MAG_VEA_FLOOR_Y.
+15:47:14 preprocess.py (get_calibration_factors) INFO: Calibration factor acquired for channel H1:PEM-EX_MAG_VEA_FLOOR_Y.
+15:47:14 preprocess.py (get_calibration_factors) INFO: Parsing calibration data for channel H1:PEM-EX_MAG_VEA_FLOOR_X.
+15:47:14 preprocess.py (get_calibration_factors) INFO: Calibration factor acquired for channel H1:PEM-EX_MAG_VEA_FLOOR_X.
+15:47:14 preprocess.py (calibrate_sensors) INFO: Channel calibrated: H1:PEM-EX_MAG_VEA_FLOOR_X.
+15:47:14 preprocess.py (calibrate_sensors) INFO: Channel calibrated: H1:PEM-EX_MAG_VEA_FLOOR_Y.
+15:47:14 preprocess.py (calibrate_sensors) INFO: Channel calibrated: H1:PEM-EX_MAG_VEA_FLOOR_Z.
+15:47:14 preprocess.py (quad_sum_ASD) INFO: Generating quad sum ASD for H1:PEM-EX_MAG_VEA_FLOOR_XYZ.
+15:47:14 preprocess.py (quad_sum_ASD) INFO: Generating quad sum ASD for H1:PEM-EX_MAG_VEA_FLOOR_XYZ.
+15:47:19 PEMcoupling.py (<module>) INFO: Cropping ASDs to match frequencies: H1:PEM-EX_MAG_VEA_FLOOR_X.
+15:47:19 PEMcoupling.py (<module>) INFO: Cropping ASDs to match frequencies: H1:PEM-EX_MAG_VEA_FLOOR_XYZ.
+15:47:19 PEMcoupling.py (<module>) INFO: Cropping ASDs to match frequencies: H1:PEM-EX_MAG_VEA_FLOOR_Y.
+15:47:19 PEMcoupling.py (<module>) INFO: Cropping ASDs to match frequencies: H1:PEM-EX_MAG_VEA_FLOOR_Z.
+15:47:19 PEMcoupling.py (<module>) INFO: Acquiring smoothing parameters for channel H1:PEM-EX_MAG_VEA_FLOOR_X.
+15:47:19 PEMcoupling.py (<module>) INFO: Acquiring smoothing parameters for channel H1:PEM-EX_MAG_VEA_FLOOR_XYZ.
+15:47:19 PEMcoupling.py (<module>) INFO: Acquiring smoothing parameters for channel H1:PEM-EX_MAG_VEA_FLOOR_Y.
+15:47:19 PEMcoupling.py (<module>) INFO: Acquiring smoothing parameters for channel H1:PEM-EX_MAG_VEA_FLOOR_Z.
+15:47:21 PEMcoupling.py (<module>) INFO: Coupling function complete: H1:PEM-EX_MAG_VEA_FLOOR_X.
+15:47:23 PEMcoupling.py (<module>) INFO: Coupling function complete: H1:PEM-EX_MAG_VEA_FLOOR_XYZ.
+15:47:25 PEMcoupling.py (<module>) INFO: Coupling function complete: H1:PEM-EX_MAG_VEA_FLOOR_Y.
+15:47:26 PEMcoupling.py (<module>) INFO: Coupling function complete: H1:PEM-EX_MAG_VEA_FLOOR_Z.
+15:47:46 PEMcoupling.py (<module>) INFO: Coupling functions saved for injection 065EXmagOppositeDoor51Hzramp.
+15:47:46 PEMcoupling.py (<module>) INFO: Searching for fundamental frequency if applicable.
+15:47:46 getparams.py (freq_search) INFO: Fundamental frequency found: 7 Hz.
+15:47:46 PEMcoupling.py (<module>) INFO: Being picky about channels.
+15:47:46 loaddata.py (get_time_series) INFO: Channel successfully extracted: H1:PEM-EX_MAG_VEA_FLOOR_X_DQ at time 1186334486 to 1186334626.0.
+15:47:47 loaddata.py (get_time_series) INFO: Channel successfully extracted: H1:PEM-EX_MAG_VEA_FLOOR_Y_DQ at time 1186334486 to 1186334626.0.
+15:47:47 loaddata.py (get_time_series) INFO: Channel successfully extracted: H1:PEM-EX_MAG_VEA_FLOOR_Z_DQ at time 1186334486 to 1186334626.0.
+15:47:50 loaddata.py (get_time_series) INFO: Channel successfully extracted: H1:PEM-EX_MAG_VEA_FLOOR_X_DQ at time 1186338343 to 1186338483.0.
+15:47:53 loaddata.py (get_time_series) INFO: Channel successfully extracted: H1:PEM-EX_MAG_VEA_FLOOR_Y_DQ at time 1186338343 to 1186338483.0.
+15:47:57 loaddata.py (get_time_series) INFO: Channel successfully extracted: H1:PEM-EX_MAG_VEA_FLOOR_Z_DQ at time 1186338343 to 1186338483.0.
+15:47:58 preprocess.py (convert_to_ASD) INFO: Channel converted to ASD: H1:PEM-EX_MAG_VEA_FLOOR_X with FFT time 25.0 and overlap time 12.5
+15:47:58 preprocess.py (convert_to_ASD) INFO: Channel converted to ASD: H1:PEM-EX_MAG_VEA_FLOOR_Y with FFT time 25.0 and overlap time 12.5
+15:47:58 preprocess.py (convert_to_ASD) INFO: Channel converted to ASD: H1:PEM-EX_MAG_VEA_FLOOR_Z with FFT time 25.0 and overlap time 12.5
+15:47:58 preprocess.py (convert_to_ASD) INFO: Channel converted to ASD: H1:PEM-EX_MAG_VEA_FLOOR_X with FFT time 25.0 and overlap time 12.5
+15:47:58 preprocess.py (convert_to_ASD) INFO: Channel converted to ASD: H1:PEM-EX_MAG_VEA_FLOOR_Y with FFT time 25.0 and overlap time 12.5
+15:47:58 preprocess.py (convert_to_ASD) INFO: Channel converted to ASD: H1:PEM-EX_MAG_VEA_FLOOR_Z with FFT time 25.0 and overlap time 12.5
+15:47:58 preprocess.py (get_calibration_factors) INFO: Parsing calibration data for channel H1:PEM-EX_MAG_VEA_FLOOR_Z.
+15:47:58 preprocess.py (get_calibration_factors) INFO: Calibration factor acquired for channel H1:PEM-EX_MAG_VEA_FLOOR_Z.
+15:47:58 preprocess.py (get_calibration_factors) INFO: Parsing calibration data for channel H1:PEM-EX_MAG_VEA_FLOOR_Y.
+15:47:58 preprocess.py (get_calibration_factors) INFO: Calibration factor acquired for channel H1:PEM-EX_MAG_VEA_FLOOR_Y.
+15:47:58 preprocess.py (get_calibration_factors) INFO: Parsing calibration data for channel H1:PEM-EX_MAG_VEA_FLOOR_X.
+15:47:58 preprocess.py (get_calibration_factors) INFO: Calibration factor acquired for channel H1:PEM-EX_MAG_VEA_FLOOR_X.
+15:47:58 preprocess.py (calibrate_sensors) INFO: Channel calibrated: H1:PEM-EX_MAG_VEA_FLOOR_X.
+15:47:58 preprocess.py (calibrate_sensors) INFO: Channel calibrated: H1:PEM-EX_MAG_VEA_FLOOR_Y.
+15:47:58 preprocess.py (calibrate_sensors) INFO: Channel calibrated: H1:PEM-EX_MAG_VEA_FLOOR_Z.
+15:47:58 preprocess.py (get_calibration_factors) INFO: Parsing calibration data for channel H1:PEM-EX_MAG_VEA_FLOOR_Z.
+15:47:58 preprocess.py (get_calibration_factors) INFO: Calibration factor acquired for channel H1:PEM-EX_MAG_VEA_FLOOR_Z.
+15:47:58 preprocess.py (get_calibration_factors) INFO: Parsing calibration data for channel H1:PEM-EX_MAG_VEA_FLOOR_Y.
+15:47:58 preprocess.py (get_calibration_factors) INFO: Calibration factor acquired for channel H1:PEM-EX_MAG_VEA_FLOOR_Y.
+15:47:58 preprocess.py (get_calibration_factors) INFO: Parsing calibration data for channel H1:PEM-EX_MAG_VEA_FLOOR_X.
+15:47:58 preprocess.py (get_calibration_factors) INFO: Calibration factor acquired for channel H1:PEM-EX_MAG_VEA_FLOOR_X.
+15:47:58 preprocess.py (calibrate_sensors) INFO: Channel calibrated: H1:PEM-EX_MAG_VEA_FLOOR_X.
+15:47:58 preprocess.py (calibrate_sensors) INFO: Channel calibrated: H1:PEM-EX_MAG_VEA_FLOOR_Y.
+15:47:58 preprocess.py (calibrate_sensors) INFO: Channel calibrated: H1:PEM-EX_MAG_VEA_FLOOR_Z.
+15:47:58 preprocess.py (quad_sum_ASD) INFO: Generating quad sum ASD for H1:PEM-EX_MAG_VEA_FLOOR_XYZ.
+15:47:58 preprocess.py (quad_sum_ASD) INFO: Generating quad sum ASD for H1:PEM-EX_MAG_VEA_FLOOR_XYZ.
+15:48:03 PEMcoupling.py (<module>) INFO: Cropping ASDs to match frequencies: H1:PEM-EX_MAG_VEA_FLOOR_X.
+15:48:03 PEMcoupling.py (<module>) INFO: Cropping ASDs to match frequencies: H1:PEM-EX_MAG_VEA_FLOOR_XYZ.
+15:48:03 PEMcoupling.py (<module>) INFO: Cropping ASDs to match frequencies: H1:PEM-EX_MAG_VEA_FLOOR_Y.
+15:48:03 PEMcoupling.py (<module>) INFO: Cropping ASDs to match frequencies: H1:PEM-EX_MAG_VEA_FLOOR_Z.
+15:48:03 PEMcoupling.py (<module>) INFO: Acquiring smoothing parameters for channel H1:PEM-EX_MAG_VEA_FLOOR_X.
+15:48:03 PEMcoupling.py (<module>) INFO: Acquiring smoothing parameters for channel H1:PEM-EX_MAG_VEA_FLOOR_XYZ.
+15:48:03 PEMcoupling.py (<module>) INFO: Acquiring smoothing parameters for channel H1:PEM-EX_MAG_VEA_FLOOR_Y.
+15:48:03 PEMcoupling.py (<module>) INFO: Acquiring smoothing parameters for channel H1:PEM-EX_MAG_VEA_FLOOR_Z.
+15:48:05 PEMcoupling.py (<module>) INFO: Coupling function complete: H1:PEM-EX_MAG_VEA_FLOOR_X.
+15:48:07 PEMcoupling.py (<module>) INFO: Coupling function complete: H1:PEM-EX_MAG_VEA_FLOOR_XYZ.
+15:48:08 PEMcoupling.py (<module>) INFO: Coupling function complete: H1:PEM-EX_MAG_VEA_FLOOR_Y.
+15:48:10 PEMcoupling.py (<module>) INFO: Coupling function complete: H1:PEM-EX_MAG_VEA_FLOOR_Z.
+15:48:31 PEMcoupling.py (<module>) INFO: Coupling functions saved for injection 065EXmagOppositeDoor7Hzramp.
+15:48:31 PEMcoupling.py (<module>) INFO: Searching for fundamental frequency if applicable.
+15:48:31 getparams.py (freq_search) INFO: Fundamental frequency found: 7 Hz.
+15:48:31 PEMcoupling.py (<module>) INFO: Being picky about channels.
+15:48:34 loaddata.py (get_time_series) INFO: Channel successfully extracted: H1:PEM-EX_MAG_EBAY_SEIRACK_X_DQ at time 1186334486 to 1186334626.0.
+15:48:37 loaddata.py (get_time_series) INFO: Channel successfully extracted: H1:PEM-EX_MAG_EBAY_SEIRACK_Y_DQ at time 1186334486 to 1186334626.0.
+15:48:39 loaddata.py (get_time_series) INFO: Channel successfully extracted: H1:PEM-EX_MAG_EBAY_SEIRACK_Z_DQ at time 1186334486 to 1186334626.0.
+15:48:41 loaddata.py (get_time_series) INFO: Channel successfully extracted: H1:PEM-EX_MAG_EBAY_SUSRACK_X_DQ at time 1186334486 to 1186334626.0.
+15:48:43 loaddata.py (get_time_series) INFO: Channel successfully extracted: H1:PEM-EX_MAG_EBAY_SUSRACK_Y_DQ at time 1186334486 to 1186334626.0.
+15:48:46 loaddata.py (get_time_series) INFO: Channel successfully extracted: H1:PEM-EX_MAG_EBAY_SUSRACK_Z_DQ at time 1186334486 to 1186334626.0.
+15:48:46 loaddata.py (get_time_series) INFO: Channel successfully extracted: H1:PEM-EX_MAG_VEA_FLOOR_X_DQ at time 1186334486 to 1186334626.0.
+15:48:47 loaddata.py (get_time_series) INFO: Channel successfully extracted: H1:PEM-EX_MAG_VEA_FLOOR_Y_DQ at time 1186334486 to 1186334626.0.
+15:48:47 loaddata.py (get_time_series) INFO: Channel successfully extracted: H1:PEM-EX_MAG_VEA_FLOOR_Z_DQ at time 1186334486 to 1186334626.0.
+15:48:52 loaddata.py (get_time_series) INFO: Channel successfully extracted: H1:PEM-EX_MAG_EBAY_SEIRACK_X_DQ at time 1186338771 to 1186338911.0.
+15:48:55 loaddata.py (get_time_series) INFO: Channel successfully extracted: H1:PEM-EX_MAG_EBAY_SEIRACK_Y_DQ at time 1186338771 to 1186338911.0.
+15:48:58 loaddata.py (get_time_series) INFO: Channel successfully extracted: H1:PEM-EX_MAG_EBAY_SEIRACK_Z_DQ at time 1186338771 to 1186338911.0.
+15:49:00 loaddata.py (get_time_series) INFO: Channel successfully extracted: H1:PEM-EX_MAG_EBAY_SUSRACK_X_DQ at time 1186338771 to 1186338911.0.
+15:49:02 loaddata.py (get_time_series) INFO: Channel successfully extracted: H1:PEM-EX_MAG_EBAY_SUSRACK_Y_DQ at time 1186338771 to 1186338911.0.
+15:49:04 loaddata.py (get_time_series) INFO: Channel successfully extracted: H1:PEM-EX_MAG_EBAY_SUSRACK_Z_DQ at time 1186338771 to 1186338911.0.
+15:49:07 loaddata.py (get_time_series) INFO: Channel successfully extracted: H1:PEM-EX_MAG_VEA_FLOOR_X_DQ at time 1186338771 to 1186338911.0.
+15:49:08 loaddata.py (get_time_series) INFO: Channel successfully extracted: H1:PEM-EX_MAG_VEA_FLOOR_Y_DQ at time 1186338771 to 1186338911.0.
+15:49:10 loaddata.py (get_time_series) INFO: Channel successfully extracted: H1:PEM-EX_MAG_VEA_FLOOR_Z_DQ at time 1186338771 to 1186338911.0.
+15:49:10 preprocess.py (convert_to_ASD) INFO: Channel converted to ASD: H1:PEM-EX_MAG_EBAY_SEIRACK_X with FFT time 25.0 and overlap time 12.5
+15:49:11 preprocess.py (convert_to_ASD) INFO: Channel converted to ASD: H1:PEM-EX_MAG_EBAY_SEIRACK_Y with FFT time 25.0 and overlap time 12.5
+15:49:11 preprocess.py (convert_to_ASD) INFO: Channel converted to ASD: H1:PEM-EX_MAG_EBAY_SEIRACK_Z with FFT time 25.0 and overlap time 12.5
+15:49:11 preprocess.py (convert_to_ASD) INFO: Channel converted to ASD: H1:PEM-EX_MAG_EBAY_SUSRACK_X with FFT time 25.0 and overlap time 12.5
+15:49:11 preprocess.py (convert_to_ASD) INFO: Channel converted to ASD: H1:PEM-EX_MAG_EBAY_SUSRACK_Y with FFT time 25.0 and overlap time 12.5
+15:49:11 preprocess.py (convert_to_ASD) INFO: Channel converted to ASD: H1:PEM-EX_MAG_EBAY_SUSRACK_Z with FFT time 25.0 and overlap time 12.5
+15:49:11 preprocess.py (convert_to_ASD) INFO: Channel converted to ASD: H1:PEM-EX_MAG_VEA_FLOOR_X with FFT time 25.0 and overlap time 12.5
+15:49:11 preprocess.py (convert_to_ASD) INFO: Channel converted to ASD: H1:PEM-EX_MAG_VEA_FLOOR_Y with FFT time 25.0 and overlap time 12.5
+15:49:11 preprocess.py (convert_to_ASD) INFO: Channel converted to ASD: H1:PEM-EX_MAG_VEA_FLOOR_Z with FFT time 25.0 and overlap time 12.5
+15:49:11 preprocess.py (convert_to_ASD) INFO: Channel converted to ASD: H1:PEM-EX_MAG_EBAY_SEIRACK_X with FFT time 25.0 and overlap time 12.5
+15:49:11 preprocess.py (convert_to_ASD) INFO: Channel converted to ASD: H1:PEM-EX_MAG_EBAY_SEIRACK_Y with FFT time 25.0 and overlap time 12.5
+15:49:12 preprocess.py (convert_to_ASD) INFO: Channel converted to ASD: H1:PEM-EX_MAG_EBAY_SEIRACK_Z with FFT time 25.0 and overlap time 12.5
+15:49:12 preprocess.py (convert_to_ASD) INFO: Channel converted to ASD: H1:PEM-EX_MAG_EBAY_SUSRACK_X with FFT time 25.0 and overlap time 12.5
+15:49:12 preprocess.py (convert_to_ASD) INFO: Channel converted to ASD: H1:PEM-EX_MAG_EBAY_SUSRACK_Y with FFT time 25.0 and overlap time 12.5
+15:49:12 preprocess.py (convert_to_ASD) INFO: Channel converted to ASD: H1:PEM-EX_MAG_EBAY_SUSRACK_Z with FFT time 25.0 and overlap time 12.5
+15:49:12 preprocess.py (convert_to_ASD) INFO: Channel converted to ASD: H1:PEM-EX_MAG_VEA_FLOOR_X with FFT time 25.0 and overlap time 12.5
+15:49:12 preprocess.py (convert_to_ASD) INFO: Channel converted to ASD: H1:PEM-EX_MAG_VEA_FLOOR_Y with FFT time 25.0 and overlap time 12.5
+15:49:12 preprocess.py (convert_to_ASD) INFO: Channel converted to ASD: H1:PEM-EX_MAG_VEA_FLOOR_Z with FFT time 25.0 and overlap time 12.5
+15:49:12 preprocess.py (get_calibration_factors) INFO: Parsing calibration data for channel H1:PEM-EX_MAG_VEA_FLOOR_Z.
+15:49:12 preprocess.py (get_calibration_factors) INFO: Calibration factor acquired for channel H1:PEM-EX_MAG_VEA_FLOOR_Z.
+15:49:12 preprocess.py (get_calibration_factors) INFO: Parsing calibration data for channel H1:PEM-EX_MAG_EBAY_SEIRACK_Z.
+15:49:12 preprocess.py (get_calibration_factors) INFO: Calibration factor acquired for channel H1:PEM-EX_MAG_EBAY_SEIRACK_Z.
+15:49:12 preprocess.py (get_calibration_factors) INFO: Parsing calibration data for channel H1:PEM-EX_MAG_EBAY_SEIRACK_Y.
+15:49:12 preprocess.py (get_calibration_factors) INFO: Calibration factor acquired for channel H1:PEM-EX_MAG_EBAY_SEIRACK_Y.
+15:49:12 preprocess.py (get_calibration_factors) INFO: Parsing calibration data for channel H1:PEM-EX_MAG_EBAY_SEIRACK_X.
+15:49:12 preprocess.py (get_calibration_factors) INFO: Calibration factor acquired for channel H1:PEM-EX_MAG_EBAY_SEIRACK_X.
+15:49:12 preprocess.py (get_calibration_factors) INFO: Parsing calibration data for channel H1:PEM-EX_MAG_VEA_FLOOR_Y.
+15:49:12 preprocess.py (get_calibration_factors) INFO: Calibration factor acquired for channel H1:PEM-EX_MAG_VEA_FLOOR_Y.
+15:49:12 preprocess.py (get_calibration_factors) INFO: Parsing calibration data for channel H1:PEM-EX_MAG_VEA_FLOOR_X.
+15:49:12 preprocess.py (get_calibration_factors) INFO: Calibration factor acquired for channel H1:PEM-EX_MAG_VEA_FLOOR_X.
+15:49:12 preprocess.py (get_calibration_factors) INFO: Parsing calibration data for channel H1:PEM-EX_MAG_EBAY_SUSRACK_Z.
+15:49:12 preprocess.py (get_calibration_factors) INFO: Calibration factor acquired for channel H1:PEM-EX_MAG_EBAY_SUSRACK_Z.
+15:49:12 preprocess.py (get_calibration_factors) INFO: Parsing calibration data for channel H1:PEM-EX_MAG_EBAY_SUSRACK_Y.
+15:49:12 preprocess.py (get_calibration_factors) INFO: Calibration factor acquired for channel H1:PEM-EX_MAG_EBAY_SUSRACK_Y.
+15:49:12 preprocess.py (get_calibration_factors) INFO: Parsing calibration data for channel H1:PEM-EX_MAG_EBAY_SUSRACK_X.
+15:49:12 preprocess.py (get_calibration_factors) INFO: Calibration factor acquired for channel H1:PEM-EX_MAG_EBAY_SUSRACK_X.
+15:49:12 preprocess.py (calibrate_sensors) INFO: Channel calibrated: H1:PEM-EX_MAG_EBAY_SEIRACK_X.
+15:49:12 preprocess.py (calibrate_sensors) INFO: Channel calibrated: H1:PEM-EX_MAG_EBAY_SEIRACK_Y.
+15:49:12 preprocess.py (calibrate_sensors) INFO: Channel calibrated: H1:PEM-EX_MAG_EBAY_SEIRACK_Z.
+15:49:12 preprocess.py (calibrate_sensors) INFO: Channel calibrated: H1:PEM-EX_MAG_EBAY_SUSRACK_X.
+15:49:12 preprocess.py (calibrate_sensors) INFO: Channel calibrated: H1:PEM-EX_MAG_EBAY_SUSRACK_Y.
+15:49:12 preprocess.py (calibrate_sensors) INFO: Channel calibrated: H1:PEM-EX_MAG_EBAY_SUSRACK_Z.
+15:49:12 preprocess.py (calibrate_sensors) INFO: Channel calibrated: H1:PEM-EX_MAG_VEA_FLOOR_X.
+15:49:12 preprocess.py (calibrate_sensors) INFO: Channel calibrated: H1:PEM-EX_MAG_VEA_FLOOR_Y.
+15:49:12 preprocess.py (calibrate_sensors) INFO: Channel calibrated: H1:PEM-EX_MAG_VEA_FLOOR_Z.
+15:49:12 preprocess.py (get_calibration_factors) INFO: Parsing calibration data for channel H1:PEM-EX_MAG_VEA_FLOOR_Z.
+15:49:12 preprocess.py (get_calibration_factors) INFO: Calibration factor acquired for channel H1:PEM-EX_MAG_VEA_FLOOR_Z.
+15:49:12 preprocess.py (get_calibration_factors) INFO: Parsing calibration data for channel H1:PEM-EX_MAG_EBAY_SEIRACK_Z.
+15:49:12 preprocess.py (get_calibration_factors) INFO: Calibration factor acquired for channel H1:PEM-EX_MAG_EBAY_SEIRACK_Z.
+15:49:12 preprocess.py (get_calibration_factors) INFO: Parsing calibration data for channel H1:PEM-EX_MAG_EBAY_SEIRACK_Y.
+15:49:12 preprocess.py (get_calibration_factors) INFO: Calibration factor acquired for channel H1:PEM-EX_MAG_EBAY_SEIRACK_Y.
+15:49:12 preprocess.py (get_calibration_factors) INFO: Parsing calibration data for channel H1:PEM-EX_MAG_EBAY_SEIRACK_X.
+15:49:12 preprocess.py (get_calibration_factors) INFO: Calibration factor acquired for channel H1:PEM-EX_MAG_EBAY_SEIRACK_X.
+15:49:12 preprocess.py (get_calibration_factors) INFO: Parsing calibration data for channel H1:PEM-EX_MAG_VEA_FLOOR_Y.
+15:49:12 preprocess.py (get_calibration_factors) INFO: Calibration factor acquired for channel H1:PEM-EX_MAG_VEA_FLOOR_Y.
+15:49:12 preprocess.py (get_calibration_factors) INFO: Parsing calibration data for channel H1:PEM-EX_MAG_VEA_FLOOR_X.
+15:49:12 preprocess.py (get_calibration_factors) INFO: Calibration factor acquired for channel H1:PEM-EX_MAG_VEA_FLOOR_X.
+15:49:12 preprocess.py (get_calibration_factors) INFO: Parsing calibration data for channel H1:PEM-EX_MAG_EBAY_SUSRACK_Z.
+15:49:12 preprocess.py (get_calibration_factors) INFO: Calibration factor acquired for channel H1:PEM-EX_MAG_EBAY_SUSRACK_Z.
+15:49:12 preprocess.py (get_calibration_factors) INFO: Parsing calibration data for channel H1:PEM-EX_MAG_EBAY_SUSRACK_Y.
+15:49:12 preprocess.py (get_calibration_factors) INFO: Calibration factor acquired for channel H1:PEM-EX_MAG_EBAY_SUSRACK_Y.
+15:49:12 preprocess.py (get_calibration_factors) INFO: Parsing calibration data for channel H1:PEM-EX_MAG_EBAY_SUSRACK_X.
+15:49:12 preprocess.py (get_calibration_factors) INFO: Calibration factor acquired for channel H1:PEM-EX_MAG_EBAY_SUSRACK_X.
+15:49:12 preprocess.py (calibrate_sensors) INFO: Channel calibrated: H1:PEM-EX_MAG_EBAY_SEIRACK_X.
+15:49:12 preprocess.py (calibrate_sensors) INFO: Channel calibrated: H1:PEM-EX_MAG_EBAY_SEIRACK_Y.
+15:49:12 preprocess.py (calibrate_sensors) INFO: Channel calibrated: H1:PEM-EX_MAG_EBAY_SEIRACK_Z.
+15:49:12 preprocess.py (calibrate_sensors) INFO: Channel calibrated: H1:PEM-EX_MAG_EBAY_SUSRACK_X.
+15:49:12 preprocess.py (calibrate_sensors) INFO: Channel calibrated: H1:PEM-EX_MAG_EBAY_SUSRACK_Y.
+15:49:12 preprocess.py (calibrate_sensors) INFO: Channel calibrated: H1:PEM-EX_MAG_EBAY_SUSRACK_Z.
+15:49:12 preprocess.py (calibrate_sensors) INFO: Channel calibrated: H1:PEM-EX_MAG_VEA_FLOOR_X.
+15:49:12 preprocess.py (calibrate_sensors) INFO: Channel calibrated: H1:PEM-EX_MAG_VEA_FLOOR_Y.
+15:49:12 preprocess.py (calibrate_sensors) INFO: Channel calibrated: H1:PEM-EX_MAG_VEA_FLOOR_Z.
+15:49:12 preprocess.py (quad_sum_ASD) INFO: Generating quad sum ASD for H1:PEM-EX_MAG_EBAY_SEIRACK_XYZ.
+15:49:12 preprocess.py (quad_sum_ASD) INFO: Generating quad sum ASD for H1:PEM-EX_MAG_EBAY_SUSRACK_XYZ.
+15:49:12 preprocess.py (quad_sum_ASD) INFO: Generating quad sum ASD for H1:PEM-EX_MAG_VEA_FLOOR_XYZ.
+15:49:12 preprocess.py (quad_sum_ASD) INFO: Generating quad sum ASD for H1:PEM-EX_MAG_EBAY_SEIRACK_XYZ.
+15:49:12 preprocess.py (quad_sum_ASD) INFO: Generating quad sum ASD for H1:PEM-EX_MAG_EBAY_SUSRACK_XYZ.
+15:49:12 preprocess.py (quad_sum_ASD) INFO: Generating quad sum ASD for H1:PEM-EX_MAG_VEA_FLOOR_XYZ.
+15:49:17 PEMcoupling.py (<module>) INFO: Cropping ASDs to match frequencies: H1:PEM-EX_MAG_EBAY_SEIRACK_X.
+15:49:17 PEMcoupling.py (<module>) INFO: Cropping ASDs to match frequencies: H1:PEM-EX_MAG_EBAY_SEIRACK_XYZ.
+15:49:17 PEMcoupling.py (<module>) INFO: Cropping ASDs to match frequencies: H1:PEM-EX_MAG_EBAY_SEIRACK_Y.
+15:49:17 PEMcoupling.py (<module>) INFO: Cropping ASDs to match frequencies: H1:PEM-EX_MAG_EBAY_SEIRACK_Z.
+15:49:17 PEMcoupling.py (<module>) INFO: Cropping ASDs to match frequencies: H1:PEM-EX_MAG_EBAY_SUSRACK_X.
+15:49:17 PEMcoupling.py (<module>) INFO: Cropping ASDs to match frequencies: H1:PEM-EX_MAG_EBAY_SUSRACK_XYZ.
+15:49:17 PEMcoupling.py (<module>) INFO: Cropping ASDs to match frequencies: H1:PEM-EX_MAG_EBAY_SUSRACK_Y.
+15:49:17 PEMcoupling.py (<module>) INFO: Cropping ASDs to match frequencies: H1:PEM-EX_MAG_EBAY_SUSRACK_Z.
+15:49:17 PEMcoupling.py (<module>) INFO: Cropping ASDs to match frequencies: H1:PEM-EX_MAG_VEA_FLOOR_X.
+15:49:17 PEMcoupling.py (<module>) INFO: Cropping ASDs to match frequencies: H1:PEM-EX_MAG_VEA_FLOOR_XYZ.
+15:49:17 PEMcoupling.py (<module>) INFO: Cropping ASDs to match frequencies: H1:PEM-EX_MAG_VEA_FLOOR_Y.
+15:49:17 PEMcoupling.py (<module>) INFO: Cropping ASDs to match frequencies: H1:PEM-EX_MAG_VEA_FLOOR_Z.
+15:49:17 PEMcoupling.py (<module>) INFO: Acquiring smoothing parameters for channel H1:PEM-EX_MAG_EBAY_SEIRACK_X.
+15:49:17 PEMcoupling.py (<module>) INFO: Acquiring smoothing parameters for channel H1:PEM-EX_MAG_EBAY_SEIRACK_XYZ.
+15:49:17 PEMcoupling.py (<module>) INFO: Acquiring smoothing parameters for channel H1:PEM-EX_MAG_EBAY_SEIRACK_Y.
+15:49:17 PEMcoupling.py (<module>) INFO: Acquiring smoothing parameters for channel H1:PEM-EX_MAG_EBAY_SEIRACK_Z.
+15:49:17 PEMcoupling.py (<module>) INFO: Acquiring smoothing parameters for channel H1:PEM-EX_MAG_EBAY_SUSRACK_X.
+15:49:17 PEMcoupling.py (<module>) INFO: Acquiring smoothing parameters for channel H1:PEM-EX_MAG_EBAY_SUSRACK_XYZ.
+15:49:17 PEMcoupling.py (<module>) INFO: Acquiring smoothing parameters for channel H1:PEM-EX_MAG_EBAY_SUSRACK_Y.
+15:49:17 PEMcoupling.py (<module>) INFO: Acquiring smoothing parameters for channel H1:PEM-EX_MAG_EBAY_SUSRACK_Z.
+15:49:17 PEMcoupling.py (<module>) INFO: Acquiring smoothing parameters for channel H1:PEM-EX_MAG_VEA_FLOOR_X.
+15:49:17 PEMcoupling.py (<module>) INFO: Acquiring smoothing parameters for channel H1:PEM-EX_MAG_VEA_FLOOR_XYZ.
+15:49:17 PEMcoupling.py (<module>) INFO: Acquiring smoothing parameters for channel H1:PEM-EX_MAG_VEA_FLOOR_Y.
+15:49:17 PEMcoupling.py (<module>) INFO: Acquiring smoothing parameters for channel H1:PEM-EX_MAG_VEA_FLOOR_Z.
+15:49:19 PEMcoupling.py (<module>) INFO: Coupling function complete: H1:PEM-EX_MAG_EBAY_SEIRACK_X.
+15:49:21 PEMcoupling.py (<module>) INFO: Coupling function complete: H1:PEM-EX_MAG_EBAY_SEIRACK_XYZ.
+15:49:22 PEMcoupling.py (<module>) INFO: Coupling function complete: H1:PEM-EX_MAG_EBAY_SEIRACK_Y.
+15:49:24 PEMcoupling.py (<module>) INFO: Coupling function complete: H1:PEM-EX_MAG_EBAY_SEIRACK_Z.
+15:49:26 PEMcoupling.py (<module>) INFO: Coupling function complete: H1:PEM-EX_MAG_EBAY_SUSRACK_X.
+15:49:28 PEMcoupling.py (<module>) INFO: Coupling function complete: H1:PEM-EX_MAG_EBAY_SUSRACK_XYZ.
+15:49:29 PEMcoupling.py (<module>) INFO: Coupling function complete: H1:PEM-EX_MAG_EBAY_SUSRACK_Y.
+15:49:31 PEMcoupling.py (<module>) INFO: Coupling function complete: H1:PEM-EX_MAG_EBAY_SUSRACK_Z.
+15:49:33 PEMcoupling.py (<module>) INFO: Coupling function complete: H1:PEM-EX_MAG_VEA_FLOOR_X.
+15:49:35 PEMcoupling.py (<module>) INFO: Coupling function complete: H1:PEM-EX_MAG_VEA_FLOOR_XYZ.
+15:49:36 PEMcoupling.py (<module>) INFO: Coupling function complete: H1:PEM-EX_MAG_VEA_FLOOR_Y.
+15:49:38 PEMcoupling.py (<module>) INFO: Coupling function complete: H1:PEM-EX_MAG_VEA_FLOOR_Z.
+15:50:38 PEMcoupling.py (<module>) INFO: Coupling functions saved for injection 066EXmagEbayRacks7Hzramp.
+15:50:38 PEMcoupling.py (<module>) INFO: Searching for fundamental frequency if applicable.
+15:50:38 getparams.py (freq_search) INFO: Fundamental frequency found: 51 Hz.
+15:50:38 PEMcoupling.py (<module>) INFO: Being picky about channels.
+15:50:39 loaddata.py (get_time_series) INFO: Channel successfully extracted: H1:PEM-EX_MAG_EBAY_SEIRACK_X_DQ at time 1186334486 to 1186334626.0.
+15:50:39 loaddata.py (get_time_series) INFO: Channel successfully extracted: H1:PEM-EX_MAG_EBAY_SEIRACK_Y_DQ at time 1186334486 to 1186334626.0.
+15:50:40 loaddata.py (get_time_series) INFO: Channel successfully extracted: H1:PEM-EX_MAG_EBAY_SEIRACK_Z_DQ at time 1186334486 to 1186334626.0.
+15:50:41 loaddata.py (get_time_series) INFO: Channel successfully extracted: H1:PEM-EX_MAG_EBAY_SUSRACK_X_DQ at time 1186334486 to 1186334626.0.
+15:50:41 loaddata.py (get_time_series) INFO: Channel successfully extracted: H1:PEM-EX_MAG_EBAY_SUSRACK_Y_DQ at time 1186334486 to 1186334626.0.
+15:50:42 loaddata.py (get_time_series) INFO: Channel successfully extracted: H1:PEM-EX_MAG_EBAY_SUSRACK_Z_DQ at time 1186334486 to 1186334626.0.
+15:50:42 loaddata.py (get_time_series) INFO: Channel successfully extracted: H1:PEM-EX_MAG_VEA_FLOOR_X_DQ at time 1186334486 to 1186334626.0.
+15:50:43 loaddata.py (get_time_series) INFO: Channel successfully extracted: H1:PEM-EX_MAG_VEA_FLOOR_Y_DQ at time 1186334486 to 1186334626.0.
+15:50:44 loaddata.py (get_time_series) INFO: Channel successfully extracted: H1:PEM-EX_MAG_VEA_FLOOR_Z_DQ at time 1186334486 to 1186334626.0.
+15:50:49 loaddata.py (get_time_series) INFO: Channel successfully extracted: H1:PEM-EX_MAG_EBAY_SEIRACK_X_DQ at time 1186339016 to 1186339156.0.
+15:50:51 loaddata.py (get_time_series) INFO: Channel successfully extracted: H1:PEM-EX_MAG_EBAY_SEIRACK_Y_DQ at time 1186339016 to 1186339156.0.
+15:50:55 loaddata.py (get_time_series) INFO: Channel successfully extracted: H1:PEM-EX_MAG_EBAY_SEIRACK_Z_DQ at time 1186339016 to 1186339156.0.
+15:51:00 loaddata.py (get_time_series) INFO: Channel successfully extracted: H1:PEM-EX_MAG_EBAY_SUSRACK_X_DQ at time 1186339016 to 1186339156.0.
+15:51:02 loaddata.py (get_time_series) INFO: Channel successfully extracted: H1:PEM-EX_MAG_EBAY_SUSRACK_Y_DQ at time 1186339016 to 1186339156.0.
+15:51:04 loaddata.py (get_time_series) INFO: Channel successfully extracted: H1:PEM-EX_MAG_EBAY_SUSRACK_Z_DQ at time 1186339016 to 1186339156.0.
+15:51:05 loaddata.py (get_time_series) INFO: Channel successfully extracted: H1:PEM-EX_MAG_VEA_FLOOR_X_DQ at time 1186339016 to 1186339156.0.
+15:51:07 loaddata.py (get_time_series) INFO: Channel successfully extracted: H1:PEM-EX_MAG_VEA_FLOOR_Y_DQ at time 1186339016 to 1186339156.0.
+15:51:09 loaddata.py (get_time_series) INFO: Channel successfully extracted: H1:PEM-EX_MAG_VEA_FLOOR_Z_DQ at time 1186339016 to 1186339156.0.
+15:51:09 preprocess.py (convert_to_ASD) INFO: Channel converted to ASD: H1:PEM-EX_MAG_EBAY_SEIRACK_X with FFT time 25.0 and overlap time 12.5
+15:51:09 preprocess.py (convert_to_ASD) INFO: Channel converted to ASD: H1:PEM-EX_MAG_EBAY_SEIRACK_Y with FFT time 25.0 and overlap time 12.5
+15:51:09 preprocess.py (convert_to_ASD) INFO: Channel converted to ASD: H1:PEM-EX_MAG_EBAY_SEIRACK_Z with FFT time 25.0 and overlap time 12.5
+15:51:09 preprocess.py (convert_to_ASD) INFO: Channel converted to ASD: H1:PEM-EX_MAG_EBAY_SUSRACK_X with FFT time 25.0 and overlap time 12.5
+15:51:10 preprocess.py (convert_to_ASD) INFO: Channel converted to ASD: H1:PEM-EX_MAG_EBAY_SUSRACK_Y with FFT time 25.0 and overlap time 12.5
+15:51:10 preprocess.py (convert_to_ASD) INFO: Channel converted to ASD: H1:PEM-EX_MAG_EBAY_SUSRACK_Z with FFT time 25.0 and overlap time 12.5
+15:51:10 preprocess.py (convert_to_ASD) INFO: Channel converted to ASD: H1:PEM-EX_MAG_VEA_FLOOR_X with FFT time 25.0 and overlap time 12.5
+15:51:10 preprocess.py (convert_to_ASD) INFO: Channel converted to ASD: H1:PEM-EX_MAG_VEA_FLOOR_Y with FFT time 25.0 and overlap time 12.5
+15:51:10 preprocess.py (convert_to_ASD) INFO: Channel converted to ASD: H1:PEM-EX_MAG_VEA_FLOOR_Z with FFT time 25.0 and overlap time 12.5
+15:51:10 preprocess.py (convert_to_ASD) INFO: Channel converted to ASD: H1:PEM-EX_MAG_EBAY_SEIRACK_X with FFT time 25.0 and overlap time 12.5
+15:51:10 preprocess.py (convert_to_ASD) INFO: Channel converted to ASD: H1:PEM-EX_MAG_EBAY_SEIRACK_Y with FFT time 25.0 and overlap time 12.5
+15:51:10 preprocess.py (convert_to_ASD) INFO: Channel converted to ASD: H1:PEM-EX_MAG_EBAY_SEIRACK_Z with FFT time 25.0 and overlap time 12.5
+15:51:10 preprocess.py (convert_to_ASD) INFO: Channel converted to ASD: H1:PEM-EX_MAG_EBAY_SUSRACK_X with FFT time 25.0 and overlap time 12.5
+15:51:10 preprocess.py (convert_to_ASD) INFO: Channel converted to ASD: H1:PEM-EX_MAG_EBAY_SUSRACK_Y with FFT time 25.0 and overlap time 12.5
+15:51:10 preprocess.py (convert_to_ASD) INFO: Channel converted to ASD: H1:PEM-EX_MAG_EBAY_SUSRACK_Z with FFT time 25.0 and overlap time 12.5
+15:51:11 preprocess.py (convert_to_ASD) INFO: Channel converted to ASD: H1:PEM-EX_MAG_VEA_FLOOR_X with FFT time 25.0 and overlap time 12.5
+15:51:11 preprocess.py (convert_to_ASD) INFO: Channel converted to ASD: H1:PEM-EX_MAG_VEA_FLOOR_Y with FFT time 25.0 and overlap time 12.5
+15:51:11 preprocess.py (convert_to_ASD) INFO: Channel converted to ASD: H1:PEM-EX_MAG_VEA_FLOOR_Z with FFT time 25.0 and overlap time 12.5
+15:51:11 preprocess.py (get_calibration_factors) INFO: Parsing calibration data for channel H1:PEM-EX_MAG_VEA_FLOOR_Z.
+15:51:11 preprocess.py (get_calibration_factors) INFO: Calibration factor acquired for channel H1:PEM-EX_MAG_VEA_FLOOR_Z.
+15:51:11 preprocess.py (get_calibration_factors) INFO: Parsing calibration data for channel H1:PEM-EX_MAG_EBAY_SEIRACK_Z.
+15:51:11 preprocess.py (get_calibration_factors) INFO: Calibration factor acquired for channel H1:PEM-EX_MAG_EBAY_SEIRACK_Z.
+15:51:11 preprocess.py (get_calibration_factors) INFO: Parsing calibration data for channel H1:PEM-EX_MAG_EBAY_SEIRACK_Y.
+15:51:11 preprocess.py (get_calibration_factors) INFO: Calibration factor acquired for channel H1:PEM-EX_MAG_EBAY_SEIRACK_Y.
+15:51:11 preprocess.py (get_calibration_factors) INFO: Parsing calibration data for channel H1:PEM-EX_MAG_EBAY_SEIRACK_X.
+15:51:11 preprocess.py (get_calibration_factors) INFO: Calibration factor acquired for channel H1:PEM-EX_MAG_EBAY_SEIRACK_X.
+15:51:11 preprocess.py (get_calibration_factors) INFO: Parsing calibration data for channel H1:PEM-EX_MAG_VEA_FLOOR_Y.
+15:51:11 preprocess.py (get_calibration_factors) INFO: Calibration factor acquired for channel H1:PEM-EX_MAG_VEA_FLOOR_Y.
+15:51:11 preprocess.py (get_calibration_factors) INFO: Parsing calibration data for channel H1:PEM-EX_MAG_VEA_FLOOR_X.
+15:51:11 preprocess.py (get_calibration_factors) INFO: Calibration factor acquired for channel H1:PEM-EX_MAG_VEA_FLOOR_X.
+15:51:11 preprocess.py (get_calibration_factors) INFO: Parsing calibration data for channel H1:PEM-EX_MAG_EBAY_SUSRACK_Z.
+15:51:11 preprocess.py (get_calibration_factors) INFO: Calibration factor acquired for channel H1:PEM-EX_MAG_EBAY_SUSRACK_Z.
+15:51:11 preprocess.py (get_calibration_factors) INFO: Parsing calibration data for channel H1:PEM-EX_MAG_EBAY_SUSRACK_Y.
+15:51:11 preprocess.py (get_calibration_factors) INFO: Calibration factor acquired for channel H1:PEM-EX_MAG_EBAY_SUSRACK_Y.
+15:51:11 preprocess.py (get_calibration_factors) INFO: Parsing calibration data for channel H1:PEM-EX_MAG_EBAY_SUSRACK_X.
+15:51:11 preprocess.py (get_calibration_factors) INFO: Calibration factor acquired for channel H1:PEM-EX_MAG_EBAY_SUSRACK_X.
+15:51:11 preprocess.py (calibrate_sensors) INFO: Channel calibrated: H1:PEM-EX_MAG_EBAY_SEIRACK_X.
+15:51:11 preprocess.py (calibrate_sensors) INFO: Channel calibrated: H1:PEM-EX_MAG_EBAY_SEIRACK_Y.
+15:51:11 preprocess.py (calibrate_sensors) INFO: Channel calibrated: H1:PEM-EX_MAG_EBAY_SEIRACK_Z.
+15:51:11 preprocess.py (calibrate_sensors) INFO: Channel calibrated: H1:PEM-EX_MAG_EBAY_SUSRACK_X.
+15:51:11 preprocess.py (calibrate_sensors) INFO: Channel calibrated: H1:PEM-EX_MAG_EBAY_SUSRACK_Y.
+15:51:11 preprocess.py (calibrate_sensors) INFO: Channel calibrated: H1:PEM-EX_MAG_EBAY_SUSRACK_Z.
+15:51:11 preprocess.py (calibrate_sensors) INFO: Channel calibrated: H1:PEM-EX_MAG_VEA_FLOOR_X.
+15:51:11 preprocess.py (calibrate_sensors) INFO: Channel calibrated: H1:PEM-EX_MAG_VEA_FLOOR_Y.
+15:51:11 preprocess.py (calibrate_sensors) INFO: Channel calibrated: H1:PEM-EX_MAG_VEA_FLOOR_Z.
+15:51:11 preprocess.py (get_calibration_factors) INFO: Parsing calibration data for channel H1:PEM-EX_MAG_VEA_FLOOR_Z.
+15:51:11 preprocess.py (get_calibration_factors) INFO: Calibration factor acquired for channel H1:PEM-EX_MAG_VEA_FLOOR_Z.
+15:51:11 preprocess.py (get_calibration_factors) INFO: Parsing calibration data for channel H1:PEM-EX_MAG_EBAY_SEIRACK_Z.
+15:51:11 preprocess.py (get_calibration_factors) INFO: Calibration factor acquired for channel H1:PEM-EX_MAG_EBAY_SEIRACK_Z.
+15:51:11 preprocess.py (get_calibration_factors) INFO: Parsing calibration data for channel H1:PEM-EX_MAG_EBAY_SEIRACK_Y.
+15:51:11 preprocess.py (get_calibration_factors) INFO: Calibration factor acquired for channel H1:PEM-EX_MAG_EBAY_SEIRACK_Y.
+15:51:11 preprocess.py (get_calibration_factors) INFO: Parsing calibration data for channel H1:PEM-EX_MAG_EBAY_SEIRACK_X.
+15:51:11 preprocess.py (get_calibration_factors) INFO: Calibration factor acquired for channel H1:PEM-EX_MAG_EBAY_SEIRACK_X.
+15:51:11 preprocess.py (get_calibration_factors) INFO: Parsing calibration data for channel H1:PEM-EX_MAG_VEA_FLOOR_Y.
+15:51:11 preprocess.py (get_calibration_factors) INFO: Calibration factor acquired for channel H1:PEM-EX_MAG_VEA_FLOOR_Y.
+15:51:11 preprocess.py (get_calibration_factors) INFO: Parsing calibration data for channel H1:PEM-EX_MAG_VEA_FLOOR_X.
+15:51:11 preprocess.py (get_calibration_factors) INFO: Calibration factor acquired for channel H1:PEM-EX_MAG_VEA_FLOOR_X.
+15:51:11 preprocess.py (get_calibration_factors) INFO: Parsing calibration data for channel H1:PEM-EX_MAG_EBAY_SUSRACK_Z.
+15:51:11 preprocess.py (get_calibration_factors) INFO: Calibration factor acquired for channel H1:PEM-EX_MAG_EBAY_SUSRACK_Z.
+15:51:11 preprocess.py (get_calibration_factors) INFO: Parsing calibration data for channel H1:PEM-EX_MAG_EBAY_SUSRACK_Y.
+15:51:11 preprocess.py (get_calibration_factors) INFO: Calibration factor acquired for channel H1:PEM-EX_MAG_EBAY_SUSRACK_Y.
+15:51:11 preprocess.py (get_calibration_factors) INFO: Parsing calibration data for channel H1:PEM-EX_MAG_EBAY_SUSRACK_X.
+15:51:11 preprocess.py (get_calibration_factors) INFO: Calibration factor acquired for channel H1:PEM-EX_MAG_EBAY_SUSRACK_X.
+15:51:11 preprocess.py (calibrate_sensors) INFO: Channel calibrated: H1:PEM-EX_MAG_EBAY_SEIRACK_X.
+15:51:11 preprocess.py (calibrate_sensors) INFO: Channel calibrated: H1:PEM-EX_MAG_EBAY_SEIRACK_Y.
+15:51:11 preprocess.py (calibrate_sensors) INFO: Channel calibrated: H1:PEM-EX_MAG_EBAY_SEIRACK_Z.
+15:51:11 preprocess.py (calibrate_sensors) INFO: Channel calibrated: H1:PEM-EX_MAG_EBAY_SUSRACK_X.
+15:51:11 preprocess.py (calibrate_sensors) INFO: Channel calibrated: H1:PEM-EX_MAG_EBAY_SUSRACK_Y.
+15:51:11 preprocess.py (calibrate_sensors) INFO: Channel calibrated: H1:PEM-EX_MAG_EBAY_SUSRACK_Z.
+15:51:11 preprocess.py (calibrate_sensors) INFO: Channel calibrated: H1:PEM-EX_MAG_VEA_FLOOR_X.
+15:51:11 preprocess.py (calibrate_sensors) INFO: Channel calibrated: H1:PEM-EX_MAG_VEA_FLOOR_Y.
+15:51:11 preprocess.py (calibrate_sensors) INFO: Channel calibrated: H1:PEM-EX_MAG_VEA_FLOOR_Z.
+15:51:11 preprocess.py (quad_sum_ASD) INFO: Generating quad sum ASD for H1:PEM-EX_MAG_EBAY_SEIRACK_XYZ.
+15:51:11 preprocess.py (quad_sum_ASD) INFO: Generating quad sum ASD for H1:PEM-EX_MAG_EBAY_SUSRACK_XYZ.
+15:51:11 preprocess.py (quad_sum_ASD) INFO: Generating quad sum ASD for H1:PEM-EX_MAG_VEA_FLOOR_XYZ.
+15:51:11 preprocess.py (quad_sum_ASD) INFO: Generating quad sum ASD for H1:PEM-EX_MAG_EBAY_SEIRACK_XYZ.
+15:51:11 preprocess.py (quad_sum_ASD) INFO: Generating quad sum ASD for H1:PEM-EX_MAG_EBAY_SUSRACK_XYZ.
+15:51:11 preprocess.py (quad_sum_ASD) INFO: Generating quad sum ASD for H1:PEM-EX_MAG_VEA_FLOOR_XYZ.
+15:51:15 PEMcoupling.py (<module>) INFO: Cropping ASDs to match frequencies: H1:PEM-EX_MAG_EBAY_SEIRACK_X.
+15:51:15 PEMcoupling.py (<module>) INFO: Cropping ASDs to match frequencies: H1:PEM-EX_MAG_EBAY_SEIRACK_XYZ.
+15:51:15 PEMcoupling.py (<module>) INFO: Cropping ASDs to match frequencies: H1:PEM-EX_MAG_EBAY_SEIRACK_Y.
+15:51:15 PEMcoupling.py (<module>) INFO: Cropping ASDs to match frequencies: H1:PEM-EX_MAG_EBAY_SEIRACK_Z.
+15:51:15 PEMcoupling.py (<module>) INFO: Cropping ASDs to match frequencies: H1:PEM-EX_MAG_EBAY_SUSRACK_X.
+15:51:15 PEMcoupling.py (<module>) INFO: Cropping ASDs to match frequencies: H1:PEM-EX_MAG_EBAY_SUSRACK_XYZ.
+15:51:15 PEMcoupling.py (<module>) INFO: Cropping ASDs to match frequencies: H1:PEM-EX_MAG_EBAY_SUSRACK_Y.
+15:51:15 PEMcoupling.py (<module>) INFO: Cropping ASDs to match frequencies: H1:PEM-EX_MAG_EBAY_SUSRACK_Z.
+15:51:15 PEMcoupling.py (<module>) INFO: Cropping ASDs to match frequencies: H1:PEM-EX_MAG_VEA_FLOOR_X.
+15:51:15 PEMcoupling.py (<module>) INFO: Cropping ASDs to match frequencies: H1:PEM-EX_MAG_VEA_FLOOR_XYZ.
+15:51:15 PEMcoupling.py (<module>) INFO: Cropping ASDs to match frequencies: H1:PEM-EX_MAG_VEA_FLOOR_Y.
+15:51:15 PEMcoupling.py (<module>) INFO: Cropping ASDs to match frequencies: H1:PEM-EX_MAG_VEA_FLOOR_Z.
+15:51:15 PEMcoupling.py (<module>) INFO: Acquiring smoothing parameters for channel H1:PEM-EX_MAG_EBAY_SEIRACK_X.
+15:51:15 PEMcoupling.py (<module>) INFO: Acquiring smoothing parameters for channel H1:PEM-EX_MAG_EBAY_SEIRACK_XYZ.
+15:51:15 PEMcoupling.py (<module>) INFO: Acquiring smoothing parameters for channel H1:PEM-EX_MAG_EBAY_SEIRACK_Y.
+15:51:15 PEMcoupling.py (<module>) INFO: Acquiring smoothing parameters for channel H1:PEM-EX_MAG_EBAY_SEIRACK_Z.
+15:51:15 PEMcoupling.py (<module>) INFO: Acquiring smoothing parameters for channel H1:PEM-EX_MAG_EBAY_SUSRACK_X.
+15:51:15 PEMcoupling.py (<module>) INFO: Acquiring smoothing parameters for channel H1:PEM-EX_MAG_EBAY_SUSRACK_XYZ.
+15:51:15 PEMcoupling.py (<module>) INFO: Acquiring smoothing parameters for channel H1:PEM-EX_MAG_EBAY_SUSRACK_Y.
+15:51:15 PEMcoupling.py (<module>) INFO: Acquiring smoothing parameters for channel H1:PEM-EX_MAG_EBAY_SUSRACK_Z.
+15:51:15 PEMcoupling.py (<module>) INFO: Acquiring smoothing parameters for channel H1:PEM-EX_MAG_VEA_FLOOR_X.
+15:51:15 PEMcoupling.py (<module>) INFO: Acquiring smoothing parameters for channel H1:PEM-EX_MAG_VEA_FLOOR_XYZ.
+15:51:15 PEMcoupling.py (<module>) INFO: Acquiring smoothing parameters for channel H1:PEM-EX_MAG_VEA_FLOOR_Y.
+15:51:15 PEMcoupling.py (<module>) INFO: Acquiring smoothing parameters for channel H1:PEM-EX_MAG_VEA_FLOOR_Z.
+15:51:16 PEMcoupling.py (<module>) INFO: Coupling function complete: H1:PEM-EX_MAG_EBAY_SEIRACK_X.
+15:51:18 PEMcoupling.py (<module>) INFO: Coupling function complete: H1:PEM-EX_MAG_EBAY_SEIRACK_XYZ.
+15:51:20 PEMcoupling.py (<module>) INFO: Coupling function complete: H1:PEM-EX_MAG_EBAY_SEIRACK_Y.
+15:51:21 PEMcoupling.py (<module>) INFO: Coupling function complete: H1:PEM-EX_MAG_EBAY_SEIRACK_Z.
+15:51:23 PEMcoupling.py (<module>) INFO: Coupling function complete: H1:PEM-EX_MAG_EBAY_SUSRACK_X.
+15:51:25 PEMcoupling.py (<module>) INFO: Coupling function complete: H1:PEM-EX_MAG_EBAY_SUSRACK_XYZ.
+15:51:26 PEMcoupling.py (<module>) INFO: Coupling function complete: H1:PEM-EX_MAG_EBAY_SUSRACK_Y.
+15:51:28 PEMcoupling.py (<module>) INFO: Coupling function complete: H1:PEM-EX_MAG_EBAY_SUSRACK_Z.
+15:51:30 PEMcoupling.py (<module>) INFO: Coupling function complete: H1:PEM-EX_MAG_VEA_FLOOR_X.
+15:51:31 PEMcoupling.py (<module>) INFO: Coupling function complete: H1:PEM-EX_MAG_VEA_FLOOR_XYZ.
+15:51:33 PEMcoupling.py (<module>) INFO: Coupling function complete: H1:PEM-EX_MAG_VEA_FLOOR_Y.
+15:51:35 PEMcoupling.py (<module>) INFO: Coupling function complete: H1:PEM-EX_MAG_VEA_FLOOR_Z.
+15:52:33 PEMcoupling.py (<module>) INFO: Coupling functions saved for injection 067EXmagEbayRacks51Hzramp.
+15:52:33 loaddata.py (get_gwinc) INFO: Importing GWINC data.
+15:52:33 loaddata.py (get_gwinc) INFO: Successfully imported GWINC data.

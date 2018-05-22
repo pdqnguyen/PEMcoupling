@@ -1,0 +1,417 @@
+15:14:04 PEMcoupling.py (<module>) INFO: Importing PEM coupling packages.
+15:14:07 getparams.py (get_arg_params) INFO: Parsing arguments.
+15:14:07 getparams.py (get_config_params) INFO: Opening config file.
+15:14:07 getparams.py (get_config_params) INFO: Checking if missing/empty config file.
+15:14:07 getparams.py (get_config_params) INFO: Parsing numerical and boolean config options.
+15:14:07 PEMcoupling.py (<module>) INFO: Separating config dictionary by section.
+15:14:07 PEMcoupling.py (<module>) INFO: Handling conflicts between config options and command line options.
+15:14:07 PEMcoupling.py (<module>) INFO: Reading in channel list given in config file.
+15:14:07 getparams.py (get_channel_names) INFO: Opening channel list file.
+15:14:07 PEMcoupling.py (<module>) INFO: Creating injection table.
+15:14:07 getparams.py (get_times_config) INFO: Reading injection times config file.
+15:14:07 PEMcoupling.py (<module>) INFO: Reporting injection results.
+15:14:07 PEMcoupling.py (<module>) INFO: Calculating FFT parameters.
+15:14:07 getparams.py (get_FFT_params) INFO: Duration given; determining overlap time and bandwidth.
+15:14:07 getparams.py (get_FFT_params) INFO: FFT parameters acquired.
+15:14:07 PEMcoupling.py (<module>) INFO: Converting smoothing parameters to frequency bins based on bandwidth.
+15:14:07 PEMcoupling.py (<module>) INFO: Beginning to loop over injections.
+15:14:07 PEMcoupling.py (<module>) INFO: Searching for fundamental frequency if applicable.
+15:14:07 PEMcoupling.py (<module>) INFO: Being picky about channels.
+15:14:11 loaddata.py (get_time_series) INFO: Channel successfully extracted: H1:PEM-EY_ACC_BSC10_ETMY_X_DQ at time 1185901457 to 1185901507.0.
+15:14:13 loaddata.py (get_time_series) INFO: Channel successfully extracted: H1:PEM-EY_ACC_BSC10_ETMY_Y_DQ at time 1185901457 to 1185901507.0.
+15:14:14 loaddata.py (get_time_series) INFO: Channel successfully extracted: H1:PEM-EY_ACC_BSC10_ETMY_Z_DQ at time 1185901457 to 1185901507.0.
+15:14:15 loaddata.py (get_time_series) INFO: Channel successfully extracted: H1:PEM-EY_ACC_EBAY_FLOOR_Z_DQ at time 1185901457 to 1185901507.0.
+15:14:17 loaddata.py (get_time_series) INFO: Channel successfully extracted: H1:PEM-EY_ACC_ISCTEY_TRANS_X_DQ at time 1185901457 to 1185901507.0.
+15:14:18 loaddata.py (get_time_series) INFO: Channel successfully extracted: H1:PEM-EY_ACC_OPLEV_ETMY_X_DQ at time 1185901457 to 1185901507.0.
+15:14:19 loaddata.py (get_time_series) INFO: Channel successfully extracted: H1:PEM-EY_ACC_VEA_FLOOR_Z_DQ at time 1185901457 to 1185901507.0.
+15:14:21 loaddata.py (get_time_series) INFO: Channel successfully extracted: H1:PEM-EY_MIC_EBAY_RACKS_DQ at time 1185901457 to 1185901507.0.
+15:14:23 loaddata.py (get_time_series) INFO: Channel successfully extracted: H1:PEM-EY_MIC_VEA_MINUSY_DQ at time 1185901457 to 1185901507.0.
+15:14:25 loaddata.py (get_time_series) INFO: Channel successfully extracted: H1:PEM-EY_MIC_VEA_PLUSY_DQ at time 1185901457 to 1185901507.0.
+15:14:27 loaddata.py (get_time_series) INFO: Channel successfully extracted: H1:PEM-EY_ACC_BSC10_ETMY_X_DQ at time 1185901639 to 1185901689.0.
+15:14:28 loaddata.py (get_time_series) INFO: Channel successfully extracted: H1:PEM-EY_ACC_BSC10_ETMY_Y_DQ at time 1185901639 to 1185901689.0.
+15:14:29 loaddata.py (get_time_series) INFO: Channel successfully extracted: H1:PEM-EY_ACC_BSC10_ETMY_Z_DQ at time 1185901639 to 1185901689.0.
+15:14:30 loaddata.py (get_time_series) INFO: Channel successfully extracted: H1:PEM-EY_ACC_EBAY_FLOOR_Z_DQ at time 1185901639 to 1185901689.0.
+15:14:31 loaddata.py (get_time_series) INFO: Channel successfully extracted: H1:PEM-EY_ACC_ISCTEY_TRANS_X_DQ at time 1185901639 to 1185901689.0.
+15:14:32 loaddata.py (get_time_series) INFO: Channel successfully extracted: H1:PEM-EY_ACC_OPLEV_ETMY_X_DQ at time 1185901639 to 1185901689.0.
+15:14:33 loaddata.py (get_time_series) INFO: Channel successfully extracted: H1:PEM-EY_ACC_VEA_FLOOR_Z_DQ at time 1185901639 to 1185901689.0.
+15:14:34 loaddata.py (get_time_series) INFO: Channel successfully extracted: H1:PEM-EY_MIC_EBAY_RACKS_DQ at time 1185901639 to 1185901689.0.
+15:14:35 loaddata.py (get_time_series) INFO: Channel successfully extracted: H1:PEM-EY_MIC_VEA_MINUSY_DQ at time 1185901639 to 1185901689.0.
+15:14:36 loaddata.py (get_time_series) INFO: Channel successfully extracted: H1:PEM-EY_MIC_VEA_PLUSY_DQ at time 1185901639 to 1185901689.0.
+15:14:36 preprocess.py (reject_saturated) INFO: Channel rejected due to saturation: H1:PEM-EY_ACC_BSC10_ETMY_Z_DQ
+15:14:37 preprocess.py (convert_to_ASD) INFO: Channel converted to ASD: H1:PEM-EY_ACC_BSC10_ETMY_X with FFT time 9.0 and overlap time 4.5
+15:14:37 preprocess.py (convert_to_ASD) INFO: Channel converted to ASD: H1:PEM-EY_ACC_BSC10_ETMY_Y with FFT time 9.0 and overlap time 4.5
+15:14:37 preprocess.py (convert_to_ASD) INFO: Channel converted to ASD: H1:PEM-EY_ACC_EBAY_FLOOR_Z with FFT time 9.0 and overlap time 4.5
+15:14:37 preprocess.py (convert_to_ASD) INFO: Channel converted to ASD: H1:PEM-EY_ACC_ISCTEY_TRANS_X with FFT time 9.0 and overlap time 4.5
+15:14:37 preprocess.py (convert_to_ASD) INFO: Channel converted to ASD: H1:PEM-EY_ACC_OPLEV_ETMY_X with FFT time 9.0 and overlap time 4.5
+15:14:37 preprocess.py (convert_to_ASD) INFO: Channel converted to ASD: H1:PEM-EY_ACC_VEA_FLOOR_Z with FFT time 9.0 and overlap time 4.5
+15:14:37 preprocess.py (convert_to_ASD) INFO: Channel converted to ASD: H1:PEM-EY_MIC_EBAY_RACKS with FFT time 9.0 and overlap time 4.5
+15:14:37 preprocess.py (convert_to_ASD) INFO: Channel converted to ASD: H1:PEM-EY_MIC_VEA_MINUSY with FFT time 9.0 and overlap time 4.5
+15:14:37 preprocess.py (convert_to_ASD) INFO: Channel converted to ASD: H1:PEM-EY_MIC_VEA_PLUSY with FFT time 9.0 and overlap time 4.5
+15:14:37 preprocess.py (convert_to_ASD) INFO: Channel converted to ASD: H1:PEM-EY_ACC_BSC10_ETMY_X with FFT time 9.0 and overlap time 4.5
+15:14:37 preprocess.py (convert_to_ASD) INFO: Channel converted to ASD: H1:PEM-EY_ACC_BSC10_ETMY_Y with FFT time 9.0 and overlap time 4.5
+15:14:37 preprocess.py (convert_to_ASD) INFO: Channel converted to ASD: H1:PEM-EY_ACC_EBAY_FLOOR_Z with FFT time 9.0 and overlap time 4.5
+15:14:37 preprocess.py (convert_to_ASD) INFO: Channel converted to ASD: H1:PEM-EY_ACC_ISCTEY_TRANS_X with FFT time 9.0 and overlap time 4.5
+15:14:37 preprocess.py (convert_to_ASD) INFO: Channel converted to ASD: H1:PEM-EY_ACC_OPLEV_ETMY_X with FFT time 9.0 and overlap time 4.5
+15:14:37 preprocess.py (convert_to_ASD) INFO: Channel converted to ASD: H1:PEM-EY_ACC_VEA_FLOOR_Z with FFT time 9.0 and overlap time 4.5
+15:14:37 preprocess.py (convert_to_ASD) INFO: Channel converted to ASD: H1:PEM-EY_MIC_EBAY_RACKS with FFT time 9.0 and overlap time 4.5
+15:14:37 preprocess.py (convert_to_ASD) INFO: Channel converted to ASD: H1:PEM-EY_MIC_VEA_MINUSY with FFT time 9.0 and overlap time 4.5
+15:14:37 preprocess.py (convert_to_ASD) INFO: Channel converted to ASD: H1:PEM-EY_MIC_VEA_PLUSY with FFT time 9.0 and overlap time 4.5
+15:14:37 preprocess.py (get_calibration_factors) INFO: Parsing calibration data for channel H1:PEM-EY_ACC_ISCTEY_TRANS_X.
+15:14:37 preprocess.py (get_calibration_factors) INFO: Calibration factor acquired for channel H1:PEM-EY_ACC_ISCTEY_TRANS_X.
+15:14:37 preprocess.py (get_calibration_factors) INFO: Parsing calibration data for channel H1:PEM-EY_ACC_VEA_FLOOR_Z.
+15:14:37 preprocess.py (get_calibration_factors) INFO: Calibration factor acquired for channel H1:PEM-EY_ACC_VEA_FLOOR_Z.
+15:14:37 preprocess.py (get_calibration_factors) INFO: Parsing calibration data for channel H1:PEM-EY_MIC_VEA_PLUSY.
+15:14:37 preprocess.py (get_calibration_factors) INFO: Calibration factor acquired for channel H1:PEM-EY_MIC_VEA_PLUSY.
+15:14:37 preprocess.py (get_calibration_factors) INFO: Parsing calibration data for channel H1:PEM-EY_MIC_EBAY_RACKS.
+15:14:37 preprocess.py (get_calibration_factors) INFO: Calibration factor acquired for channel H1:PEM-EY_MIC_EBAY_RACKS.
+15:14:37 preprocess.py (get_calibration_factors) INFO: Parsing calibration data for channel H1:PEM-EY_MIC_VEA_MINUSY.
+15:14:37 preprocess.py (get_calibration_factors) INFO: Calibration factor acquired for channel H1:PEM-EY_MIC_VEA_MINUSY.
+15:14:37 preprocess.py (get_calibration_factors) INFO: Parsing calibration data for channel H1:PEM-EY_ACC_OPLEV_ETMY_X.
+15:14:37 preprocess.py (get_calibration_factors) INFO: Calibration factor acquired for channel H1:PEM-EY_ACC_OPLEV_ETMY_X.
+15:14:37 preprocess.py (get_calibration_factors) INFO: Parsing calibration data for channel H1:PEM-EY_ACC_BSC10_ETMY_Y.
+15:14:37 preprocess.py (get_calibration_factors) INFO: Calibration factor acquired for channel H1:PEM-EY_ACC_BSC10_ETMY_Y.
+15:14:37 preprocess.py (get_calibration_factors) INFO: Parsing calibration data for channel H1:PEM-EY_ACC_BSC10_ETMY_X.
+15:14:37 preprocess.py (get_calibration_factors) INFO: Calibration factor acquired for channel H1:PEM-EY_ACC_BSC10_ETMY_X.
+15:14:37 preprocess.py (get_calibration_factors) INFO: Parsing calibration data for channel H1:PEM-EY_ACC_EBAY_FLOOR_Z.
+15:14:37 preprocess.py (get_calibration_factors) INFO: Calibration factor acquired for channel H1:PEM-EY_ACC_EBAY_FLOOR_Z.
+15:14:37 preprocess.py (calibrate_sensors) INFO: Channel calibrated: H1:PEM-EY_ACC_BSC10_ETMY_X.
+15:14:37 preprocess.py (calibrate_sensors) INFO: Channel calibrated: H1:PEM-EY_ACC_BSC10_ETMY_Y.
+15:14:37 preprocess.py (calibrate_sensors) INFO: Channel calibrated: H1:PEM-EY_ACC_EBAY_FLOOR_Z.
+15:14:37 preprocess.py (calibrate_sensors) INFO: Channel calibrated: H1:PEM-EY_ACC_ISCTEY_TRANS_X.
+15:14:37 preprocess.py (calibrate_sensors) INFO: Channel calibrated: H1:PEM-EY_ACC_OPLEV_ETMY_X.
+15:14:37 preprocess.py (calibrate_sensors) INFO: Channel calibrated: H1:PEM-EY_ACC_VEA_FLOOR_Z.
+15:14:37 preprocess.py (calibrate_sensors) INFO: Channel calibrated: H1:PEM-EY_MIC_EBAY_RACKS.
+15:14:37 preprocess.py (calibrate_sensors) INFO: Channel calibrated: H1:PEM-EY_MIC_VEA_MINUSY.
+15:14:37 preprocess.py (calibrate_sensors) INFO: Channel calibrated: H1:PEM-EY_MIC_VEA_PLUSY.
+15:14:37 preprocess.py (get_calibration_factors) INFO: Parsing calibration data for channel H1:PEM-EY_ACC_ISCTEY_TRANS_X.
+15:14:37 preprocess.py (get_calibration_factors) INFO: Calibration factor acquired for channel H1:PEM-EY_ACC_ISCTEY_TRANS_X.
+15:14:37 preprocess.py (get_calibration_factors) INFO: Parsing calibration data for channel H1:PEM-EY_ACC_VEA_FLOOR_Z.
+15:14:37 preprocess.py (get_calibration_factors) INFO: Calibration factor acquired for channel H1:PEM-EY_ACC_VEA_FLOOR_Z.
+15:14:37 preprocess.py (get_calibration_factors) INFO: Parsing calibration data for channel H1:PEM-EY_MIC_VEA_PLUSY.
+15:14:37 preprocess.py (get_calibration_factors) INFO: Calibration factor acquired for channel H1:PEM-EY_MIC_VEA_PLUSY.
+15:14:37 preprocess.py (get_calibration_factors) INFO: Parsing calibration data for channel H1:PEM-EY_MIC_EBAY_RACKS.
+15:14:37 preprocess.py (get_calibration_factors) INFO: Calibration factor acquired for channel H1:PEM-EY_MIC_EBAY_RACKS.
+15:14:37 preprocess.py (get_calibration_factors) INFO: Parsing calibration data for channel H1:PEM-EY_MIC_VEA_MINUSY.
+15:14:37 preprocess.py (get_calibration_factors) INFO: Calibration factor acquired for channel H1:PEM-EY_MIC_VEA_MINUSY.
+15:14:37 preprocess.py (get_calibration_factors) INFO: Parsing calibration data for channel H1:PEM-EY_ACC_OPLEV_ETMY_X.
+15:14:37 preprocess.py (get_calibration_factors) INFO: Calibration factor acquired for channel H1:PEM-EY_ACC_OPLEV_ETMY_X.
+15:14:37 preprocess.py (get_calibration_factors) INFO: Parsing calibration data for channel H1:PEM-EY_ACC_BSC10_ETMY_Y.
+15:14:37 preprocess.py (get_calibration_factors) INFO: Calibration factor acquired for channel H1:PEM-EY_ACC_BSC10_ETMY_Y.
+15:14:37 preprocess.py (get_calibration_factors) INFO: Parsing calibration data for channel H1:PEM-EY_ACC_BSC10_ETMY_X.
+15:14:37 preprocess.py (get_calibration_factors) INFO: Calibration factor acquired for channel H1:PEM-EY_ACC_BSC10_ETMY_X.
+15:14:37 preprocess.py (get_calibration_factors) INFO: Parsing calibration data for channel H1:PEM-EY_ACC_EBAY_FLOOR_Z.
+15:14:37 preprocess.py (get_calibration_factors) INFO: Calibration factor acquired for channel H1:PEM-EY_ACC_EBAY_FLOOR_Z.
+15:14:37 preprocess.py (calibrate_sensors) INFO: Channel calibrated: H1:PEM-EY_ACC_BSC10_ETMY_X.
+15:14:37 preprocess.py (calibrate_sensors) INFO: Channel calibrated: H1:PEM-EY_ACC_BSC10_ETMY_Y.
+15:14:37 preprocess.py (calibrate_sensors) INFO: Channel calibrated: H1:PEM-EY_ACC_EBAY_FLOOR_Z.
+15:14:37 preprocess.py (calibrate_sensors) INFO: Channel calibrated: H1:PEM-EY_ACC_ISCTEY_TRANS_X.
+15:14:37 preprocess.py (calibrate_sensors) INFO: Channel calibrated: H1:PEM-EY_ACC_OPLEV_ETMY_X.
+15:14:37 preprocess.py (calibrate_sensors) INFO: Channel calibrated: H1:PEM-EY_ACC_VEA_FLOOR_Z.
+15:14:37 preprocess.py (calibrate_sensors) INFO: Channel calibrated: H1:PEM-EY_MIC_EBAY_RACKS.
+15:14:37 preprocess.py (calibrate_sensors) INFO: Channel calibrated: H1:PEM-EY_MIC_VEA_MINUSY.
+15:14:37 preprocess.py (calibrate_sensors) INFO: Channel calibrated: H1:PEM-EY_MIC_VEA_PLUSY.
+15:14:42 PEMcoupling.py (<module>) INFO: Cropping ASDs to match frequencies: H1:PEM-EY_ACC_BSC10_ETMY_X.
+15:14:42 PEMcoupling.py (<module>) INFO: Cropping ASDs to match frequencies: H1:PEM-EY_ACC_BSC10_ETMY_Y.
+15:14:42 PEMcoupling.py (<module>) INFO: Cropping ASDs to match frequencies: H1:PEM-EY_ACC_EBAY_FLOOR_Z.
+15:14:42 PEMcoupling.py (<module>) INFO: Cropping ASDs to match frequencies: H1:PEM-EY_ACC_ISCTEY_TRANS_X.
+15:14:42 PEMcoupling.py (<module>) INFO: Cropping ASDs to match frequencies: H1:PEM-EY_ACC_OPLEV_ETMY_X.
+15:14:42 PEMcoupling.py (<module>) INFO: Cropping ASDs to match frequencies: H1:PEM-EY_ACC_VEA_FLOOR_Z.
+15:14:42 PEMcoupling.py (<module>) INFO: Cropping ASDs to match frequencies: H1:PEM-EY_MIC_EBAY_RACKS.
+15:14:42 PEMcoupling.py (<module>) INFO: Cropping ASDs to match frequencies: H1:PEM-EY_MIC_VEA_MINUSY.
+15:14:42 PEMcoupling.py (<module>) INFO: Cropping ASDs to match frequencies: H1:PEM-EY_MIC_VEA_PLUSY.
+15:14:42 PEMcoupling.py (<module>) INFO: Acquiring smoothing parameters for channel H1:PEM-EY_ACC_BSC10_ETMY_X.
+15:14:42 PEMcoupling.py (<module>) INFO: Acquiring smoothing parameters for channel H1:PEM-EY_ACC_BSC10_ETMY_Y.
+15:14:42 PEMcoupling.py (<module>) INFO: Acquiring smoothing parameters for channel H1:PEM-EY_ACC_EBAY_FLOOR_Z.
+15:14:42 PEMcoupling.py (<module>) INFO: Acquiring smoothing parameters for channel H1:PEM-EY_ACC_ISCTEY_TRANS_X.
+15:14:42 PEMcoupling.py (<module>) INFO: Acquiring smoothing parameters for channel H1:PEM-EY_ACC_OPLEV_ETMY_X.
+15:14:42 PEMcoupling.py (<module>) INFO: Acquiring smoothing parameters for channel H1:PEM-EY_ACC_VEA_FLOOR_Z.
+15:14:42 PEMcoupling.py (<module>) INFO: Acquiring smoothing parameters for channel H1:PEM-EY_MIC_EBAY_RACKS.
+15:14:42 PEMcoupling.py (<module>) INFO: Acquiring smoothing parameters for channel H1:PEM-EY_MIC_VEA_MINUSY.
+15:14:42 PEMcoupling.py (<module>) INFO: Acquiring smoothing parameters for channel H1:PEM-EY_MIC_VEA_PLUSY.
+15:14:47 PEMcoupling.py (<module>) INFO: Coupling function complete: H1:PEM-EY_ACC_BSC10_ETMY_X.
+15:14:49 PEMcoupling.py (<module>) INFO: Coupling function complete: H1:PEM-EY_ACC_BSC10_ETMY_Y.
+15:14:51 PEMcoupling.py (<module>) INFO: Coupling function complete: H1:PEM-EY_ACC_EBAY_FLOOR_Z.
+15:14:52 PEMcoupling.py (<module>) INFO: Coupling function complete: H1:PEM-EY_ACC_ISCTEY_TRANS_X.
+15:14:54 PEMcoupling.py (<module>) INFO: Coupling function complete: H1:PEM-EY_ACC_OPLEV_ETMY_X.
+15:14:56 PEMcoupling.py (<module>) INFO: Coupling function complete: H1:PEM-EY_ACC_VEA_FLOOR_Z.
+15:15:00 PEMcoupling.py (<module>) INFO: Coupling function complete: H1:PEM-EY_MIC_EBAY_RACKS.
+15:15:05 PEMcoupling.py (<module>) INFO: Coupling function complete: H1:PEM-EY_MIC_VEA_MINUSY.
+15:15:12 PEMcoupling.py (<module>) INFO: Coupling function complete: H1:PEM-EY_MIC_VEA_PLUSY.
+15:16:08 PEMcoupling.py (<module>) INFO: Coupling functions saved for injection 033EYacousticNearDoor30to2k.
+15:16:08 PEMcoupling.py (<module>) INFO: Searching for fundamental frequency if applicable.
+15:16:08 PEMcoupling.py (<module>) INFO: Being picky about channels.
+15:16:08 loaddata.py (get_time_series) INFO: Channel successfully extracted: H1:PEM-EY_ACC_BSC10_ETMY_X_DQ at time 1185901457 to 1185901507.0.
+15:16:09 loaddata.py (get_time_series) INFO: Channel successfully extracted: H1:PEM-EY_ACC_BSC10_ETMY_Y_DQ at time 1185901457 to 1185901507.0.
+15:16:09 loaddata.py (get_time_series) INFO: Channel successfully extracted: H1:PEM-EY_ACC_BSC10_ETMY_Z_DQ at time 1185901457 to 1185901507.0.
+15:16:10 loaddata.py (get_time_series) INFO: Channel successfully extracted: H1:PEM-EY_ACC_EBAY_FLOOR_Z_DQ at time 1185901457 to 1185901507.0.
+15:16:10 loaddata.py (get_time_series) INFO: Channel successfully extracted: H1:PEM-EY_ACC_ISCTEY_TRANS_X_DQ at time 1185901457 to 1185901507.0.
+15:16:11 loaddata.py (get_time_series) INFO: Channel successfully extracted: H1:PEM-EY_ACC_OPLEV_ETMY_X_DQ at time 1185901457 to 1185901507.0.
+15:16:11 loaddata.py (get_time_series) INFO: Channel successfully extracted: H1:PEM-EY_ACC_VEA_FLOOR_Z_DQ at time 1185901457 to 1185901507.0.
+15:16:12 loaddata.py (get_time_series) INFO: Channel successfully extracted: H1:PEM-EY_MIC_EBAY_RACKS_DQ at time 1185901457 to 1185901507.0.
+15:16:13 loaddata.py (get_time_series) INFO: Channel successfully extracted: H1:PEM-EY_MIC_VEA_MINUSY_DQ at time 1185901457 to 1185901507.0.
+15:16:13 loaddata.py (get_time_series) INFO: Channel successfully extracted: H1:PEM-EY_MIC_VEA_PLUSY_DQ at time 1185901457 to 1185901507.0.
+15:16:17 loaddata.py (get_time_series) INFO: Channel successfully extracted: H1:PEM-EY_ACC_BSC10_ETMY_X_DQ at time 1185902128 to 1185902178.0.
+15:16:20 loaddata.py (get_time_series) INFO: Channel successfully extracted: H1:PEM-EY_ACC_BSC10_ETMY_Y_DQ at time 1185902128 to 1185902178.0.
+15:16:22 loaddata.py (get_time_series) INFO: Channel successfully extracted: H1:PEM-EY_ACC_BSC10_ETMY_Z_DQ at time 1185902128 to 1185902178.0.
+15:16:24 loaddata.py (get_time_series) INFO: Channel successfully extracted: H1:PEM-EY_ACC_EBAY_FLOOR_Z_DQ at time 1185902128 to 1185902178.0.
+15:16:25 loaddata.py (get_time_series) INFO: Channel successfully extracted: H1:PEM-EY_ACC_ISCTEY_TRANS_X_DQ at time 1185902128 to 1185902178.0.
+15:16:26 loaddata.py (get_time_series) INFO: Channel successfully extracted: H1:PEM-EY_ACC_OPLEV_ETMY_X_DQ at time 1185902128 to 1185902178.0.
+15:16:28 loaddata.py (get_time_series) INFO: Channel successfully extracted: H1:PEM-EY_ACC_VEA_FLOOR_Z_DQ at time 1185902128 to 1185902178.0.
+15:16:31 loaddata.py (get_time_series) INFO: Channel successfully extracted: H1:PEM-EY_MIC_EBAY_RACKS_DQ at time 1185902128 to 1185902178.0.
+15:16:32 loaddata.py (get_time_series) INFO: Channel successfully extracted: H1:PEM-EY_MIC_VEA_MINUSY_DQ at time 1185902128 to 1185902178.0.
+15:16:34 loaddata.py (get_time_series) INFO: Channel successfully extracted: H1:PEM-EY_MIC_VEA_PLUSY_DQ at time 1185902128 to 1185902178.0.
+15:16:34 preprocess.py (reject_saturated) INFO: Channel rejected due to saturation: H1:PEM-EY_ACC_BSC10_ETMY_Z_DQ
+15:16:34 preprocess.py (convert_to_ASD) INFO: Channel converted to ASD: H1:PEM-EY_ACC_BSC10_ETMY_X with FFT time 9.0 and overlap time 4.5
+15:16:34 preprocess.py (convert_to_ASD) INFO: Channel converted to ASD: H1:PEM-EY_ACC_BSC10_ETMY_Y with FFT time 9.0 and overlap time 4.5
+15:16:34 preprocess.py (convert_to_ASD) INFO: Channel converted to ASD: H1:PEM-EY_ACC_EBAY_FLOOR_Z with FFT time 9.0 and overlap time 4.5
+15:16:34 preprocess.py (convert_to_ASD) INFO: Channel converted to ASD: H1:PEM-EY_ACC_ISCTEY_TRANS_X with FFT time 9.0 and overlap time 4.5
+15:16:34 preprocess.py (convert_to_ASD) INFO: Channel converted to ASD: H1:PEM-EY_ACC_OPLEV_ETMY_X with FFT time 9.0 and overlap time 4.5
+15:16:34 preprocess.py (convert_to_ASD) INFO: Channel converted to ASD: H1:PEM-EY_ACC_VEA_FLOOR_Z with FFT time 9.0 and overlap time 4.5
+15:16:34 preprocess.py (convert_to_ASD) INFO: Channel converted to ASD: H1:PEM-EY_MIC_EBAY_RACKS with FFT time 9.0 and overlap time 4.5
+15:16:34 preprocess.py (convert_to_ASD) INFO: Channel converted to ASD: H1:PEM-EY_MIC_VEA_MINUSY with FFT time 9.0 and overlap time 4.5
+15:16:34 preprocess.py (convert_to_ASD) INFO: Channel converted to ASD: H1:PEM-EY_MIC_VEA_PLUSY with FFT time 9.0 and overlap time 4.5
+15:16:34 preprocess.py (convert_to_ASD) INFO: Channel converted to ASD: H1:PEM-EY_ACC_BSC10_ETMY_X with FFT time 9.0 and overlap time 4.5
+15:16:34 preprocess.py (convert_to_ASD) INFO: Channel converted to ASD: H1:PEM-EY_ACC_BSC10_ETMY_Y with FFT time 9.0 and overlap time 4.5
+15:16:34 preprocess.py (convert_to_ASD) INFO: Channel converted to ASD: H1:PEM-EY_ACC_EBAY_FLOOR_Z with FFT time 9.0 and overlap time 4.5
+15:16:34 preprocess.py (convert_to_ASD) INFO: Channel converted to ASD: H1:PEM-EY_ACC_ISCTEY_TRANS_X with FFT time 9.0 and overlap time 4.5
+15:16:34 preprocess.py (convert_to_ASD) INFO: Channel converted to ASD: H1:PEM-EY_ACC_OPLEV_ETMY_X with FFT time 9.0 and overlap time 4.5
+15:16:34 preprocess.py (convert_to_ASD) INFO: Channel converted to ASD: H1:PEM-EY_ACC_VEA_FLOOR_Z with FFT time 9.0 and overlap time 4.5
+15:16:34 preprocess.py (convert_to_ASD) INFO: Channel converted to ASD: H1:PEM-EY_MIC_EBAY_RACKS with FFT time 9.0 and overlap time 4.5
+15:16:34 preprocess.py (convert_to_ASD) INFO: Channel converted to ASD: H1:PEM-EY_MIC_VEA_MINUSY with FFT time 9.0 and overlap time 4.5
+15:16:35 preprocess.py (convert_to_ASD) INFO: Channel converted to ASD: H1:PEM-EY_MIC_VEA_PLUSY with FFT time 9.0 and overlap time 4.5
+15:16:35 preprocess.py (get_calibration_factors) INFO: Parsing calibration data for channel H1:PEM-EY_ACC_ISCTEY_TRANS_X.
+15:16:35 preprocess.py (get_calibration_factors) INFO: Calibration factor acquired for channel H1:PEM-EY_ACC_ISCTEY_TRANS_X.
+15:16:35 preprocess.py (get_calibration_factors) INFO: Parsing calibration data for channel H1:PEM-EY_ACC_VEA_FLOOR_Z.
+15:16:35 preprocess.py (get_calibration_factors) INFO: Calibration factor acquired for channel H1:PEM-EY_ACC_VEA_FLOOR_Z.
+15:16:35 preprocess.py (get_calibration_factors) INFO: Parsing calibration data for channel H1:PEM-EY_MIC_VEA_PLUSY.
+15:16:35 preprocess.py (get_calibration_factors) INFO: Calibration factor acquired for channel H1:PEM-EY_MIC_VEA_PLUSY.
+15:16:35 preprocess.py (get_calibration_factors) INFO: Parsing calibration data for channel H1:PEM-EY_MIC_EBAY_RACKS.
+15:16:35 preprocess.py (get_calibration_factors) INFO: Calibration factor acquired for channel H1:PEM-EY_MIC_EBAY_RACKS.
+15:16:35 preprocess.py (get_calibration_factors) INFO: Parsing calibration data for channel H1:PEM-EY_MIC_VEA_MINUSY.
+15:16:35 preprocess.py (get_calibration_factors) INFO: Calibration factor acquired for channel H1:PEM-EY_MIC_VEA_MINUSY.
+15:16:35 preprocess.py (get_calibration_factors) INFO: Parsing calibration data for channel H1:PEM-EY_ACC_OPLEV_ETMY_X.
+15:16:35 preprocess.py (get_calibration_factors) INFO: Calibration factor acquired for channel H1:PEM-EY_ACC_OPLEV_ETMY_X.
+15:16:35 preprocess.py (get_calibration_factors) INFO: Parsing calibration data for channel H1:PEM-EY_ACC_BSC10_ETMY_Y.
+15:16:35 preprocess.py (get_calibration_factors) INFO: Calibration factor acquired for channel H1:PEM-EY_ACC_BSC10_ETMY_Y.
+15:16:35 preprocess.py (get_calibration_factors) INFO: Parsing calibration data for channel H1:PEM-EY_ACC_BSC10_ETMY_X.
+15:16:35 preprocess.py (get_calibration_factors) INFO: Calibration factor acquired for channel H1:PEM-EY_ACC_BSC10_ETMY_X.
+15:16:35 preprocess.py (get_calibration_factors) INFO: Parsing calibration data for channel H1:PEM-EY_ACC_EBAY_FLOOR_Z.
+15:16:35 preprocess.py (get_calibration_factors) INFO: Calibration factor acquired for channel H1:PEM-EY_ACC_EBAY_FLOOR_Z.
+15:16:35 preprocess.py (calibrate_sensors) INFO: Channel calibrated: H1:PEM-EY_ACC_BSC10_ETMY_X.
+15:16:35 preprocess.py (calibrate_sensors) INFO: Channel calibrated: H1:PEM-EY_ACC_BSC10_ETMY_Y.
+15:16:35 preprocess.py (calibrate_sensors) INFO: Channel calibrated: H1:PEM-EY_ACC_EBAY_FLOOR_Z.
+15:16:35 preprocess.py (calibrate_sensors) INFO: Channel calibrated: H1:PEM-EY_ACC_ISCTEY_TRANS_X.
+15:16:35 preprocess.py (calibrate_sensors) INFO: Channel calibrated: H1:PEM-EY_ACC_OPLEV_ETMY_X.
+15:16:35 preprocess.py (calibrate_sensors) INFO: Channel calibrated: H1:PEM-EY_ACC_VEA_FLOOR_Z.
+15:16:35 preprocess.py (calibrate_sensors) INFO: Channel calibrated: H1:PEM-EY_MIC_EBAY_RACKS.
+15:16:35 preprocess.py (calibrate_sensors) INFO: Channel calibrated: H1:PEM-EY_MIC_VEA_MINUSY.
+15:16:35 preprocess.py (calibrate_sensors) INFO: Channel calibrated: H1:PEM-EY_MIC_VEA_PLUSY.
+15:16:35 preprocess.py (get_calibration_factors) INFO: Parsing calibration data for channel H1:PEM-EY_ACC_ISCTEY_TRANS_X.
+15:16:35 preprocess.py (get_calibration_factors) INFO: Calibration factor acquired for channel H1:PEM-EY_ACC_ISCTEY_TRANS_X.
+15:16:35 preprocess.py (get_calibration_factors) INFO: Parsing calibration data for channel H1:PEM-EY_ACC_VEA_FLOOR_Z.
+15:16:35 preprocess.py (get_calibration_factors) INFO: Calibration factor acquired for channel H1:PEM-EY_ACC_VEA_FLOOR_Z.
+15:16:35 preprocess.py (get_calibration_factors) INFO: Parsing calibration data for channel H1:PEM-EY_MIC_VEA_PLUSY.
+15:16:35 preprocess.py (get_calibration_factors) INFO: Calibration factor acquired for channel H1:PEM-EY_MIC_VEA_PLUSY.
+15:16:35 preprocess.py (get_calibration_factors) INFO: Parsing calibration data for channel H1:PEM-EY_MIC_EBAY_RACKS.
+15:16:35 preprocess.py (get_calibration_factors) INFO: Calibration factor acquired for channel H1:PEM-EY_MIC_EBAY_RACKS.
+15:16:35 preprocess.py (get_calibration_factors) INFO: Parsing calibration data for channel H1:PEM-EY_MIC_VEA_MINUSY.
+15:16:35 preprocess.py (get_calibration_factors) INFO: Calibration factor acquired for channel H1:PEM-EY_MIC_VEA_MINUSY.
+15:16:35 preprocess.py (get_calibration_factors) INFO: Parsing calibration data for channel H1:PEM-EY_ACC_OPLEV_ETMY_X.
+15:16:35 preprocess.py (get_calibration_factors) INFO: Calibration factor acquired for channel H1:PEM-EY_ACC_OPLEV_ETMY_X.
+15:16:35 preprocess.py (get_calibration_factors) INFO: Parsing calibration data for channel H1:PEM-EY_ACC_BSC10_ETMY_Y.
+15:16:35 preprocess.py (get_calibration_factors) INFO: Calibration factor acquired for channel H1:PEM-EY_ACC_BSC10_ETMY_Y.
+15:16:35 preprocess.py (get_calibration_factors) INFO: Parsing calibration data for channel H1:PEM-EY_ACC_BSC10_ETMY_X.
+15:16:35 preprocess.py (get_calibration_factors) INFO: Calibration factor acquired for channel H1:PEM-EY_ACC_BSC10_ETMY_X.
+15:16:35 preprocess.py (get_calibration_factors) INFO: Parsing calibration data for channel H1:PEM-EY_ACC_EBAY_FLOOR_Z.
+15:16:35 preprocess.py (get_calibration_factors) INFO: Calibration factor acquired for channel H1:PEM-EY_ACC_EBAY_FLOOR_Z.
+15:16:35 preprocess.py (calibrate_sensors) INFO: Channel calibrated: H1:PEM-EY_ACC_BSC10_ETMY_X.
+15:16:35 preprocess.py (calibrate_sensors) INFO: Channel calibrated: H1:PEM-EY_ACC_BSC10_ETMY_Y.
+15:16:35 preprocess.py (calibrate_sensors) INFO: Channel calibrated: H1:PEM-EY_ACC_EBAY_FLOOR_Z.
+15:16:35 preprocess.py (calibrate_sensors) INFO: Channel calibrated: H1:PEM-EY_ACC_ISCTEY_TRANS_X.
+15:16:35 preprocess.py (calibrate_sensors) INFO: Channel calibrated: H1:PEM-EY_ACC_OPLEV_ETMY_X.
+15:16:35 preprocess.py (calibrate_sensors) INFO: Channel calibrated: H1:PEM-EY_ACC_VEA_FLOOR_Z.
+15:16:35 preprocess.py (calibrate_sensors) INFO: Channel calibrated: H1:PEM-EY_MIC_EBAY_RACKS.
+15:16:35 preprocess.py (calibrate_sensors) INFO: Channel calibrated: H1:PEM-EY_MIC_VEA_MINUSY.
+15:16:35 preprocess.py (calibrate_sensors) INFO: Channel calibrated: H1:PEM-EY_MIC_VEA_PLUSY.
+15:16:37 PEMcoupling.py (<module>) INFO: Cropping ASDs to match frequencies: H1:PEM-EY_ACC_BSC10_ETMY_X.
+15:16:37 PEMcoupling.py (<module>) INFO: Cropping ASDs to match frequencies: H1:PEM-EY_ACC_BSC10_ETMY_Y.
+15:16:37 PEMcoupling.py (<module>) INFO: Cropping ASDs to match frequencies: H1:PEM-EY_ACC_EBAY_FLOOR_Z.
+15:16:37 PEMcoupling.py (<module>) INFO: Cropping ASDs to match frequencies: H1:PEM-EY_ACC_ISCTEY_TRANS_X.
+15:16:37 PEMcoupling.py (<module>) INFO: Cropping ASDs to match frequencies: H1:PEM-EY_ACC_OPLEV_ETMY_X.
+15:16:37 PEMcoupling.py (<module>) INFO: Cropping ASDs to match frequencies: H1:PEM-EY_ACC_VEA_FLOOR_Z.
+15:16:37 PEMcoupling.py (<module>) INFO: Cropping ASDs to match frequencies: H1:PEM-EY_MIC_EBAY_RACKS.
+15:16:37 PEMcoupling.py (<module>) INFO: Cropping ASDs to match frequencies: H1:PEM-EY_MIC_VEA_MINUSY.
+15:16:37 PEMcoupling.py (<module>) INFO: Cropping ASDs to match frequencies: H1:PEM-EY_MIC_VEA_PLUSY.
+15:16:37 PEMcoupling.py (<module>) INFO: Acquiring smoothing parameters for channel H1:PEM-EY_ACC_BSC10_ETMY_X.
+15:16:37 PEMcoupling.py (<module>) INFO: Acquiring smoothing parameters for channel H1:PEM-EY_ACC_BSC10_ETMY_Y.
+15:16:37 PEMcoupling.py (<module>) INFO: Acquiring smoothing parameters for channel H1:PEM-EY_ACC_EBAY_FLOOR_Z.
+15:16:37 PEMcoupling.py (<module>) INFO: Acquiring smoothing parameters for channel H1:PEM-EY_ACC_ISCTEY_TRANS_X.
+15:16:37 PEMcoupling.py (<module>) INFO: Acquiring smoothing parameters for channel H1:PEM-EY_ACC_OPLEV_ETMY_X.
+15:16:37 PEMcoupling.py (<module>) INFO: Acquiring smoothing parameters for channel H1:PEM-EY_ACC_VEA_FLOOR_Z.
+15:16:37 PEMcoupling.py (<module>) INFO: Acquiring smoothing parameters for channel H1:PEM-EY_MIC_EBAY_RACKS.
+15:16:37 PEMcoupling.py (<module>) INFO: Acquiring smoothing parameters for channel H1:PEM-EY_MIC_VEA_MINUSY.
+15:16:37 PEMcoupling.py (<module>) INFO: Acquiring smoothing parameters for channel H1:PEM-EY_MIC_VEA_PLUSY.
+15:16:42 PEMcoupling.py (<module>) INFO: Coupling function complete: H1:PEM-EY_ACC_BSC10_ETMY_X.
+15:16:44 PEMcoupling.py (<module>) INFO: Coupling function complete: H1:PEM-EY_ACC_BSC10_ETMY_Y.
+15:16:46 PEMcoupling.py (<module>) INFO: Coupling function complete: H1:PEM-EY_ACC_EBAY_FLOOR_Z.
+15:16:48 PEMcoupling.py (<module>) INFO: Coupling function complete: H1:PEM-EY_ACC_ISCTEY_TRANS_X.
+15:16:50 PEMcoupling.py (<module>) INFO: Coupling function complete: H1:PEM-EY_ACC_OPLEV_ETMY_X.
+15:16:52 PEMcoupling.py (<module>) INFO: Coupling function complete: H1:PEM-EY_ACC_VEA_FLOOR_Z.
+15:16:56 PEMcoupling.py (<module>) INFO: Coupling function complete: H1:PEM-EY_MIC_EBAY_RACKS.
+15:17:03 PEMcoupling.py (<module>) INFO: Coupling function complete: H1:PEM-EY_MIC_VEA_MINUSY.
+15:17:09 PEMcoupling.py (<module>) INFO: Coupling function complete: H1:PEM-EY_MIC_VEA_PLUSY.
+15:18:04 PEMcoupling.py (<module>) INFO: Coupling functions saved for injection 034EYacousticMechDoor30to2k.
+15:18:04 PEMcoupling.py (<module>) INFO: Searching for fundamental frequency if applicable.
+15:18:04 PEMcoupling.py (<module>) INFO: Being picky about channels.
+15:18:05 loaddata.py (get_time_series) INFO: Channel successfully extracted: H1:PEM-EY_ACC_BSC10_ETMY_X_DQ at time 1185901457 to 1185901507.0.
+15:18:05 loaddata.py (get_time_series) INFO: Channel successfully extracted: H1:PEM-EY_ACC_BSC10_ETMY_Y_DQ at time 1185901457 to 1185901507.0.
+15:18:06 loaddata.py (get_time_series) INFO: Channel successfully extracted: H1:PEM-EY_ACC_BSC10_ETMY_Z_DQ at time 1185901457 to 1185901507.0.
+15:18:06 loaddata.py (get_time_series) INFO: Channel successfully extracted: H1:PEM-EY_ACC_EBAY_FLOOR_Z_DQ at time 1185901457 to 1185901507.0.
+15:18:07 loaddata.py (get_time_series) INFO: Channel successfully extracted: H1:PEM-EY_ACC_ISCTEY_TRANS_X_DQ at time 1185901457 to 1185901507.0.
+15:18:07 loaddata.py (get_time_series) INFO: Channel successfully extracted: H1:PEM-EY_ACC_OPLEV_ETMY_X_DQ at time 1185901457 to 1185901507.0.
+15:18:08 loaddata.py (get_time_series) INFO: Channel successfully extracted: H1:PEM-EY_ACC_VEA_FLOOR_Z_DQ at time 1185901457 to 1185901507.0.
+15:18:09 loaddata.py (get_time_series) INFO: Channel successfully extracted: H1:PEM-EY_MIC_EBAY_RACKS_DQ at time 1185901457 to 1185901507.0.
+15:18:09 loaddata.py (get_time_series) INFO: Channel successfully extracted: H1:PEM-EY_MIC_VEA_MINUSY_DQ at time 1185901457 to 1185901507.0.
+15:18:10 loaddata.py (get_time_series) INFO: Channel successfully extracted: H1:PEM-EY_MIC_VEA_PLUSY_DQ at time 1185901457 to 1185901507.0.
+15:18:12 loaddata.py (get_time_series) INFO: Channel successfully extracted: H1:PEM-EY_ACC_BSC10_ETMY_X_DQ at time 1185902414 to 1185902464.0.
+15:18:14 loaddata.py (get_time_series) INFO: Channel successfully extracted: H1:PEM-EY_ACC_BSC10_ETMY_Y_DQ at time 1185902414 to 1185902464.0.
+15:18:15 loaddata.py (get_time_series) INFO: Channel successfully extracted: H1:PEM-EY_ACC_BSC10_ETMY_Z_DQ at time 1185902414 to 1185902464.0.
+15:18:16 loaddata.py (get_time_series) INFO: Channel successfully extracted: H1:PEM-EY_ACC_EBAY_FLOOR_Z_DQ at time 1185902414 to 1185902464.0.
+15:18:17 loaddata.py (get_time_series) INFO: Channel successfully extracted: H1:PEM-EY_ACC_ISCTEY_TRANS_X_DQ at time 1185902414 to 1185902464.0.
+15:18:18 loaddata.py (get_time_series) INFO: Channel successfully extracted: H1:PEM-EY_ACC_OPLEV_ETMY_X_DQ at time 1185902414 to 1185902464.0.
+15:18:19 loaddata.py (get_time_series) INFO: Channel successfully extracted: H1:PEM-EY_ACC_VEA_FLOOR_Z_DQ at time 1185902414 to 1185902464.0.
+15:18:20 loaddata.py (get_time_series) INFO: Channel successfully extracted: H1:PEM-EY_MIC_EBAY_RACKS_DQ at time 1185902414 to 1185902464.0.
+15:18:22 loaddata.py (get_time_series) INFO: Channel successfully extracted: H1:PEM-EY_MIC_VEA_MINUSY_DQ at time 1185902414 to 1185902464.0.
+15:18:23 loaddata.py (get_time_series) INFO: Channel successfully extracted: H1:PEM-EY_MIC_VEA_PLUSY_DQ at time 1185902414 to 1185902464.0.
+15:18:23 preprocess.py (reject_saturated) INFO: Channel rejected due to saturation: H1:PEM-EY_ACC_BSC10_ETMY_Z_DQ
+15:18:23 preprocess.py (convert_to_ASD) INFO: Channel converted to ASD: H1:PEM-EY_ACC_BSC10_ETMY_X with FFT time 9.0 and overlap time 4.5
+15:18:23 preprocess.py (convert_to_ASD) INFO: Channel converted to ASD: H1:PEM-EY_ACC_BSC10_ETMY_Y with FFT time 9.0 and overlap time 4.5
+15:18:23 preprocess.py (convert_to_ASD) INFO: Channel converted to ASD: H1:PEM-EY_ACC_EBAY_FLOOR_Z with FFT time 9.0 and overlap time 4.5
+15:18:23 preprocess.py (convert_to_ASD) INFO: Channel converted to ASD: H1:PEM-EY_ACC_ISCTEY_TRANS_X with FFT time 9.0 and overlap time 4.5
+15:18:23 preprocess.py (convert_to_ASD) INFO: Channel converted to ASD: H1:PEM-EY_ACC_OPLEV_ETMY_X with FFT time 9.0 and overlap time 4.5
+15:18:23 preprocess.py (convert_to_ASD) INFO: Channel converted to ASD: H1:PEM-EY_ACC_VEA_FLOOR_Z with FFT time 9.0 and overlap time 4.5
+15:18:23 preprocess.py (convert_to_ASD) INFO: Channel converted to ASD: H1:PEM-EY_MIC_EBAY_RACKS with FFT time 9.0 and overlap time 4.5
+15:18:23 preprocess.py (convert_to_ASD) INFO: Channel converted to ASD: H1:PEM-EY_MIC_VEA_MINUSY with FFT time 9.0 and overlap time 4.5
+15:18:23 preprocess.py (convert_to_ASD) INFO: Channel converted to ASD: H1:PEM-EY_MIC_VEA_PLUSY with FFT time 9.0 and overlap time 4.5
+15:18:24 preprocess.py (convert_to_ASD) INFO: Channel converted to ASD: H1:PEM-EY_ACC_BSC10_ETMY_X with FFT time 9.0 and overlap time 4.5
+15:18:24 preprocess.py (convert_to_ASD) INFO: Channel converted to ASD: H1:PEM-EY_ACC_BSC10_ETMY_Y with FFT time 9.0 and overlap time 4.5
+15:18:24 preprocess.py (convert_to_ASD) INFO: Channel converted to ASD: H1:PEM-EY_ACC_EBAY_FLOOR_Z with FFT time 9.0 and overlap time 4.5
+15:18:24 preprocess.py (convert_to_ASD) INFO: Channel converted to ASD: H1:PEM-EY_ACC_ISCTEY_TRANS_X with FFT time 9.0 and overlap time 4.5
+15:18:24 preprocess.py (convert_to_ASD) INFO: Channel converted to ASD: H1:PEM-EY_ACC_OPLEV_ETMY_X with FFT time 9.0 and overlap time 4.5
+15:18:24 preprocess.py (convert_to_ASD) INFO: Channel converted to ASD: H1:PEM-EY_ACC_VEA_FLOOR_Z with FFT time 9.0 and overlap time 4.5
+15:18:24 preprocess.py (convert_to_ASD) INFO: Channel converted to ASD: H1:PEM-EY_MIC_EBAY_RACKS with FFT time 9.0 and overlap time 4.5
+15:18:24 preprocess.py (convert_to_ASD) INFO: Channel converted to ASD: H1:PEM-EY_MIC_VEA_MINUSY with FFT time 9.0 and overlap time 4.5
+15:18:24 preprocess.py (convert_to_ASD) INFO: Channel converted to ASD: H1:PEM-EY_MIC_VEA_PLUSY with FFT time 9.0 and overlap time 4.5
+15:18:24 preprocess.py (get_calibration_factors) INFO: Parsing calibration data for channel H1:PEM-EY_ACC_ISCTEY_TRANS_X.
+15:18:24 preprocess.py (get_calibration_factors) INFO: Calibration factor acquired for channel H1:PEM-EY_ACC_ISCTEY_TRANS_X.
+15:18:24 preprocess.py (get_calibration_factors) INFO: Parsing calibration data for channel H1:PEM-EY_ACC_VEA_FLOOR_Z.
+15:18:24 preprocess.py (get_calibration_factors) INFO: Calibration factor acquired for channel H1:PEM-EY_ACC_VEA_FLOOR_Z.
+15:18:24 preprocess.py (get_calibration_factors) INFO: Parsing calibration data for channel H1:PEM-EY_MIC_VEA_PLUSY.
+15:18:24 preprocess.py (get_calibration_factors) INFO: Calibration factor acquired for channel H1:PEM-EY_MIC_VEA_PLUSY.
+15:18:24 preprocess.py (get_calibration_factors) INFO: Parsing calibration data for channel H1:PEM-EY_MIC_EBAY_RACKS.
+15:18:24 preprocess.py (get_calibration_factors) INFO: Calibration factor acquired for channel H1:PEM-EY_MIC_EBAY_RACKS.
+15:18:24 preprocess.py (get_calibration_factors) INFO: Parsing calibration data for channel H1:PEM-EY_MIC_VEA_MINUSY.
+15:18:24 preprocess.py (get_calibration_factors) INFO: Calibration factor acquired for channel H1:PEM-EY_MIC_VEA_MINUSY.
+15:18:24 preprocess.py (get_calibration_factors) INFO: Parsing calibration data for channel H1:PEM-EY_ACC_OPLEV_ETMY_X.
+15:18:24 preprocess.py (get_calibration_factors) INFO: Calibration factor acquired for channel H1:PEM-EY_ACC_OPLEV_ETMY_X.
+15:18:24 preprocess.py (get_calibration_factors) INFO: Parsing calibration data for channel H1:PEM-EY_ACC_BSC10_ETMY_Y.
+15:18:24 preprocess.py (get_calibration_factors) INFO: Calibration factor acquired for channel H1:PEM-EY_ACC_BSC10_ETMY_Y.
+15:18:24 preprocess.py (get_calibration_factors) INFO: Parsing calibration data for channel H1:PEM-EY_ACC_BSC10_ETMY_X.
+15:18:24 preprocess.py (get_calibration_factors) INFO: Calibration factor acquired for channel H1:PEM-EY_ACC_BSC10_ETMY_X.
+15:18:24 preprocess.py (get_calibration_factors) INFO: Parsing calibration data for channel H1:PEM-EY_ACC_EBAY_FLOOR_Z.
+15:18:24 preprocess.py (get_calibration_factors) INFO: Calibration factor acquired for channel H1:PEM-EY_ACC_EBAY_FLOOR_Z.
+15:18:24 preprocess.py (calibrate_sensors) INFO: Channel calibrated: H1:PEM-EY_ACC_BSC10_ETMY_X.
+15:18:24 preprocess.py (calibrate_sensors) INFO: Channel calibrated: H1:PEM-EY_ACC_BSC10_ETMY_Y.
+15:18:24 preprocess.py (calibrate_sensors) INFO: Channel calibrated: H1:PEM-EY_ACC_EBAY_FLOOR_Z.
+15:18:24 preprocess.py (calibrate_sensors) INFO: Channel calibrated: H1:PEM-EY_ACC_ISCTEY_TRANS_X.
+15:18:24 preprocess.py (calibrate_sensors) INFO: Channel calibrated: H1:PEM-EY_ACC_OPLEV_ETMY_X.
+15:18:24 preprocess.py (calibrate_sensors) INFO: Channel calibrated: H1:PEM-EY_ACC_VEA_FLOOR_Z.
+15:18:24 preprocess.py (calibrate_sensors) INFO: Channel calibrated: H1:PEM-EY_MIC_EBAY_RACKS.
+15:18:24 preprocess.py (calibrate_sensors) INFO: Channel calibrated: H1:PEM-EY_MIC_VEA_MINUSY.
+15:18:24 preprocess.py (calibrate_sensors) INFO: Channel calibrated: H1:PEM-EY_MIC_VEA_PLUSY.
+15:18:24 preprocess.py (get_calibration_factors) INFO: Parsing calibration data for channel H1:PEM-EY_ACC_ISCTEY_TRANS_X.
+15:18:24 preprocess.py (get_calibration_factors) INFO: Calibration factor acquired for channel H1:PEM-EY_ACC_ISCTEY_TRANS_X.
+15:18:24 preprocess.py (get_calibration_factors) INFO: Parsing calibration data for channel H1:PEM-EY_ACC_VEA_FLOOR_Z.
+15:18:24 preprocess.py (get_calibration_factors) INFO: Calibration factor acquired for channel H1:PEM-EY_ACC_VEA_FLOOR_Z.
+15:18:24 preprocess.py (get_calibration_factors) INFO: Parsing calibration data for channel H1:PEM-EY_MIC_VEA_PLUSY.
+15:18:24 preprocess.py (get_calibration_factors) INFO: Calibration factor acquired for channel H1:PEM-EY_MIC_VEA_PLUSY.
+15:18:24 preprocess.py (get_calibration_factors) INFO: Parsing calibration data for channel H1:PEM-EY_MIC_EBAY_RACKS.
+15:18:24 preprocess.py (get_calibration_factors) INFO: Calibration factor acquired for channel H1:PEM-EY_MIC_EBAY_RACKS.
+15:18:24 preprocess.py (get_calibration_factors) INFO: Parsing calibration data for channel H1:PEM-EY_MIC_VEA_MINUSY.
+15:18:24 preprocess.py (get_calibration_factors) INFO: Calibration factor acquired for channel H1:PEM-EY_MIC_VEA_MINUSY.
+15:18:24 preprocess.py (get_calibration_factors) INFO: Parsing calibration data for channel H1:PEM-EY_ACC_OPLEV_ETMY_X.
+15:18:24 preprocess.py (get_calibration_factors) INFO: Calibration factor acquired for channel H1:PEM-EY_ACC_OPLEV_ETMY_X.
+15:18:24 preprocess.py (get_calibration_factors) INFO: Parsing calibration data for channel H1:PEM-EY_ACC_BSC10_ETMY_Y.
+15:18:24 preprocess.py (get_calibration_factors) INFO: Calibration factor acquired for channel H1:PEM-EY_ACC_BSC10_ETMY_Y.
+15:18:24 preprocess.py (get_calibration_factors) INFO: Parsing calibration data for channel H1:PEM-EY_ACC_BSC10_ETMY_X.
+15:18:24 preprocess.py (get_calibration_factors) INFO: Calibration factor acquired for channel H1:PEM-EY_ACC_BSC10_ETMY_X.
+15:18:24 preprocess.py (get_calibration_factors) INFO: Parsing calibration data for channel H1:PEM-EY_ACC_EBAY_FLOOR_Z.
+15:18:24 preprocess.py (get_calibration_factors) INFO: Calibration factor acquired for channel H1:PEM-EY_ACC_EBAY_FLOOR_Z.
+15:18:24 preprocess.py (calibrate_sensors) INFO: Channel calibrated: H1:PEM-EY_ACC_BSC10_ETMY_X.
+15:18:24 preprocess.py (calibrate_sensors) INFO: Channel calibrated: H1:PEM-EY_ACC_BSC10_ETMY_Y.
+15:18:24 preprocess.py (calibrate_sensors) INFO: Channel calibrated: H1:PEM-EY_ACC_EBAY_FLOOR_Z.
+15:18:24 preprocess.py (calibrate_sensors) INFO: Channel calibrated: H1:PEM-EY_ACC_ISCTEY_TRANS_X.
+15:18:24 preprocess.py (calibrate_sensors) INFO: Channel calibrated: H1:PEM-EY_ACC_OPLEV_ETMY_X.
+15:18:24 preprocess.py (calibrate_sensors) INFO: Channel calibrated: H1:PEM-EY_ACC_VEA_FLOOR_Z.
+15:18:24 preprocess.py (calibrate_sensors) INFO: Channel calibrated: H1:PEM-EY_MIC_EBAY_RACKS.
+15:18:24 preprocess.py (calibrate_sensors) INFO: Channel calibrated: H1:PEM-EY_MIC_VEA_MINUSY.
+15:18:24 preprocess.py (calibrate_sensors) INFO: Channel calibrated: H1:PEM-EY_MIC_VEA_PLUSY.
+15:18:26 PEMcoupling.py (<module>) INFO: Cropping ASDs to match frequencies: H1:PEM-EY_ACC_BSC10_ETMY_X.
+15:18:26 PEMcoupling.py (<module>) INFO: Cropping ASDs to match frequencies: H1:PEM-EY_ACC_BSC10_ETMY_Y.
+15:18:26 PEMcoupling.py (<module>) INFO: Cropping ASDs to match frequencies: H1:PEM-EY_ACC_EBAY_FLOOR_Z.
+15:18:26 PEMcoupling.py (<module>) INFO: Cropping ASDs to match frequencies: H1:PEM-EY_ACC_ISCTEY_TRANS_X.
+15:18:26 PEMcoupling.py (<module>) INFO: Cropping ASDs to match frequencies: H1:PEM-EY_ACC_OPLEV_ETMY_X.
+15:18:26 PEMcoupling.py (<module>) INFO: Cropping ASDs to match frequencies: H1:PEM-EY_ACC_VEA_FLOOR_Z.
+15:18:26 PEMcoupling.py (<module>) INFO: Cropping ASDs to match frequencies: H1:PEM-EY_MIC_EBAY_RACKS.
+15:18:26 PEMcoupling.py (<module>) INFO: Cropping ASDs to match frequencies: H1:PEM-EY_MIC_VEA_MINUSY.
+15:18:26 PEMcoupling.py (<module>) INFO: Cropping ASDs to match frequencies: H1:PEM-EY_MIC_VEA_PLUSY.
+15:18:26 PEMcoupling.py (<module>) INFO: Acquiring smoothing parameters for channel H1:PEM-EY_ACC_BSC10_ETMY_X.
+15:18:26 PEMcoupling.py (<module>) INFO: Acquiring smoothing parameters for channel H1:PEM-EY_ACC_BSC10_ETMY_Y.
+15:18:26 PEMcoupling.py (<module>) INFO: Acquiring smoothing parameters for channel H1:PEM-EY_ACC_EBAY_FLOOR_Z.
+15:18:26 PEMcoupling.py (<module>) INFO: Acquiring smoothing parameters for channel H1:PEM-EY_ACC_ISCTEY_TRANS_X.
+15:18:26 PEMcoupling.py (<module>) INFO: Acquiring smoothing parameters for channel H1:PEM-EY_ACC_OPLEV_ETMY_X.
+15:18:26 PEMcoupling.py (<module>) INFO: Acquiring smoothing parameters for channel H1:PEM-EY_ACC_VEA_FLOOR_Z.
+15:18:26 PEMcoupling.py (<module>) INFO: Acquiring smoothing parameters for channel H1:PEM-EY_MIC_EBAY_RACKS.
+15:18:26 PEMcoupling.py (<module>) INFO: Acquiring smoothing parameters for channel H1:PEM-EY_MIC_VEA_MINUSY.
+15:18:26 PEMcoupling.py (<module>) INFO: Acquiring smoothing parameters for channel H1:PEM-EY_MIC_VEA_PLUSY.
+15:18:31 PEMcoupling.py (<module>) INFO: Coupling function complete: H1:PEM-EY_ACC_BSC10_ETMY_X.
+15:18:33 PEMcoupling.py (<module>) INFO: Coupling function complete: H1:PEM-EY_ACC_BSC10_ETMY_Y.
+15:18:35 PEMcoupling.py (<module>) INFO: Coupling function complete: H1:PEM-EY_ACC_EBAY_FLOOR_Z.
+15:18:37 PEMcoupling.py (<module>) INFO: Coupling function complete: H1:PEM-EY_ACC_ISCTEY_TRANS_X.
+15:18:38 PEMcoupling.py (<module>) INFO: Coupling function complete: H1:PEM-EY_ACC_OPLEV_ETMY_X.
+15:18:40 PEMcoupling.py (<module>) INFO: Coupling function complete: H1:PEM-EY_ACC_VEA_FLOOR_Z.
+15:18:44 PEMcoupling.py (<module>) INFO: Coupling function complete: H1:PEM-EY_MIC_EBAY_RACKS.
+15:18:50 PEMcoupling.py (<module>) INFO: Coupling function complete: H1:PEM-EY_MIC_VEA_MINUSY.
+15:18:56 PEMcoupling.py (<module>) INFO: Coupling function complete: H1:PEM-EY_MIC_VEA_PLUSY.
+15:19:51 PEMcoupling.py (<module>) INFO: Coupling functions saved for injection 035EYacousticMechDoor30to2k_half.
+15:19:51 PEMcoupling.py (<module>) INFO: Searching for fundamental frequency if applicable.
+15:19:51 PEMcoupling.py (<module>) INFO: Being picky about channels.
+15:19:51 loaddata.py (get_time_series) INFO: Channel successfully extracted: H1:PEM-EY_ACC_EBAY_FLOOR_Z_DQ at time 1185901457 to 1185901507.0.
+15:19:52 loaddata.py (get_time_series) INFO: Channel successfully extracted: H1:PEM-EY_MIC_EBAY_RACKS_DQ at time 1185901457 to 1185901507.0.
+15:19:55 loaddata.py (get_time_series) INFO: Channel successfully extracted: H1:PEM-EY_ACC_EBAY_FLOOR_Z_DQ at time 1185906715 to 1185906765.0.
+15:20:01 loaddata.py (get_time_series) INFO: Channel successfully extracted: H1:PEM-EY_MIC_EBAY_RACKS_DQ at time 1185906715 to 1185906765.0.
+15:20:01 preprocess.py (convert_to_ASD) INFO: Channel converted to ASD: H1:PEM-EY_ACC_EBAY_FLOOR_Z with FFT time 9.0 and overlap time 4.5
+15:20:01 preprocess.py (convert_to_ASD) INFO: Channel converted to ASD: H1:PEM-EY_MIC_EBAY_RACKS with FFT time 9.0 and overlap time 4.5
+15:20:01 preprocess.py (convert_to_ASD) INFO: Channel converted to ASD: H1:PEM-EY_ACC_EBAY_FLOOR_Z with FFT time 9.0 and overlap time 4.5
+15:20:01 preprocess.py (convert_to_ASD) INFO: Channel converted to ASD: H1:PEM-EY_MIC_EBAY_RACKS with FFT time 9.0 and overlap time 4.5
+15:20:01 preprocess.py (get_calibration_factors) INFO: Parsing calibration data for channel H1:PEM-EY_MIC_EBAY_RACKS.
+15:20:01 preprocess.py (get_calibration_factors) INFO: Calibration factor acquired for channel H1:PEM-EY_MIC_EBAY_RACKS.
+15:20:01 preprocess.py (get_calibration_factors) INFO: Parsing calibration data for channel H1:PEM-EY_ACC_EBAY_FLOOR_Z.
+15:20:01 preprocess.py (get_calibration_factors) INFO: Calibration factor acquired for channel H1:PEM-EY_ACC_EBAY_FLOOR_Z.
+15:20:01 preprocess.py (calibrate_sensors) INFO: Channel calibrated: H1:PEM-EY_ACC_EBAY_FLOOR_Z.
+15:20:01 preprocess.py (calibrate_sensors) INFO: Channel calibrated: H1:PEM-EY_MIC_EBAY_RACKS.
+15:20:01 preprocess.py (get_calibration_factors) INFO: Parsing calibration data for channel H1:PEM-EY_MIC_EBAY_RACKS.
+15:20:01 preprocess.py (get_calibration_factors) INFO: Calibration factor acquired for channel H1:PEM-EY_MIC_EBAY_RACKS.
+15:20:01 preprocess.py (get_calibration_factors) INFO: Parsing calibration data for channel H1:PEM-EY_ACC_EBAY_FLOOR_Z.
+15:20:01 preprocess.py (get_calibration_factors) INFO: Calibration factor acquired for channel H1:PEM-EY_ACC_EBAY_FLOOR_Z.
+15:20:01 preprocess.py (calibrate_sensors) INFO: Channel calibrated: H1:PEM-EY_ACC_EBAY_FLOOR_Z.
+15:20:01 preprocess.py (calibrate_sensors) INFO: Channel calibrated: H1:PEM-EY_MIC_EBAY_RACKS.
+15:20:04 PEMcoupling.py (<module>) INFO: Cropping ASDs to match frequencies: H1:PEM-EY_ACC_EBAY_FLOOR_Z.
+15:20:04 PEMcoupling.py (<module>) INFO: Cropping ASDs to match frequencies: H1:PEM-EY_MIC_EBAY_RACKS.
+15:20:04 PEMcoupling.py (<module>) INFO: Acquiring smoothing parameters for channel H1:PEM-EY_ACC_EBAY_FLOOR_Z.
+15:20:04 PEMcoupling.py (<module>) INFO: Acquiring smoothing parameters for channel H1:PEM-EY_MIC_EBAY_RACKS.
+15:20:06 PEMcoupling.py (<module>) INFO: Coupling function complete: H1:PEM-EY_ACC_EBAY_FLOOR_Z.
+15:20:11 PEMcoupling.py (<module>) INFO: Coupling function complete: H1:PEM-EY_MIC_EBAY_RACKS.
+15:20:26 PEMcoupling.py (<module>) INFO: Coupling functions saved for injection 042EYacouEbay20to2k.
+15:20:26 loaddata.py (get_gwinc) INFO: Importing GWINC data.
+15:20:26 loaddata.py (get_gwinc) INFO: Successfully imported GWINC data.
