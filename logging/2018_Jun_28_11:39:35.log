@@ -1,0 +1,233 @@
+11:39:35 PEMcoupling.py (<module>) INFO: Importing PEM coupling packages.
+11:39:37 getparams.py (get_arg_params) INFO: Parsing arguments.
+11:39:37 getparams.py (get_config_params) INFO: Opening config file.
+11:39:37 getparams.py (get_config_params) INFO: Checking if missing/empty config file.
+11:39:37 getparams.py (get_config_params) INFO: Parsing numerical and boolean config options.
+11:39:37 PEMcoupling.py (<module>) INFO: Separating config dictionary by section.
+11:39:37 PEMcoupling.py (<module>) INFO: Handling conflicts between config options and command line options.
+11:39:37 PEMcoupling.py (<module>) INFO: Reading in channel list given in config file.
+11:39:37 getparams.py (get_channel_names) INFO: Opening channel list file.
+11:39:37 getparams.py (get_channel_list) INFO: Performing channel search.
+11:39:37 PEMcoupling.py (<module>) INFO: Creating injection table.
+11:39:37 getparams.py (get_times) INFO: Getting DTT files from command line input.
+11:39:37 getparams.py (get_times) INFO: List of DTT files created.
+11:39:37 getparams.py (get_times_DTT) INFO: Reading DTT files for times.
+11:39:41 getparams.py (get_times_DTT) INFO: Finished reading DTTs.
+11:39:41 PEMcoupling.py (<module>) INFO: Reporting injection results.
+11:39:41 PEMcoupling.py (<module>) INFO: Calculating FFT parameters.
+11:39:41 getparams.py (get_FFT_params) INFO: Duration given; determining overlap time and bandwidth.
+11:39:41 getparams.py (get_FFT_params) INFO: FFT parameters acquired.
+11:39:41 PEMcoupling.py (<module>) INFO: Converting smoothing parameters to frequency bins based on bandwidth.
+11:39:41 PEMcoupling.py (<module>) INFO: Beginning to loop over injections.
+11:39:41 PEMcoupling.py (<module>) INFO: Searching for fundamental frequency if applicable.
+11:39:41 PEMcoupling.py (<module>) INFO: Being picky about channels.
+11:39:43 loaddata.py (get_time_series) INFO: Channel successfully extracted: H1:PEM-CS_ACC_BEAMTUBE_MCTUBE_Y_DQ at time 1185727588 to 1185727638.0.
+11:39:43 loaddata.py (get_time_series) INFO: Channel successfully extracted: H1:PEM-CS_ACC_BEAMTUBE_MCTUBE_Y_DQ at time 1185732574 to 1185732624.0.
+11:39:43 preprocess.py (reject_saturated) INFO: Channel rejected due to saturation: H1:PEM-CS_ACC_BEAMTUBE_MCTUBE_Y_DQ
+11:39:43 PEMcoupling.py (<module>) INFO: Searching for fundamental frequency if applicable.
+11:39:43 PEMcoupling.py (<module>) INFO: Being picky about channels.
+11:39:44 loaddata.py (get_time_series) INFO: Channel successfully extracted: H1:PEM-CS_ACC_BEAMTUBE_MCTUBE_Y_DQ at time 1185727588 to 1185727638.0.
+11:39:45 loaddata.py (get_time_series) INFO: Channel successfully extracted: H1:PEM-CS_ACC_BEAMTUBE_MCTUBE_Y_DQ at time 1185737302 to 1185737352.0.
+11:39:45 preprocess.py (convert_to_ASD) INFO: Channel converted to ASD: H1:PEM-CS_ACC_BEAMTUBE_MCTUBE_Y with FFT time 9.0 and overlap time 4.5
+11:39:45 preprocess.py (convert_to_ASD) INFO: Channel converted to ASD: H1:PEM-CS_ACC_BEAMTUBE_MCTUBE_Y with FFT time 9.0 and overlap time 4.5
+11:39:45 preprocess.py (get_calibration_factors) INFO: Parsing calibration data for channel H1:PEM-CS_ACC_BEAMTUBE_MCTUBE_Y.
+11:39:45 preprocess.py (get_calibration_factors) INFO: Calibration factor acquired for channel H1:PEM-CS_ACC_BEAMTUBE_MCTUBE_Y.
+11:39:45 preprocess.py (calibrate_sensors) INFO: Channel calibrated: H1:PEM-CS_ACC_BEAMTUBE_MCTUBE_Y.
+11:39:45 preprocess.py (get_calibration_factors) INFO: Parsing calibration data for channel H1:PEM-CS_ACC_BEAMTUBE_MCTUBE_Y.
+11:39:45 preprocess.py (get_calibration_factors) INFO: Calibration factor acquired for channel H1:PEM-CS_ACC_BEAMTUBE_MCTUBE_Y.
+11:39:45 preprocess.py (calibrate_sensors) INFO: Channel calibrated: H1:PEM-CS_ACC_BEAMTUBE_MCTUBE_Y.
+11:39:46 PEMcoupling.py (<module>) INFO: Cropping ASDs to match frequencies: H1:PEM-CS_ACC_BEAMTUBE_MCTUBE_Y.
+11:39:46 PEMcoupling.py (<module>) INFO: Acquiring smoothing parameters for channel H1:PEM-CS_ACC_BEAMTUBE_MCTUBE_Y.
+11:39:51 PEMcoupling.py (<module>) INFO: Coupling function complete: H1:PEM-CS_ACC_BEAMTUBE_MCTUBE_Y.
+11:39:58 PEMcoupling.py (<module>) INFO: Coupling functions saved for injection 007CSacousticFarOutputOptics700to1200.
+11:39:58 PEMcoupling.py (<module>) INFO: Searching for fundamental frequency if applicable.
+11:39:58 PEMcoupling.py (<module>) INFO: Being picky about channels.
+11:39:59 loaddata.py (get_time_series) INFO: Channel successfully extracted: H1:PEM-CS_ACC_BEAMTUBE_MCTUBE_Y_DQ at time 1185727588 to 1185727638.0.
+11:39:59 loaddata.py (get_time_series) INFO: Channel successfully extracted: H1:PEM-CS_ACC_BEAMTUBE_MCTUBE_Y_DQ at time 1185737487 to 1185737537.0.
+11:39:59 preprocess.py (convert_to_ASD) INFO: Channel converted to ASD: H1:PEM-CS_ACC_BEAMTUBE_MCTUBE_Y with FFT time 9.0 and overlap time 4.5
+11:39:59 preprocess.py (convert_to_ASD) INFO: Channel converted to ASD: H1:PEM-CS_ACC_BEAMTUBE_MCTUBE_Y with FFT time 9.0 and overlap time 4.5
+11:39:59 preprocess.py (get_calibration_factors) INFO: Parsing calibration data for channel H1:PEM-CS_ACC_BEAMTUBE_MCTUBE_Y.
+11:39:59 preprocess.py (get_calibration_factors) INFO: Calibration factor acquired for channel H1:PEM-CS_ACC_BEAMTUBE_MCTUBE_Y.
+11:39:59 preprocess.py (calibrate_sensors) INFO: Channel calibrated: H1:PEM-CS_ACC_BEAMTUBE_MCTUBE_Y.
+11:39:59 preprocess.py (get_calibration_factors) INFO: Parsing calibration data for channel H1:PEM-CS_ACC_BEAMTUBE_MCTUBE_Y.
+11:39:59 preprocess.py (get_calibration_factors) INFO: Calibration factor acquired for channel H1:PEM-CS_ACC_BEAMTUBE_MCTUBE_Y.
+11:39:59 preprocess.py (calibrate_sensors) INFO: Channel calibrated: H1:PEM-CS_ACC_BEAMTUBE_MCTUBE_Y.
+11:40:01 PEMcoupling.py (<module>) INFO: Cropping ASDs to match frequencies: H1:PEM-CS_ACC_BEAMTUBE_MCTUBE_Y.
+11:40:01 PEMcoupling.py (<module>) INFO: Acquiring smoothing parameters for channel H1:PEM-CS_ACC_BEAMTUBE_MCTUBE_Y.
+11:40:06 PEMcoupling.py (<module>) INFO: Coupling function complete: H1:PEM-CS_ACC_BEAMTUBE_MCTUBE_Y.
+11:40:12 PEMcoupling.py (<module>) INFO: Coupling functions saved for injection 008CSacousticFarOutputOptics700to1200louder.
+11:40:12 PEMcoupling.py (<module>) INFO: Searching for fundamental frequency if applicable.
+11:40:12 PEMcoupling.py (<module>) INFO: Being picky about channels.
+11:40:13 loaddata.py (get_time_series) INFO: Channel successfully extracted: H1:PEM-CS_ACC_BEAMTUBE_MCTUBE_Y_DQ at time 1185727588 to 1185727638.0.
+11:40:14 loaddata.py (get_time_series) INFO: Channel successfully extracted: H1:PEM-CS_ACC_BEAMTUBE_MCTUBE_Y_DQ at time 1185738546 to 1185738596.0.
+11:40:14 preprocess.py (convert_to_ASD) INFO: Channel converted to ASD: H1:PEM-CS_ACC_BEAMTUBE_MCTUBE_Y with FFT time 9.0 and overlap time 4.5
+11:40:14 preprocess.py (convert_to_ASD) INFO: Channel converted to ASD: H1:PEM-CS_ACC_BEAMTUBE_MCTUBE_Y with FFT time 9.0 and overlap time 4.5
+11:40:14 preprocess.py (get_calibration_factors) INFO: Parsing calibration data for channel H1:PEM-CS_ACC_BEAMTUBE_MCTUBE_Y.
+11:40:14 preprocess.py (get_calibration_factors) INFO: Calibration factor acquired for channel H1:PEM-CS_ACC_BEAMTUBE_MCTUBE_Y.
+11:40:14 preprocess.py (calibrate_sensors) INFO: Channel calibrated: H1:PEM-CS_ACC_BEAMTUBE_MCTUBE_Y.
+11:40:14 preprocess.py (get_calibration_factors) INFO: Parsing calibration data for channel H1:PEM-CS_ACC_BEAMTUBE_MCTUBE_Y.
+11:40:14 preprocess.py (get_calibration_factors) INFO: Calibration factor acquired for channel H1:PEM-CS_ACC_BEAMTUBE_MCTUBE_Y.
+11:40:14 preprocess.py (calibrate_sensors) INFO: Channel calibrated: H1:PEM-CS_ACC_BEAMTUBE_MCTUBE_Y.
+11:40:15 PEMcoupling.py (<module>) INFO: Cropping ASDs to match frequencies: H1:PEM-CS_ACC_BEAMTUBE_MCTUBE_Y.
+11:40:15 PEMcoupling.py (<module>) INFO: Acquiring smoothing parameters for channel H1:PEM-CS_ACC_BEAMTUBE_MCTUBE_Y.
+11:40:19 PEMcoupling.py (<module>) INFO: Coupling function complete: H1:PEM-CS_ACC_BEAMTUBE_MCTUBE_Y.
+11:40:26 PEMcoupling.py (<module>) INFO: Coupling functions saved for injection 009CSacousticFarOutputOptics20to130.
+11:40:26 PEMcoupling.py (<module>) INFO: Searching for fundamental frequency if applicable.
+11:40:26 PEMcoupling.py (<module>) INFO: Being picky about channels.
+11:40:27 loaddata.py (get_time_series) INFO: Channel successfully extracted: H1:PEM-CS_ACC_BEAMTUBE_MCTUBE_Y_DQ at time 1185727588 to 1185727638.0.
+11:40:27 loaddata.py (get_time_series) INFO: Channel successfully extracted: H1:PEM-CS_ACC_BEAMTUBE_MCTUBE_Y_DQ at time 1185739050 to 1185739100.0.
+11:40:28 preprocess.py (convert_to_ASD) INFO: Channel converted to ASD: H1:PEM-CS_ACC_BEAMTUBE_MCTUBE_Y with FFT time 9.0 and overlap time 4.5
+11:40:28 preprocess.py (convert_to_ASD) INFO: Channel converted to ASD: H1:PEM-CS_ACC_BEAMTUBE_MCTUBE_Y with FFT time 9.0 and overlap time 4.5
+11:40:28 preprocess.py (get_calibration_factors) INFO: Parsing calibration data for channel H1:PEM-CS_ACC_BEAMTUBE_MCTUBE_Y.
+11:40:28 preprocess.py (get_calibration_factors) INFO: Calibration factor acquired for channel H1:PEM-CS_ACC_BEAMTUBE_MCTUBE_Y.
+11:40:28 preprocess.py (calibrate_sensors) INFO: Channel calibrated: H1:PEM-CS_ACC_BEAMTUBE_MCTUBE_Y.
+11:40:28 preprocess.py (get_calibration_factors) INFO: Parsing calibration data for channel H1:PEM-CS_ACC_BEAMTUBE_MCTUBE_Y.
+11:40:28 preprocess.py (get_calibration_factors) INFO: Calibration factor acquired for channel H1:PEM-CS_ACC_BEAMTUBE_MCTUBE_Y.
+11:40:28 preprocess.py (calibrate_sensors) INFO: Channel calibrated: H1:PEM-CS_ACC_BEAMTUBE_MCTUBE_Y.
+11:40:29 PEMcoupling.py (<module>) INFO: Cropping ASDs to match frequencies: H1:PEM-CS_ACC_BEAMTUBE_MCTUBE_Y.
+11:40:29 PEMcoupling.py (<module>) INFO: Acquiring smoothing parameters for channel H1:PEM-CS_ACC_BEAMTUBE_MCTUBE_Y.
+11:40:33 PEMcoupling.py (<module>) INFO: Coupling function complete: H1:PEM-CS_ACC_BEAMTUBE_MCTUBE_Y.
+11:40:40 PEMcoupling.py (<module>) INFO: Coupling functions saved for injection 010CSacousticHAM5OutputOptics20to130.
+11:40:40 PEMcoupling.py (<module>) INFO: Searching for fundamental frequency if applicable.
+11:40:40 PEMcoupling.py (<module>) INFO: Being picky about channels.
+11:40:41 loaddata.py (get_time_series) INFO: Channel successfully extracted: H1:PEM-CS_ACC_BEAMTUBE_MCTUBE_Y_DQ at time 1185727588 to 1185727638.0.
+11:40:41 loaddata.py (get_time_series) INFO: Channel successfully extracted: H1:PEM-CS_ACC_BEAMTUBE_MCTUBE_Y_DQ at time 1185739382 to 1185739432.0.
+11:40:41 preprocess.py (convert_to_ASD) INFO: Channel converted to ASD: H1:PEM-CS_ACC_BEAMTUBE_MCTUBE_Y with FFT time 9.0 and overlap time 4.5
+11:40:41 preprocess.py (convert_to_ASD) INFO: Channel converted to ASD: H1:PEM-CS_ACC_BEAMTUBE_MCTUBE_Y with FFT time 9.0 and overlap time 4.5
+11:40:41 preprocess.py (get_calibration_factors) INFO: Parsing calibration data for channel H1:PEM-CS_ACC_BEAMTUBE_MCTUBE_Y.
+11:40:41 preprocess.py (get_calibration_factors) INFO: Calibration factor acquired for channel H1:PEM-CS_ACC_BEAMTUBE_MCTUBE_Y.
+11:40:41 preprocess.py (calibrate_sensors) INFO: Channel calibrated: H1:PEM-CS_ACC_BEAMTUBE_MCTUBE_Y.
+11:40:41 preprocess.py (get_calibration_factors) INFO: Parsing calibration data for channel H1:PEM-CS_ACC_BEAMTUBE_MCTUBE_Y.
+11:40:41 preprocess.py (get_calibration_factors) INFO: Calibration factor acquired for channel H1:PEM-CS_ACC_BEAMTUBE_MCTUBE_Y.
+11:40:41 preprocess.py (calibrate_sensors) INFO: Channel calibrated: H1:PEM-CS_ACC_BEAMTUBE_MCTUBE_Y.
+11:40:43 PEMcoupling.py (<module>) INFO: Cropping ASDs to match frequencies: H1:PEM-CS_ACC_BEAMTUBE_MCTUBE_Y.
+11:40:43 PEMcoupling.py (<module>) INFO: Acquiring smoothing parameters for channel H1:PEM-CS_ACC_BEAMTUBE_MCTUBE_Y.
+11:40:47 PEMcoupling.py (<module>) INFO: Coupling function complete: H1:PEM-CS_ACC_BEAMTUBE_MCTUBE_Y.
+11:40:54 PEMcoupling.py (<module>) INFO: Coupling functions saved for injection 011CSacousticHAM5OutputOptics700to1200.
+11:40:54 PEMcoupling.py (<module>) INFO: Searching for fundamental frequency if applicable.
+11:40:54 PEMcoupling.py (<module>) INFO: Being picky about channels.
+11:40:55 loaddata.py (get_time_series) INFO: Channel successfully extracted: H1:PEM-CS_ACC_BEAMTUBE_MCTUBE_Y_DQ at time 1185727588 to 1185727638.0.
+11:40:56 loaddata.py (get_time_series) INFO: Channel successfully extracted: H1:PEM-CS_ACC_BEAMTUBE_MCTUBE_Y_DQ at time 1185740558 to 1185740608.0.
+11:40:56 preprocess.py (reject_saturated) INFO: Channel rejected due to saturation: H1:PEM-CS_ACC_BEAMTUBE_MCTUBE_Y_DQ
+11:40:56 PEMcoupling.py (<module>) INFO: Searching for fundamental frequency if applicable.
+11:40:56 PEMcoupling.py (<module>) INFO: Being picky about channels.
+11:40:56 PEMcoupling.py (<module>) WARNING: All given channels were excluded for this injection type. Moving on to the next injection.
+11:40:56 PEMcoupling.py (<module>) INFO: Searching for fundamental frequency if applicable.
+11:40:56 PEMcoupling.py (<module>) INFO: Being picky about channels.
+11:40:56 loaddata.py (get_time_series) INFO: Channel successfully extracted: H1:PEM-CS_ACC_BEAMTUBE_MCTUBE_Y_DQ at time 1186330073 to 1186330123.0.
+11:40:57 loaddata.py (get_time_series) INFO: Channel successfully extracted: H1:PEM-CS_ACC_BEAMTUBE_MCTUBE_Y_DQ at time 1186332515 to 1186332565.0.
+11:40:57 preprocess.py (convert_to_ASD) INFO: Channel converted to ASD: H1:PEM-CS_ACC_BEAMTUBE_MCTUBE_Y with FFT time 9.0 and overlap time 4.5
+11:40:57 preprocess.py (convert_to_ASD) INFO: Channel converted to ASD: H1:PEM-CS_ACC_BEAMTUBE_MCTUBE_Y with FFT time 9.0 and overlap time 4.5
+11:40:57 preprocess.py (get_calibration_factors) INFO: Parsing calibration data for channel H1:PEM-CS_ACC_BEAMTUBE_MCTUBE_Y.
+11:40:57 preprocess.py (get_calibration_factors) INFO: Calibration factor acquired for channel H1:PEM-CS_ACC_BEAMTUBE_MCTUBE_Y.
+11:40:57 preprocess.py (calibrate_sensors) INFO: Channel calibrated: H1:PEM-CS_ACC_BEAMTUBE_MCTUBE_Y.
+11:40:57 preprocess.py (get_calibration_factors) INFO: Parsing calibration data for channel H1:PEM-CS_ACC_BEAMTUBE_MCTUBE_Y.
+11:40:57 preprocess.py (get_calibration_factors) INFO: Calibration factor acquired for channel H1:PEM-CS_ACC_BEAMTUBE_MCTUBE_Y.
+11:40:57 preprocess.py (calibrate_sensors) INFO: Channel calibrated: H1:PEM-CS_ACC_BEAMTUBE_MCTUBE_Y.
+11:40:58 PEMcoupling.py (<module>) INFO: Cropping ASDs to match frequencies: H1:PEM-CS_ACC_BEAMTUBE_MCTUBE_Y.
+11:40:58 PEMcoupling.py (<module>) INFO: Acquiring smoothing parameters for channel H1:PEM-CS_ACC_BEAMTUBE_MCTUBE_Y.
+11:41:03 PEMcoupling.py (<module>) INFO: Coupling function complete: H1:PEM-CS_ACC_BEAMTUBE_MCTUBE_Y.
+11:41:10 PEMcoupling.py (<module>) INFO: Coupling functions saved for injection 059CSbigshakeInputArmLow10to25.
+11:41:10 PEMcoupling.py (<module>) INFO: Searching for fundamental frequency if applicable.
+11:41:10 PEMcoupling.py (<module>) INFO: Being picky about channels.
+11:41:10 loaddata.py (get_time_series) INFO: Channel successfully extracted: H1:PEM-CS_ACC_BEAMTUBE_MCTUBE_Y_DQ at time 1186330073 to 1186330123.0.
+11:41:11 loaddata.py (get_time_series) INFO: Channel successfully extracted: H1:PEM-CS_ACC_BEAMTUBE_MCTUBE_Y_DQ at time 1186331668 to 1186331718.0.
+11:41:11 preprocess.py (reject_saturated) INFO: Channel rejected due to saturation: H1:PEM-CS_ACC_BEAMTUBE_MCTUBE_Y_DQ
+11:41:11 PEMcoupling.py (<module>) INFO: Searching for fundamental frequency if applicable.
+11:41:11 PEMcoupling.py (<module>) INFO: Being picky about channels.
+11:41:11 loaddata.py (get_time_series) INFO: Channel successfully extracted: H1:PEM-CS_ACC_BEAMTUBE_MCTUBE_Y_DQ at time 1186341943 to 1186341993.0.
+11:41:12 loaddata.py (get_time_series) INFO: Channel successfully extracted: H1:PEM-CS_ACC_BEAMTUBE_MCTUBE_Y_DQ at time 1186342438 to 1186342488.0.
+11:41:12 preprocess.py (convert_to_ASD) INFO: Channel converted to ASD: H1:PEM-CS_ACC_BEAMTUBE_MCTUBE_Y with FFT time 9.0 and overlap time 4.5
+11:41:12 preprocess.py (convert_to_ASD) INFO: Channel converted to ASD: H1:PEM-CS_ACC_BEAMTUBE_MCTUBE_Y with FFT time 9.0 and overlap time 4.5
+11:41:12 preprocess.py (get_calibration_factors) INFO: Parsing calibration data for channel H1:PEM-CS_ACC_BEAMTUBE_MCTUBE_Y.
+11:41:12 preprocess.py (get_calibration_factors) INFO: Calibration factor acquired for channel H1:PEM-CS_ACC_BEAMTUBE_MCTUBE_Y.
+11:41:12 preprocess.py (calibrate_sensors) INFO: Channel calibrated: H1:PEM-CS_ACC_BEAMTUBE_MCTUBE_Y.
+11:41:12 preprocess.py (get_calibration_factors) INFO: Parsing calibration data for channel H1:PEM-CS_ACC_BEAMTUBE_MCTUBE_Y.
+11:41:12 preprocess.py (get_calibration_factors) INFO: Calibration factor acquired for channel H1:PEM-CS_ACC_BEAMTUBE_MCTUBE_Y.
+11:41:12 preprocess.py (calibrate_sensors) INFO: Channel calibrated: H1:PEM-CS_ACC_BEAMTUBE_MCTUBE_Y.
+11:41:14 PEMcoupling.py (<module>) INFO: Cropping ASDs to match frequencies: H1:PEM-CS_ACC_BEAMTUBE_MCTUBE_Y.
+11:41:14 PEMcoupling.py (<module>) INFO: Acquiring smoothing parameters for channel H1:PEM-CS_ACC_BEAMTUBE_MCTUBE_Y.
+11:41:22 PEMcoupling.py (<module>) INFO: Coupling function complete: H1:PEM-CS_ACC_BEAMTUBE_MCTUBE_Y.
+11:41:29 PEMcoupling.py (<module>) INFO: Coupling functions saved for injection 070CSacousticYman.
+11:41:29 PEMcoupling.py (<module>) INFO: Searching for fundamental frequency if applicable.
+11:41:29 PEMcoupling.py (<module>) INFO: Being picky about channels.
+11:41:30 loaddata.py (get_time_series) INFO: Channel successfully extracted: H1:PEM-CS_ACC_BEAMTUBE_MCTUBE_Y_DQ at time 1186341943 to 1186341993.0.
+11:41:31 loaddata.py (get_time_series) INFO: Channel successfully extracted: H1:PEM-CS_ACC_BEAMTUBE_MCTUBE_Y_DQ at time 1186343577 to 1186343627.0.
+11:41:31 preprocess.py (convert_to_ASD) INFO: Channel converted to ASD: H1:PEM-CS_ACC_BEAMTUBE_MCTUBE_Y with FFT time 9.0 and overlap time 4.5
+11:41:31 preprocess.py (convert_to_ASD) INFO: Channel converted to ASD: H1:PEM-CS_ACC_BEAMTUBE_MCTUBE_Y with FFT time 9.0 and overlap time 4.5
+11:41:31 preprocess.py (get_calibration_factors) INFO: Parsing calibration data for channel H1:PEM-CS_ACC_BEAMTUBE_MCTUBE_Y.
+11:41:31 preprocess.py (get_calibration_factors) INFO: Calibration factor acquired for channel H1:PEM-CS_ACC_BEAMTUBE_MCTUBE_Y.
+11:41:31 preprocess.py (calibrate_sensors) INFO: Channel calibrated: H1:PEM-CS_ACC_BEAMTUBE_MCTUBE_Y.
+11:41:31 preprocess.py (get_calibration_factors) INFO: Parsing calibration data for channel H1:PEM-CS_ACC_BEAMTUBE_MCTUBE_Y.
+11:41:31 preprocess.py (get_calibration_factors) INFO: Calibration factor acquired for channel H1:PEM-CS_ACC_BEAMTUBE_MCTUBE_Y.
+11:41:31 preprocess.py (calibrate_sensors) INFO: Channel calibrated: H1:PEM-CS_ACC_BEAMTUBE_MCTUBE_Y.
+11:41:32 PEMcoupling.py (<module>) INFO: Cropping ASDs to match frequencies: H1:PEM-CS_ACC_BEAMTUBE_MCTUBE_Y.
+11:41:32 PEMcoupling.py (<module>) INFO: Acquiring smoothing parameters for channel H1:PEM-CS_ACC_BEAMTUBE_MCTUBE_Y.
+11:41:37 PEMcoupling.py (<module>) INFO: Coupling function complete: H1:PEM-CS_ACC_BEAMTUBE_MCTUBE_Y.
+11:41:45 PEMcoupling.py (<module>) INFO: Coupling functions saved for injection 071CSacousticFarOutputOptics30to2k.
+11:41:45 PEMcoupling.py (<module>) INFO: Searching for fundamental frequency if applicable.
+11:41:45 PEMcoupling.py (<module>) INFO: Being picky about channels.
+11:41:45 loaddata.py (get_time_series) INFO: Channel successfully extracted: H1:PEM-CS_ACC_BEAMTUBE_MCTUBE_Y_DQ at time 1186341943 to 1186341993.0.
+11:41:46 loaddata.py (get_time_series) INFO: Channel successfully extracted: H1:PEM-CS_ACC_BEAMTUBE_MCTUBE_Y_DQ at time 1186344201 to 1186344251.0.
+11:41:46 preprocess.py (convert_to_ASD) INFO: Channel converted to ASD: H1:PEM-CS_ACC_BEAMTUBE_MCTUBE_Y with FFT time 9.0 and overlap time 4.5
+11:41:46 preprocess.py (convert_to_ASD) INFO: Channel converted to ASD: H1:PEM-CS_ACC_BEAMTUBE_MCTUBE_Y with FFT time 9.0 and overlap time 4.5
+11:41:46 preprocess.py (get_calibration_factors) INFO: Parsing calibration data for channel H1:PEM-CS_ACC_BEAMTUBE_MCTUBE_Y.
+11:41:46 preprocess.py (get_calibration_factors) INFO: Calibration factor acquired for channel H1:PEM-CS_ACC_BEAMTUBE_MCTUBE_Y.
+11:41:46 preprocess.py (calibrate_sensors) INFO: Channel calibrated: H1:PEM-CS_ACC_BEAMTUBE_MCTUBE_Y.
+11:41:46 preprocess.py (get_calibration_factors) INFO: Parsing calibration data for channel H1:PEM-CS_ACC_BEAMTUBE_MCTUBE_Y.
+11:41:46 preprocess.py (get_calibration_factors) INFO: Calibration factor acquired for channel H1:PEM-CS_ACC_BEAMTUBE_MCTUBE_Y.
+11:41:46 preprocess.py (calibrate_sensors) INFO: Channel calibrated: H1:PEM-CS_ACC_BEAMTUBE_MCTUBE_Y.
+11:41:47 PEMcoupling.py (<module>) INFO: Cropping ASDs to match frequencies: H1:PEM-CS_ACC_BEAMTUBE_MCTUBE_Y.
+11:41:47 PEMcoupling.py (<module>) INFO: Acquiring smoothing parameters for channel H1:PEM-CS_ACC_BEAMTUBE_MCTUBE_Y.
+11:41:53 PEMcoupling.py (<module>) INFO: Coupling function complete: H1:PEM-CS_ACC_BEAMTUBE_MCTUBE_Y.
+11:42:00 PEMcoupling.py (<module>) INFO: Coupling functions saved for injection 072CSacousticXman30to2k.
+11:42:00 PEMcoupling.py (<module>) INFO: Searching for fundamental frequency if applicable.
+11:42:00 PEMcoupling.py (<module>) INFO: Being picky about channels.
+11:42:00 loaddata.py (get_time_series) INFO: Channel successfully extracted: H1:PEM-CS_ACC_BEAMTUBE_MCTUBE_Y_DQ at time 1186424630 to 1186424680.0.
+11:42:01 loaddata.py (get_time_series) INFO: Channel successfully extracted: H1:PEM-CS_ACC_BEAMTUBE_MCTUBE_Y_DQ at time 1186427504 to 1186427554.0.
+11:42:01 preprocess.py (convert_to_ASD) INFO: Channel converted to ASD: H1:PEM-CS_ACC_BEAMTUBE_MCTUBE_Y with FFT time 9.0 and overlap time 4.5
+11:42:01 preprocess.py (convert_to_ASD) INFO: Channel converted to ASD: H1:PEM-CS_ACC_BEAMTUBE_MCTUBE_Y with FFT time 9.0 and overlap time 4.5
+11:42:01 preprocess.py (get_calibration_factors) INFO: Parsing calibration data for channel H1:PEM-CS_ACC_BEAMTUBE_MCTUBE_Y.
+11:42:01 preprocess.py (get_calibration_factors) INFO: Calibration factor acquired for channel H1:PEM-CS_ACC_BEAMTUBE_MCTUBE_Y.
+11:42:01 preprocess.py (calibrate_sensors) INFO: Channel calibrated: H1:PEM-CS_ACC_BEAMTUBE_MCTUBE_Y.
+11:42:01 preprocess.py (get_calibration_factors) INFO: Parsing calibration data for channel H1:PEM-CS_ACC_BEAMTUBE_MCTUBE_Y.
+11:42:01 preprocess.py (get_calibration_factors) INFO: Calibration factor acquired for channel H1:PEM-CS_ACC_BEAMTUBE_MCTUBE_Y.
+11:42:01 preprocess.py (calibrate_sensors) INFO: Channel calibrated: H1:PEM-CS_ACC_BEAMTUBE_MCTUBE_Y.
+11:42:03 PEMcoupling.py (<module>) INFO: Cropping ASDs to match frequencies: H1:PEM-CS_ACC_BEAMTUBE_MCTUBE_Y.
+11:42:03 PEMcoupling.py (<module>) INFO: Acquiring smoothing parameters for channel H1:PEM-CS_ACC_BEAMTUBE_MCTUBE_Y.
+11:42:07 PEMcoupling.py (<module>) INFO: Coupling function complete: H1:PEM-CS_ACC_BEAMTUBE_MCTUBE_Y.
+11:42:14 PEMcoupling.py (<module>) INFO: Coupling functions saved for injection 079CSbigshake5to40BoltedToOutput.
+11:42:14 PEMcoupling.py (<module>) INFO: Searching for fundamental frequency if applicable.
+11:42:14 PEMcoupling.py (<module>) INFO: Being picky about channels.
+11:42:14 loaddata.py (get_time_series) INFO: Channel successfully extracted: H1:PEM-CS_ACC_BEAMTUBE_MCTUBE_Y_DQ at time 1186519124 to 1186519174.0.
+11:42:15 loaddata.py (get_time_series) INFO: Channel successfully extracted: H1:PEM-CS_ACC_BEAMTUBE_MCTUBE_Y_DQ at time 1186520842 to 1186520892.0.
+11:42:15 preprocess.py (convert_to_ASD) INFO: Channel converted to ASD: H1:PEM-CS_ACC_BEAMTUBE_MCTUBE_Y with FFT time 9.0 and overlap time 4.5
+11:42:15 preprocess.py (convert_to_ASD) INFO: Channel converted to ASD: H1:PEM-CS_ACC_BEAMTUBE_MCTUBE_Y with FFT time 9.0 and overlap time 4.5
+11:42:15 preprocess.py (get_calibration_factors) INFO: Parsing calibration data for channel H1:PEM-CS_ACC_BEAMTUBE_MCTUBE_Y.
+11:42:15 preprocess.py (get_calibration_factors) INFO: Calibration factor acquired for channel H1:PEM-CS_ACC_BEAMTUBE_MCTUBE_Y.
+11:42:15 preprocess.py (calibrate_sensors) INFO: Channel calibrated: H1:PEM-CS_ACC_BEAMTUBE_MCTUBE_Y.
+11:42:15 preprocess.py (get_calibration_factors) INFO: Parsing calibration data for channel H1:PEM-CS_ACC_BEAMTUBE_MCTUBE_Y.
+11:42:15 preprocess.py (get_calibration_factors) INFO: Calibration factor acquired for channel H1:PEM-CS_ACC_BEAMTUBE_MCTUBE_Y.
+11:42:15 preprocess.py (calibrate_sensors) INFO: Channel calibrated: H1:PEM-CS_ACC_BEAMTUBE_MCTUBE_Y.
+11:42:17 PEMcoupling.py (<module>) INFO: Cropping ASDs to match frequencies: H1:PEM-CS_ACC_BEAMTUBE_MCTUBE_Y.
+11:42:17 PEMcoupling.py (<module>) INFO: Acquiring smoothing parameters for channel H1:PEM-CS_ACC_BEAMTUBE_MCTUBE_Y.
+11:42:24 PEMcoupling.py (<module>) INFO: Coupling function complete: H1:PEM-CS_ACC_BEAMTUBE_MCTUBE_Y.
+11:42:31 PEMcoupling.py (<module>) INFO: Coupling functions saved for injection 094CSacousticYman30to1800lowredo.
+11:42:31 PEMcoupling.py (<module>) INFO: Searching for fundamental frequency if applicable.
+11:42:31 PEMcoupling.py (<module>) INFO: Being picky about channels.
+11:42:32 loaddata.py (get_time_series) INFO: Channel successfully extracted: H1:PEM-CS_ACC_BEAMTUBE_MCTUBE_Y_DQ at time 1186519372 to 1186519422.0.
+11:42:32 loaddata.py (get_time_series) INFO: Channel successfully extracted: H1:PEM-CS_ACC_BEAMTUBE_MCTUBE_Y_DQ at time 1186521320 to 1186521370.0.
+11:42:32 preprocess.py (convert_to_ASD) INFO: Channel converted to ASD: H1:PEM-CS_ACC_BEAMTUBE_MCTUBE_Y with FFT time 9.0 and overlap time 4.5
+11:42:32 preprocess.py (convert_to_ASD) INFO: Channel converted to ASD: H1:PEM-CS_ACC_BEAMTUBE_MCTUBE_Y with FFT time 9.0 and overlap time 4.5
+11:42:32 preprocess.py (get_calibration_factors) INFO: Parsing calibration data for channel H1:PEM-CS_ACC_BEAMTUBE_MCTUBE_Y.
+11:42:32 preprocess.py (get_calibration_factors) INFO: Calibration factor acquired for channel H1:PEM-CS_ACC_BEAMTUBE_MCTUBE_Y.
+11:42:32 preprocess.py (calibrate_sensors) INFO: Channel calibrated: H1:PEM-CS_ACC_BEAMTUBE_MCTUBE_Y.
+11:42:32 preprocess.py (get_calibration_factors) INFO: Parsing calibration data for channel H1:PEM-CS_ACC_BEAMTUBE_MCTUBE_Y.
+11:42:32 preprocess.py (get_calibration_factors) INFO: Calibration factor acquired for channel H1:PEM-CS_ACC_BEAMTUBE_MCTUBE_Y.
+11:42:32 preprocess.py (calibrate_sensors) INFO: Channel calibrated: H1:PEM-CS_ACC_BEAMTUBE_MCTUBE_Y.
+11:42:34 PEMcoupling.py (<module>) INFO: Cropping ASDs to match frequencies: H1:PEM-CS_ACC_BEAMTUBE_MCTUBE_Y.
+11:42:34 PEMcoupling.py (<module>) INFO: Acquiring smoothing parameters for channel H1:PEM-CS_ACC_BEAMTUBE_MCTUBE_Y.
+11:42:38 PEMcoupling.py (<module>) INFO: Coupling function complete: H1:PEM-CS_ACC_BEAMTUBE_MCTUBE_Y.
+11:42:45 PEMcoupling.py (<module>) INFO: Coupling functions saved for injection 095CSshakerEMPSLtable80to1000.
+11:42:45 loaddata.py (get_gwinc) INFO: Importing GWINC data.
+11:42:45 loaddata.py (get_gwinc) INFO: Successfully imported GWINC data.

@@ -5,6 +5,7 @@ import pandas as pd
 from scipy.io import loadmat
 import time
 import datetime
+import os
 import sys
 import subprocess
 import logging
@@ -22,8 +23,14 @@ except ImportError:
     print('')
     raise
 
-def get_composite_coup_func(cf_list, injection_names, comp_dict, directory,\
-                            injection_freqs=None, gwinc=None, smoothing_width=0.005, verbose=False):
+def get_composite_coup_func(
+    cf_list, injection_names, out_dir,
+    freq_lines=None, gwinc=None, local_max_width=0,
+    upper_lim=True, est_amb_plot=True,
+    freq_min=None, freq_max=None,
+    factor_min=None, factor_max=None,
+    fig_w=9, fig_h=6,
+    verbose=False):
     """
     Calculates a composite coupling function from multiple coupling functions, and saves the results.
     
@@ -35,8 +42,8 @@ def get_composite_coup_func(cf_list, injection_names, comp_dict, directory,\
         Names of injections corresponding to each coupling function.
     comp_dict : dict
         Options for processing composite coupling functions.
-    directory : str
-        Output directory.
+    out_dir : str
+        Output directory for composite coupling functions.
     inejction_freqs : dict, optional
         Fundamental frequency of each injection, for magnetic line injections.
     gwinc : list, optional
@@ -46,51 +53,128 @@ def get_composite_coup_func(cf_list, injection_names, comp_dict, directory,\
     verbose : {False, True}, optional
     """
     
+    if not os.path.exists(str(out_dir)):
+        os.makedirs(str(out_dir))
     channel_name = cf_list[0].name
-    if injection_freqs is None:
-        injection_freqs = {n: None for n in injection_names}
-    freqs = np.mean([coup_func.freqs for coup_func in cf_list], axis=0)
-    darm = np.mean([coup_func.darm_bg for coup_func in cf_list], axis=0)
-    band_widths = [coup_func.df for coup_func in cf_list]
-    column_len = [coup_func.freqs.shape for coup_func in cf_list]
+    band_widths = [cf.df for cf in cf_list]
+    column_len = [cf.freqs.shape for cf in cf_list]
     if (any(bw != band_widths[0] for bw in band_widths) or any([k != column_len[0] for k in column_len])):
         print('\nError: Coupling data objects have unequal data lengths.')
         print('If all the band_widths are the same, this should not be an issue.\n')
-    local_max_window = int(comp_dict['local_max_width'] / band_widths[0]) # Convert from Hz to bins
-    # Create composite coupling function
-    comp_cf = CoupFuncComposite.compute(cf_list, injection_names, local_max_window=local_max_window, freq_lines=injection_freqs)
-#     comp_cf = analysis.composite_coupling_function(cf_list, injection_names, local_max_window=local_max_window, freq_lines=injection_freqs)
-    # Gaussian smoothing of final result
-    smooth_chans = ['ACC', 'MIC', 'WFS']
-    # Export results
-    path = directory + '/CompositeCouplingFunctions'
-    export_composite_coupling_data(
-        comp_cf, freqs, darm, gwinc, injection_names, path,
-        upper_lim=comp_dict['upper_lim'], est_amb_plot=comp_dict['comp_est_amb_plot'],
-        freq_min=comp_dict['comp_freq_min'], freq_max=comp_dict['comp_freq_max'],
-        factor_min=comp_dict['comp_y_min'], factor_max=comp_dict['comp_y_max'],
-        fig_w=comp_dict['comp_fig_width'], fig_h=comp_dict['comp_fig_height'],
-        verbose=verbose
+    #### COMPUTE COMPOSITE COUPLING FUNCTION ####
+    local_max_window = int(local_max_width / band_widths[0]) # Convert from Hz to bins
+    if freq_lines is None:
+        freq_lines = {injection: None for injection in injection_names}
+    comp_cf = CoupFuncComposite.compute(cf_list, injection_names, local_max_window=local_max_window, freq_lines=freq_lines)
+    
+    #### X-AXIS (FREQUENCY) LIMITS ####
+    if verbose:
+        print('\nDetermining axis limits for plots...')
+    x_axis = comp_cf.freqs[comp_cf.values > 0]
+    if (len(x_axis) == 0):
+        print('No lowest coupling factors for ' + comp_cf.name + '.')
+        print('Data export aborted for this channel.')
+        return
+    try:
+        float(freq_min)
+    except TypeError:
+        freq_min = max( [min(x_axis) / 1.5, 6] )
+    try:
+        float(freq_max)
+    except TypeError:
+        freq_max = min( [max(x_axis) * 1.5, max(comp_cf.freqs)] )
+    
+    #### Y-AXIS (COUPLING FACTOR) LIMITS ####
+    y_axis = comp_cf.values[(comp_cf.values > 0) & (comp_cf.freqs>=freq_min) & (comp_cf.freqs < freq_max)]
+    y_axis_counts = comp_cf.values_in_counts[(comp_cf.values > 0) & (comp_cf.freqs>=freq_min) & (comp_cf.freqs < freq_max)]
+    if (len(y_axis) == 0):
+        print('No lowest coupling factors for ' + comp_cf.name)
+        print('between ' + str(freq_min) + ' and ' + str(freq_max) + ' Hz.')
+        print('Data export aborted for this channel.')
+        return
+    try:
+        float(factor_min)
+    except TypeError:
+        factor_min = np.min(y_axis) / 3
+        factor_counts_min = np.min(y_axis_counts) / 3
+    else:
+        factor_counts_min = factor_min
+    try:
+        float(factor_max)
+    except TypeError:
+        factor_max = np.max(y_axis) * 1.5
+        factor_counts_max = np.max(y_axis_counts) * 1.5
+    else:
+        factor_counts_max = factor_max
+        
+    #### SORTED NAMES OF INJECTIONS ####
+    sorted_names = sorted(set(comp_cf.injections))
+    if None in sorted_names:
+        sorted_names.remove(None)
+    
+    #### FILEPATH ####
+    base_filename = comp_cf.name.replace('_DQ', '') + '_composite_'
+    csv_filename = os.path.join(out_dir, base_filename + 'coupling_data.txt')
+    multi_filename = os.path.join(out_dir, base_filename + 'coupling_multi_plot.png')
+    single_filename = os.path.join(out_dir, base_filename + 'coupling_plot.png')
+    single_counts_filename = os.path.join(out_dir, base_filename + 'coupling_counts_plot.png')
+    est_amb_multi_filename = os.path.join(out_dir, base_filename + 'est_amb_multi_plot.png')
+    est_amb_single_filename = os.path.join(out_dir, base_filename + 'est_amb_plot.png')
+    
+    #### LOWEST COUPLING FUNCTION PLOT ####
+    # Split/multi-plot
+    comp_cf.plot(
+        multi_filename, in_counts=False, split_injections=True, upper_lim=upper_lim,
+        freq_min=freq_min, freq_max=freq_max, factor_min=factor_min, factor_max=factor_max,
+        fig_w=fig_w, fig_h=fig_h
     )
-    #### APPLY ALL THE ABOVE STEPS TO BINNED DATA ####
-    cf_binning = None #comp_dict['coupling_function_binning']
-    if cf_binning is not None:
-        # Bin original coupling function data
-        cf_binned_list = [coup_func.bin_data(cf_binning) for coup_func in cf_list]
-        # Keep track of binned frequencies and DARM separately for plotting an unbinned DARM
-        freqs_binned = np.mean([coup_func.freqs for coup_func in cf_binned_list], axis=0)
-        darm_binned = np.mean([coup_func.darm_bg for coup_func in cf_binned_list], axis=0)
-        # Composite coupling function
-        comp_cf_binned = CoupFuncComposite.compute(cf_binned_list, injection_names, local_max_window=local_max_window)
-        # Data export
-        path_binned = path + 'Binned'
-        export_composite_coupling_data(
-            comp_cf_binned, freqs, darm, gwinc, injection_names, path_binned,
-            upper_lim=comp_dict['upper_lim'], est_amb_plot=comp_dict['comp_est_amb_plot'],
-            freq_min=comp_dict['comp_freq_min'], freq_max=comp_dict['comp_freq_max'],
-            factor_min=comp_dict['comp_y_min'], factor_max=comp_dict['comp_y_max'],
-            verbose=verbose
-        )
+    # Merged plot
+    comp_cf.plot(
+        single_filename, in_counts=False, split_injections=False, upper_lim=upper_lim,
+        freq_min=freq_min, freq_max=freq_max, factor_min=factor_min, factor_max=factor_max,
+        fig_w=fig_w, fig_h=fig_h
+    )
+    # Merged plot in counts
+    comp_cf.plot(
+        single_counts_filename, in_counts=True, split_injections=False, upper_lim=upper_lim,
+        freq_min=freq_min, freq_max=freq_max, factor_min=factor_counts_min, factor_max=factor_counts_max,
+        fig_w=fig_w, fig_h=fig_h
+    )    
+    if verbose:
+        print('Composite coupling function plots complete.')
+
+    #### LOWEST ESTIMATED AMBIENT PLOT ####
+    if est_amb_plot:
+        mask_freq = (comp_cf.freqs >= freq_min) & (comp_cf.freqs < freq_max) # data lying within frequency plot range
+        ambs_pos = comp_cf.ambients[(comp_cf.ambients > 0) & mask_freq]
+        darm_pos = comp_cf.darm_bg[(comp_cf.darm_bg > 0) & mask_freq]
+        values = np.concatenate((ambs_pos, darm_pos)) # all positive data within freq range
+        amb_min = values.min() / 4
+        amb_max = values.max() * 2
+        if np.any(comp_cf.flags != 'No data'):
+            freqs_raw = np.mean([cf.freqs for cf in cf_list], axis=0)
+            darm_raw = np.mean([cf.darm_bg for cf in cf_list], axis=0)
+            # Split/multi-plot
+            comp_cf.ambientplot(
+                est_amb_multi_filename,
+                gw_signal='darm', split_injections=True, gwinc=gwinc, darm_data=[freqs_raw, darm_raw],
+                freq_min=freq_min, freq_max=freq_max, amb_min=amb_min, amb_max=amb_max, fig_w=fig_w, fig_h=fig_h
+            )
+            # Merged plot
+            comp_cf.ambientplot(
+                est_amb_single_filename,
+                gw_signal='strain', split_injections=False, gwinc=gwinc, darm_data=[freqs_raw, darm_raw],
+                freq_min=freq_min, freq_max=freq_max, amb_min=amb_min/4000., amb_max=amb_max/4000., fig_w=fig_w, fig_h=fig_h
+            )
+            if verbose:
+                print('Composite estimated ambient plots complete.')        
+        else:
+            print('No composite coupling data for this channel.')
+            
+    #### CSV OUTPUT ####
+    comp_cf.to_csv(csv_filename)
+    if verbose:
+        print('CSV saved.')
     if verbose:
         print('\nLowest (composite) coupling function complete for ' + channel_name)
     return
@@ -221,18 +305,26 @@ if __name__ == "__main__":
                   directory + '.\n')
             continue
         cf_list = []
-        inj_names = []
-        injection_freqs = {}
+        injection_names = []
+        freq_lines = {}
         for file_name in file_names:
             if not ('composite' in file_name):
                 cf = CoupFunc.load(file_name, channelname=channel_name.replace('_DQ', ''))
                 cf_list.append(cf)
-                name_inj = file_name.split('/')[-2]
-                inj_names.append(name_inj)
-                freq_search_result = freq_search(name_inj)
+                injection_name = file_name.split('/')[-2]
+                injection_names.append(injection_name)
+                freq_search_result = freq_search(injection_name)
                 if freq_search_result is not None:
-                    injection_freqs[name_inj] = freq_search_result
-        get_composite_coup_func(cf_list, inj_names, comp_dict, directory,\
-                                injection_freqs=injection_freqs, gwinc=gwinc, smoothing_width=0.005, verbose=verbose)
+                    freq_lines[injection_name] = freq_search_result
+        out_dir = os.path.join(directory, 'CompositeCouplingFunctions')
+        get_composite_coup_func(
+            cf_list, injection_names, out_dir,
+            freq_lines=freq_lines, gwinc=gwinc, local_max_width=comp_dict['local_max_width'],
+            upper_lim=comp_dict['upper_lim'], est_amb_plot=comp_dict['comp_est_amb_plot'],
+            freq_min=comp_dict['comp_freq_min'], freq_max=comp_dict['comp_freq_max'],
+            factor_min=comp_dict['comp_y_min'], factor_max=comp_dict['comp_y_max'],
+            fig_w=comp_dict['comp_fig_width'], fig_h=comp_dict['comp_fig_height'],
+            verbose=verbose
+        )
     t2 = time.time() - t1
     print('Lowest (composite) coupling functions processed. (Runtime: {:.3f} s.)\n'.format(t2))

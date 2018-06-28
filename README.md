@@ -32,6 +32,6 @@ It uses GWpy and PEM_coupling modules to:
 
 GWPy:
 
-    This code is written to run on gwpy.
+This code is written to run on gwpy.
 
-    On LIGO cluster, activate the gwpy virtualenv via ". ~detchar/opt/gwpysoft/bin/activate"
+On LIGO cluster, activate the gwpy virtualenv via ". ~detchar/opt/gwpysoft/bin/activate"

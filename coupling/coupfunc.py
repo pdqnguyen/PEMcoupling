@@ -73,7 +73,7 @@ class CoupFunc(PEMChannelASD):
     """
     
     def __init__(self, name, freqs, values, flags, sens_bg, darm_bg, sens_inj=None, darm_inj=None,\
-                 t_bg=0, t_inj=0, unit='', calibration=None, values_in_counts=None):
+                 t_bg=0, t_inj=0, injection_name=None, unit='', calibration=None, values_in_counts=None):
         super(CoupFunc, self).__init__(name, freqs, values)
         self.flags = np.asarray(flags, dtype=object)
         self.sens_bg = np.asarray(sens_bg)
@@ -83,6 +83,7 @@ class CoupFunc(PEMChannelASD):
         self.ambients = self.values * self.sens_bg
         self.t_bg = int(t_bg)
         self.t_inj = int(t_inj)
+        self.injection_name = injection_name
         self.df = self.freqs[1] - self.freqs[0]
         self.calibration = calibration
         if values_in_counts is not None:
@@ -121,7 +122,7 @@ class CoupFunc(PEMChannelASD):
     def compute(
         cls, ASD_bg, ASD_inj, ASD_darm_bg, ASD_darm_inj,
         darm_factor=2, sens_factor=2, local_max_width=0,
-        smooth_params=None, notch_windows = [], fsearch=None, verbose=False
+        smooth_params=None, notch_windows = [], fsearch=None, injection_name=None, verbose=False
     ):
         """
         Calculates coupling factors from sensor spectra and DARM spectra.
@@ -289,18 +290,17 @@ class CoupFunc(PEMChannelASD):
             factors = new_factors
             flags = new_flags
         cf = cls(name, freqs, factors, flags, sens_bg, darm_bg, sens_inj=sens_inj, darm_inj=darm_inj,\
-                 t_bg=t_bg, t_inj=t_inj, unit=unit, calibration=calibration)
+                 t_bg=t_bg, t_inj=t_inj, injection_name=injection_name, unit=unit, calibration=calibration)
         return cf
     
-    def plot(self, path, in_counts=False, ts=None, upper_lim=True, freq_min=None, freq_max=None,\
+    def plot(self, filename, in_counts=False, ts=None, upper_lim=True, freq_min=None, freq_max=None,\
              factor_min=None, factor_max=None, fig_w=15, fig_h=6):
         """
         Export a coupling function plot from the data
         
         Parameters
         ----------
-        path : str
-            Target directory.
+        filename : str
         in_counts : bool
             If True, convert coupling function to counts, and treat data as such.
         ts : time.time object
@@ -404,7 +404,7 @@ class CoupFunc(PEMChannelASD):
         plt.figtext(.95,0, str_quiet_time, ha='right', fontsize = 12, color = 'b')
         plt.figtext(.05,0, str_inj_time, fontsize = 12, color = 'b')
         plt.figtext(.5,0, 'Band Width: {:1.3f} Hz'.format(self.df), ha='center', va='top', fontsize = 12, color = 'b')
-        plt.figtext(.05,.96, 'Injection name:\n{} '.format(path.split('/')[-1]), fontsize = 12, color = 'b')
+        plt.figtext(.05,.96, 'Injection name:\n{} '.format(self.injection_name), fontsize = 12, color = 'b')
         plt.figtext(.95,.99, 'Measured coupling factors: {}'.format(len(real[1])), ha='right', fontsize = 12, color = 'b')
         if upper_lim:
             plt.figtext(.95,.96, 'Upper limit coupling factors: {}'.format(len(upper[1])), ha='right', fontsize = 12, color = 'b')
@@ -422,27 +422,18 @@ class CoupFunc(PEMChannelASD):
         for tick in ax.yaxis.get_major_ticks():
             tick.label.set_fontsize(18)
         # EXPORT PLOT
-        filename = self.name[self.name.index('-')+1:].replace('_DQ','') +'_coupling_plot.png'
-        if in_counts:
-            filename = filename.replace('_plot','_counts_plot')
-        if path is None: 
-            path = datetime.datetime.fromtimestamp(ts).strftime('DATA_%Y-%m-%d_%H:%M:%S')
-        if not os.path.exists(path):
-            os.makedirs(path)
-        file_name = path + '/' + filename
-        plt.savefig(file_name, bbox_inches='tight')
+        plt.savefig(filename, bbox_inches='tight')
         plt.close()
         return fig
 
-    def specplot(self, path=None, ts=None, est_amb=True, show_darm_threshold=True, upper_lim=True,\
+    def specplot(self, filename, ts=None, est_amb=True, show_darm_threshold=True, upper_lim=True,\
                  freq_min=None, freq_max=None, spec_min=None, spec_max=None, fig_w=12, fig_h=6):
         """
         Export an estimated ambient plot from the data.
         
         Parameters
         ----------
-        path : str
-            Target directory.
+        filename : str
         ts : time.time object
             Timestamp object.
         est_amb : bool
@@ -466,9 +457,19 @@ class CoupFunc(PEMChannelASD):
         """
         if ts is None:
             ts = time.time()
+        try:
+            float(freq_min)
+        except:
+            freq_min = self.freqs[0]
+        try:
+            float(freq_max)
+        except:
+            freq_max = self.freqs[-1]
         loc_freq_min, loc_freq_max = 0, -1
-        while self.freqs[loc_freq_min] < freq_min: loc_freq_min += 1
-        while self.freqs[loc_freq_max] > freq_max: loc_freq_max -= 1
+        while self.freqs[loc_freq_min] < freq_min:
+            loc_freq_min += 1
+        while self.freqs[loc_freq_max] > freq_max:
+            loc_freq_max -= 1
         darm_y = list(self.darm_bg[loc_freq_min:loc_freq_max]) + list(self.darm_inj[loc_freq_min:loc_freq_max])
         amp_max_spec = max(darm_y)
         amp_min_spec = min(darm_y)
@@ -478,17 +479,25 @@ class CoupFunc(PEMChannelASD):
         # Y-AXIS LIMITS FOR DARM/EST AMB SPECTROGRAM
         amb_values = self.ambients[np.isfinite(self.ambients) & (self.ambients>0)]
         amb_min = np.min(amb_values) if np.any(amb_values) else self.darm_bg.min()/10.
-        if spec_min is None:
+        try:
+            float(spec_min)
+        except TypeError:
             if show_darm_threshold:
                 spec_min = min([amb_min, min(self.darm_bg)])/4
             else:
                 spec_min = amp_min_spec/4
-        if spec_max is None:
+        try:
+            float(spec_max)
+        except TypeError:
             spec_max = amp_max_spec*2
         # CREATE FIGURE FOR SPECTRUM PLOTS
-        if fig_w is None:
+        try:
+            float(fig_w)
+        except TypeError:
             fig_w = 14
-        if fig_h is None:
+        try:
+            float(fig_h)
+        except TypeError:
             fig_h = 6
         fig = plt.figure(figsize=(fig_w, fig_h))
         # PLOT SENSOR SPECTRA
@@ -586,8 +595,7 @@ class CoupFunc(PEMChannelASD):
         plt.figtext(.9,.01, str_quiet_time, ha='right', fontsize = 12, color = 'b')
         plt.figtext(.1,.01, str_inj_time, fontsize = 12, color = 'b')
         plt.figtext(.5,0.0, 'Band Width: {:1.3f} Hz'.format(self.df), ha='center', va='top', fontsize = 14, color = 'b')
-        plt.figtext(.1,.97, 'Injection name:\n{} '.format(path.split('/')[-1].replace('_','\_')),
-                    fontsize = 12, color = 'b')
+        plt.figtext(.1,.97, 'Injection name:\n{} '.format(self.injection_name), fontsize = 12, color = 'b')
         if est_amb:
             plt.figtext(.9,.99, 'Measured coupling factors: {}'.format(len(real_amb[1])), ha='right', \
                         fontsize = 14, color = 'b')
@@ -609,11 +617,6 @@ class CoupFunc(PEMChannelASD):
         for tick in ax2.yaxis.get_major_ticks():
             tick.label.set_fontsize(18)
         # EXPORT PLOT
-        if path is None:
-            path = datetime.datetime.fromtimestamp(ts).strftime('DATA_%Y-%m-%d_%H:%M:%S')
-        if not os.path.exists(path):
-            os.makedirs(path)
-        filename = path + '/' + self.name[self.name.index('-')+1:].replace('_DQ','')+'_spectrum.png'
         plt.savefig(filename, bbox_inches='tight')
         plt.close()
         return fig

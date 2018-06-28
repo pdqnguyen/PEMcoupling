@@ -206,7 +206,7 @@ else:
     print('')
     sys.exit()
 # Dictionary for keeping track of fundamental frequencies of magnetic injections
-injection_freqs = {}
+freq_lines = {}
 
 #=====================================================
 #### FFT CALCULATIONS
@@ -238,24 +238,27 @@ t1 = time.time()
 coup_func_results = {}
 logging.info('Beginning to loop over injections.')
 for injection in injection_table:
-    name_inj, time_bg, time_inj = injection
+    injection_name, time_bg, time_inj = injection
     # Create subdirectory for this injection
-    if name_inj != '':
+    if injection_name != '':
         print('\n' + '*'*20 + '\n')
-        print('Analyzing injection: ' + name_inj)
-        subdir = name_inj
+        print('Analyzing injection: ' + injection_name)
+        new_dir = injection_name
     else:
-        subdir = datetime.datetime.fromtimestamp(t1).strftime('DATA_%Y-%m-%d_%H:%M:%S')
-    subdirectory = (general_dict['directory'] + '/' + subdir if general_dict['directory'] is not None else subdir)
-    print('Output directory for this injection:\n' + subdirectory)
-    if not os.path.exists(subdirectory):
-        os.makedirs(subdirectory)
-        logging.info('Subidrectory ' + subdirectory + ' created.')
+        new_dir = datetime.datetime.fromtimestamp(t1).strftime('DATA_%Y-%m-%d_%H:%M:%S')
+    if general_dict['directory'] is not None:
+        out_dir = os.path.join(general_dict['directory'], new_dir)
+    else:
+        out_dir = new_dir
+    print('Output directory for this injection:\n' + out_dir)
+    if not os.path.exists(out_dir):
+        os.makedirs(out_dir)
+        logging.info('Subdirectory ' + out_dir + ' created.')
     # Get fundamental frequency if this is a magnetic injection
     logging.info('Searching for fundamental frequency if applicable.')
-    freq_search = getparams.freq_search(name_inj, verbose=True)
+    freq_search = getparams.freq_search(injection_name, verbose=True)
     if freq_search is not None:
-        injection_freqs[name_inj] = freq_search
+        freq_lines[injection_name] = freq_search
 
     #=====================================================
     #### PREPARE SENSOR DATA
@@ -268,20 +271,20 @@ for injection in injection_table:
     #### BE PICKY ABOUT CHANNELS ####
     # Exclude isolated locations (e.g. tables) from channels for certain injections (e.g. shaker)
     logging.info('Being picky about channels.')
-    if 'shake' in subdir.lower():
+    if 'shake' in injection_name.lower():
         chans = []
         for c in channels:
             omit_channels = ['IOT', 'ISCT', 'OPLEV', 'PSL_TABLE', 'MIC']
-            if all(x not in c for x in omit_channels) or ( ('PSL_TABLE' in c) and ('psl' in subdir.lower()) ):
+            if all(x not in c for x in omit_channels) or ( ('PSL_TABLE' in c) and ('psl' in injection_name.lower()) ):
                 chans.append(c)
-    elif 'acou' in subdir.lower():
-        if 'ebay' in subdir.lower():
+    elif 'acou' in injection_name.lower():
+        if 'ebay' in injection_name.lower():
             chans = [c for c in channels if ('EBAY' in c)]
-        elif 'psl' in subdir.lower():
+        elif 'psl' in injection_name.lower():
             chans = [c for c in channels if ('PSL' in c)]
         else:
             chans = [c for c in channels if ('PSL' not in c)]
-    elif 'mag' in subdir.lower() and 'ebay' not in subdir.lower():
+    elif 'mag' in injection_name.lower() and 'ebay' not in injection_name.lower():
         chans = [c for c in channels if ('EBAY' not in c)]
     else:
         chans = channels
@@ -303,7 +306,7 @@ for injection in injection_table:
     
     if verbose: print('All channel time series extracted. (Runtime: {:.3f} s)\n'.format(time.time() - t11))
     if len(chans_failed)>0:
-        with open(subdirectory + '/0_FAILED_CHANNELS.txt', 'wb') as f:
+        with open(out_dir + '/0_FAILED_CHANNELS.txt', 'wb') as f:
             f.write('\n'.join(chans_failed))
     
     #### REJECT SATURATED TIME SERIES ####
@@ -366,7 +369,7 @@ for injection in injection_table:
             ASD_bg_list, ASD_inj_list,
             ratio_dict['ratio_z_min'], ratio_dict['ratio_z_max'],
             method=ratio_method, minFreq=ratio_dict['ratio_min_frequency'], maxFreq=ratio_dict['ratio_max_frequency'], 
-            directory=subdirectory, ts=t1
+            directory=out_dir, ts=t1
         )
         # QUIT CALCULATIONS IF RATIO PLOT IS ALL WE WANT (-R option instead of -r)
         if options.ratio_plot_only is not None:
@@ -432,9 +435,9 @@ for injection in injection_table:
     if verbose:
         print('ASDs are ready for coupling function calculations.\n')
     
-    #============================================
-    #### ANALYSIS // DATA EXPORT
-    #============================================
+    #======================================
+    #### ANALYSIS
+    #======================================
     
     #### GET SMOOTHING PARAMETERS ####
     # Smoothing is applied within the coupling function calculation.
@@ -445,7 +448,7 @@ for injection in injection_table:
         logging.info('Acquiring smoothing parameters for channel ' + chan_name + '.')
         smooth_params[chan_name] = None
         for option, values in smooth_dict.iteritems():
-            if 'shake' in name_inj:
+            if 'shake' in injection_name:
                 values[0] = values[1]
             if '_smoothing' in option:
                 chan_type = option[:option.index('_')].upper()    # Channel type from smoothing dict
@@ -467,13 +470,15 @@ for injection in injection_table:
             ASD_bg_list[i], ASD_inj_list[i], ASD_darm_bg_list[i], ASD_darm_inj_list[i],
             darm_factor=cf_dict['darm_factor_threshold'], sens_factor=cf_dict['sens_factor_threshold'],
             local_max_width=cf_dict['local_max_width'], smooth_params=smooth_params[channel_name],
-            notch_windows=darm_notch_data, fsearch=freq_search, verbose=verbose
+            notch_windows=darm_notch_data, fsearch=freq_search,
+            injection_name=injection_name,
+            verbose=verbose
         )
         coup_func_list.append(cf)
         logging.info('Coupling function complete: ' + channel_name + '.')
         if channel_name not in coup_func_results.keys():
             coup_func_results[channel_name] = []
-        coup_func_results[channel_name].append((name_inj, cf))
+        coup_func_results[channel_name].append((injection_name, cf))
     ts2 = time.time() - ts1
     if verbose:
         print('Coupling functions calculated. (Runtime: {:4f} s)\n'.format(ts2))
@@ -485,27 +490,68 @@ for injection in injection_table:
             calib_dict['calibration_method'], ifo,
             TS_inj, time_inj, time_inj + dur, fft_time, overlap_time,
             coher_dict['coherence_spectrum_plot'], coher_dict['coherence_threshold'], coher_dict['percent_data_threshold'],
-            subdirectory, t1
+            out_dir, t1
         )
         t22 = time.time() - t21
         if verbose:
             print('Coherence data computed. (Runtime: '+str(t22)+' s.)\n')
     else:
         coherence_results = {}
-    #### DATA EXPORT ####
+        
+    #======================================
+    #### DATA EXPORT
+    #======================================
+    
     print('Saving results...')
-    savedata.export_coup_data(
-        coup_func_list,
-        plot_dict['spectrum_plot'], plot_dict['darm/10'], plot_dict['upper_lim'], plot_dict['est_amb_plot'],
-        plot_dict['plot_freq_min'], plot_dict['plot_freq_max'],
-        plot_dict['coup_y_min'], plot_dict['coup_y_max'], plot_dict['spec_y_min'], plot_dict['spec_y_max'],
-        plot_dict['coup_fig_height'], plot_dict['coup_fig_width'], plot_dict['spec_fig_height'], plot_dict['spec_fig_width'],
-        subdirectory, t1, coherence_results, verbose
-    )
-    logging.info('Coupling functions saved for injection ' + name_inj + '.')
+    for cf in coup_func_list:        
+        if verbose:
+            print('Exporting data for {}'.format(cf.name))
+        base_filename = cf.name[cf.name.index('-')+1:].replace('_DQ','')
+        cf_plot_filename = os.path.join(out_dir, base_filename + '_coupling_plot')
+        cf_counts_plot_filename = os.path.join(out_dir, base_filename + '_coupling_counts_plot')
+        spec_plot_filename = os.path.join(out_dir, base_filename + '_spectrum.png')
+        csv_filename = os.path.join(out_dir, base_filename + '_coupling_data.txt')
+        #### COUPLING FUNCTION PLOT ####
+        # Coupling function in physical sensor units
+        cf.plot(
+            cf_plot_filename,
+            in_counts=False, ts=t1, upper_lim=plot_dict['upper_lim'],
+            freq_min=plot_dict['plot_freq_min'], freq_max=plot_dict['plot_freq_max'],
+            factor_min=plot_dict['coup_y_min'], factor_max=plot_dict['coup_y_max'],
+            fig_w=plot_dict['coup_fig_width'], fig_h=plot_dict['coup_fig_height']
+        )
+        # Coupling function in raw sensor counts
+        cf.plot(
+            cf_counts_plot_filename,
+            in_counts=True, ts=t1, upper_lim=plot_dict['upper_lim'],
+            freq_min=plot_dict['plot_freq_min'], freq_max=plot_dict['plot_freq_max'],
+            factor_min=plot_dict['coup_y_min'], factor_max=plot_dict['coup_y_max'],
+            fig_w=plot_dict['coup_fig_width'], fig_h=plot_dict['coup_fig_height']
+        )
+        # ASD PLOT WITH ESTIMATED AMBIENTS
+        if plot_dict['spectrum_plot']:
+            cf.specplot(
+                spec_plot_filename,
+                ts=t1, est_amb=plot_dict['est_amb_plot'],
+                show_darm_threshold=plot_dict['darm/10'], upper_lim=plot_dict['upper_lim'],
+                freq_min=plot_dict['plot_freq_min'], freq_max=plot_dict['plot_freq_max'],
+                spec_min=plot_dict['spec_y_min'], spec_max=plot_dict['spec_y_max'],
+                fig_w=plot_dict['spec_fig_width'], fig_h=plot_dict['spec_fig_height'],
+            )
+        # CSV DATA FILE
+        if any(cf.flags != 'No data'):
+            # Look for coherence data
+            try:
+                coherence_data = coherence_results[cf.name]
+            except KeyError:
+                coherence_data = None
+            cf.to_csv(csv_filename, coherence_data=coherence_data)
+    logging.info('Coupling functions saved for injection ' + injection_name + '.')
     if (not verbose) and ((options.injection_list is not None) or (options.injection_search is not None) or (options.dtt is not None)):
-        print('\n' + subdir + ' complete.')
+        print('\n' + new_dir + ' complete.')
     del TS_bg_list, TS_inj_list, ASD_bg_list, ASD_inj_list, ASD_darm_bg_list, ASD_darm_inj_list
+
+#===========================
 
 print('\n' + '*'*20 + '\n')
 t2 = time.time()
@@ -536,7 +582,6 @@ if gwinc is None:
     print('')
     logging.warning('Composite estimated ambient will not show GWINC.')
     print('')
-comp_dict['local_max_width'] = cf_dict['local_max_width']
 final_channel_list = sorted(coup_func_results.keys())
 for channel_name in final_channel_list:
     print('Creating composite coupling function for ' + channel_name + '.')
@@ -545,9 +590,15 @@ for channel_name in final_channel_list:
     for inj_name, coup_func in coup_func_results[channel_name]:
         injection_names.append(inj_name)
         cf_list.append(coup_func)
+    out_dir = os.path.join(general_dict['directory'], 'CompositeCouplingFunctions')
     get_composite_coup_func(
-        cf_list, injection_names, comp_dict, general_dict['directory'],
-        injection_freqs=injection_freqs, gwinc=gwinc, smoothing_width=0.005, verbose=verbose
+        cf_list, injection_names, out_dir,
+        freq_lines=freq_lines, gwinc=gwinc, local_max_width=cf_dict['local_max_width'],
+        upper_lim=comp_dict['upper_lim'], est_amb_plot=comp_dict['comp_est_amb_plot'],
+        freq_min=comp_dict['comp_freq_min'], freq_max=comp_dict['comp_freq_max'],
+        factor_min=comp_dict['comp_y_min'], factor_max=comp_dict['comp_y_max'],
+        fig_w=comp_dict['comp_fig_width'], fig_h=comp_dict['comp_fig_height'],
+        verbose=verbose
     )
 t3 = time.time()
 print('Lowest (composite) coupling functions processed. (Runtime: {:.3f} s.)\n'.format(t3 - t2))
