@@ -28,33 +28,41 @@ def get_arg_params(args):
     """
     
     logging.info('Parsing arguments.')
-    if len(args) != 3:
+    if len(args) == 0:
+        print('')
+        logging.warning('No arguments given. Running interactive mode.')
+        print('')
+        ifo_input = raw_input('Interferometer (H1/L1): ').upper()
+        station_input = raw_input('Station (CS/EX/EY/ALL): ').upper()
+        injection_type = raw_input('Interferometer (MAGNETIC/VIBRATIONAL/ACOUSTIC): ').upper()
+    elif len(args) != 3:
         print('')
         logging.error('Exactly 3 arguments required (interferometer, station, injection type).')
         print('')
         sys.exit()
-    ifo_input, station_input, injection_type = args
+    else:
+        ifo_input, station_input, injection_type = [s.upper() for s in args]
     # Make sure interferometer input is valid
     ifo_dict = {'H1': 'H1', 'LHO': 'H1', 'L1': 'L1', 'LLO': 'L1'}
     try:
-        ifo = ifo_dict[ifo_input.upper()]
+        ifo = ifo_dict[ifo_input]
     except KeyError:
         print('')
         logging.error('Argument "ifo" must be one of "H1", "LHO", "L1", or "LHO" (not case-sensitive).')
         print('')
         sys.exit()
     # Make sure station input is valid
-    if station_input.upper() in ['CS', 'EX', 'EY', 'ALL']:
-        station = station_input.upper()
+    if station_input in ['CS', 'EX', 'EY', 'ALL']:
+        station = station_input
     else:
         print('')
         logging.error('Argument "station" must be one of "CS", "EX", "EY", or "ALL" (not case-sensitive).')
         print('')
         sys.exit()
     # Make sure injection type is valid
-    if injection_type.lower() in ['mag', 'magnetic']:
+    if injection_type in ['MAG', 'MAGNETIC']:
         config_name = 'config_files/config_magnetic.txt'
-    elif injection_type.lower() in ['vib', 'vibrational', 'acoustic']:
+    elif injection_type in ['VIB', 'VIBRATIONAL', 'ACOUSTIC']:
         config_name = 'config_files/config_vibrational.txt'
     else:
         print('')
@@ -697,11 +705,11 @@ def freq_search(name_inj, verbose=False):
     
     Returns
     -------
-    freq_search : float
+    out : float
         Fundamental frequency (Hz).
     """
     
-    freq_search = None # Fundamental frequency of injection lines
+    out = None # Fundamental frequency of injection lines
     if 'mag' in name_inj.lower():
         # Search for either one of two patterns:
         # (1) 'p' between two numbers (eg 7p1)
@@ -711,9 +719,9 @@ def freq_search(name_inj, verbose=False):
             # If found, get fundamental frequency from search result
             freq_str = re.sub('Hz', '', freq_str, flags=re.IGNORECASE)
             freq_str = re.sub('p', '.', freq_str, flags=re.IGNORECASE)
-            freq_search = float(freq_str)
+            out = float(freq_str)
             logging.info('Fundamental frequency found: ' + freq_str +' Hz.')
             if verbose:
                 print('Fundamental frequency found: ' + freq_str +' Hz.')
                 print('Coupling will only be computed near harmonics of this frequency.')
-    return freq_search
+    return out

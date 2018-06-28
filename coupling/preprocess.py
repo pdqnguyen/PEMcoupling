@@ -13,7 +13,7 @@ from gwpy.frequencyseries import FrequencySeries
 import numpy as np
 import time
 import logging
-from channel import ChannelASD
+from pemchannel import PEMChannelASD
 from utils import quad_sum_names
 
 def reject_saturated(time_series_list, verbose=False):
@@ -76,7 +76,8 @@ def convert_to_ASD(time_series_list, FFT_time, overlap_time):
     for ts in time_series_list:
         asd1 = ts.asd(FFT_time, overlap_time)
         name = asd1.channel.name.replace('_DQ', '')
-        asd2 = ChannelASD(name, asd1.frequencies.value, asd1.value, t0=asd1.epoch.value)
+        asd2 = PEMChannelASD(name, asd1.frequencies.value, asd1.value, t0=asd1.epoch.value)
+#         asd2 = ChannelASD(name, asd1.frequencies.value, asd1.value, t0=asd1.epoch.value)
         logging.info('Channel converted to ASD: ' + name + ' with FFT time ' + str(FFT_time) + ' and overlap time ' + str(overlap_time))
         asd_list.append(asd2)
     return asd_list
@@ -199,13 +200,13 @@ def calibrate_sensors(asd_list, calibration_file, verbose=False):
     else:
         not_list = True
         asd_list= [asd_list]
-    channel_names = [asd.channel.name for asd in asd_list]
+    channel_names = [asd.name for asd in asd_list]
     calibration_factors, uncalibrated_channels = get_calibration_factors(channel_names, calibration_file)
     calibrated_asd_list = []
     for i, asd in enumerate(asd_list):
         name = channel_names[i]
         if isinstance(asd, FrequencySeries):
-            asd = ChannelASD(name, asd.frequencies.value, asd.value, t0=asd.epoch.value)
+            asd = PEMChannelASD(name, asd.frequencies.value, asd.value, t0=asd.epoch.value)
             logging.info('Channel converted from gwpy FrequencySeries to ChannelASD object: ' + name + '.')
         if name in calibration_factors.keys():
             asd.calibrate(calibration_factors[name])
@@ -240,54 +241,7 @@ def quad_sum_ASD(asd_list, replace_original=False):
         asd_axes = [asd for asd in asd_list if asd.name in axes]
         logging.info('Generating quad sum ASD for ' + name + '.')
         qsum_values = np.sqrt( sum([asd.values**2 for asd in asd_axes]) )
-        qsum = ChannelASD(name, asd_axes[0].freqs, qsum_values, t0=asd_axes[0].t0,\
+        qsum = PEMChannelASD(name, asd_axes[0].freqs, qsum_values, t0=asd_axes[0].t0,\
                           unit=asd_axes[0].unit, calibration=asd_axes[0].calibration)
         asd_list_qsum.append(qsum)
     return asd_list_qsum
-
-def smooth_ASD(x, y, width, smoothing_log=False):
-    """
-    Sliding-average smoothing function for cleaning up noisiness in a spectrum.
-    Example of logarithmic smoothing:
-    If width = 5 and smoothing_log = True, smoothing windows are defined such that the window is
-    5 frequency bins wide (i.e. 5 Hz wide if bandwidth = 1 Hz) at 100 Hz, and 50 bins at 1000 Hz.
-    ...
-    A bit about smoothing: the underlying motivation is to minimize random noise which artificially yields coupling
-    factors in the calculations later, but smoothing is also crucial in eliminating point-source features
-    (e.g. drops in microphone spectrum due to the point-like microphone sitting at an anti-node of the injected
-    sound waves). It is not so justifiable to smooth the sensor background, or DARM, since background noise and
-    overall coupling to DARM are diffuse, so smoothing of these should be very limited.
-    The extra objects ASD_new_bg_smoother is the background ASD smoothed as much as the injection.
-    ASD_bg and ASD_bg_smoother are both used in the CouplingFunction routine; the latter for determining
-    coupling regions in frequency domain, the former for actual coupling computation.
-    
-    Parameters
-    ----------
-    x : array 
-        Frequencies.
-    y : array
-        ASD values to be smoothed.
-    width : int
-        Size of window for sliding average (measured in frequency bins).
-    smoothing_log : {False, True}, optional
-        If True, smoothing window width grows proportional to frequency (see example above).
-    
-    Returns
-    -------
-    y_smooth : array
-        Smoothed ASD values.
-    """
-    y_smooth = np.zeros_like(y)
-    if smoothing_log:
-        # Num of bins at frequency f:  ~ width * f / 100
-        widths = np.round(x * width / 100).astype(int)
-        for i,w in enumerate(widths):
-            lower_ = max([0, i-int(w/2)])
-            upper_ = min([len(y), i+w-int(w/2)+1])
-            y_smooth[i] = np.mean(y[lower_:upper_])
-    else:
-        for i in range(len(y)):
-            lower_ = max([0, i-int(width/2)])
-            upper_ = min([len(y), i+width-int(width/2)])
-            y_smooth[i] = np.mean(y[lower_:upper_])
-    return y_smooth

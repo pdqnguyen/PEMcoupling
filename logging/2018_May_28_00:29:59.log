@@ -1,0 +1,71 @@
+00:29:59 PEMcoupling.py (<module>) INFO: Importing PEM coupling packages.
+00:30:01 getparams.py (get_arg_params) INFO: Parsing arguments.
+00:30:01 getparams.py (get_config_params) INFO: Opening config file.
+00:30:01 getparams.py (get_config_params) INFO: Checking if missing/empty config file.
+00:30:01 getparams.py (get_config_params) INFO: Parsing numerical and boolean config options.
+00:30:01 PEMcoupling.py (<module>) INFO: Separating config dictionary by section.
+00:30:01 PEMcoupling.py (<module>) INFO: Handling conflicts between config options and command line options.
+00:30:01 PEMcoupling.py (<module>) INFO: Reading in channel list given in config file.
+00:30:01 getparams.py (get_channel_names) INFO: Opening channel list file.
+00:30:01 getparams.py (get_channel_list) INFO: Performing channel search.
+00:30:01 PEMcoupling.py (<module>) INFO: Creating injection table.
+00:30:01 getparams.py (get_times) INFO: Getting DTT files from command line input.
+00:30:01 getparams.py (get_times) INFO: List of DTT files created.
+00:30:01 getparams.py (get_times_DTT) INFO: Reading DTT files for times.
+00:30:02 getparams.py (get_times_DTT) INFO: Finished reading DTTs.
+00:30:02 PEMcoupling.py (<module>) INFO: Reporting injection results.
+00:30:02 PEMcoupling.py (<module>) INFO: Calculating FFT parameters.
+00:30:02 getparams.py (get_FFT_params) INFO: Duration given; determining overlap time and bandwidth.
+00:30:02 getparams.py (get_FFT_params) INFO: FFT parameters acquired.
+00:30:02 PEMcoupling.py (<module>) INFO: Converting smoothing parameters to frequency bins based on bandwidth.
+00:30:02 PEMcoupling.py (<module>) INFO: Beginning to loop over injections.
+00:30:02 PEMcoupling.py (<module>) INFO: Searching for fundamental frequency if applicable.
+00:30:02 getparams.py (freq_search) INFO: Fundamental frequency found: 7 Hz.
+00:30:02 PEMcoupling.py (<module>) INFO: Being picky about channels.
+00:30:03 loaddata.py (get_time_series) INFO: Channel successfully extracted: H1:PEM-CS_MAG_LVEA_OUTPUTOPTICS_X_DQ at time 1185815495 to 1185815635.0.
+00:30:04 loaddata.py (get_time_series) INFO: Channel successfully extracted: H1:PEM-CS_MAG_LVEA_OUTPUTOPTICS_Y_DQ at time 1185815495 to 1185815635.0.
+00:30:04 loaddata.py (get_time_series) INFO: Channel successfully extracted: H1:PEM-CS_MAG_LVEA_OUTPUTOPTICS_Z_DQ at time 1185815495 to 1185815635.0.
+00:30:05 loaddata.py (get_time_series) INFO: Channel successfully extracted: H1:PEM-CS_MAG_LVEA_OUTPUTOPTICS_X_DQ at time 1185823829 to 1185823969.0.
+00:30:05 loaddata.py (get_time_series) INFO: Channel successfully extracted: H1:PEM-CS_MAG_LVEA_OUTPUTOPTICS_Y_DQ at time 1185823829 to 1185823969.0.
+00:30:06 loaddata.py (get_time_series) INFO: Channel successfully extracted: H1:PEM-CS_MAG_LVEA_OUTPUTOPTICS_Z_DQ at time 1185823829 to 1185823969.0.
+00:30:06 preprocess.py (convert_to_ASD) INFO: Channel converted to ASD: H1:PEM-CS_MAG_LVEA_OUTPUTOPTICS_X with FFT time 25.0 and overlap time 12.5
+00:30:06 preprocess.py (convert_to_ASD) INFO: Channel converted to ASD: H1:PEM-CS_MAG_LVEA_OUTPUTOPTICS_Y with FFT time 25.0 and overlap time 12.5
+00:30:06 preprocess.py (convert_to_ASD) INFO: Channel converted to ASD: H1:PEM-CS_MAG_LVEA_OUTPUTOPTICS_Z with FFT time 25.0 and overlap time 12.5
+00:30:07 preprocess.py (convert_to_ASD) INFO: Channel converted to ASD: H1:PEM-CS_MAG_LVEA_OUTPUTOPTICS_X with FFT time 25.0 and overlap time 12.5
+00:30:07 preprocess.py (convert_to_ASD) INFO: Channel converted to ASD: H1:PEM-CS_MAG_LVEA_OUTPUTOPTICS_Y with FFT time 25.0 and overlap time 12.5
+00:30:07 preprocess.py (convert_to_ASD) INFO: Channel converted to ASD: H1:PEM-CS_MAG_LVEA_OUTPUTOPTICS_Z with FFT time 25.0 and overlap time 12.5
+00:30:07 preprocess.py (get_calibration_factors) INFO: Parsing calibration data for channel H1:PEM-CS_MAG_LVEA_OUTPUTOPTICS_X.
+00:30:07 preprocess.py (get_calibration_factors) INFO: Calibration factor acquired for channel H1:PEM-CS_MAG_LVEA_OUTPUTOPTICS_X.
+00:30:07 preprocess.py (get_calibration_factors) INFO: Parsing calibration data for channel H1:PEM-CS_MAG_LVEA_OUTPUTOPTICS_Y.
+00:30:07 preprocess.py (get_calibration_factors) INFO: Calibration factor acquired for channel H1:PEM-CS_MAG_LVEA_OUTPUTOPTICS_Y.
+00:30:07 preprocess.py (get_calibration_factors) INFO: Parsing calibration data for channel H1:PEM-CS_MAG_LVEA_OUTPUTOPTICS_Z.
+00:30:07 preprocess.py (get_calibration_factors) INFO: Calibration factor acquired for channel H1:PEM-CS_MAG_LVEA_OUTPUTOPTICS_Z.
+00:30:07 preprocess.py (calibrate_sensors) INFO: Channel calibrated: H1:PEM-CS_MAG_LVEA_OUTPUTOPTICS_X.
+00:30:07 preprocess.py (calibrate_sensors) INFO: Channel calibrated: H1:PEM-CS_MAG_LVEA_OUTPUTOPTICS_Y.
+00:30:07 preprocess.py (calibrate_sensors) INFO: Channel calibrated: H1:PEM-CS_MAG_LVEA_OUTPUTOPTICS_Z.
+00:30:07 preprocess.py (get_calibration_factors) INFO: Parsing calibration data for channel H1:PEM-CS_MAG_LVEA_OUTPUTOPTICS_X.
+00:30:07 preprocess.py (get_calibration_factors) INFO: Calibration factor acquired for channel H1:PEM-CS_MAG_LVEA_OUTPUTOPTICS_X.
+00:30:07 preprocess.py (get_calibration_factors) INFO: Parsing calibration data for channel H1:PEM-CS_MAG_LVEA_OUTPUTOPTICS_Y.
+00:30:07 preprocess.py (get_calibration_factors) INFO: Calibration factor acquired for channel H1:PEM-CS_MAG_LVEA_OUTPUTOPTICS_Y.
+00:30:07 preprocess.py (get_calibration_factors) INFO: Parsing calibration data for channel H1:PEM-CS_MAG_LVEA_OUTPUTOPTICS_Z.
+00:30:07 preprocess.py (get_calibration_factors) INFO: Calibration factor acquired for channel H1:PEM-CS_MAG_LVEA_OUTPUTOPTICS_Z.
+00:30:07 preprocess.py (calibrate_sensors) INFO: Channel calibrated: H1:PEM-CS_MAG_LVEA_OUTPUTOPTICS_X.
+00:30:07 preprocess.py (calibrate_sensors) INFO: Channel calibrated: H1:PEM-CS_MAG_LVEA_OUTPUTOPTICS_Y.
+00:30:07 preprocess.py (calibrate_sensors) INFO: Channel calibrated: H1:PEM-CS_MAG_LVEA_OUTPUTOPTICS_Z.
+00:30:07 preprocess.py (quad_sum_ASD) INFO: Generating quad sum ASD for H1:PEM-CS_MAG_LVEA_OUTPUTOPTICS_XYZ.
+00:30:07 preprocess.py (quad_sum_ASD) INFO: Generating quad sum ASD for H1:PEM-CS_MAG_LVEA_OUTPUTOPTICS_XYZ.
+00:30:09 PEMcoupling.py (<module>) INFO: Cropping ASDs to match frequencies: H1:PEM-CS_MAG_LVEA_OUTPUTOPTICS_X.
+00:30:09 PEMcoupling.py (<module>) INFO: Cropping ASDs to match frequencies: H1:PEM-CS_MAG_LVEA_OUTPUTOPTICS_XYZ.
+00:30:09 PEMcoupling.py (<module>) INFO: Cropping ASDs to match frequencies: H1:PEM-CS_MAG_LVEA_OUTPUTOPTICS_Y.
+00:30:09 PEMcoupling.py (<module>) INFO: Cropping ASDs to match frequencies: H1:PEM-CS_MAG_LVEA_OUTPUTOPTICS_Z.
+00:30:09 PEMcoupling.py (<module>) INFO: Acquiring smoothing parameters for channel H1:PEM-CS_MAG_LVEA_OUTPUTOPTICS_X.
+00:30:09 PEMcoupling.py (<module>) INFO: Acquiring smoothing parameters for channel H1:PEM-CS_MAG_LVEA_OUTPUTOPTICS_XYZ.
+00:30:09 PEMcoupling.py (<module>) INFO: Acquiring smoothing parameters for channel H1:PEM-CS_MAG_LVEA_OUTPUTOPTICS_Y.
+00:30:09 PEMcoupling.py (<module>) INFO: Acquiring smoothing parameters for channel H1:PEM-CS_MAG_LVEA_OUTPUTOPTICS_Z.
+00:30:11 PEMcoupling.py (<module>) INFO: Coupling function complete: H1:PEM-CS_MAG_LVEA_OUTPUTOPTICS_X.
+00:30:13 PEMcoupling.py (<module>) INFO: Coupling function complete: H1:PEM-CS_MAG_LVEA_OUTPUTOPTICS_XYZ.
+00:30:15 PEMcoupling.py (<module>) INFO: Coupling function complete: H1:PEM-CS_MAG_LVEA_OUTPUTOPTICS_Y.
+00:30:17 PEMcoupling.py (<module>) INFO: Coupling function complete: H1:PEM-CS_MAG_LVEA_OUTPUTOPTICS_Z.
+00:30:40 PEMcoupling.py (<module>) INFO: Coupling functions saved for injection 025CSmagEbayFar7Hzramp.
+00:30:40 loaddata.py (get_gwinc) INFO: Importing GWINC data.
+00:30:40 loaddata.py (get_gwinc) INFO: Successfully imported GWINC data.

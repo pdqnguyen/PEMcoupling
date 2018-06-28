@@ -3,7 +3,6 @@ import numpy as np
 import pandas as pd
 from scipy.io import loadmat
 import logging
-from couplingfunction import CoupFunc
 
 def get_time_series(channel_names, t_start, t_end, return_failed=False):
     """
@@ -118,29 +117,6 @@ def get_calibrated_DARM(ifo, gw_channel, t_start, t_end, FFT_time, overlap_time,
         print('To calibrate from H1:CAL-DELTAL_EXTERNAL_DQ, write "deltal_channel".')
         raise NameError(gw_channel)
     return darm_asd
-
-def csv_to_cf(filename, channelname=None):
-    """
-    Loads csv coupling function data into a CoupFunc object.
-    
-    Parameters
-    ----------
-    filename : str
-        Name of coupling function data file.
-        
-    Returns
-    -------
-    cf : couplingfunction.CoupFunc object
-    """
-    try:
-        data = pd.read_csv(filename, delimiter=',')
-    except IOError:
-        print('')
-        logging.warning('Invalid file or file format: ' + filename)
-        print('')
-    cf = CoupFunc(channelname, data.frequency, data.factor, data.flag,\
-                  sens_bg=data.sensBG, darm_bg=data.darmBG, factors_in_counts=data.factor_counts)
-    return cf
 
 def get_gwinc(filename):
     """

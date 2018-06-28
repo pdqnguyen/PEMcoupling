@@ -1,0 +1,3 @@
+12:39:40 PEMcoupling.py (<module>) INFO: Importing PEM coupling packages.
+12:39:42 channel_test.py (<module>) ERROR: Failed to load PEM coupling modules. Make sure you have all of these in the right place!
+12:39:42 PEMcoupling.py (<module>) ERROR: Failed to load PEM coupling modules. Make sure you have all of these in the right place!

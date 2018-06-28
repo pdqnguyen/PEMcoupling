@@ -1,0 +1,3 @@
+11:10:12 PEMcoupling.py (<module>) INFO: Importing PEM coupling packages.
+11:10:15 getparams.py (get_arg_params) INFO: Parsing arguments.
+11:10:15 getparams.py (get_arg_params) WARNING: No arguments given. Running interactive mode.

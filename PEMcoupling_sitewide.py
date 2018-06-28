@@ -32,9 +32,8 @@ logging.getLogger().addHandler(stderrLogger)
 logging.info('Importing PEM coupling packages.')
 # pemcoupling modules
 try:
-    from utils import pem_sort
-    from analysis import get_gwinc, max_coupling_function, max_estimated_ambient
-    from summaryplots import plot_summary_coupfunc, plot_summary_ambient
+    from coupling.loaddata import get_gwinc
+    from coupling import sitewide
 except ImportError:
     print('')
     logging.error('Failed to load PEM coupling modules. Make sure you have all of these in the right place!')
@@ -253,9 +252,9 @@ if gwinc is None:
 
 #### COMPUTE SUMMARY DATA ####
 print('Determining maximum coupling function...')
-max_factor_df = max_coupling_function(freqs, factor_df, flag_df)
+max_factor_df = sitewide.max_coupling_function(freqs, factor_df, flag_df)
 print('Determining maximum estimated ambient...')
-max_amb_df = max_estimated_ambient(freqs, amb_df, flag_df)
+max_amb_df = sitewide.max_estimated_ambient(freqs, amb_df, flag_df)
 #### CREATE OUTPUT DIRECTORY ####
 if not os.path.exists(subdir):
     os.makedirs(subdir)
@@ -265,7 +264,7 @@ max_factor_df.to_csv(csv_filepath, index=False)
 max_amb_df.to_csv(csv_filepath.replace('coupling','ambient'), index=False)
 #### COUPLING FUNCTION PLOT ####
 print('Plotting coupling function...')
-plot_summary_coupfunc(
+sitewide.plot_summary_coupfunc(
     max_factor_df, plot_filepath1,
     upper_lim=upper_lim,
     injection_info=(ifo, station, injection_type),
@@ -278,7 +277,7 @@ plot_summary_coupfunc(
 )
 #### ESTIMATED AMBIENT PLOT ####
 print('Plotting estimated ambient...')
-plot_summary_ambient(
+sitewide.plot_summary_ambient(
     max_amb_df, plot_filepath2,
     upper_lim=upper_lim,
     darm_data=darm_data,

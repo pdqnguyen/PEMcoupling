@@ -51,11 +51,10 @@ logging.getLogger().addHandler(stderrLogger)
 logging.info('Importing PEM coupling packages.')
 # pemcoupling modules
 try:
-    import getparams
-    import loaddata
-    import preprocess
-    import analysis
-    import savedata
+    from coupling import getparams, loaddata, preprocess, savedata
+    from coupling.pemchannel import PEMChannelASD
+    from coupling.coupfunc import CoupFunc
+    from coupling.coherence import coherence
     from PEMcoupling_composite import get_composite_coup_func
 except ImportError:
     print('')
@@ -399,8 +398,8 @@ for injection in injection_table:
     for i in range(N_chans):
         darm_bg = ASD_darm_bg_single.copy()
         darm_inj = ASD_darm_inj_single.copy()
-        ASD_darm_bg = preprocess.ChannelASD(darm_bg.name, darm_bg.frequencies.value, darm_bg.value, t0=time_bg)
-        ASD_darm_inj = preprocess.ChannelASD(darm_inj.name, darm_inj.frequencies.value, darm_inj.value, t0=time_inj)
+        ASD_darm_bg = PEMChannelASD(darm_bg.name, darm_bg.frequencies.value, darm_bg.value, t0=time_bg)
+        ASD_darm_inj = PEMChannelASD(darm_inj.name, darm_inj.frequencies.value, darm_inj.value, t0=time_inj)
         ASD_darm_bg_list.append(ASD_darm_bg)
         ASD_darm_inj_list.append(ASD_darm_inj)
     t_darm2 = time.time() - t_darm
@@ -464,7 +463,7 @@ for injection in injection_table:
     coup_func_list = []
     for i in range(N_chans):
         channel_name = ASD_bg_list[i].name
-        cf = analysis.coupling_function(
+        cf = CoupFunc.compute(
             ASD_bg_list[i], ASD_inj_list[i], ASD_darm_bg_list[i], ASD_darm_inj_list[i],
             darm_factor=cf_dict['darm_factor_threshold'], sens_factor=cf_dict['sens_factor_threshold'],
             local_max_width=cf_dict['local_max_width'], smooth_params=smooth_params[channel_name],
@@ -482,7 +481,7 @@ for injection in injection_table:
     if coher_dict['coherence_calculator']:
         t21 = time.time()
         print('Calculating coherences...')
-        coherence_results = analysis.coherence(
+        coherence_results = coherence(
             calib_dict['calibration_method'], ifo,
             TS_inj, time_inj, time_inj + dur, fft_time, overlap_time,
             coher_dict['coherence_spectrum_plot'], coher_dict['coherence_threshold'], coher_dict['percent_data_threshold'],

@@ -1,0 +1,40 @@
+12:41:49 PEMcoupling.py (<module>) INFO: Importing PEM coupling packages.
+12:41:51 getparams.py (get_arg_params) INFO: Parsing arguments.
+12:41:51 getparams.py (get_config_params) INFO: Opening config file.
+12:41:51 getparams.py (get_config_params) INFO: Checking if missing/empty config file.
+12:41:51 getparams.py (get_config_params) INFO: Parsing numerical and boolean config options.
+12:41:51 PEMcoupling.py (<module>) INFO: Separating config dictionary by section.
+12:41:51 PEMcoupling.py (<module>) INFO: Handling conflicts between config options and command line options.
+12:41:51 PEMcoupling.py (<module>) INFO: Reading in channel list given in config file.
+12:41:51 getparams.py (get_channel_names) INFO: Opening channel list file.
+12:41:51 getparams.py (get_channel_list) INFO: Performing channel search.
+12:41:51 PEMcoupling.py (<module>) INFO: Creating injection table.
+12:41:51 getparams.py (get_times) INFO: Getting DTT files from command line input.
+12:41:51 getparams.py (get_times) INFO: List of DTT files created.
+12:41:51 getparams.py (get_times_DTT) INFO: Reading DTT files for times.
+12:41:55 getparams.py (get_times_DTT) INFO: Finished reading DTTs.
+12:41:55 PEMcoupling.py (<module>) INFO: Reporting injection results.
+12:41:55 PEMcoupling.py (<module>) INFO: Calculating FFT parameters.
+12:41:55 getparams.py (get_FFT_params) INFO: Duration given; determining overlap time and bandwidth.
+12:41:55 getparams.py (get_FFT_params) INFO: FFT parameters acquired.
+12:41:55 PEMcoupling.py (<module>) INFO: Converting smoothing parameters to frequency bins based on bandwidth.
+12:41:55 PEMcoupling.py (<module>) INFO: Beginning to loop over injections.
+12:41:55 PEMcoupling.py (<module>) INFO: Searching for fundamental frequency if applicable.
+12:41:55 PEMcoupling.py (<module>) INFO: Being picky about channels.
+12:41:56 loaddata.py (get_time_series) INFO: Channel successfully extracted: H1:PEM-CS_ACC_BSC1_ITMY_X_DQ at time 1185727588 to 1185727638.0.
+12:41:57 loaddata.py (get_time_series) INFO: Channel successfully extracted: H1:PEM-CS_ACC_BSC1_ITMY_X_DQ at time 1185732574 to 1185732624.0.
+12:41:57 preprocess.py (reject_saturated) INFO: Channel rejected due to saturation: H1:PEM-CS_ACC_BSC1_ITMY_X_DQ
+12:41:57 PEMcoupling.py (<module>) INFO: Searching for fundamental frequency if applicable.
+12:41:57 PEMcoupling.py (<module>) INFO: Being picky about channels.
+12:41:57 loaddata.py (get_time_series) INFO: Channel successfully extracted: H1:PEM-CS_ACC_BSC1_ITMY_X_DQ at time 1185727588 to 1185727638.0.
+12:41:58 loaddata.py (get_time_series) INFO: Channel successfully extracted: H1:PEM-CS_ACC_BSC1_ITMY_X_DQ at time 1185737302 to 1185737352.0.
+12:41:58 preprocess.py (convert_to_ASD) INFO: Channel converted to ASD: H1:PEM-CS_ACC_BSC1_ITMY_X with FFT time 9.0 and overlap time 4.5
+12:41:58 preprocess.py (convert_to_ASD) INFO: Channel converted to ASD: H1:PEM-CS_ACC_BSC1_ITMY_X with FFT time 9.0 and overlap time 4.5
+12:41:58 preprocess.py (get_calibration_factors) INFO: Parsing calibration data for channel H1:PEM-CS_ACC_BSC1_ITMY_X.
+12:41:58 preprocess.py (get_calibration_factors) INFO: Calibration factor acquired for channel H1:PEM-CS_ACC_BSC1_ITMY_X.
+12:41:58 preprocess.py (calibrate_sensors) INFO: Channel calibrated: H1:PEM-CS_ACC_BSC1_ITMY_X.
+12:41:58 preprocess.py (get_calibration_factors) INFO: Parsing calibration data for channel H1:PEM-CS_ACC_BSC1_ITMY_X.
+12:41:58 preprocess.py (get_calibration_factors) INFO: Calibration factor acquired for channel H1:PEM-CS_ACC_BSC1_ITMY_X.
+12:41:58 preprocess.py (calibrate_sensors) INFO: Channel calibrated: H1:PEM-CS_ACC_BSC1_ITMY_X.
+12:41:59 PEMcoupling.py (<module>) INFO: Cropping ASDs to match frequencies: H1:PEM-CS_ACC_BSC1_ITMY_X.
+12:41:59 PEMcoupling.py (<module>) INFO: Acquiring smoothing parameters for channel H1:PEM-CS_ACC_BSC1_ITMY_X.

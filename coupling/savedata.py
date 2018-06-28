@@ -170,7 +170,7 @@ def export_composite_coupling_data(comp_cf, freqs_raw, darm_raw, gwinc, inj_name
     #### DETERMINE AXIS LIMITS ####
     if verbose:
         print('\nDetermining axis limits for plots...')
-    mask_nonzero = (comp_cf.factors > 0)    
+    mask_nonzero = (comp_cf.values > 0)    
     #### X-AXIS (FREQUENCY) LIMITS ####
     x_axis = comp_cf.freqs[mask_nonzero]    
     if (len(x_axis) == 0):
@@ -183,8 +183,8 @@ def export_composite_coupling_data(comp_cf, freqs_raw, darm_raw, gwinc, inj_name
         freq_max = min( [max(x_axis) * 1.5, max(comp_cf.freqs)] )
     
     #### Y-AXIS (COUPLING FACTOR) LIMITS ####
-    y_axis = comp_cf.factors[mask_nonzero & (comp_cf.freqs>=freq_min) & (comp_cf.freqs < freq_max)]
-    y_axis_counts = comp_cf.factors_in_counts[mask_nonzero & (comp_cf.freqs>=freq_min) & (comp_cf.freqs < freq_max)]
+    y_axis = comp_cf.values[mask_nonzero & (comp_cf.freqs>=freq_min) & (comp_cf.freqs < freq_max)]
+    y_axis_counts = comp_cf.values_in_counts[mask_nonzero & (comp_cf.freqs>=freq_min) & (comp_cf.freqs < freq_max)]
     if (len(y_axis) == 0):
         print('No lowest coupling factors for ' + comp_cf.name)
         print('between ' + str(freq_min) + ' and ' + str(freq_max) + ' Hz.')

@@ -1,104 +1,56 @@
 import numpy as np
+import re
 import logging
+from gwpy.detector import Channel
 
-class ChannelInfoBase(object):
-    """
-    Channel information for a PEM sensor; used in ChannelASD, CoupFunc, and CompCoupFunc.
-    
-    Attributes
-    ----------
-    name : str
-        Channel name.
-    unit : str
-        Units in which channel data is given.
-    system : str
-        System, usual PEM.
-    station : str
-        'CS', 'EX', or 'EY'.
-    sensor : str
-        Type of sensor, e.g. ACC or MAG.
-    qty : str
-        Physical quantity measured by this sensor, e.g. 'Magnetic Field'.
-    coupling : str
-        Coupling type, e.g. 'Magnetic'.
-    """
-    
-    def __init__(self, name, unit):
-        """
-        Parameters
-        ----------
-        name : str
-        unit : str
-        """
-        self.name = name
-        self.ifo = self._ifo()
-        self.system = self._system()
-        self.station = self._station()
-        self.sensor = self._sensor()
-        if unit == '':
-            self.unit = self._get_unit_from_sensor()
+class PEMChannel(Channel):
+    def __init__(self, name, unit=''):
+        super(PEMChannel, self).__init__(name)
+        try:
+            sensor_match = re.search('(?P<sensor>[a-zA-Z0-9]+)', self.signal)
+            if sensor_match is None:
+                raise ValueError("Cannot parse channel name according to LIGO "
+                                 "channel-naming convention T990033")
+            parts = sensor_match.groupdict()
+        except (TypeError, ValueError):
+            self.sensor = ''
         else:
-            self.unit = unit
-        self.qty, self.coupling = self._get_measurement_info()
+            for key, val in parts.items():
+                try:
+                    setattr(self, key, val)
+                except AttributeError:
+                    setattr(self, '_%s' % key, val)
+        self._init_pem_info(unit=unit)
     
-    def _ifo(self):
-        try:
-            idx = self.name.index(':')
-            if self.name[ : idx] in ['H1', 'L1']:
-                return self.name[ : self.name.index(':')]
-            else:
-                return ''
-        except:
-            return ''
-    
-    def _system(self):
-        try:
-            idx1 = self.name.index(':') + 1
-            idx2 = self.name.index('-')
-            return self.name[idx1:idx2]
-        except:
-            return ''
-    
-    def _station(self):
-        try:
-            idx1 = self.name.index('-') + 1
-            idx2 = self.name.index('_')
-            return self.name[idx1:idx2]
-        except:
-            return ''
-
-    def _sensor(self):
-        try:
-            idx1 = self.name.index('_') + 1
-            idx2 = self.name[idx1:].index('_') + idx1
-            return self.name[idx1:idx2]
-        except:
-            return ''
-    
-    def _get_unit_from_sensor(self):
+    def _init_pem_info(self, unit=''):
         units_dict = {'MIC': 'Pa', 'MAG': 'T', 'RADIO': 'ADC', 'SEIS': 'm', \
                       'ISI': 'm', 'ACC': 'm', 'HPI': 'm', 'ADC': 'm'}
-        if self.sensor in units_dict.keys():
-            return units_dict[self.sensor]
-        elif self.system in units_dict.keys():
-            return units_dict[self.system]
-        else:
-            return 'Counts'
-    
-    def _get_measurement_info(self):
         qty_dict = {'Pa': 'Pressure', 'T': 'Magnetic Field', 'm': 'Displacement', 'm/s': 'Velocity', 'm/s2': 'Acceleration'}
         coupling_dict = {'MIC': 'Acoustic', 'MAG': 'Magnetic', 'RADIO': 'RF', 'SEIS': 'Seismic', \
                      'ISI': 'Seismic', 'ACC': 'Vibrational', 'HPI': 'Seismic', 'ADC': 'Vibrational'}
-        qty, coupling = ('', '')
-        if self.unit in qty_dict.keys():
-            qty = qty_dict[self.unit]
-        if self.sensor in coupling_dict.keys():
-            coupling = coupling_dict[self.sensor]
-        elif self.system in coupling_dict.keys():
-            coupling = coupling_dict[self.system]
-        return qty, coupling
+        if unit == '':
+            try:
+                self.unit = units_dict[self.sensor]
+            except KeyError:
+                try:
+                    self.unit = units_dict[self.system]
+                except KeyError:
+                    self.unit = 'Counts'
+        else:
+            self.unit = unit
+        try:
+            self.qty = qty_dict[self.unit.name]
+        except KeyError:
+            self.qty = ''
+        try:
+            self.coupling = coupling_dict[self.sensor]
+        except KeyError:
+            try:
+                self.coupling = coupling_dict[self.system]
+            except KeyError:
+                self.coupling = ''
 
-class ChannelASD(ChannelInfoBase):
+class PEMChannelASD(PEMChannel):
     """
     Calibrated amplitude spectral density of a single channel.
     
@@ -129,15 +81,16 @@ class ChannelASD(ChannelInfoBase):
         unit : str, optional
         calibration : array-like, optional
         """
-        self.name = name
+        super(PEMChannelASD, self).__init__(name, unit=unit)
         freqs = np.asarray(freqs)
         values = np.asarray(values)
         self.freqs = freqs[freqs > 1e-3]
         self.values = values[freqs > 1e-3]
         self.t0 = t0
-        self.unit = unit
-        self.df = self.freqs[1] - self.freqs[0]
-        self.channel = ChannelInfoBase(self.name, unit)
+        try:
+            self.df = self.freqs[1] - self.freqs[0]
+        except IndexError:
+            self.df = None
         self.calibration = calibration
     
     def calibrate(self, calibration_factor, new_unit=None):
@@ -154,10 +107,10 @@ class ChannelASD(ChannelInfoBase):
         
         sensor_units = {'SEI': 'm/s', 'ACC': 'm/s2', 'MIC': 'Pa', 'MAG': 'T'}
         system_units = {'HPI': 'm/s', 'ISI': 'm/s'}
-        if self.channel.sensor in sensor_units.keys():
-            new_unit = sensor_units[self.channel.sensor]
-        elif self.channel.system in system_units.keys():
-            new_unit = system_units[self.channel.system]
+        if self.sensor in sensor_units.keys():
+            new_unit = sensor_units[self.sensor]
+        elif self.system in system_units.keys():
+            new_unit = system_units[self.system]
         else:
             new_unit = ''
         self.calibration = np.ones_like(self.values) * calibration_factor

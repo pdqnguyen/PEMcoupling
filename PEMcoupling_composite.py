@@ -10,11 +10,12 @@ import subprocess
 import logging
 # pemcoupling modules
 try:
-    import getparams
-    import analysis
-    import loaddata
-    import savedata
-    from utils import quad_sum_names
+    from coupling.coupfunc import CoupFunc
+    from coupling.coupfunccomposite import CoupFuncComposite
+    from coupling.getparams import get_channel_list, freq_search
+    from coupling.loaddata import get_gwinc
+    from coupling.savedata import export_composite_coupling_data
+    from coupling.utils import quad_sum_names
 except ImportError:
     print('')
     logging.error('Failed to load PEM coupling modules. Make sure you have all of these in the right place!')
@@ -52,20 +53,18 @@ def get_composite_coup_func(cf_list, injection_names, comp_dict, directory,\
     darm = np.mean([coup_func.darm_bg for coup_func in cf_list], axis=0)
     band_widths = [coup_func.df for coup_func in cf_list]
     column_len = [coup_func.freqs.shape for coup_func in cf_list]
-    if (any(bw != band_widths[0] for bw in band_widths) or \
-        any([k != column_len[0] for k in column_len])):
+    if (any(bw != band_widths[0] for bw in band_widths) or any([k != column_len[0] for k in column_len])):
         print('\nError: Coupling data objects have unequal data lengths.')
         print('If all the band_widths are the same, this should not be an issue.\n')
     local_max_window = int(comp_dict['local_max_width'] / band_widths[0]) # Convert from Hz to bins
     # Create composite coupling function
-    comp_cf = analysis.composite_coupling_function(cf_list, injection_names, local_max_window=local_max_window, freq_lines=injection_freqs)
+    comp_cf = CoupFuncComposite.compute(cf_list, injection_names, local_max_window=local_max_window, freq_lines=injection_freqs)
+#     comp_cf = analysis.composite_coupling_function(cf_list, injection_names, local_max_window=local_max_window, freq_lines=injection_freqs)
     # Gaussian smoothing of final result
     smooth_chans = ['ACC', 'MIC', 'WFS']
-#     if any(x in channel_name for x in smooth_chans):
-#         comp_data = analysis.smooth_comp_data(comp_data, smoothing_width)
     # Export results
     path = directory + '/CompositeCouplingFunctions'
-    savedata.export_composite_coupling_data(
+    export_composite_coupling_data(
         comp_cf, freqs, darm, gwinc, injection_names, path,
         upper_lim=comp_dict['upper_lim'], est_amb_plot=comp_dict['comp_est_amb_plot'],
         freq_min=comp_dict['comp_freq_min'], freq_max=comp_dict['comp_freq_max'],
@@ -82,14 +81,10 @@ def get_composite_coup_func(cf_list, injection_names, comp_dict, directory,\
         freqs_binned = np.mean([coup_func.freqs for coup_func in cf_binned_list], axis=0)
         darm_binned = np.mean([coup_func.darm_bg for coup_func in cf_binned_list], axis=0)
         # Composite coupling function
-        comp_cf_binned = analysis.composite_coupling_function(cf_binned_list, injection_names,\
-                                                                local_max_window=local_max_window)
-        # Final smoothing
-#         if any(x in channel_name for x in smooth_chans):
-#             comp_data_binned = analysis.smooth_comp_data(comp_data_binned, smoothing_width)
+        comp_cf_binned = CoupFuncComposite.compute(cf_binned_list, injection_names, local_max_window=local_max_window)
         # Data export
         path_binned = path + 'Binned'
-        savedata.export_composite_coupling_data(
+        export_composite_coupling_data(
             comp_cf_binned, freqs, darm, gwinc, injection_names, path_binned,
             upper_lim=comp_dict['upper_lim'], est_amb_plot=comp_dict['comp_est_amb_plot'],
             freq_min=comp_dict['comp_freq_min'], freq_max=comp_dict['comp_freq_max'],
@@ -188,9 +183,9 @@ if __name__ == "__main__":
             comp_dict[option] = (value.lower() in ['on', 'true', 'yes'])
     #### GET CHANNEL LIST ####
     if options.channel_list is not None:
-        channels = getparams.get_channel_list(options.channel_list, ifo, station, search=options.channel_search, verbose=verbose)
+        channels = get_channel_list(options.channel_list, ifo, station, search=options.channel_search, verbose=verbose)
     elif '.txt' in config_dict['channels']:
-        channels = getparams.get_channel_list(config_dict['channels'], ifo, station, search=options.channel_search, verbose=verbose)
+        channels = get_channel_list(config_dict['channels'], ifo, station, search=options.channel_search, verbose=verbose)
     else:
         print('\nChannel list input required in config file ("channels") or command line option ("-C").\n')
         sys.exit()
@@ -208,7 +203,7 @@ if __name__ == "__main__":
     #### IMPORT GWINC DATA FOR AMBIENT PLOT ####
     gwinc_file = 'config_files/darm/gwinc_nomm_noises.mat'
     try:
-        gwinc = loaddata.get_gwinc(gwinc_file)
+        gwinc = get_gwinc(gwinc_file)
     except IOError:
         gwinc = None
     if gwinc is None:
@@ -230,15 +225,14 @@ if __name__ == "__main__":
         injection_freqs = {}
         for file_name in file_names:
             if not ('composite' in file_name):
-                cf = loaddata.csv_to_cf(file_name, channelname=channel_name.replace('_DQ', ''))
+                cf = CoupFunc.load(file_name, channelname=channel_name.replace('_DQ', ''))
                 cf_list.append(cf)
                 name_inj = file_name.split('/')[-2]
                 inj_names.append(name_inj)
-                freq_search = getparams.freq_search(name_inj)
-                if freq_search is not None:
-                    injection_freqs[name_inj] = freq_search
-        
+                freq_search_result = freq_search(name_inj)
+                if freq_search_result is not None:
+                    injection_freqs[name_inj] = freq_search_result
         get_composite_coup_func(cf_list, inj_names, comp_dict, directory,\
-                                 injection_freqs=injection_freqs, gwinc=gwinc, smoothing_width=0.005, verbose=verbose)
+                                injection_freqs=injection_freqs, gwinc=gwinc, smoothing_width=0.005, verbose=verbose)
     t2 = time.time() - t1
     print('Lowest (composite) coupling functions processed. (Runtime: {:.3f} s.)\n'.format(t2))

@@ -1,0 +1,28 @@
+00:46:47 PEMcoupling.py (<module>) INFO: Importing PEM coupling packages.
+00:46:50 getparams.py (get_arg_params) INFO: Parsing arguments.
+00:46:50 getparams.py (get_config_params) INFO: Opening config file.
+00:46:50 getparams.py (get_config_params) INFO: Checking if missing/empty config file.
+00:46:50 getparams.py (get_config_params) INFO: Parsing numerical and boolean config options.
+00:46:50 PEMcoupling.py (<module>) INFO: Separating config dictionary by section.
+00:46:50 PEMcoupling.py (<module>) INFO: Handling conflicts between config options and command line options.
+00:46:50 PEMcoupling.py (<module>) INFO: Reading in channel list given in config file.
+00:46:50 getparams.py (get_channel_names) INFO: Opening channel list file.
+00:46:50 getparams.py (get_channel_list) INFO: Performing channel search.
+00:46:50 PEMcoupling.py (<module>) INFO: Creating injection table.
+00:46:50 getparams.py (get_times) INFO: Getting DTT files from command line input.
+00:46:50 getparams.py (get_times) INFO: List of DTT files created.
+00:46:50 getparams.py (get_times_DTT) INFO: Reading DTT files for times.
+00:46:58 getparams.py (get_times_DTT) INFO: Finished reading DTTs.
+00:46:58 PEMcoupling.py (<module>) INFO: Reporting injection results.
+00:46:58 PEMcoupling.py (<module>) INFO: Calculating FFT parameters.
+00:46:58 getparams.py (get_FFT_params) INFO: Duration given; determining overlap time and bandwidth.
+00:46:58 getparams.py (get_FFT_params) INFO: FFT parameters acquired.
+00:46:58 PEMcoupling.py (<module>) INFO: Converting smoothing parameters to frequency bins based on bandwidth.
+00:46:58 PEMcoupling.py (<module>) INFO: Beginning to loop over injections.
+00:46:58 PEMcoupling.py (<module>) INFO: Searching for fundamental frequency if applicable.
+00:46:58 PEMcoupling.py (<module>) INFO: Being picky about channels.
+00:47:03 loaddata.py (get_time_series) INFO: Channel successfully extracted: H1:PEM-CS_ACC_BSC1_ITMY_X_DQ at time 1185727588 to 1185727638.0.
+00:47:06 loaddata.py (get_time_series) INFO: Channel successfully extracted: H1:PEM-CS_ACC_BSC1_ITMY_X_DQ at time 1185732574 to 1185732624.0.
+00:47:06 preprocess.py (reject_saturated) INFO: Channel rejected due to saturation: H1:PEM-CS_ACC_BSC1_ITMY_X_DQ
+00:47:06 PEMcoupling.py (<module>) INFO: Searching for fundamental frequency if applicable.
+00:47:06 PEMcoupling.py (<module>) INFO: Being picky about channels.
