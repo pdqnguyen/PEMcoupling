@@ -15,7 +15,6 @@ try:
     from coupling.coupfunccomposite import CoupFuncComposite
     from coupling.getparams import get_channel_list, freq_search
     from coupling.loaddata import get_gwinc
-    from coupling.savedata import export_composite_coupling_data
     from coupling.utils import quad_sum_names
 except ImportError:
     print('')

@@ -51,10 +51,11 @@ logging.getLogger().addHandler(stderrLogger)
 logging.info('Importing PEM coupling packages.')
 # pemcoupling modules
 try:
-    from coupling import getparams, loaddata, preprocess, savedata
+    from coupling import getparams, loaddata, preprocess
     from coupling.pemchannel import PEMChannelASD
     from coupling.coupfunc import CoupFunc
     from coupling.coherence import coherence
+    from coupling.savedate import ratio_table
     from PEMcoupling_composite import get_composite_coup_func
 except ImportError:
     print('')
@@ -365,7 +366,7 @@ for injection in injection_table:
             ratio_method = 'max'
         elif ratio_dict['ratio_avg']:
             ratio_method = 'avg'
-        savedata.ratio_table(
+        ratio_table(
             ASD_bg_list, ASD_inj_list,
             ratio_dict['ratio_z_min'], ratio_dict['ratio_z_max'],
             method=ratio_method, minFreq=ratio_dict['ratio_min_frequency'], maxFreq=ratio_dict['ratio_max_frequency'], 
