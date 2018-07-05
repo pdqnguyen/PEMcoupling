@@ -1,3 +1,0 @@
-12:10:33 PEMcoupling.py INFO: Parsing arguements.
-12:10:33 getparams.py INFO: Parsing arguments.
-12:10:33 getparams.py ERROR: Argument "ifo" must be one of "H1", "LHO", "L1", or "LHO" (not case-sensitive).

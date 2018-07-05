@@ -1,3 +1,0 @@
-DEBUG:root:This message should go to the log file
-INFO:root:Event logging for PEMcoupling.py executed at time 2018_Mar_30_11:26:57
-WARNING:root:  Warning message.

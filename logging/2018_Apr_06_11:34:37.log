@@ -1,3 +1,0 @@
-11:34:37 PEMcoupling.py (<module>) INFO: Importing PEM coupling packages.
-11:34:40 getparams.py (get_arg_params) INFO: Parsing arguments.
-11:34:40 getparams.py (get_arg_params) ERROR: Exactly 3 arguments required (configuration file, interferometer, and station).

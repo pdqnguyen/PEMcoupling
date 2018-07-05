@@ -1,3 +1,0 @@
-15:50:45 PEMcoupling_sitewide.py (<module>) INFO: Importing PEM coupling packages.
-15:50:47 /home/philippe.nguyen/public_html/PEMcode/test_code/utils.py (error_msg) ERROR: Four args required:
-[composite coupling function directory] [interferometer] [station] [injection type]

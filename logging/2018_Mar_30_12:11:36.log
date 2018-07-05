@@ -1,3 +1,0 @@
-12:11:36 PEMcoupling.py INFO: Parsing arguements.
-12:11:36 getparams.py INFO: Parsing arguments.
-12:11:36 getparams.py ERROR: Argument "injection_type" must be one of "mag", "magnetic", "vib", "vibrational", or "acoustic" (not case-sensitive).

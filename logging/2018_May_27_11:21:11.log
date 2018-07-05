@@ -1,4 +1,0 @@
-11:21:11 PEMcoupling.py (<module>) INFO: Importing PEM coupling packages.
-11:21:14 getparams.py (get_arg_params) INFO: Parsing arguments.
-11:21:14 getparams.py (get_arg_params) WARNING: No arguments given. Running interactive mode.
-11:21:19 getparams.py (get_arg_params) ERROR: Argument "injection_type" must be one of "mag", "magnetic", "vib", "vibrational", or "acoustic" (not case-sensitive).

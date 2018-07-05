@@ -1,3 +1,0 @@
-12:05:17 PEMcoupling.py (<module>) INFO: Importing PEM coupling packages.
-12:05:19 getparams.py (get_arg_params) INFO: Parsing arguments.
-12:05:19 getparams.py (get_arg_params) ERROR: Argument "ifo" must be one of "H1", "LHO", "L1", or "LHO" (not case-sensitive).

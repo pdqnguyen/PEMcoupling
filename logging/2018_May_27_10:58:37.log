@@ -1,4 +1,0 @@
-10:58:37 PEMcoupling.py (<module>) INFO: Importing PEM coupling packages.
-10:58:40 getparams.py (get_arg_params) INFO: Parsing arguments.
-10:58:40 getparams.py (get_arg_params) WARNING: No arguments given. Running interactive mode.
-10:58:47 getparams.py (get_arg_params) ERROR: Exactly 3 arguments required (interferometer, station, injection type).
