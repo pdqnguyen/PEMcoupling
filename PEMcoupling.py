@@ -55,7 +55,7 @@ try:
     from coupling.pemchannel import PEMChannelASD
     from coupling.coupfunc import CoupFunc
     from coupling.coherence import coherence
-    from coupling.savedate import ratio_table
+    from coupling.savedata import ratio_table
     from PEMcoupling_composite import get_composite_coup_func
 except ImportError:
     print('')
