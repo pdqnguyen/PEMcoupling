@@ -135,15 +135,19 @@ class CoupFuncComposite(PEMChannelASD):
         df = cf_list[0].df
         for cf in cf_list:
             ratio = np.zeros(freqs.size)
-            for i in range(ratio.size):
-                idx1 = max([0, i - int(5./df)])
-                idx2 = min([freqs.size, i + int(5./df)])
-                mean_inj = cf.sens_inj[idx1:idx2].mean()
-                mean_bg = cf.sens_bg[idx1:idx2].mean()
-                if mean_inj > mean_bg:
-                    ratio[i] = mean_inj / mean_bg
-                else:
-                    ratio[i] = 0
+            if local_max_window == 0:
+                for i in range(ratio.size):
+                    idx1 = max([0, i - int(5./df)])
+                    idx2 = min([freqs.size, i + int(5./df)])
+                    mean_inj = cf.sens_inj[idx1:idx2].mean()
+                    mean_bg = cf.sens_bg[idx1:idx2].mean()
+                    if mean_inj > mean_bg:
+                        ratio[i] = mean_inj / mean_bg
+                    else:
+                        ratio[i] = 0
+            else:
+                for i in range(ratio.size):
+                    ratio[i] = max([0, cf.sens_inj[i] / cf.sens_bg[i]])
             ratio_cols.append(ratio)
         injection_cols = [[n]*N_rows for n in injection_names]
 
@@ -171,7 +175,9 @@ class CoupFuncComposite(PEMChannelASD):
 
             # Find loudest injections at this frequency
             ratio_row = np.asarray(matrix_ratio[i,:])
-            loud_injs = (ratio_row > 0.5*ratio_row.max()) & (matrix_flag[i,:] != 'No data')
+#             loud_injs = np.ones(ratio_row.shape, dtype=bool)
+            loud_injs = np.argmax(ratio_row)
+#             loud_injs = (ratio_row > 0.5 * ratio_row.max()) & (matrix_flag[i,:] != 'No data')
             # Assign rows to arrays
             factor_row = np.asarray(matrix_fact[i,loud_injs])
             factor_counts_row = np.asarray(matrix_fact_counts[i,loud_injs])
