@@ -60,6 +60,11 @@ def get_composite_coup_func(
     if (any(bw != band_widths[0] for bw in band_widths) or any([k != column_len[0] for k in column_len])):
         print('\nError: Coupling data objects have unequal data lengths.')
         print('If all the band_widths are the same, this should not be an issue.\n')
+        fmin = max([cf.freqs.min() for cf in cf_list])
+        fmax = min([cf.freqs.max() for cf in cf_list])
+        for i in range(len(cf_list)):
+            cf_list[i].crop(fmin, fmax)
+    
     #### COMPUTE COMPOSITE COUPLING FUNCTION ####
     local_max_window = int(local_max_width / band_widths[0]) # Convert from Hz to bins
     if freq_lines is None:

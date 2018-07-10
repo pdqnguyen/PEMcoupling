@@ -114,8 +114,9 @@ class CoupFunc(PEMChannelASD):
             logging.warning('Invalid file or file format: ' + filename)
             print('')
         cf = cls(channelname, data.frequency, data.factor, data.flag,\
-                 sens_bg=data.sensBG, darm_bg=data.darmBG, sens_inj=data.sensINJ,\
+                 data.sensBG, data.darmBG, sens_inj=data.sensINJ,\
                  values_in_counts=data.factor_counts)
+        setattr(cf, 'df', np.mean(np.diff(cf.freqs)))
         return cf
     
     @classmethod
@@ -292,6 +293,50 @@ class CoupFunc(PEMChannelASD):
         cf = cls(name, freqs, factors, flags, sens_bg, darm_bg, sens_inj=sens_inj, darm_inj=darm_inj,\
                  t_bg=t_bg, t_inj=t_inj, injection_name=injection_name, unit=unit, calibration=calibration)
         return cf
+    
+    def crop(self, fmin, fmax):
+        """
+        Crop coupling function and ASDs between fmin and fmax.
+        
+        Parameters
+        ----------
+        fmin : float, int
+            Minimum frequency (Hz).
+        fmax : float, int
+            Maximum frequency (Hz).
+        """
+        
+        try:
+            fmin = float(fmin)
+            fmax = float(fmax)
+        except:
+            print('')
+            logging.warning('.crop method for ChannelASD object requires float inputs for fmin, fmax.')
+            print('')
+            return
+        # Determine start and end indices from fmin and fmax
+        if fmin > self.freqs[0]:
+            start = int(float(fmin - self.freqs[0]) / float(self.df))
+        else:
+            start = None
+        if fmax <= self.freqs[-1]:
+            end = int(float(fmax - self.freqs[0]) / float(self.df))
+        else:
+            end = None
+        # Crop data to start and end
+        self.freqs = self.freqs[start:end]
+        self.values = self.values[start:end]
+        self.flags = self.flags[start:end]
+        self.sens_bg = self.sens_bg[start:end]
+        self.sens_inj = self.sens_inj[start:end]
+        self.darm_bg = self.darm_bg[start:end]
+        self.ambients = self.ambients[start:end]
+        for attr in ['sens_inj', 'darm_inj', 'calibration', 'values_in_counts']:
+            if hasattr(self, attr):
+                val = getattr(self, attr)
+                if val is not None:
+                    if np.ndim(val) > 0:
+                        setattr(self, attr, val[start:end])
     
     def plot(self, filename, in_counts=False, ts=None, upper_lim=True, freq_min=None, freq_max=None,\
              factor_min=None, factor_max=None, fig_w=15, fig_h=6):
